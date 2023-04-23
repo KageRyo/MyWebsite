@@ -1,0 +1,7 @@
+/* 滑鼠移動至頂部列選項時的變色效果 */
+.ts-tab .item:hover {
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
