@@ -6,7 +6,7 @@
     transition: all 0.3s ease;
 }
 
-/* 移除 mailto 的超連結底線 */
+/* 移除超連結所產生的底線 */
 .no-underline {
     text-decoration: none;
 }
