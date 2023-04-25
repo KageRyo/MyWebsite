@@ -10,3 +10,8 @@
 .no-underline {
     text-decoration: none;
 }
+
+/* 使文字可以左右對齊 */
+.justify-text {
+    text-align: justify;
+}
