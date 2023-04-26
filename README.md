@@ -28,4 +28,4 @@
 - 電子郵件: kageryo@coderyo.com
 
 ## License
-此專案採用 CC-BY-4.0 License 進行許可 - 更多詳細信息，請查看 [LICENSE](LICENSE) 文件。
+此專案採用 `CC-BY-4.0 License` 進行許可 - 更多詳細信息，請查看 [LICENSE](LICENSE) 文件。
