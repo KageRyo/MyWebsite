@@ -18,7 +18,7 @@
 
 /* 文字過多時使其溢出 */
 .text-overflow-ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    overflow : hidden;
+    text-overflow : ellipsis;
+    white-space : nowrap;
 }
