@@ -14,15 +14,13 @@ document.addEventListener('DOMContentLoaded', function () {
           const repoUrl = repo.html_url;
           const repoDescription = repo.description || '無描述';
           const projectCard = `
-            <div class="ts-card">
-                <div class="content">
-                    <div class="header">
-                        <a href="${repoUrl}" target="_blank">${repoName}</a>
-                    </div>
-                    <div class="description">
-                        ${repoDescription}
-                    </div>
-                </div>
+            <div class="content">
+              <div class="header">
+                <a href="${repoUrl}" target="_blank">${repoName}</a>
+              </div>
+              <div class="description">
+                ${repoDescription}
+              </div>
             </div>`;
           projectsContainer.insertAdjacentHTML('beforeend', projectCard);
         });
