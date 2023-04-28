@@ -17,7 +17,7 @@
 ## 聯絡我們
 如果您有任何問題或建議，請隨時通過以下方式聯繫我們：
 
-- [提交 Issue](https://github.com/username/MyWebsite/issues)
+- [提交 Issue](https://github.com/KageRyo/MyWebsite/issues)
 - 電子郵件: kageryo@coderyo.com
 
 ## License
