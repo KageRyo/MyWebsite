@@ -62,8 +62,26 @@
     </div>
     <div class="ts-space is-big"></div>
     <!-- 作品集 -->
-    <div class="projects ts-container">
-        <!-- 透過 JavaScript 自 GitHub 抓取專案 -->
+    <div class="ts-container">
+        <div class="ts-box">
+            <table class="ts-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>名稱</th>
+                        <th>網址</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody id="projects">
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4" id="total-repos">統計筆數：0</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
     <div class="ts-space is-big"></div>
     <!-- 底部列 -->
