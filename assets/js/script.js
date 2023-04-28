@@ -29,26 +29,42 @@ document.addEventListener('DOMContentLoaded', function () {
   fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
-      const projectsContainer = document.querySelector('.projects');
+      const projectsContainer = document.getElementById('projects');
+      const totalRepos = document.getElementById('total-repos');
 
-      if (projectsContainer) {
+      if (projectsContainer && totalRepos) {
+        let index = 1;
         data.forEach((repo) => {
           const repoName = repo.name;
           const repoUrl = repo.html_url;
           const repoDescription = repo.description || '無描述';
-          const projectCard = `
-            <div class="ts-card">
-                <div class="content">
-                    <div class="header">
-                        <a href="${repoUrl}" target="_blank">${repoName}</a>
-                    </div>
-                    <div class="description">
-                        ${repoDescription}
-                    </div>
-                </div>
-            </div>`;
-          projectsContainer.insertAdjacentHTML('beforeend', projectCard);
+
+          const tableRow = document.createElement('tr');
+
+          const indexCell = document.createElement('td');
+          indexCell.innerText = index;
+          tableRow.appendChild(indexCell);
+
+          const nameCell = document.createElement('td');
+          nameCell.innerText = repoName;
+          tableRow.appendChild(nameCell);
+
+          const urlCell = document.createElement('td');
+          const urlLink = document.createElement('a');
+          urlLink.href = repoUrl;
+          urlLink.target = '_blank';
+          urlLink.innerText = repoUrl;
+          urlCell.appendChild(urlLink);
+          tableRow.appendChild(urlCell);
+
+          const descriptionCell = document.createElement('td');
+          descriptionCell.innerText = repoDescription;
+          tableRow.appendChild(descriptionCell);
+
+          projectsContainer.appendChild(tableRow);
+          index++;
         });
+        totalRepos.textContent = `統計筆數：${data.length}`;
       }
     });
 });
