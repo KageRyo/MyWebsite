@@ -33,6 +33,23 @@
                 <a href="project.html" class="item">作品集</a>
                 <a href="contect.html" class="item">聯絡我</a>
             </div>
+            <!-- 國家選擇選單 -->
+            <div class="ts-select" data-dropdown="select">
+                <div class="content">
+                    <span class="ts-flag is-tw-flag"></span> 正體中文
+                </div>
+            </div>
+            <div class="ts-dropdown" data-name="select" data-position="bottom-start">
+                <button class="item is-selected">
+                    <span class="ts-flag is-tw-flag"></span> 正體中文
+                </button>
+                <button class="item unfinished-feature">
+                    <span class="ts-flag is-america-flag"></span> English
+                </button>
+                <button class="item unfinished-feature">
+                    <span class="ts-flag is-japan-flag"></span> 日本語
+                </button>
+            </div>
         </div>
     </div>
     <!-- 穹頂 -->
@@ -64,8 +81,7 @@
                         </span>
                         <div class="ts-space"></div>
                         <!-- 查看更多 -->
-                        <a href="about.html" target="_blank"
-                            rel="noopener noreferrer">
+                        <a href="about.html" target="_blank" rel="noopener noreferrer">
                             <button class="ts-button is-fluid is-start-icon">
                                 <span class="ts-icon is-heart-icon"></span>
                                 查看更多
@@ -119,8 +135,8 @@
                                 class="ts-text is-external-link" target="_blank" rel="noopener noreferrer">國立臺中科技大學</a>
                             的 <a href="https://ipe.nutc.edu.tw/" class="ts-text is-external-link" target="_blank"
                                 rel="noopener noreferrer">智慧生產工程系</a>，目前學習方向涉及軟硬體整合、前後端開發與人工智慧，如果對我想要有進一步的了解歡迎到 <a
-                                href="about.html" class="item">關於我</a> 或 <a href="project.html"
-                                class="item">作品集</a> 看看。</p>
+                                href="about.html" class="item">關於我</a> 或 <a href="project.html" class="item">作品集</a> 看看。
+                        </p>
                         <div class="ts-wrap is-center-aligned">
                             <a href="https://fb.com/yinglaceook" target="_blank" rel="noopener noreferrer"
                                 class="ts-icon is-secondary is-facebook-icon is-circular is-large"></a>
@@ -186,6 +202,23 @@
         <a href="https://github.com/KageRyo/" class="item">Chien-Hsun, Chang 張健勳</a>
     </div>
     <div class="ts-space"></div>
+    <!-- 未完成功能 -->
+    <div class="ts-modal is-hidden">
+        <div class="content">
+            <div class="ts-content is-center-aligned is-vertically-padded">
+                <div class="ts-header is-icon">
+                    <span class="ts-icon is-circle-exclamation-icon"></span>
+                    這個功能還沒有開放
+                </div>
+                <div class="ts-space"></div>
+                如果您有其他問題，歡迎到此專案的 GitHub。
+            </div>
+            <div class="ts-divider"></div>
+            <div class="ts-content is-tertiary">
+                <button class="ts-button is-fluid" id="close-modal-button">了解</button>
+            </div>
+        </div>
+    </div>
     <!-- 引入 JavaScript -->
     <script src="./assets/js/script.js"></script>
     <!-- 開發者工具警告訊息 -->
