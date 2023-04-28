@@ -1,5 +1,4 @@
 // 點擊未完成功能時的事件
-/*
 document.addEventListener("DOMContentLoaded", () => {
   const unfinishedFeatures = document.querySelectorAll(".unfinished-feature");
   const modal = document.querySelector(".ts-modal");
@@ -21,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.add("is-hidden");
   });
 });
-*/
 
 // 自 GitHub 抓取專案資料的程式
 document.addEventListener('DOMContentLoaded', function () {
