@@ -1,10 +1,15 @@
-// 點擊未完成功能時的事件
+// 初始化功能
 document.addEventListener("DOMContentLoaded", () => {
+  initUnfinishedFeatures();
+  fetchProjects();
+});
+
+// 處理未完成功能的點擊事件
+function initUnfinishedFeatures() {
   const unfinishedFeatures = document.querySelectorAll(".unfinished-feature");
   const modal = document.querySelector(".ts-modal");
   const closeButton = document.getElementById("close-modal-button");
 
-  // 未完成功能的點擊事件
   unfinishedFeatures.forEach(feature => {
     feature.addEventListener("click", event => {
       event.preventDefault();
@@ -13,18 +18,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 關閉未完成功能的點擊事件
   closeButton.addEventListener("click", event => {
     event.preventDefault();
     modal.classList.remove("is-visible");
     modal.classList.add("is-hidden");
   });
-});
+}
 
-// 自 GitHub 抓取專案資料的程式
-document.addEventListener('DOMContentLoaded', function () {
+// 從 GitHub API 獲取專案資料
+function fetchProjects() {
   const githubUsername = 'KageRyo';
-  const apiUrl = 'https://api.github.com/users/' + githubUsername + '/repos';
+  const apiUrl = `https://api.github.com/users/${githubUsername}/repos`;
 
   fetch(apiUrl)
     .then((response) => response.json())
@@ -35,36 +39,38 @@ document.addEventListener('DOMContentLoaded', function () {
       if (projectsContainer && totalRepos) {
         let index = 1;
         data.forEach((repo) => {
-          const repoName = repo.name;
-          const repoUrl = repo.html_url;
-          const repoDescription = repo.description || '無描述';
-
-          const tableRow = document.createElement('tr');
-
-          const indexCell = document.createElement('td');
-          indexCell.innerText = index;
-          tableRow.appendChild(indexCell);
-
-          const nameCell = document.createElement('td');
-          nameCell.innerText = repoName;
-          tableRow.appendChild(nameCell);
-
-          const urlCell = document.createElement('td');
-          const urlLink = document.createElement('a');
-          urlLink.href = repoUrl;
-          urlLink.target = '_blank';
-          urlLink.innerText = repoUrl;
-          urlCell.appendChild(urlLink);
-          tableRow.appendChild(urlCell);
-
-          const descriptionCell = document.createElement('td');
-          descriptionCell.innerText = repoDescription;
-          tableRow.appendChild(descriptionCell);
-
-          projectsContainer.appendChild(tableRow);
+          const { name, html_url, description = '無描述' } = repo;
+          projectsContainer.appendChild(createProjectTableRow(index, name, html_url, description));
           index++;
         });
         totalRepos.textContent = `統計筆數：${data.length}`;
       }
     });
-});
+}
+
+// 創建專案表格行
+function createProjectTableRow(index, name, url, description) {
+  const tableRow = document.createElement('tr');
+
+  const indexCell = document.createElement('td');
+  indexCell.innerText = index;
+  tableRow.appendChild(indexCell);
+
+  const nameCell = document.createElement('td');
+  nameCell.innerText = name;
+  tableRow.appendChild(nameCell);
+
+  const urlCell = document.createElement('td');
+  const urlLink = document.createElement('a');
+  urlLink.href = url;
+  urlLink.target = '_blank';
+  urlLink.innerText = url;
+  urlCell.appendChild(urlLink);
+  tableRow.appendChild(urlCell);
+
+  const descriptionCell = document.createElement('td');
+  descriptionCell.innerText = description;
+  tableRow.appendChild(descriptionCell);
+
+  return tableRow;
+}
