@@ -6,6 +6,13 @@
     transition: all 0.3s ease;
 }
 
+/* 調整嵌入式地圖為自適應大小 */
+.map-container {
+    width: 100%;
+    height: 350px;
+    border: 1px solid black;
+}
+
 /* 移除超連結所產生的底線 */
 .no-underline {
     text-decoration: none;
