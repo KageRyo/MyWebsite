@@ -74,3 +74,22 @@ function createProjectTableRow(index, name, url, description) {
 
   return tableRow;
 }
+
+// 聯絡表單功能的實作
+function sendEmail() {
+  var to = "kageryo@coderyo.com";
+  var name = document.getElementById("name").value;
+  var gender = document.querySelector('input[name="gender"]:checked').value;
+  var email = document.getElementById("email").value;
+  var message = document.getElementById("message").value;
+
+  var subject = "聯絡表單: " + name;
+  var body = "姓名：" + name + "%0A";
+  body += "性別：" + gender + "%0A";
+  body += "電子郵件：" + email + "%0A%0A";
+  body += "訊息：" + message;
+
+  var mailTo = document.createElement("a");
+  mailTo.href = "mailto:" + to + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  mailTo.click();
+}
