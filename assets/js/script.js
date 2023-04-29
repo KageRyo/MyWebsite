@@ -75,13 +75,51 @@ function createProjectTableRow(index, name, url, description) {
   return tableRow;
 }
 
+// 檢測 email 欄位是否正確
+function isValidEmail(email) {
+  var regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+  return regex.test(email);
+}
+
+// 檢測欄位是否有被填寫
+function isNotEmpty(value) {
+  return value.trim().length > 0;
+}
+
 // 聯絡表單功能的實作
 function sendEmail() {
   var to = "kageryo@coderyo.com";
   var name = document.getElementById("name").value;
-  var gender = document.querySelector('input[name="gender"]:checked').value;
+  var genderRadio = document.querySelector('input[name="gender"]:checked');
+  var gender = genderRadio ? genderRadio.value : '';
   var email = document.getElementById("email").value;
   var message = document.getElementById("message").value;
+
+  var emailValid = isValidEmail(email);
+  var nameValid = isNotEmpty(name);
+  var messageValid = isNotEmpty(message);
+
+  if (!emailValid) {
+    document.getElementById("email").parentNode.className = "ts-input is-underlined is-fluid is-negative";
+  } else {
+    document.getElementById("email").parentNode.className = "ts-input is-underlined is-fluid";
+  }
+
+  if (!nameValid) {
+    document.getElementById("name").parentNode.className = "ts-input is-underlined is-fluid is-negative";
+  } else {
+    document.getElementById("name").parentNode.className = "ts-input is-underlined is-fluid";
+  }
+
+  if (!messageValid) {
+    document.getElementById("message").parentNode.className = "ts-input is-underlined is-fluid is-negative";
+  } else {
+    document.getElementById("message").parentNode.className = "ts-input is-resizable is-underlined is-fluid";
+  }
+
+  if (!emailValid || !nameValid || !messageValid) {
+    return;
+  }
 
   var subject = "聯絡表單: " + name;
   var body = "姓名：" + name + "%0A";
