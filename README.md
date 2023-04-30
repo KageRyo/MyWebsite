@@ -2,7 +2,7 @@
 我的個人網頁，在這裡探索更多新事物❤️
 
 ## 這是什麼？
-這是 [KageRyo Developer](https://github.com/kageryo) 的個人網站，目前仍屬於開發階段，使用 [TocasUI](https://github.com/teacat/tocas) 進行開發。  
+這是 [KageRyo Developer](https://github.com/kageryo) 的個人網站，使用 [TocasUI](https://github.com/teacat/tocas) 進行開發。  
 本專案開源條款為 `CC-BY4`，可自由再製、轉發或使用，包含但不限於商業用途，唯須標明作者。  
 
 ## 如何貢獻
