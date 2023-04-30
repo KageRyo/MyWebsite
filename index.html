@@ -4,7 +4,10 @@
 <head>
     <!-- 網頁標題和語系 -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--
+        先暫時關閉手機版縮放，因為手機版縮放會影響到一些元件的排版。
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    -->
     <title>KageRyo Developer</title>
     <link rel="icon" type="img/icon" href="assets/img/favicon.ico">
     <!-- 引入 CSS -->
@@ -34,7 +37,7 @@
                 <a href="contact.html" class="item">聯絡我</a>
             </div>
             <!-- 國家選擇選單 -->
-            <div class="ts-select" data-dropdown="select">
+            <div class="ts-select mobile:is-hidden" data-dropdown="select">
                 <div class="content">
                     <span class="ts-flag is-tw-flag"></span> 正體中文
                 </div>
