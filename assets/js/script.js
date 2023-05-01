@@ -1,7 +1,6 @@
 // 初始化功能
 document.addEventListener("DOMContentLoaded", () => {
   initUnfinishedFeatures();
-  initViewMoreDetails();
   fetchProjects();
 });
 
@@ -24,28 +23,6 @@ function initUnfinishedFeatures() {
     modal.classList.remove("is-visible");
     modal.classList.add("is-hidden");
   });
-}
-
-// 查看更多按鈕的點擊事件
-function initViewMoreDetails() {
-  // 檢查當前頁面是否為首頁
-  if (window.location.pathname === "/index.html" || window.location.pathname === "/") {
-    const viewMoreDetailsButton = document.getElementById("view-more");
-
-    // 檢查 viewMoreDetailsButton 是否存在
-    if (viewMoreDetailsButton) {
-      viewMoreDetailsButton.addEventListener("click", function () {
-        const projectDetails = document.getElementById("project-details");
-        if (projectDetails.classList.contains("is-hidden")) {
-          projectDetails.classList.remove("is-hidden");
-          viewMoreDetailsButton.innerText = "收起";
-        } else {
-          projectDetails.classList.add("is-hidden");
-          viewMoreDetailsButton.innerText = "了解更多";
-        }
-      });
-    }
-  }
 }
 
 // 從 GitHub API 獲取專案資料
