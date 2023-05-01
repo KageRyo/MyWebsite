@@ -1,6 +1,7 @@
 // 初始化功能
 document.addEventListener("DOMContentLoaded", () => {
   initUnfinishedFeatures();
+  initViewMoreDetails();
   fetchProjects();
 });
 
@@ -22,6 +23,19 @@ function initUnfinishedFeatures() {
     event.preventDefault();
     modal.classList.remove("is-visible");
     modal.classList.add("is-hidden");
+  });
+}
+
+// 查看更多按鈕的點擊事件
+function initViewMoreDetails() {
+  document.querySelector(".view-more").addEventListener("click", function () {
+    document.querySelector(".ts-app-drawer").classList.remove("is-hidden");
+    document.querySelector(".ts-app-drawer").classList.add("is-visible");
+  });
+
+  document.querySelector(".close-more").addEventListener("click", function () {
+    document.querySelector(".ts-app-drawer").classList.remove("is-visible");
+    document.querySelector(".ts-app-drawer").classList.add("is-hidden");
   });
 }
 
