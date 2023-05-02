@@ -70,6 +70,8 @@ function createProjectTableRow(index, name, url, description) {
 
   const descriptionCell = document.createElement('td');
   descriptionCell.innerText = description;
+  descriptionCell.classList.add('ts-text');
+  descriptionCell.classList.add('is-1-lines');
   tableRow.appendChild(descriptionCell);
 
   return tableRow;
