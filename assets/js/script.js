@@ -1,8 +1,42 @@
 // 初始化功能
 document.addEventListener("DOMContentLoaded", () => {
+  modeToggle();
+  applySavedTheme();
   initUnfinishedFeatures();
   fetchProjects();
 });
+
+// 處理黑白色系切換的事件
+function modeToggle() {
+  const toggleBtn = document.getElementById('mode-toggle');
+  const tbtnClass = document.querySelector('.ts-icon');
+
+  toggleBtn.addEventListener('click', () => {
+    if (tbtnClass.classList.contains('is-sun-icon')) {
+      localStorage.setItem('theme', 'is-light');
+    } else {
+      localStorage.setItem('theme', 'is-dark');
+    }
+    applySavedTheme();
+  });
+}
+
+// 儲存黑白色系的設定
+function applySavedTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  const htmlClass = document.querySelector('html');
+  const tbtnClass = document.querySelector('.ts-icon');
+
+  if (savedTheme) {
+    htmlClass.className = savedTheme;
+
+    if (savedTheme === 'is-dark') {
+      tbtnClass.classList.replace('is-moon-icon', 'is-sun-icon');
+    } else {
+      tbtnClass.classList.replace('is-sun-icon', 'is-moon-icon');
+    }
+  }
+}
 
 // 處理未完成功能的點擊事件
 function initUnfinishedFeatures() {
