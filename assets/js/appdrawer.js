@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 處理邊緣抽屜的開關
 function initAppDrawer() {
-    const appDrawer = document.querySelector(".ts-app-drawer");
+    const appDrawer = document.querySelector(".ts-app-drawer#more");
     const appDrawerOpenButton = document.getElementById("app-drawer-open-button");
     const appDrawerCloseButton = document.getElementById("app-drawer-close-button");
 
