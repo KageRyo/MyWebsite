@@ -49,20 +49,20 @@
             <!-- 黑白色系切換 -->
             <div class="ts-icon item is-sun-icon" id="mode-toggle"></div>
             <!-- 國家選擇選單 -->
-            <div class="ts-select" data-dropdown="select">
+            <div class="ts-select mobile:is-hidden" data-dropdown="select">
                 <div class="content">
-                    <span class="ts-flag is-tw-flag"></span> 正體中文
+                    <span class="ts-flag is-tw-flag"></span> <div class="mobile:u-hidden">正體中文</div>
                 </div>
             </div>
             <div class="ts-dropdown" data-name="select" data-position="bottom-start">
                 <button class="item is-selected">
-                    <span class="ts-flag is-tw-flag"></span> 正體中文
+                    <span class="ts-flag is-tw-flag"></span> <div class="mobile:u-hidden">正體中文</div>
                 </button>
                 <button class="item unfinished-feature">
-                    <span class="ts-flag is-america-flag"></span> English
+                    <span class="ts-flag is-america-flag"></span> <div class="mobile:u-hidden">English</div>
                 </button>
                 <button class="item unfinished-feature">
-                    <span class="ts-flag is-japan-flag"></span> 日本語
+                    <span class="ts-flag is-japan-flag"></span> <div class="mobile:u-hidden">日本語</div>
                 </button>
             </div>
             <button class="mobile:ts-button mobile:is-icon" onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.add('is-visible')">
