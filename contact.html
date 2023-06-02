@@ -4,10 +4,8 @@
 <head>
     <!-- 網頁標題和語系 -->
     <meta charset="UTF-8">
-    <!--
-        先暫時關閉手機版縮放，因為手機版縮放會影響到一些元件的排版。
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    -->
+    <!--手機版縮放-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>KageRyo Developer</title>
     <link rel="icon" type="img/icon" href="assets/img/favicon.ico">
     <!-- 網頁資訊 -->
@@ -42,7 +40,7 @@
         </div>
         <!-- 頂部列右側 -->
         <div class="end">
-            <div class="ts-tab">
+            <div class="ts-tab mobile:u-hidden">
                 <a href="index.html" class="item">首頁</a>
                 <a href="about.html" class="item">關於我</a>
                 <a href="project.html" class="item">作品集</a>
@@ -67,6 +65,25 @@
                     <span class="ts-flag is-japan-flag"></span> 日本語
                 </button>
             </div>
+            <button class="mobile:ts-button mobile:is-icon" onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.add('is-visible')">
+                <span class="mobile:ts-icon mobile:is-bars-icon"></span>
+            </button>
+        </div>
+    </div>
+    <div class="ts-app-drawer is-right u-dark" id="mobile-menu" style="color:white;">
+        <div style="width:80%;" onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.remove('is-visible')"></div>
+        <div class="content">
+            <div class="ts-content">
+                <div class="ts-menu is-start-icon is-separated">
+                    <div class="item">
+                        <div class="ts-close is-big is-rounded" onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.remove('is-visible')"></div>
+                    </div>
+                    <a href="index.html" class="item">首頁</a>
+                    <a href="about.html" class="item">關於我</a>
+                    <a href="project.html" class="item">作品集</a>
+                    <a href="contact.html" class="item is-active">聯絡我</a>
+                </div>
+            </div>
         </div>
     </div>
     <!-- 穹頂 -->
@@ -82,7 +99,7 @@
     <div class="ts-container">
         <div class="ts-grid">
             <!-- 聯絡資訊 -->
-            <div class="column is-8-wide">
+            <div class="tablet+:column tablet+:is-8-wide mobile:ts-content">
                 <div class="ts-header is-big is-heavy">聯絡資訊</div>
                 <div class="ts-space is-small"></div>
                 <!-- Facebook -->
@@ -166,7 +183,7 @@
                 </a>
             </div>
             <!-- 聯絡表單 -->
-            <div class="column is-8-wide">
+            <div class="tablet+:column tablet+:is-8-wide mobile:ts-content">
                 <div class="ts-header is-big is-heavy">聯絡表單</div>
                 <div class="ts-space is-large"></div>
                 <div class="ts-container is-very-narrow">
