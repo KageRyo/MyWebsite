@@ -106,6 +106,7 @@ function createProjectTableRow(index, name, url, description) {
   descriptionCell.innerText = description;
   descriptionCell.classList.add('ts-text');
   descriptionCell.classList.add('is-1-lines');
+  descriptionCell.classList.add('mobile:u-hidden');
   tableRow.appendChild(descriptionCell);
 
   return tableRow;
