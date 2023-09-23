@@ -33,14 +33,14 @@
 
 <body>
     <!-- 頂部列 -->
-    <div class="ts-app-topbar u-dark">
+    <div class="ts-app-topbar has-dark">
         <!-- 頂部列左側 -->
         <div class="start">
             <a href="index.html" class="item is-text">KageRyo Developer</a>
         </div>
         <!-- 頂部列右側 -->
         <div class="end">
-            <div class="ts-tab mobile:u-hidden">
+            <div class="ts-tab mobile:has-hidden">
                 <a href="index.html" class="item">首頁</a>
                 <a href="about.html" class="item">關於我</a>
                 <a href="project.html" class="item is-active">作品集</a>
@@ -51,18 +51,18 @@
             <!-- 國家選擇選單 -->
             <div class="ts-select mobile:is-hidden" data-dropdown="select">
                 <div class="content">
-                    <span class="ts-flag is-tw-flag"></span> <div class="mobile:u-hidden">正體中文</div>
+                    <span class="ts-flag is-tw-flag"></span> <div class="mobile:has-hidden">正體中文</div>
                 </div>
             </div>
             <div class="ts-dropdown" data-name="select" data-position="bottom-start">
                 <button class="item is-selected">
-                    <span class="ts-flag is-tw-flag"></span> <div class="mobile:u-hidden">正體中文</div>
+                    <span class="ts-flag is-tw-flag"></span> <div class="mobile:has-hidden">正體中文</div>
                 </button>
                 <button class="item unfinished-feature">
-                    <span class="ts-flag is-america-flag"></span> <div class="mobile:u-hidden">English</div>
+                    <span class="ts-flag is-america-flag"></span> <div class="mobile:has-hidden">English</div>
                 </button>
                 <button class="item unfinished-feature">
-                    <span class="ts-flag is-japan-flag"></span> <div class="mobile:u-hidden">日本語</div>
+                    <span class="ts-flag is-japan-flag"></span> <div class="mobile:has-hidden">日本語</div>
                 </button>
             </div>
             <button class="mobile:ts-button mobile:is-icon" onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.add('is-visible')">
@@ -70,7 +70,7 @@
             </button>
         </div>
     </div>
-    <div class="ts-app-drawer is-right u-dark" id="mobile-menu" style="color:white;">
+    <div class="ts-app-drawer is-right has-dark" id="mobile-menu" style="color:white;">
         <div style="width:80%;" onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.remove('is-visible')"></div>
         <div class="content">
             <div class="ts-content">
@@ -90,13 +90,13 @@
     <div class="ts-content is-tertiary is-vertically-padded">
         <div class="ts-container">
             <div class="ts-header is-huge is-heavy">Chien-Hsun, Chang</div>
-            <div class="ts-text is-secondary u-bottom-spaced">Developer, Programmer, and Student@NUTC, TAICHUNG.</div>
+            <div class="ts-text is-secondary has-bottom-spaced">Developer, Programmer, and Student@NUTC, TAICHUNG.</div>
         </div>
     </div>
     <!-- 作品集 -->
-    <div class="ts-container u-top-spaced-large">
+    <div class="ts-container has-top-spaced-large">
         <!-- 精選專案 -->
-        <div class="ts-header is-big is-heavy u-bottom-spaced-small">精選專案</div>
+        <div class="ts-header is-big is-heavy has-bottom-spaced-small">精選專案</div>
         <div class="ts-grid">
             <div class="tablet+:column tablet+:is-4-wide mobile:ts-content" style="width:100%;">
                 <a href="https://github.com/KageRyo/Bybit-Predict" target="_blank" rel="noopener noreferrer"
@@ -164,15 +164,15 @@
             </div>
         </div>
         <!-- GitHub 專案 -->
-        <div class="ts-header is-big is-heavy u-top-spaced-large">我在 GitHub 上的開源專案</div>
-        <div class="ts-box u-top-spaced-small">
+        <div class="ts-header is-big is-heavy has-top-spaced-large">我在 GitHub 上的開源專案</div>
+        <div class="ts-box has-top-spaced-small">
             <table class="ts-table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>名稱</th>
                         <th>網址</th>
-                        <th class="mobile:u-hidden">描述</th>
+                        <th class="mobile:has-hidden">描述</th>
                     </tr>
                 </thead>
                 <tbody id="projects">
@@ -186,16 +186,16 @@
         </div>
     </div>
     <!-- 底部列 -->
-    <div class="ts-meta is-secondary is-center-aligned is-small u-top-spaced-big">
+    <div class="ts-meta is-secondary is-center-aligned is-small has-top-spaced-big">
         <a href="https://kageryo.coderyo.com/" class="item">2023 &copy; KageRyo Developer</a>
         <a href="https://github.com/CodeRyoDeveloper/" class="item">CodeRyo 碼凌數位科技</a>
-        <a href="https://github.com/KageRyo/" class="item u-bottom-spaced">Chien-Hsun, Chang 張健勳</a>
+        <a href="https://github.com/KageRyo/" class="item has-bottom-spaced">Chien-Hsun, Chang 張健勳</a>
     </div>
     <!-- 未完成功能 -->
     <div class="ts-modal is-hidden">
         <div class="content">
             <div class="ts-content is-center-aligned is-vertically-padded">
-                <div class="ts-header is-icon u-bottom-spaced">
+                <div class="ts-header is-icon has-bottom-spaced">
                     <span class="ts-icon is-circle-exclamation-icon"></span>
                     這個功能還沒有開放
                 </div>
