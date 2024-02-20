@@ -197,19 +197,21 @@
                         </div>
                         <div class="column">
                             <div class="ts-text is-label">性別</div>
-                            <div class="ts-wrap is-center-aligned has-top-spaced">
-                                <label class="ts-radio">
-                                    <input id="male" name="gender" type="radio" checked="">
-                                    男性
-                                </label>
-                                <label class="ts-radio">
-                                    <input id="female" name="gender" type="radio">
-                                    女性
-                                </label>
-                                <label class="ts-radio">
-                                    <input id="other" name="gender" type="radio">
-                                    其它
-                                </label>
+                            <div class="has-flex-center">
+                                <div class="ts-wrap has-top-spaced">
+                                    <label class="ts-radio">
+                                        <input id="male" name="gender" type="radio" checked="">
+                                        男性
+                                    </label>
+                                    <label class="ts-radio">
+                                        <input id="female" name="gender" type="radio">
+                                        女性
+                                    </label>
+                                    <label class="ts-radio">
+                                        <input id="other" name="gender" type="radio">
+                                        其它
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -229,38 +231,42 @@
                 </div>
             </div>
             <!-- 地圖 -->
-            <div class="ts-center has-top-spaced">
+            <div class="has-full-size has-top-spaced">
                 <iframe class="map-container" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                     src="https://www.openstreetmap.org/export/embed.html?bbox=120.67497611045839%2C24.14560815136439%2C120.69289326667787%2C24.154164462906795&amp;layer=mapnik">
                 </iframe>
             </div>
         </div>
-        <!-- 底部列 -->
-        <div class="ts-meta is-secondary is-center-aligned is-small has-top-spaced-big">
+    <!-- 底部列 -->
+    <div class="has-flex-center">
+        <div class="ts-meta is-secondary is-small">
             <a href="https://kageryo.coderyo.com/" class="item">2023-2024 &copy; KageRyo Developer</a>
             <a href="https://github.com/CodeRyoDeveloper/" class="item">CodeRyo 碼凌數位科技</a>
             <a href="https://github.com/KageRyo/" class="item has-bottom-spaced">Chien-Hsun, Chang 張健勳</a>
         </div>
-        <!-- 未完成功能 -->
-        <div class="ts-modal is-hidden">
-            <div class="content">
-                <div class="ts-content is-center-aligned is-vertically-padded">
-                    <div class="ts-header is-icon has-bottom-spaced">
-                        <span class="ts-icon is-circle-exclamation-icon"></span>
-                        這個功能還沒有開放
-                    </div>
-                    如果您有其他問題，歡迎到此專案的 GitHub。
+    </div>
+    <!-- 未完成功能 -->
+    <div class="ts-modal is-hidden">
+        <div class="content">
+            <div class="ts-content has-flex-center is-vertically-padded">
+                <div class="ts-header is-icon has-bottom-spaced">
+                    <span class="ts-icon is-circle-exclamation-icon"></span>
+                    這個功能還沒有開放
                 </div>
-                <div class="ts-divider"></div>
-                <div class="ts-content is-tertiary">
-                    <button class="ts-button is-fluid" id="close-modal-button">了解</button>
-                </div>
+                如果您有其他問題，歡迎到此專案的 GitHub。
+            </div>
+            <div class="ts-divider"></div>
+            <div class="ts-content is-tertiary">
+                <button class="ts-button is-fluid" id="close-modal-button">了解</button>
             </div>
         </div>
-        <!-- 引入 JavaScript -->
-        <script src="./assets/js/script.js"></script>
-        <!-- 開發者工具警告訊息 -->
-        <script src="./assets/js/warning.js"></script>
+    </div>
+    <!-- 引入 JavaScript -->
+    <script src="./assets/js/script.js"></script>
+    <!-- 引入邊緣收屜 JavaScript -->
+    <script src="./assets/js/appdrawer.js"></script>
+    <!-- 開發者工具警告訊息 -->
+    <script src="./assets/js/warning.js"></script>
 </body>
 
 </html>
