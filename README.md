@@ -3,7 +3,7 @@
 
 ## 這是什麼？
 這是 [KageRyo Developer](https://github.com/kageryo) 的個人網站，使用 [TocasUI](https://github.com/teacat/tocas) 進行開發。  
-本專案開源條款為 `CC-BY4`，可自由再製、轉發或使用，包含但不限於商業用途，唯須標明作者。  
+本專案頁面內容條款為 `CC-BY4`，可自由再製、轉發或使用，包含但不限於商業用途，唯須標明作者，而程式原始碼以 `MIT` 進行授權。  
 
 ## 如何貢獻
 我們歡迎任何形式的貢獻！如果您對此專案感興趣，請遵循以下步驟：
@@ -21,4 +21,4 @@
 - 電子郵件: kageryo@coderyo.com
 
 ## License
-此專案採用 `CC-BY-4.0 License` 進行許可 - 更多詳細信息，請查看 [LICENSE](LICENSE) 文件。
+此專案原始碼採用 `MIT License` 授權，其頁面內容採用 `CC-BY-4.0 License` 進行授權。
