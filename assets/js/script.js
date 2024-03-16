@@ -62,14 +62,13 @@ function initUnfinishedFeatures() {
 // 從 GitHub API 獲取專案資料
 function fetchProjects() {
   // KageRyo
-  const githubUsername = 'KageRyo';
-  const apiUrl = `https://api.github.com/users/${githubUsername}/repos`;
+  const apiUrl_KageRyo = `https://api.github.com/users/KageRyo/repos`;
 
-  fetch(apiUrl)
+  fetch(apiUrl_KageRyo)
     .then((response) => response.json())
     .then((data) => {
-      const projectsContainer = document.getElementById('projects-KageRyo');
-      const totalRepos = document.getElementById('total-repos-KageRyo');
+      const projectsContainer = document.getElementById('projects-kageryo');
+      const totalRepos = document.getElementById('total-repos-kageryo');
 
       if (projectsContainer && totalRepos) {
         let index = 1;
@@ -82,8 +81,62 @@ function fetchProjects() {
       }
     });
     // KageRyo's Lab
+    apiUrl_Lab = `https://api.github.com/users/KageRyo-Lab/repos`;
+
+    fetch(apiUrl_Lab)
+      .then((response) => response.json())
+      .then((data) => {
+        const projectsContainer = document.getElementById('projects-lab');
+        const totalRepos = document.getElementById('total-repos-lab');
+  
+        if (projectsContainer && totalRepos) {
+          let index = 1;
+          data.forEach((repo) => {
+            const { name, html_url, description = '無描述' } = repo;
+            projectsContainer.appendChild(createProjectTableRow(index, name, html_url, description));
+            index++;
+          });
+          totalRepos.textContent = `統計筆數：${data.length}`;
+        }
+      });
     // CodeRyo
+    const apiUrl_CodeRyo = `https://api.github.com/users/CodeRyoDeveloper/repos`;
+
+    fetch(apiUrl_CodeRyo)
+      .then((response) => response.json())
+      .then((data) => {
+        const projectsContainer = document.getElementById('projects-coderyo');
+        const totalRepos = document.getElementById('total-repos-coderyo');
+  
+        if (projectsContainer && totalRepos) {
+          let index = 1;
+          data.forEach((repo) => {
+            const { name, html_url, description = '無描述' } = repo;
+            projectsContainer.appendChild(createProjectTableRow(index, name, html_url, description));
+            index++;
+          });
+          totalRepos.textContent = `統計筆數：${data.length}`;
+        }
+      });
     // RotatingPotato 
+    const apiUrl_Potato = `https://api.github.com/users/RotatingPotato/repos`;
+
+    fetch(apiUrl_Potato)
+      .then((response) => response.json())
+      .then((data) => {
+        const projectsContainer = document.getElementById('projects-potato');
+        const totalRepos = document.getElementById('total-repos-potato');
+  
+        if (projectsContainer && totalRepos) {
+          let index = 1;
+          data.forEach((repo) => {
+            const { name, html_url, description = '無描述' } = repo;
+            projectsContainer.appendChild(createProjectTableRow(index, name, html_url, description));
+            index++;
+          });
+          totalRepos.textContent = `統計筆數：${data.length}`;
+        }
+      });
 }
 
 // 創建專案表格行
