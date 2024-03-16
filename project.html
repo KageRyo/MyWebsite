@@ -25,9 +25,9 @@
     <!-- 引入字型 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
     <!-- 套用 TocasUI -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.5/tocas.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.5/tocas.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.5/tocas.min.js"></script>
 </head>
 
@@ -51,32 +51,40 @@
             <!-- 國家選擇選單 -->
             <div class="ts-select mobile:is-hidden" data-dropdown="select">
                 <div class="content">
-                    <span class="ts-flag is-tw-flag"></span> <div class="mobile:has-hidden">正體中文</div>
+                    <span class="ts-flag is-tw-flag"></span>
+                    <div class="mobile:has-hidden">正體中文</div>
                 </div>
             </div>
             <div class="ts-dropdown" data-name="select" data-position="bottom-start">
                 <button class="item is-selected">
-                    <span class="ts-flag is-tw-flag"></span> <div class="mobile:has-hidden">正體中文</div>
+                    <span class="ts-flag is-tw-flag"></span>
+                    <div class="mobile:has-hidden">正體中文</div>
                 </button>
                 <button class="item unfinished-feature">
-                    <span class="ts-flag is-america-flag"></span> <div class="mobile:has-hidden">English</div>
+                    <span class="ts-flag is-america-flag"></span>
+                    <div class="mobile:has-hidden">English</div>
                 </button>
                 <button class="item unfinished-feature">
-                    <span class="ts-flag is-japan-flag"></span> <div class="mobile:has-hidden">日本語</div>
+                    <span class="ts-flag is-japan-flag"></span>
+                    <div class="mobile:has-hidden">日本語</div>
                 </button>
             </div>
-            <button class="mobile:ts-button mobile:is-icon" onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.add('is-visible')">
+            <button class="mobile:ts-button mobile:is-icon"
+                onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.add('is-visible')">
                 <span class="mobile:ts-icon mobile:is-bars-icon"></span>
             </button>
         </div>
     </div>
     <div class="ts-app-drawer is-right has-dark" id="mobile-menu" style="color:white;">
-        <div style="width:80%;" onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.remove('is-visible')"></div>
+        <div style="width:80%;"
+            onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.remove('is-visible')"></div>
         <div class="content">
             <div class="ts-content">
                 <div class="ts-menu is-start-icon is-separated">
                     <div class="item">
-                        <div class="ts-close is-big is-rounded" onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.remove('is-visible')"></div>
+                        <div class="ts-close is-big is-rounded"
+                            onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.remove('is-visible')">
+                        </div>
                     </div>
                     <a href="index.html" class="item">首頁</a>
                     <a href="about.html" class="item">關於我</a>
@@ -132,14 +140,14 @@
                 </a>
             </div>
             <div class="tablet+:column tablet+:is-4-wide mobile:ts-content">
-                <a href="https://github.com/KageRyo/ClassPractice" target="_blank" rel="noopener noreferrer"
+                <a href="https://github.com/KageRyo-Lab/ClassPractice" target="_blank" rel="noopener noreferrer"
                     class="no-underline">
                     <div class="ts-box">
                         <div class="ts-image">
                             <img src="./assets/img/nutc.svg">
                         </div>
                         <div class="ts-content is-secondary">
-                            <div class="ts-text is-description">KageRyo/ClassPractice</div>
+                            <div class="ts-text is-description">KageRyo-Lab/ClassPractice</div>
                             <div class="ts-header is-truncated is-heavy">ClassPractice</div>
                             <div class="ts-text is-description text-overflow-ellipsis">All of my practice in class.
                             </div>
@@ -165,24 +173,99 @@
         </div>
         <!-- GitHub 專案 -->
         <div class="ts-header is-big is-heavy has-top-spaced-large">我在 GitHub 上的開源專案</div>
-        <div class="ts-box has-top-spaced-small">
-            <table class="ts-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>名稱</th>
-                        <th>網址</th>
-                        <th class="mobile:has-hidden">描述</th>
-                    </tr>
-                </thead>
-                <tbody id="projects">
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="4" id="total-repos">統計筆數：0</th>
-                    </tr>
-                </tfoot>
-            </table>
+        <div class="ts-tab is-pilled has-vertically-spaced">
+            <button class="item is-active" data-tab="kageryo">KageRyo</button>
+            <button class="item unfinished-feature" data-tab="kageryo-lab">KageRyo's Lab</button>
+            <button class="item unfinished-feature" data-tab="coderyo">CodeRyo</button>
+            <button class="item unfinished-feature" data-tab="rotatingpotato">RotatingPotato</button>
+        </div>
+        <!-- KageRyo -->
+        <div data-name="kageryo">
+            <div class="ts-box has-top-spaced-small">
+                <table class="ts-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>名稱</th>
+                            <th>網址</th>
+                            <th class="mobile:has-hidden">描述</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projects-KageRyo">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4" id="total-repos-KageRyo">統計筆數：0</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <!-- KageRyo's Lab -->
+        <div data-name="kageryo-lab">
+            <div class="ts-box has-top-spaced-small">
+                <table class="ts-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>名稱</th>
+                            <th>網址</th>
+                            <th class="mobile:has-hidden">描述</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projects-Lab">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4" id="total-repos-Lab">統計筆數：0</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <!-- CodeRyo -->
+        <div data-name="coderyo">
+            <div class="ts-box has-top-spaced-small">
+                <table class="ts-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>名稱</th>
+                            <th>網址</th>
+                            <th class="mobile:has-hidden">描述</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projects-CodeRyo">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4" id="total-repos-CodeRyo">統計筆數：0</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <!-- RotatingPotato -->
+        <div data-name="rotatingpotato">
+            <div class="ts-box has-top-spaced-small">
+                <table class="ts-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>名稱</th>
+                            <th>網址</th>
+                            <th class="mobile:has-hidden">描述</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projects-Potato">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4" id="total-repos-Potato">統計筆數：0</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
     <!-- 底部列 -->

@@ -61,14 +61,15 @@ function initUnfinishedFeatures() {
 
 // 從 GitHub API 獲取專案資料
 function fetchProjects() {
+  // KageRyo
   const githubUsername = 'KageRyo';
   const apiUrl = `https://api.github.com/users/${githubUsername}/repos`;
 
   fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
-      const projectsContainer = document.getElementById('projects');
-      const totalRepos = document.getElementById('total-repos');
+      const projectsContainer = document.getElementById('projects-KageRyo');
+      const totalRepos = document.getElementById('total-repos-KageRyo');
 
       if (projectsContainer && totalRepos) {
         let index = 1;
@@ -80,6 +81,9 @@ function fetchProjects() {
         totalRepos.textContent = `統計筆數：${data.length}`;
       }
     });
+    // KageRyo's Lab
+    // CodeRyo
+    // RotatingPotato 
 }
 
 // 創建專案表格行
