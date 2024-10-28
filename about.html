@@ -47,15 +47,15 @@
                 <a href="contact.html" class="item">聯絡我</a>
             </div>
             <!-- 黑白色系切換 -->
-            <div class="ts-icon item is-sun-icon" id="mode-toggle"></div>
+            <div class="ts-icon item is-sun-icon" id="mode-toggle" style="z-index: 9999;"></div>
             <!-- 國家選擇選單 -->
-            <div class="ts-select mobile:is-hidden" data-dropdown="select">
+            <div class="ts-select mobile:is-hidden" data-dropdown="select" style="z-index: 9999;">
                 <div class="content">
                     <span class="ts-flag is-tw-flag"></span>
                     <div class="mobile:has-hidden">正體中文</div>
                 </div>
             </div>
-            <div class="ts-dropdown" data-name="select" data-position="bottom-start">
+            <div class="ts-dropdown" data-name="select" data-position="bottom-start" style="z-index: 9999;">
                 <button class="item is-selected">
                     <span class="ts-flag is-tw-flag"></span>
                     <div class="mobile:has-hidden">正體中文</div>
@@ -69,28 +69,21 @@
                     <div class="mobile:has-hidden">日本語</div>
                 </button>
             </div>
-            <button class="mobile:ts-button mobile:is-icon"
-                onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.add('is-visible')">
+            <button class="mobile:ts-button mobile:is-icon" style="z-index: 9999;"
+                onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.toggle('is-visible')">
                 <span class="mobile:ts-icon mobile:is-bars-icon"></span>
             </button>
         </div>
     </div>
     <div class="ts-app-drawer is-right has-dark" id="mobile-menu" style="color:white;">
-        <div style="width:80%;"
-            onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.remove('is-visible')"></div>
+        <div style="width:80%"></div>
         <div class="content">
-            <div class="ts-content">
-                <div class="ts-menu is-start-icon is-separated">
-                    <div class="item">
-                        <div class="ts-close is-big is-rounded"
-                            onclick="document.querySelector('.ts-app-drawer#mobile-menu').classList.remove('is-visible')">
-                        </div>
-                    </div>
-                    <a href="index.html" class="item">首頁</a>
-                    <a href="about.html" class="item is-active">關於我</a>
-                    <a href="project.html" class="item">作品集</a>
-                    <a href="contact.html" class="item">聯絡我</a>
-                </div>
+            <div class="ts-app-sidebar" style="padding-top:20%;">
+                <div class="header ts-divider is-start-text">導航欄</div>
+                <a href="index.html" class="item is-indented">首頁</a>
+                <a href="about.html" class="item is-active is-indented">關於我</a>
+                <a href="project.html" class="item is-indented">作品集</a>
+                <a href="contact.html" class="item is-indented">聯絡我</a>
             </div>
         </div>
     </div>
