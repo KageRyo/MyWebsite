@@ -23,9 +23,12 @@ function detectSystemTheme() {
   if (window.matchMedia) {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     mediaQuery.addEventListener('change', (e) => {
-      const newTheme = e.matches ? 'is-dark' : 'is-light';
-      localStorage.setItem('theme', newTheme);
-      applySavedTheme();
+      const themeSource = localStorage.getItem('themeSource');
+      if (themeSource === 'system') {
+        const newTheme = e.matches ? 'is-dark' : 'is-light';
+        localStorage.setItem('theme', newTheme);
+        applySavedTheme();
+      }
     });
   }
 }
