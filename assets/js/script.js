@@ -1,6 +1,8 @@
+const THEME_KEY = 'theme';
+const THEME_SOURCE_KEY = 'themeSource';
+
 // 初始化功能
 document.addEventListener("DOMContentLoaded", () => {
-  // localStorage.removeItem('theme'); // 測試用
   modeToggle();
   detectSystemTheme();
   applySavedTheme();
@@ -10,23 +12,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 檢測系統主題偏好
 function detectSystemTheme() {
-  const savedTheme = localStorage.getItem('theme');
+  const savedTheme = localStorage.getItem(THEME_KEY);
 
   if (!savedTheme) {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      localStorage.setItem('theme', 'is-dark');
+      localStorage.setItem(THEME_KEY, 'is-dark');
     } else {
-      localStorage.setItem('theme', 'is-light');
+      localStorage.setItem(THEME_KEY, 'is-light');
     }
+    localStorage.setItem(THEME_SOURCE_KEY, 'system');
   }
 
   // 監聽系統主題變化
   if (window.matchMedia) {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     mediaQuery.addEventListener('change', (e) => {
-      const newTheme = e.matches ? 'is-dark' : 'is-light';
-      localStorage.setItem('theme', newTheme);
-      applySavedTheme();
+      const themeSource = localStorage.getItem(THEME_SOURCE_KEY);
+      if (themeSource === 'system') {
+        const newTheme = e.matches ? 'is-dark' : 'is-light';
+        localStorage.setItem(THEME_KEY, newTheme);
+        applySavedTheme();
+      }
     });
   }
 }
@@ -37,17 +43,19 @@ function modeToggle() {
 
   toggleBtn.addEventListener('click', () => {
     if (tbtnClass.classList.contains('is-sun-icon')) {
-      localStorage.setItem('theme', 'is-light');
+      localStorage.setItem(THEME_KEY, 'is-light');
     } else {
-      localStorage.setItem('theme', 'is-dark');
+      localStorage.setItem(THEME_KEY, 'is-dark');
     }
+    // Set theme source to manual when user manually toggles
+    localStorage.setItem(THEME_SOURCE_KEY, 'manual');
     applySavedTheme();
   });
 }
 
 // 儲存黑白色系的設定
 function applySavedTheme() {
-  const savedTheme = localStorage.getItem('theme');
+  const savedTheme = localStorage.getItem(THEME_KEY);
   const htmlClass = document.querySelector('html');
   const tbtnClass = document.querySelector('.ts-icon');
 
