@@ -1,6 +1,5 @@
 // 初始化功能
 document.addEventListener("DOMContentLoaded", () => {
-  // localStorage.removeItem('theme'); // 測試用
   modeToggle();
   detectSystemTheme();
   applySavedTheme();
