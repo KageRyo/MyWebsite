@@ -1,11 +1,35 @@
 // 初始化功能
 document.addEventListener("DOMContentLoaded", () => {
+  // localStorage.removeItem('theme'); // 測試用
   modeToggle();
+  detectSystemTheme();
   applySavedTheme();
   initUnfinishedFeatures();
   fetchProjects();
 });
 
+// 檢測系統主題偏好
+function detectSystemTheme() {
+  const savedTheme = localStorage.getItem('theme');
+
+  if (!savedTheme) {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      localStorage.setItem('theme', 'is-dark');
+    } else {
+      localStorage.setItem('theme', 'is-light');
+    }
+  }
+
+  // 監聽系統主題變化
+  if (window.matchMedia) {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', (e) => {
+      const newTheme = e.matches ? 'is-dark' : 'is-light';
+      localStorage.setItem('theme', newTheme);
+      applySavedTheme();
+    });
+  }
+}
 // 處理黑白色系切換的事件
 function modeToggle() {
   const toggleBtn = document.getElementById('mode-toggle');
