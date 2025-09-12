@@ -23,22 +23,42 @@
     </div>
     
     <div v-else-if="error" class="ts-content is-center-aligned has-top-spaced">
-      <div class="ts-text is-negative">
-        <div class="ts-icon is-exclamation-triangle-icon"></div>
-        {{ error }}
+      <div class="ts-text is-warning">
+        <div class="ts-icon is-wrench-icon"></div>
+        <div class="ts-header is-large">GitHub API 功能修復中</div>
+        <div class="ts-text is-secondary has-top-spaced-small">
+          由於 GitHub API 速率限制問題，此功能暫時無法正常運作。<br>
+          我們正在修復這個問題，敬請見諒！
+        </div>
+        <div class="ts-text is-small has-top-spaced">
+          您仍可以直接訪問我的 GitHub 主頁查看所有專案：<br>
+          <a href="https://github.com/KageRyo" target="_blank" class="ts-text is-link">
+            🔗 github.com/KageRyo
+          </a>
+        </div>
+        <button 
+          class="ts-button is-outlined has-top-spaced" 
+          @click="retryFetch"
+        >
+          嘗試重新載入
+        </button>
       </div>
-      <button 
-        class="ts-button is-outlined has-top-spaced" 
-        @click="retryFetch"
-      >
-        重新載入
-      </button>
     </div>
     
     <div v-else-if="currentProjects.length === 0" class="ts-content is-center-aligned has-top-spaced">
-      <div class="ts-text is-secondary">
-        <div class="ts-icon is-folder-open-icon"></div>
-        目前沒有找到任何專案
+      <div class="ts-text is-warning">
+        <div class="ts-icon is-wrench-icon"></div>
+        <div class="ts-header is-large">GitHub API 功能修復中</div>
+        <div class="ts-text is-secondary has-top-spaced-small">
+          由於 GitHub API 速率限制問題，此功能暫時無法正常運作。<br>
+          我們正在修復這個問題，敬請見諒！
+        </div>
+        <div class="ts-text is-small has-top-spaced">
+          您仍可以直接訪問我的 GitHub 主頁：
+          <a href="https://github.com/KageRyo" target="_blank" class="ts-text is-link">
+            github.com/KageRyo
+          </a>
+        </div>
       </div>
     </div>
     
