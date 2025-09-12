@@ -72,14 +72,14 @@
       
       <!-- Ko-fi 贊助按鈕 -->
       <div class="has-flex-center has-top-spaced">
-        <div id="kofi-button-container"></div>
+        <div id="kofi-widget-container"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, nextTick } from 'vue'
 
 // 表單數據
 const form = reactive({
@@ -124,48 +124,30 @@ ${form.message}`
   }
 }
 
-// 載入 Ko-fi 按鈕
-onMounted(() => {
-  const KOFI_SCRIPT_ID = 'kofi-widget-script';
-  const KOFI_SCRIPT_SRC = 'https://storage.ko-fi.com/cdn/scripts/overlay-widget.js';
-  const container = document.getElementById('kofi-button-container');
-  if (!container) return;
-
-  // Check if script is already present
-  let script = document.getElementById(KOFI_SCRIPT_ID);
-  if (!script) {
-    script = document.createElement('script');
-    script.id = KOFI_SCRIPT_ID;
-    script.src = KOFI_SCRIPT_SRC;
-    script.async = true;
-    script.onload = () => {
-      if (typeof kofiwidget2 !== 'undefined') {
-        kofiwidget2.init('Support Me on Ko-fi', '#606466', 'P5P0KOCNI');
-        kofiwidget2.draw();
-      } else {
-        console.error('Ko-fi widget failed to load.');
-      }
-    };
-    script.onerror = () => {
-      console.error('Failed to load Ko-fi widget script.');
-    };
-    document.body.appendChild(script);
-  } else {
-    // Script already loaded, try to init immediately
-    if (typeof kofiwidget2 !== 'undefined') {
-      kofiwidget2.init('Support Me on Ko-fi', '#606466', 'P5P0KOCNI');
-      kofiwidget2.draw();
-    } else {
-      // Wait a bit in case script is still loading
-      setTimeout(() => {
-        if (typeof kofiwidget2 !== 'undefined') {
-          kofiwidget2.init('Support Me on Ko-fi', '#606466', 'P5P0KOCNI');
-          kofiwidget2.draw();
-        } else {
-          console.error('Ko-fi widget failed to load.');
-        }
-      }, 500);
+// 初始化 Ko-fi 按鈕
+onMounted(async () => {
+  await nextTick()
+  
+  // 確保 kofiwidget2 已經載入
+  if (typeof window.kofiwidget2 !== 'undefined') {
+    try {
+      window.kofiwidget2.init('Support Me on Ko-fi', '#606466', 'P5P0KOCNI')
+      window.kofiwidget2.draw()
+    } catch (error) {
+      console.log('Ko-fi widget initialization failed:', error)
     }
+  } else {
+    // 如果還沒載入，等待一下再試
+    setTimeout(() => {
+      if (typeof window.kofiwidget2 !== 'undefined') {
+        try {
+          window.kofiwidget2.init('Support Me on Ko-fi', '#606466', 'P5P0KOCNI')
+          window.kofiwidget2.draw()
+        } catch (error) {
+          console.log('Ko-fi widget delayed initialization failed:', error)
+        }
+      }
+    }, 1000)
   }
-});
+})
 </script>

@@ -19,11 +19,27 @@
     <!-- 專案列表 -->
     <div v-if="loading" class="ts-content is-center-aligned has-top-spaced">
       <div class="ts-loader"></div>
-      <div class="ts-text is-secondary">載入中...</div>
+      <div class="ts-text is-secondary">正在載入 GitHub 專案...</div>
     </div>
     
     <div v-else-if="error" class="ts-content is-center-aligned has-top-spaced">
-      <div class="ts-text is-negative">{{ error }}</div>
+      <div class="ts-text is-negative">
+        <div class="ts-icon is-exclamation-triangle-icon"></div>
+        {{ error }}
+      </div>
+      <button 
+        class="ts-button is-outlined has-top-spaced" 
+        @click="retryFetch"
+      >
+        重新載入
+      </button>
+    </div>
+    
+    <div v-else-if="currentProjects.length === 0" class="ts-content is-center-aligned has-top-spaced">
+      <div class="ts-text is-secondary">
+        <div class="ts-icon is-folder-open-icon"></div>
+        目前沒有找到任何專案
+      </div>
     </div>
     
     <div v-else class="ts-box has-top-spaced-small">
@@ -87,8 +103,20 @@ const currentProjects = computed(() => {
 const loading = computed(() => projectStore.loading)
 const error = computed(() => projectStore.error)
 
+// 重新載入函數
+const retryFetch = async () => {
+  console.log('重新載入 GitHub 專案...')
+  await projectStore.fetchAllProjects()
+}
+
 // 組件掛載時載入專案
-onMounted(() => {
-  projectStore.fetchAllProjects()
+onMounted(async () => {
+  try {
+    console.log('開始載入 GitHub 專案...')
+    await projectStore.fetchAllProjects()
+    console.log('GitHub 專案載入完成:', projectStore.projects)
+  } catch (error) {
+    console.error('載入 GitHub 專案失敗:', error)
+  }
 })
 </script>
