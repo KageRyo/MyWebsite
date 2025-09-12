@@ -126,15 +126,46 @@ ${form.message}`
 
 // 載入 Ko-fi 按鈕
 onMounted(() => {
-  // 等待 Ko-fi 腳本載入
-  setTimeout(() => {
-    if (typeof kofiwidget2 !== 'undefined') {
-      const container = document.getElementById('kofi-button-container')
-      if (container) {
-        kofiwidget2.init('Support Me on Ko-fi', '#606466', 'P5P0KOCNI')
-        kofiwidget2.draw()
+  const KOFI_SCRIPT_ID = 'kofi-widget-script';
+  const KOFI_SCRIPT_SRC = 'https://storage.ko-fi.com/cdn/scripts/overlay-widget.js';
+  const container = document.getElementById('kofi-button-container');
+  if (!container) return;
+
+  // Check if script is already present
+  let script = document.getElementById(KOFI_SCRIPT_ID);
+  if (!script) {
+    script = document.createElement('script');
+    script.id = KOFI_SCRIPT_ID;
+    script.src = KOFI_SCRIPT_SRC;
+    script.async = true;
+    script.onload = () => {
+      if (typeof kofiwidget2 !== 'undefined') {
+        kofiwidget2.init('Support Me on Ko-fi', '#606466', 'P5P0KOCNI');
+        kofiwidget2.draw();
+      } else {
+        console.error('Ko-fi widget failed to load.');
       }
+    };
+    script.onerror = () => {
+      console.error('Failed to load Ko-fi widget script.');
+    };
+    document.body.appendChild(script);
+  } else {
+    // Script already loaded, try to init immediately
+    if (typeof kofiwidget2 !== 'undefined') {
+      kofiwidget2.init('Support Me on Ko-fi', '#606466', 'P5P0KOCNI');
+      kofiwidget2.draw();
+    } else {
+      // Wait a bit in case script is still loading
+      setTimeout(() => {
+        if (typeof kofiwidget2 !== 'undefined') {
+          kofiwidget2.init('Support Me on Ko-fi', '#606466', 'P5P0KOCNI');
+          kofiwidget2.draw();
+        } else {
+          console.error('Ko-fi widget failed to load.');
+        }
+      }, 500);
     }
-  }, 1000)
-})
+  }
+});
 </script>
