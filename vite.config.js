@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [vue()],
-  base: './', // 支援相對路徑部署
+  base: '/MyWebsite/', // GitHub Pages 專案路徑
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src')
@@ -12,12 +12,20 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    open: '/index-vue.html' // 自動開啟 Vue 版本
+    open: true
   },
   build: {
-    outDir: 'dist-vue',
+    outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
-    minify: 'terser'
+    minify: 'terser',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'vue-router', 'pinia'],
+          utils: ['axios']
+        }
+      }
+    }
   }
 })

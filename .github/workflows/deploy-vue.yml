@@ -1,10 +1,9 @@
-name: Deploy Vue to GitHub Pages
+name: Deploy Vue App to GitHub Pages
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -33,11 +32,6 @@ jobs:
       
     - name: Build Vue app
       run: npm run build
-      
-    - name: Copy Vue build to vue subdirectory
-      run: |
-        mkdir -p vue-dist
-        cp -r dist/* vue-dist/
         
     - name: Setup Pages
       uses: actions/configure-pages@v4
@@ -45,7 +39,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: '.'
+        path: './dist'
 
   deploy:
     environment:
