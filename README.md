@@ -4,64 +4,62 @@
 ## 🌟 專案介紹
 這是 [KageRyo Developer](https://github.com/kageryo) 的個人網站，展示個人簡介、技能、作品集和聯絡資訊。
 
-## 🚀 技術架構
-
-### 原生 HTML 版本（穩定版）
-- **HTML5** + **CSS3** + **JavaScript (ES6+)**
+## ⚡ 技術特色
 - **[TocasUI](https://github.com/teacat/tocas)** - 現代化 CSS 框架
 - **GitHub API** 整合 - 動態載入專案資訊
 - **響應式設計** - 支援桌面與行動裝置
-
-### Vue.js 版本（重構中）
-- **Vue 3** - 使用 Composition API
-- **Vue Router 4** - 單頁應用路由管理
-- **Pinia** - 現代化狀態管理
-- **Vite** - 快速建構工具
-- **保持 TocasUI** 設計風格
+- **自動部署** - GitHub Pages
 
 ## 🚀 快速開始
 
-### 原生 HTML 版本
-直接開啟 `index.html` 即可在瀏覽器中查看，或部署到任何靜態網站服務。
-
-### Vue.js 版本
-
-#### 前置要求
+### 前置要求
 - Node.js (建議版本 16+)
 - npm 或 yarn
 
-#### 安裝與運行
+### 本地開發
 ```bash
+# Clone 專案
+git clone https://github.com/KageRyo/MyWebsite.git
+cd MyWebsite
+
 # 安裝依賴
 npm install
 
-# 開發環境
+# 啟動開發伺服器
 npm run dev
+```
 
+### 建置與部署
+```bash
 # 建構生產版本
 npm run build
 
-# 預覽生產版本
+# 預覽建構結果
 npm run preview
 ```
 
+自動部署已配置，推送到主分支即可更新網站。
+
+### 線上訪問
+🌐 **官網**：https://kageryo.github.io/MyWebsite/
+
 ## 📂 專案結構
 ```
-├── index.html              # 首頁（原生版）
-├── about.html              # 關於我頁面
-├── project.html            # 作品集頁面
-├── contact.html            # 聯絡頁面
-├── index-vue.html          # Vue 版本入口
-├── src/                    # Vue 源碼目錄
-│   ├── components/         # Vue 組件
-│   ├── stores/             # Pinia 狀態管理
+├── index.html              # 主入口檔案
+├── src/                    # 應用程式源碼
+│   ├── components/         # 組件模組
+│   │   ├── about/          # 關於頁面組件
+│   │   ├── contact/        # 聯絡頁面組件
+│   │   ├── home/           # 首頁組件
+│   │   ├── layout/         # 佈局組件
+│   │   └── projects/       # 專案頁面組件
+│   ├── stores/             # 狀態管理
 │   ├── router/             # 路由配置
 │   └── views/              # 頁面組件
 ├── assets/                 # 靜態資源
 │   ├── css/                # 樣式文件
-│   ├── js/                 # JavaScript 文件
 │   └── img/                # 圖片資源
-└── vite.config.js          # Vite 配置
+└── .github/workflows/      # 自動部署配置
 ```  
 
 ## ✨ 主要功能
@@ -70,12 +68,7 @@ npm run preview
 - 📱 **行動裝置優化** - 手機端導航選單
 - 🔗 **GitHub API 整合** - 動態載入開源專案
 - 📧 **聯絡表單** - 直接發送郵件功能
-- 🎯 **多語言介面** - 預留多語言擴展（開發中）
-
-## 🔄 版本說明
-- **HTML 版本**: 穩定運行的生產版本
-- **Vue 版本**: 正在重構中，採用現代化架構
-- **GitFlow**: 使用 `feature/vue-refactor` 分支進行 Vue 重構
+- 🚀 **快速載入** - 現代化單頁應用體驗
 
 ## 如何貢獻
 我們歡迎任何形式的貢獻！如果您對此專案感興趣，請遵循以下步驟：
