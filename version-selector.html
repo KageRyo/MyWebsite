@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KageRyo Developer - 版本選擇</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .version-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .version-card {
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .version-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .version-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        
+        .version-desc {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-top: 8px;
+        }
+        
+        .stable {
+            background: #e8f5e8;
+            color: #4caf50;
+        }
+        
+        .beta {
+            background: #fff3e0;
+            color: #ff9800;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 KageRyo Developer Website</h1>
+        <p>歡迎來到我的個人網站！請選擇您想要查看的版本：</p>
+        
+        <div class="version-grid">
+            <a href="index.html" class="version-card">
+                <div class="version-title">📄 原生 HTML 版本</div>
+                <div class="version-desc">穩定的生產版本，使用原生 HTML + CSS + JS</div>
+                <div class="status stable">✅ 穩定版</div>
+            </a>
+            
+            <a href="index-vue.html" class="version-card" onclick="checkVueVersion(event)">
+                <div class="version-title">⚡ Vue.js 版本</div>
+                <div class="version-desc">現代化重構版本，使用 Vue 3 + Vite</div>
+                <div class="status beta">🚧 開發中</div>
+            </a>
+        </div>
+        
+        <div style="margin-top: 30px; font-size: 0.9em; color: #666;">
+            <p>💡 <strong>提示：</strong> Vue 版本需要先運行 <code>npm run dev</code></p>
+        </div>
+    </div>
+    
+    <script>
+        function checkVueVersion(event) {
+            // 簡單檢查是否在開發服務器下
+            if (window.location.protocol === 'file:') {
+                event.preventDefault();
+                alert('Vue 版本需要在開發服務器下運行\n\n請執行：\n1. npm install\n2. npm run dev');
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
