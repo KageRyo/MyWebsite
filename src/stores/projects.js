@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import axios from 'axios'
 
 export const useProjectStore = defineStore('projects', () => {
   // 狀態
@@ -30,11 +29,31 @@ export const useProjectStore = defineStore('projects', () => {
     error.value = null
     
     try {
-      const response = await axios.get(API_URLS[username])
-      projects.value[username] = response.data
+      console.log(`正在獲取 ${username} 的專案...`)
+      
+      const response = await fetch(API_URLS[username], {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'KageRyo-Website'
+        }
+      })
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      }
+      
+      const data = await response.json()
+      projects.value[username] = data
+      console.log(`${username} 專案載入成功:`, data.length, '個專案')
+      
     } catch (err) {
-      error.value = `獲取 ${username} 專案失敗: ${err.message}`
-      console.error(error.value)
+      const errorMessage = `獲取 ${username} 專案失敗: ${err.message}`
+      error.value = errorMessage
+      console.error(errorMessage, err)
+      
+      // 設置空陣列避免顯示問題
+      projects.value[username] = []
     } finally {
       loading.value = false
     }
