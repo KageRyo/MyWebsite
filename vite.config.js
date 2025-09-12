@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/MyWebsite/', // GitHub Pages 專案路徑
+  base: '/', // 自訂網域使用根路徑
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src')
