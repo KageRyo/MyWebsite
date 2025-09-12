@@ -16,6 +16,13 @@ export default defineConfig({
         } catch (err) {
           console.log('CNAME file not found, skipping...')
         }
+        
+        try {
+          copyFileSync('.nojekyll', 'dist/.nojekyll')
+          console.log('.nojekyll file copied to dist/')
+        } catch (err) {
+          console.log('.nojekyll file not found, skipping...')
+        }
       }
     }
   ],
