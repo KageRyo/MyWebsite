@@ -1,9 +1,24 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
+import { copyFileSync } from 'fs'
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    // 複製 CNAME 文件到 dist 目錄
+    {
+      name: 'copy-cname',
+      closeBundle() {
+        try {
+          copyFileSync('CNAME', 'dist/CNAME')
+          console.log('CNAME file copied to dist/')
+        } catch (err) {
+          console.log('CNAME file not found, skipping...')
+        }
+      }
+    }
+  ],
   base: '/', // 自訂網域使用根路徑
   resolve: {
     alias: {
