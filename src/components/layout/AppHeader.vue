@@ -65,6 +65,7 @@
 
 <script setup>
 import { useThemeStore } from '../../stores/theme'
+
 import { useModalStore } from '../../stores/modal'
 
 const themeStore = useThemeStore()
@@ -87,7 +88,5 @@ const toggleMobileMenu = () => {
 </script>
 
 <style scoped>
-.router-link-active {
-  /* TocasUI 會自動處理 active 狀態 */
-}
+/* TocasUI 會自動處理路由 active 狀態 */
 </style>

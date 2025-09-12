@@ -17,10 +17,10 @@
         <!-- 聯絡表單 -->
         <ContactForm />
       </div>
-      
-      <!-- 地圖 -->
-      <LocationMap />
     </div>
+    
+    <!-- 地圖 -->
+    <LocationMap />
   </div>
 </template>
 
