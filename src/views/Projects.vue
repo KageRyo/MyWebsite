@@ -27,8 +27,5 @@ import GitHubProjects from '../components/projects/GitHubProjects.vue'
 
 const projectStore = useProjectStore()
 
-onMounted(() => {
-  // 載入 GitHub 專案
-  projectStore.fetchAllProjects()
-})
+// GitHub 專案由 GitHubProjects 組件負責載入，避免重複調用
 </script>
