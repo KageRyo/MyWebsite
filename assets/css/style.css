@@ -29,3 +29,18 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.ts-app-drawer {
+    position: fixed; /* 確保建立在視窗層級 */
+    z-index: 1050;
+}
+
+.ts-modal {
+    position: fixed;
+    z-index: 1100;
+}
+
+.ts-app-topbar .ts-dropdown,
+.ts-app-topbar .ts-select {
+    z-index: 1000; /* 低於抽屜(1050)與模態(1100) */
+}

@@ -25,18 +25,18 @@
         class="ts-icon item is-sun-icon" 
         :class="{ 'is-moon-icon': themeStore.isDark }"
         @click="themeStore.toggleTheme"
-        style="z-index: 9999; cursor: pointer;"
+        style="cursor: pointer;"
       ></div>
       
       <!-- 語言選擇選單 -->
-      <div class="ts-select mobile:is-hidden" data-dropdown="select" style="z-index: 9999;">
+      <div class="ts-select mobile:is-hidden" data-dropdown="select">
         <div class="content">
           <span class="ts-flag is-tw-flag"></span>
           <div class="mobile:has-hidden">正體中文</div>
         </div>
       </div>
       
-      <div class="ts-dropdown" data-name="select" data-position="bottom-start" style="z-index: 9999;">
+      <div class="ts-dropdown" data-name="select" data-position="bottom-start">
         <button class="item is-selected">
           <span class="ts-flag is-tw-flag"></span>
           <div class="mobile:has-hidden">正體中文</div>
@@ -54,7 +54,6 @@
       <!-- 手機版選單按鈕 -->
       <button 
         class="mobile:ts-button mobile:is-icon" 
-        style="z-index: 9999;"
         @click="toggleMobileMenu"
       >
         <span class="mobile:ts-icon mobile:is-bars-icon"></span>
