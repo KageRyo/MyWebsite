@@ -8,7 +8,7 @@
         <span class="ts-icon is-facebook-icon"></span>
         <div class="content">
           <div class="title">Facebook</div>
-          <div class="text">Chang Chien Hsun（張健勳）</div>
+          <div class="text">Chien-Hsun Chang（張健勳）</div>
         </div>
       </div>
     </a>
