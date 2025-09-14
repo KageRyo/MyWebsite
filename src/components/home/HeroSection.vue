@@ -1,7 +1,7 @@
 <template>
   <div class="ts-content is-tertiary is-vertically-padded">
     <div class="ts-container">
-      <div class="ts-header is-huge is-heavy">Chien-Hsun, Chang</div>
+  <div class="ts-header is-huge is-heavy">Chien-Hsun Chang</div>
       <div class="ts-text is-secondary">Developer, Programmer, and Student@TAIWAN.</div>
       
       <div class="ts-grid is-relaxed has-top-spaced">
@@ -17,7 +17,7 @@
           <div class="ts-segment is-padded is-secondary">
             <!-- 個人簡述 -->
             <div class="ts-header is-big is-heavy">Hello👏</div>
-            <div class="ts-header is-big is-heavy">I'm Chien-Hsun, Chang</div>
+            <div class="ts-header is-big is-heavy">I'm Chien-Hsun Chang</div>
             <div class="ts-text is-description has-bottom-spaced-small">
               A Student && Developer from Taiwan.
               <span class="ts-flag is-taiwan-flag"></span>

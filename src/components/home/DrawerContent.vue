@@ -9,7 +9,7 @@
       <div class="ts-content justify-text">
         <div class="ts-header is-large has-bottom-spaced">查看更多</div>
         <!-- 介紹文字 -->
-        <p>嗨，我是 Chien-Hsun, Chang 張健勳！</p>
+  <p>嗨，我是 Chien-Hsun Chang 張健勳！</p>
         <p>KageRyo Developer 是我用於軟體開發等之網路化名，其中文為影凌開發者，也可以簡稱為 K6Dev。</p>
         <p>感謝您前來瀏覽我的個人網頁，有任何疑問歡迎透過各種管道聯絡我，若不知道怎麼做可以切換到 
           <router-link to="/contact" target="_blank" rel="noopener noreferrer">聯絡我</router-link> 頁面。
