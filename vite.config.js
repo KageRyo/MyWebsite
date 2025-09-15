@@ -23,6 +23,14 @@ export default defineConfig({
         } catch (err) {
           console.log('.nojekyll file not found, skipping...')
         }
+
+        // 將 build 後的 index.html 複製為 404.html，支援 GitHub Pages 的 SPA 深層連結
+        try {
+          copyFileSync('dist/index.html', 'dist/404.html')
+          console.log('index.html copied to 404.html for SPA fallback')
+        } catch (err) {
+          console.log('Failed to create 404.html from index.html, skipping...')
+        }
       }
     }
   ],
