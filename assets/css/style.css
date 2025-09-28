@@ -1,11 +1,3 @@
-/* 滑鼠移動至頂部列選項時的變色效果 */
-.ts-tab .item:hover {
-    background-color: white;
-    color: #333;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
 /* 調整嵌入式地圖為自適應大小 */
 .map-container {
     width: 100%;
@@ -30,17 +22,39 @@
     white-space: nowrap;
 }
 
+/* 確保 TocasUI 抽屜正確定位 */
 .ts-app-drawer {
-    position: fixed; /* 確保建立在視窗層級 */
-    z-index: 1050;
-}
-
-.ts-modal {
     position: fixed;
-    z-index: 1100;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 320px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    background-color: var(--ts-gray-50);
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
 }
 
-.ts-app-topbar .ts-dropdown,
-.ts-app-topbar .ts-select {
-    z-index: 1000; /* 低於抽屜(1050)與模態(1100) */
+
+.ts-app-drawer.is-visible {
+    transform: translateX(0);
+}
+
+.ts-app-drawer .content {
+    height: 100%;
+    padding: 1rem;
+}
+
+/* 背景遮罩樣式 */
+.drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    cursor: pointer;
 }

@@ -1,15 +1,20 @@
 <template>
   <!-- 未完成功能模態框 -->
-  <div 
+  <dialog 
+    ref="modalDialog"
     class="ts-modal" 
-    :class="{ 'is-hidden': !modalStore.unfinishedModalVisible }"
+    :open="modalStore.unfinishedModalVisible"
+    @click="handleBackdropClick"
   >
     <div class="content">
-      <div class="ts-content has-flex-center is-vertically-padded">
-        <div class="ts-header is-icon has-bottom-spaced">
+      <div class="ts-content">
+        <div class="ts-header is-icon">
           <span class="ts-icon is-circle-exclamation-icon"></span>
           這個功能還沒有開放
         </div>
+      </div>
+      <div class="ts-divider"></div>
+      <div class="ts-content">
         如果您有其他問題，歡迎到此專案的 GitHub。
       </div>
       <div class="ts-divider"></div>
@@ -22,11 +27,29 @@
         </button>
       </div>
     </div>
-  </div>
+  </dialog>
 </template>
 
 <script setup>
+import { ref, watch } from 'vue'
 import { useModalStore } from '../../stores/modal'
 
 const modalStore = useModalStore()
+const modalDialog = ref(null)
+
+// 監聽模態框狀態變化
+watch(() => modalStore.unfinishedModalVisible, (newVal) => {
+  if (newVal && modalDialog.value) {
+    modalDialog.value.showModal()
+  } else if (modalDialog.value) {
+    modalDialog.value.close()
+  }
+})
+
+// 處理點擊背景關閉
+const handleBackdropClick = (event) => {
+  if (event.target === modalDialog.value) {
+    modalStore.closeUnfinishedModal()
+  }
+}
 </script>
