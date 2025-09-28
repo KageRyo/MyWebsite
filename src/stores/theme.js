@@ -4,7 +4,6 @@ import { ref, computed } from 'vue'
 export const useThemeStore = defineStore('theme', () => {
   // 初始主題狀態應該根據系統主題或保存的設定來決定
   const getInitialTheme = () => {
-    localStorage.clear();
     const savedTheme = localStorage.getItem('theme')
     if (savedTheme) {
       return savedTheme
