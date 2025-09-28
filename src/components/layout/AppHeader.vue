@@ -17,8 +17,8 @@
 
       <!-- 黑白色系切換 -->
       <button class="ts-button is-small is-secondary" @click="themeStore.toggleTheme"
-        :title="themeStore.isDark ? '切換到淺色模式' : '切換到深色模式'">
-        <span class="ts-icon" :class="themeStore.isDark ? 'is-moon-icon' : 'is-sun-icon'"></span>
+        :title="themeStore.theme === 'is-dark' ? '切換到淺色模式' : '切換到深色模式'">
+        <span class="ts-icon" :class="themeStore.theme === 'is-dark' ? 'is-moon-icon' : 'is-sun-icon'"></span>
       </button>
 
       <!-- 語言選擇選單 -->
