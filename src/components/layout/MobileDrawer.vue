@@ -1,14 +1,13 @@
 <template>
-  <!-- 背景遮罩層 - 點擊可關閉 -->
+  <!-- 背景遮罩 -->
   <div 
-    v-show="modalStore.mobileMenuVisible"
-    class="ts-app-drawer-backdrop"
+    v-if="modalStore.mobileMenuVisible"
+    class="drawer-backdrop"
     @click="modalStore.closeMobileMenu"
-    style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 999;"
   ></div>
-
+  
   <div 
-    class="ts-app-drawer is-right has-dark"
+    class="ts-app-drawer is-right"
     :class="{ 'is-visible': modalStore.mobileMenuVisible }"
   >
     <div class="content">
@@ -17,17 +16,17 @@
         <div class="ts-content is-padded">
           <div class="ts-grid is-middle-aligned">
             <div class="column">
-              <div class="ts-header is-large is-heavy">導航欄</div>
+              <div class="ts-header is-large is-heavy is-text">導航欄</div>
             </div>
             <div class="column is-fluid"></div>
             <div class="column">
               <button 
-                class="ts-button is-rounded is-outline mobile:is-small"
+                class="ts-button is-rounded is-outline is-small"
                 @click="handleCloseClick"
                 aria-label="關閉選單"
                 type="button"
               >
-                <span class="ts-icon is-bars-icon"></span>
+                <span class="ts-icon is-xmark-icon"></span>
               </button>
             </div>
           </div>
