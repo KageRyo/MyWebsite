@@ -19,7 +19,7 @@
     <!-- 專案列表 -->
     <div v-if="loading" class="ts-content is-center-aligned has-top-spaced">
       <div class="ts-loader"></div>
-      <div class="ts-text is-secondary">正在載入 GitHub 專案...</div>
+      <div class="ts-text is-secondary">正在載入 {{ currentTabLabel }} 的 GitHub 專案...</div>
     </div>
     
     <div v-else-if="error" class="ts-content is-center-aligned has-top-spaced">
@@ -32,15 +32,16 @@
         </div>
         <div class="ts-text is-small has-top-spaced">
           您仍可以直接訪問我的 GitHub 主頁查看所有專案：<br>
-          <a href="https://github.com/KageRyo" target="_blank" class="ts-text is-link">
-            🔗 github.com/KageRyo
+          <a :href="currentGitHubUrl" target="_blank" class="ts-text is-link">
+            🔗 {{ currentGitHubUrl.replace('https://', '') }}
           </a>
         </div>
         <button 
           class="ts-button is-outlined has-top-spaced" 
           @click="retryFetch"
+          :disabled="loading"
         >
-          嘗試重新載入
+          {{ loading ? '載入中...' : '嘗試重新載入' }}
         </button>
       </div>
     </div>
@@ -55,8 +56,8 @@
         </div>
         <div class="ts-text is-small has-top-spaced">
           您仍可以直接訪問我的 GitHub 主頁：
-          <a href="https://github.com/KageRyo" target="_blank" class="ts-text is-link">
-            github.com/KageRyo
+          <a :href="currentGitHubUrl" target="_blank" class="ts-text is-link">
+            {{ currentGitHubUrl.replace('https://', '') }}
           </a>
         </div>
       </div>
@@ -111,8 +112,7 @@ const activeTab = ref('kageryo')
 const tabs = [
   { key: 'kageryo', label: 'KageRyo' },
   { key: 'kageryo_lab', label: "KageRyo's Lab" },
-  { key: 'coderyo', label: 'CodeRyo' },
-  { key: 'rotatingpotato', label: 'RotatingPotato' }
+  { key: 'coderyostudio', label: 'CodeRyo' }
 ]
 
 // 計算屬性
@@ -120,23 +120,38 @@ const currentProjects = computed(() => {
   return projectStore.projects[activeTab.value] || []
 })
 
+const currentTabLabel = computed(() => {
+  const tab = tabs.find(t => t.key === activeTab.value)
+  return tab ? tab.label : '專案'
+})
+
+const currentGitHubUrl = computed(() => {
+  const urlMap = {
+    'kageryo': 'https://github.com/KageRyo',
+    'kageryo_lab': 'https://github.com/KageRyo-Lab', 
+    'coderyostudio': 'https://github.com/CodeRyoStudio'
+  }
+  return urlMap[activeTab.value] || 'https://github.com/KageRyo'
+})
+
 const loading = computed(() => projectStore.loading)
 const error = computed(() => projectStore.error)
 
 // 重新載入函數
 const retryFetch = async () => {
-  console.log('重新載入 GitHub 專案...')
-  await projectStore.fetchAllProjects()
+  try {
+    await projectStore.fetchAllProjects()
+  } catch (error) {
+    // 靜默處理錯誤
+  }
 }
 
 // 組件掛載時載入專案
 onMounted(async () => {
   try {
-    console.log('開始載入 GitHub 專案...')
     await projectStore.fetchAllProjects()
-    console.log('GitHub 專案載入完成:', projectStore.projects)
   } catch (error) {
-    console.error('載入 GitHub 專案失敗:', error)
+    // 靜默處理錯誤
   }
 })
 </script>

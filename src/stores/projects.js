@@ -6,8 +6,7 @@ export const useProjectStore = defineStore('projects', () => {
   const projects = ref({
     kageryo: [],
     kageryo_lab: [],
-    coderyo: [],
-    rotatingpotato: []
+    coderyostudio: []
   })
   
   const loading = ref(false)
@@ -19,50 +18,46 @@ export const useProjectStore = defineStore('projects', () => {
   const API_URLS = {
     kageryo: 'https://api.github.com/users/KageRyo/repos',
     kageryo_lab: 'https://api.github.com/users/KageRyo-Lab/repos', 
-    coderyo: 'https://api.github.com/users/CodeRyoDeveloper/repos',
-    rotatingpotato: 'https://api.github.com/users/RotatingPotato/repos'
+    coderyostudio: 'https://api.github.com/users/CodeRyoStudio/repos'
   }
   
   // 動作
   const fetchProjects = async (username) => {
-    if (!API_URLS[username]) return
-    
-    loading.value = true
-    error.value = null
+    if (!API_URLS[username]) {
+      return { success: false, error: `無效的用戶名: ${username}` }
+    }
     
     try {
-      console.log(`正在獲取 ${username} 的專案...`)
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 秒超時
       
       const response = await fetch(API_URLS[username], {
         method: 'GET',
         headers: {
           'Accept': 'application/vnd.github.v3+json',
           'User-Agent': 'KageRyo-Website'
-        }
+        },
+        signal: controller.signal
       })
+      
+      clearTimeout(timeoutId)
       
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }
       
       const data = await response.json()
-      projects.value[username] = data
-      console.log(`${username} 專案載入成功:`, data.length, '個專案')
+      projects.value[username] = data || []
+      
+      return { success: true, data: data || [] }
       
     } catch (err) {
       const errorMessage = `獲取 ${username} 專案失敗: ${err.message}`
-      console.error(errorMessage, err)
       
-      // 如果是 403 錯誤（API 限制），拋出錯誤讓上層處理
-      if (err.message.includes('403')) {
-        throw err
-      }
-      
-      // 其他錯誤設置空陣列
-      error.value = errorMessage
+      // 設置空陣列避免 undefined
       projects.value[username] = []
-    } finally {
-      loading.value = false
+      
+      return { success: false, error: err.message, username }
     }
   }
   
@@ -70,71 +65,86 @@ export const useProjectStore = defineStore('projects', () => {
     // 檢查緩存
     const now = Date.now()
     if (now - lastFetchTime.value < CACHE_DURATION && projects.value.kageryo.length > 0) {
-      console.log('使用緩存的專案數據')
       return
     }
     
-    // 如果遇到 API 限制，使用靜態數據
+    loading.value = true
+    error.value = null
+    
+    // 初始化所有用戶的專案陣列
+    Object.keys(API_URLS).forEach(username => {
+      projects.value[username] = []
+    })
+    
     try {
-      const promises = Object.keys(API_URLS).map(username => fetchProjects(username))
-      await Promise.all(promises)
-      lastFetchTime.value = now
+      // 並行獲取所有專案
+      const fetchPromises = Object.keys(API_URLS).map(username => fetchProjects(username))
+      const results = await Promise.allSettled(fetchPromises)
+      
+      // 檢查結果
+      let hasAnySuccess = false
+      let errorCount = 0
+      let rateLimited = false
+      
+      results.forEach((result, index) => {
+        const username = Object.keys(API_URLS)[index]
+        
+        if (result.status === 'fulfilled' && result.value?.success) {
+          hasAnySuccess = true
+        } else {
+          errorCount++
+          const errorMsg = result.status === 'rejected' 
+            ? result.reason?.message 
+            : result.value?.error
+          
+          // 檢查是否為 API 限制
+          if (errorMsg?.includes('403') || errorMsg?.includes('rate limit')) {
+            rateLimited = true
+          }
+        }
+      })
+      
+      // 如果所有請求都失敗且包含 API 限制，載入"功能修復中"
+      if (!hasAnySuccess && rateLimited) {
+        return
+      }
+      
+      // 如果有部分成功，更新快取時間
+      if (hasAnySuccess) {
+        lastFetchTime.value = now
+      } else {
+        error.value = '所有 GitHub 專案載入失敗，請稍後重試'
+      }
+      
     } catch (err) {
-      console.log('API 限制，載入靜態專案數據')
-      loadStaticProjects()
+      error.value = '載入專案時發生錯誤，請稍後重試'
+    } finally {
+      loading.value = false
     }
   }
   
-  // 靜態專案數據（作為後備方案）
-  const loadStaticProjects = () => {
-    projects.value = {
-      kageryo: [
-        {
-          id: 1,
-          name: 'MyWebsite',
-          html_url: 'https://github.com/KageRyo/MyWebsite',
-          description: '個人網站 - Vue.js 重構版本'
-        },
-        {
-          id: 2, 
-          name: 'Arduino-Projects',
-          html_url: 'https://github.com/KageRyo/Arduino-Projects',
-          description: 'Arduino 相關專案與教學'
-        },
-        {
-          id: 3,
-          name: 'Python-Learning',
-          html_url: 'https://github.com/KageRyo/Python-Learning', 
-          description: 'Python 學習筆記與實作'
-        }
-      ],
-      kageryo_lab: [
-        {
-          id: 11,
-          name: 'Lab-Website',
-          html_url: 'https://github.com/KageRyo-Lab/Lab-Website',
-          description: '實驗室網站開發專案'
-        }
-      ],
-      coderyo: [
-        {
-          id: 21,
-          name: 'CoderYo-Platform',
-          html_url: 'https://github.com/CodeRyoDeveloper/CoderYo-Platform', 
-          description: 'CodeRyo 開發者平台'
-        }
-      ],
-      rotatingpotato: [
-        {
-          id: 31,
-          name: 'Game-Projects',
-          html_url: 'https://github.com/RotatingPotato/Game-Projects',
-          description: '遊戲開發相關專案'
-        }
-      ]
+  // 取得特定用戶的專案統計
+  const getProjectStats = (username) => {
+    const userProjects = projects.value[username] || []
+    return {
+      total: userProjects.length,
+      projects: userProjects,
+      hasData: userProjects.length > 0
     }
-    loading.value = false
-    error.value = null
+  }
+  
+  // 取得所有專案的總計
+  const getAllProjectStats = () => {
+    let total = 0
+    const stats = {}
+    
+    Object.keys(projects.value).forEach(username => {
+      const count = projects.value[username]?.length || 0
+      stats[username] = count
+      total += count
+    })
+    
+    return { total, stats }
   }
   
   return {
@@ -143,6 +153,7 @@ export const useProjectStore = defineStore('projects', () => {
     error,
     fetchProjects,
     fetchAllProjects,
-    loadStaticProjects
+    getProjectStats,
+    getAllProjectStats
   }
 })
