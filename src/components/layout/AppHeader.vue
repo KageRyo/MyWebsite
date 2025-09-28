@@ -16,7 +16,7 @@
       </div>
 
       <!-- 黑白色系切換 -->
-      <button class="ts-button is-small is-secondary" @click="themeStore.toggleTheme"
+      <button class="ts-button is-icon is-secondary" @click="themeStore.toggleTheme"
         :title="themeStore.theme === 'is-dark' ? '切換到淺色模式' : '切換到深色模式'">
         <span class="ts-icon" :class="themeStore.theme === 'is-dark' ? 'is-moon-icon' : 'is-sun-icon'"></span>
       </button>
@@ -94,14 +94,9 @@ const handleLanguageChange = (event) => {
       break
   }
 
-  // 如果不是正體中文，顯示未完成提示並重置
+  // 如果不是正體中文，顯示"未完成提示"
   if (selectedValue !== 'zh-TW') {
     showUnfinishedModal()
-    // 重置選擇為正體中文
-    setTimeout(() => {
-      event.target.value = 'zh-TW'
-      currentFlag.value = 'is-tw-flag'
-    }, 100)
   }
 }
 </script>
