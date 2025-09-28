@@ -27,8 +27,6 @@ import UnfinishedModal from './components/common/UnfinishedModal.vue'
 
 // 使用主題 store
 const themeStore = useThemeStore()
-
-// 組件掛載時初始化主題
 onMounted(() => {
   themeStore.initTheme()
 })
