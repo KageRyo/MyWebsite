@@ -33,7 +33,7 @@
               <span class="ts-icon is-calendar-days-icon"></span>
               <div class="content">
                 <div class="title">年齡</div>
-                <div class="text">23</div>
+                <div class="text">{{ currentAge }}</div>
               </div>
             </div>
 
@@ -56,5 +56,22 @@
 </template>
 
 <script setup>
-// 個人資訊組件
+import { computed } from 'vue'
+
+// 計算當前年齡
+const currentAge = computed(() => {
+  // 生日：2002/10/6 00:00 UTC+8
+  const birthDate = new Date('2002-10-06T00:00:00+08:00')
+  const now = new Date()
+  
+  let age = now.getFullYear() - birthDate.getFullYear()
+  const monthDiff = now.getMonth() - birthDate.getMonth()
+  
+  // 如果還沒到生日月份，或者是生日月份但還沒到生日日期，年齡減1
+  if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < birthDate.getDate())) {
+    age--
+  }
+  
+  return age
+})
 </script>
