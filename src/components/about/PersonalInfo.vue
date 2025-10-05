@@ -33,7 +33,7 @@
               <span class="ts-icon is-calendar-days-icon"></span>
               <div class="content">
                 <div class="title">年齡</div>
-                <div class="text">23</div>
+                <div class="text">{{ age }} 歲</div>
               </div>
             </div>
 
@@ -57,4 +57,26 @@
 
 <script setup>
 // 個人資訊組件
+import { computed } from 'vue';
+
+// 出生年月日 (2002/10/6)
+const birthYear = 2002;
+const birthMonth = 10; // 1-based
+const birthDay = 6;
+
+// 以 UTC+8 為基準計算年齡
+const age = computed(() => {
+  // 取得當前 UTC+8 時間
+  const now = new Date();
+  // 轉換為 UTC+8
+  const utc8 = new Date(now.getTime() + (8 - now.getTimezoneOffset() / 60) * 60 * 60 * 1000);
+  const year = utc8.getUTCFullYear();
+  const month = utc8.getUTCMonth() + 1; // 0-based
+  const day = utc8.getUTCDate();
+  let age = year - birthYear;
+  if (month < birthMonth || (month === birthMonth && day < birthDay)) {
+    age--;
+  }
+  return age;
+});
 </script>
