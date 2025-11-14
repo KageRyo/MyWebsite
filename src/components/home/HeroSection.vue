@@ -42,18 +42,12 @@
               <!-- 社群連結 -->
               <div class="has-flex-center">
                 <div class="ts-wrap has-top-spaced">
-                  <a href="https://fb.com/yinglaceook" target="_blank" rel="noopener noreferrer"
-                    class="ts-icon is-secondary is-facebook-icon is-circular is-large"></a>
-                  <a href="https://instagram.com/yinglnstagram_" target="_blank" rel="noopener noreferrer"
-                    class="ts-icon is-secondary is-instagram-icon is-circular is-large"></a>
-                  <a href="https://youtube.com/@kageryo" target="_blank" rel="noopener noreferrer"
-                    class="ts-icon is-secondary is-youtube-icon is-circular is-large"></a>
-                  <a href="https://x.com/k6dev" target="_blank" rel="noopener noreferrer"
-                    class="ts-icon is-secondary is-x-twitter-icon is-circular is-large"></a>
                   <a href="https://coderyo.com/discord" target="_blank" rel="noopener noreferrer"
                     class="ts-icon is-secondary is-discord-icon is-circular is-large"></a>
                   <a href="https://github.com/KageRyo" target="_blank" rel="noopener noreferrer"
                     class="ts-icon is-secondary is-github-icon is-circular is-large"></a>
+                  <a href="https://www.linkedin.com/in/kageryo/" target="_blank" rel="noopener noreferrer"
+                    class="ts-icon is-secondary is-linkedin-icon is-circular is-large"></a>
                 </div>
               </div>
 
