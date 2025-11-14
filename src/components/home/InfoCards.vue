@@ -21,12 +21,14 @@
             </p>
             <div class="has-flex-center">
               <div class="ts-wrap">
-                <a href="https://fb.com/yinglaceook" target="_blank" rel="noopener noreferrer"
-                  class="ts-icon is-secondary is-facebook-icon is-circular is-large"></a>
-                <a href="https://x.com/k6dev" target="_blank" rel="noopener noreferrer"
-                  class="ts-icon is-secondary is-x-twitter-icon is-circular is-large"></a>
+                <a href="https://coderyo.com/discord" target="_blank" rel="noopener noreferrer"
+                  class="ts-icon is-secondary is-discord-icon is-circular is-large"></a>
                 <a href="https://github.com/KageRyo" target="_blank" rel="noopener noreferrer"
                   class="ts-icon is-secondary is-github-icon is-circular is-large"></a>
+                <a href="https://www.linkedin.com/in/kageryo/" target="_blank" rel="noopener noreferrer"
+                  class="ts-icon is-secondary is-linkedin-icon is-circular is-large"></a>
+                <a href="mailto:kageryo@coderyo.com" target="_blank" rel="noopener noreferrer"
+                  class="ts-icon is-secondary is-envelope-icon is-circular is-large"></a>
               </div>
             </div>
           </div>
@@ -74,8 +76,6 @@
             </p>
             <div class="has-flex-center">
               <div class="ts-wrap">
-                <a href="https://fb.com/teamCodeRyo" target="_blank" rel="noopener noreferrer"
-                  class="ts-icon is-secondary is-facebook-icon is-circular is-large"></a>
                 <a href="https://coderyo.com/discord" target="_blank" rel="noopener noreferrer"
                   class="ts-icon is-secondary is-discord-icon is-circular is-large"></a>
                 <a href="https://github.com/CodeRyoDeveloper" target="_blank" rel="noopener noreferrer"
