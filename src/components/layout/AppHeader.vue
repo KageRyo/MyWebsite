@@ -24,24 +24,28 @@
       <!-- 語言選擇選單 -->
       <div class="ts-select" data-dropdown="select">
         <div class="content">
-          <span class="ts-flag is-tw-flag"></span>
-          <div class="mobile:has-hidden">正體中文</div>
+          <span :class="'ts-flag ' + currentFlag"></span>
+          <div class="mobile:has-hidden">
+            <template v-if="locale === 'zh-TW'">正體中文</template>
+            <template v-else-if="locale === 'en'">English</template>
+            <template v-else-if="locale === 'ja'">日本語</template>
+          </div>
         </div>
       </div>
 
       <div class="ts-dropdown" id="select">
-          <button class="item is-selected">
-            <span class="ts-flag is-tw-flag"></span>
-            <div>正體中文</div>
-          </button>
-          <button class="item" @click="showUnfinishedModal">
-            <span class="ts-flag is-america-flag"></span>
-            <div>English</div>
-          </button>
-          <button class="item" @click="showUnfinishedModal">
-            <span class="ts-flag is-japan-flag"></span>
-            <div>日本語</div>
-          </button>
+        <button class="item" :class="{ 'is-selected': locale === 'zh-TW' }" @click="handleLanguageChange('zh-TW')">
+          <span class="ts-flag is-tw-flag"></span>
+          <div>正體中文</div>
+        </button>
+        <button class="item" :class="{ 'is-selected': locale === 'en' }" @click="handleLanguageChange('en')">
+          <span class="ts-flag is-america-flag"></span>
+          <div>English</div>
+        </button>
+        <button class="item" :class="{ 'is-selected': locale === 'ja' }" @click="handleLanguageChange('ja')">
+          <span class="ts-flag is-japan-flag"></span>
+          <div>日本語</div>
+        </button>
       </div>
 
       <!-- 手機版選單按鈕 -->
@@ -53,7 +57,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useThemeStore } from '../../stores/theme'
 import { useModalStore } from '../../stores/modal'
 
@@ -63,12 +67,15 @@ const modalStore = useModalStore()
 // 當前選擇的語言旗幟
 const currentFlag = ref('is-tw-flag')
 
-const navItems = [
-  { name: 'home', path: '/', label: '首頁' },
-  { name: 'about', path: '/about', label: '關於我' },
-  { name: 'projects', path: '/projects', label: '作品集' },
-  { name: 'contact', path: '/contact', label: '聯絡我' }
-]
+import { useI18n } from 'vue-i18n'
+const { t, locale } = useI18n()
+
+const navItems = computed(() => [
+  { name: 'home', path: '/', label: t('home') },
+  { name: 'about', path: '/about', label: t('about') },
+  { name: 'projects', path: '/projects', label: t('projects') },
+  { name: 'contact', path: '/contact', label: t('contact') }
+])
 
 const showUnfinishedModal = () => {
   modalStore.showUnfinishedModal()
@@ -78,25 +85,18 @@ const toggleMobileMenu = () => {
   modalStore.toggleMobileMenu()
 }
 
-const handleLanguageChange = (event) => {
-  const selectedValue = event.target.value
-
-  // 暫時更新旗幟顯示
-  switch (selectedValue) {
+function handleLanguageChange(lang) {
+  locale.value = lang
+  switch (lang) {
     case 'zh-TW':
       currentFlag.value = 'is-tw-flag'
       break
-    case 'en-US':
+    case 'en':
       currentFlag.value = 'is-america-flag'
       break
-    case 'ja-JP':
+    case 'ja':
       currentFlag.value = 'is-japan-flag'
       break
-  }
-
-  // 如果不是正體中文，顯示"未完成提示"
-  if (selectedValue !== 'zh-TW') {
-    showUnfinishedModal()
   }
 }
 </script>
