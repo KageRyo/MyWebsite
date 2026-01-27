@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "KageRyo Developer 個人網站 - Vue.js 版本",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
