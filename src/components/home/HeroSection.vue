@@ -30,13 +30,13 @@
 
               <!-- 介紹文字 -->
               <span class="ts-text">
-                目前是研究生一枚，有空的時候會想一些小東西來做，基本上全部都會是開源的Repo，歡迎互相交流交流。 ヾ(*´∀ ˋ*)ﾉ
+                {{ $t('hero.introduction') }}
               </span>
 
               <!-- 查看更多按鈕 -->
               <button class="ts-button is-fluid is-start-icon has-top-spaced" @click="modalStore.showAppDrawer">
                 <span class="ts-icon is-heart-icon"></span>
-                查看更多
+                {{ $t('hero.seeMore') }}
               </button>
 
               <!-- 社群連結 -->
