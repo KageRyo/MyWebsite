@@ -41,70 +41,8 @@
         </div>
       </div>
     </a>
-
-    <div class="has-flex-center has-top-spaced-large">
-      <div id="kofi-widget-container" ref="kofiContainer" aria-label="Ko-fi 贊助按鈕"></div>
-    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
-
-const kofiContainer = ref(null)
-
-const initKofiWidget = () => {
-  if (typeof window.kofiwidget2 !== 'undefined' && kofiContainer.value) {
-    try {
-      kofiContainer.value.innerHTML = ''
-
-
-      const widgetHTML = window.kofiwidget2.getHTML()
-      if (widgetHTML) {
-        kofiContainer.value.innerHTML = widgetHTML
-      } else {
-        window.kofiwidget2.draw()
-        const widget = document.querySelector('iframe[src*="ko-fi.com"]')
-        if (widget && widget.parentNode) {
-          kofiContainer.value.appendChild(widget.parentNode)
-        }
-      }
-    } catch (error) {
-      console.log('Ko-fi widget initialization failed:', error)
-      // 提供備用的贊助連結
-      kofiContainer.value.innerHTML = `
-        <a href="https://ko-fi.com/P5P0KOCNI" target="_blank" class="ts-button is-outlined">
-          ☕ Support Me on Ko-fi
-        </a>
-      `
-    }
-  }
-}
-
-onMounted(async () => {
-  await nextTick()
-
-  if (typeof window.kofiwidget2 !== 'undefined') {
-    initKofiWidget()
-  } else {
-    let attempts = 0
-    const maxAttempts = 10
-    const checkInterval = setInterval(() => {
-      attempts++
-      if (typeof window.kofiwidget2 !== 'undefined') {
-        clearInterval(checkInterval)
-        initKofiWidget()
-      } else if (attempts >= maxAttempts) {
-        clearInterval(checkInterval)
-        if (kofiContainer.value) {
-          kofiContainer.value.innerHTML = `
-            <a href="https://ko-fi.com/P5P0KOCNI" target="_blank" class="ts-button is-outlined">
-              ☕ Support Me on Ko-fi
-            </a>
-          `
-        }
-      }
-    }, 500)
-  }
-})
 </script>
