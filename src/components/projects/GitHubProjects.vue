@@ -105,17 +105,14 @@ import { useProjectStore } from '../../stores/projects'
 
 const projectStore = useProjectStore()
 
-// 響應式數據
 const activeTab = ref('kageryo')
 
-// 標籤頁配置
 const tabs = [
   { key: 'kageryo', label: 'KageRyo' },
   { key: 'kageryo_lab', label: "KageRyo's Lab" },
   { key: 'coderyostudio', label: 'CodeRyo' }
 ]
 
-// 計算屬性
 const currentProjects = computed(() => {
   return projectStore.projects[activeTab.value] || []
 })
@@ -137,21 +134,17 @@ const currentGitHubUrl = computed(() => {
 const loading = computed(() => projectStore.loading)
 const error = computed(() => projectStore.error)
 
-// 重新載入函數
 const retryFetch = async () => {
   try {
     await projectStore.fetchAllProjects()
   } catch (error) {
-    // 靜默處理錯誤
   }
 }
 
-// 組件掛載時載入專案
 onMounted(async () => {
   try {
     await projectStore.fetchAllProjects()
   } catch (error) {
-    // 靜默處理錯誤
   }
 })
 </script>

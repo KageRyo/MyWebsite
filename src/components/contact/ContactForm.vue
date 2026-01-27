@@ -4,7 +4,6 @@
     <div class="ts-container is-very-narrow has-top-spaced-large">
       <form @submit.prevent="sendEmail">
         <div class="ts-grid is-relaxed is-2-columns">
-          <!-- 姓名 -->
           <div class="column">
             <div class="ts-text is-label">名稱</div>
             <div class="ts-input is-underlined is-fluid has-top-spaced">
@@ -17,7 +16,6 @@
             </div>
           </div>
           
-          <!-- 性別 -->
           <div class="column">
             <div class="ts-text is-label">性別</div>
             <div class="has-flex-center">
@@ -39,7 +37,6 @@
           </div>
         </div>
         
-        <!-- 電子郵件 -->
         <div class="ts-text is-label has-top-spaced-large">電子郵件地址</div>
         <div class="ts-input is-underlined is-fluid has-top-spaced">
           <input 
@@ -50,7 +47,6 @@
           >
         </div>
         
-        <!-- 訊息內容 -->
         <div class="ts-text is-label has-top-spaced-large">內文</div>
         <div class="ts-input is-resizable is-underlined is-fluid has-top-spaced">
           <textarea 
@@ -60,7 +56,6 @@
           ></textarea>
         </div>
         
-        <!-- 送出按鈕 -->
         <button 
           class="ts-button is-fluid has-vertically-spaced-large" 
           type="submit"
@@ -70,7 +65,6 @@
         </button>
       </form>
 
-      <!-- Ko-fi 贊助按鈕已移至聯絡資訊（ContactInfo） -->
     </div>
   </div>
 </template>
@@ -78,7 +72,6 @@
 <script setup>
 import { ref, reactive, onMounted, nextTick } from 'vue'
 
-// 表單數據
 const form = reactive({
   name: '',
   gender: 'male',
@@ -177,16 +170,13 @@ const showEmailModal = (subject, body) => {
   </div>
 </div>`
 
-  // 移除現有的模態框
   const existingModal = document.getElementById('email-modal')
   if (existingModal) {
     existingModal.remove()
   }
   
-  // 添加模態框到 body
   document.body.insertAdjacentHTML('beforeend', modalContent)
   
-  // 添加全域函數
   window.copyEmailContent = async () => {
     const emailContent = `收件人: kageryo@coderyo.com
 主旨: ${subject}
@@ -212,7 +202,6 @@ ${body}`
   }
 }
 
-// 發送郵件功能
 const sendEmail = async () => {
   isSubmitting.value = true
   
@@ -229,7 +218,6 @@ ${form.message}`
     
     console.log('嘗試打開郵件應用程式:', mailtoURL)
     
-    // 創建一個隱藏的 a 標籤來觸發 mailto
     const link = document.createElement('a')
     link.href = mailtoURL
     link.style.display = 'none'
@@ -237,7 +225,6 @@ ${form.message}`
     link.click()
     document.body.removeChild(link)
     
-    // 檢查是否成功觸發
     let mailAppOpened = false
     
     // 監聽視窗焦點變化來檢測郵件應用程式是否打開
@@ -256,13 +243,11 @@ ${form.message}`
     document.addEventListener('visibilitychange', handleVisibilityChange)
     window.addEventListener('blur', handleBlur)
     
-    // 等待一小段時間檢查結果
     setTimeout(() => {
       document.removeEventListener('visibilitychange', handleVisibilityChange)
       window.removeEventListener('blur', handleBlur)
       
       if (mailAppOpened) {
-        // 郵件應用程式似乎有打開
         alert('郵件應用程式已開啟，請確認發送！')
         
         // 重置表單
@@ -273,13 +258,11 @@ ${form.message}`
           message: ''
         })
       } else {
-        // 郵件應用程式沒有打開，提供備用方案
         const userConfirm = confirm('郵件應用程式可能沒有正確開啟。\n\n點擊「確定」查看備用方案，或點擊「取消」保留表單內容。')
         
         if (userConfirm) {
           showEmailModal(subject, body)
           
-          // 重置表單
           Object.assign(form, {
             name: '',
             gender: 'male',

@@ -1,11 +1,9 @@
 <template>
   <div class="ts-app-topbar has-dark">
-    <!-- 頂部列左側 -->
     <div class="start">
       <router-link to="/" class="item is-text">KageRyo Developer</router-link>
     </div>
 
-    <!-- 頂部列右側 -->
     <div class="end">
       <!-- 導航選單 -->
       <div class="ts-tab mobile:has-hidden">
@@ -21,7 +19,6 @@
         <span class="ts-icon" :class="themeStore.theme === 'is-dark' ? 'is-moon-icon' : 'is-sun-icon'"></span>
       </button>
 
-      <!-- 語言選擇選單 -->
       <div class="ts-select" data-dropdown="select">
         <div class="content">
           <span :class="'ts-flag ' + currentFlag"></span>
@@ -64,7 +61,6 @@ import { useModalStore } from '../../stores/modal'
 const themeStore = useThemeStore()
 const modalStore = useModalStore()
 
-// 當前選擇的語言旗幟
 const currentFlag = ref('is-tw-flag')
 
 import { useI18n } from 'vue-i18n'
@@ -102,5 +98,4 @@ function handleLanguageChange(lang) {
 </script>
 
 <style scoped>
-/* TocasUI 會自動處理路由 active 狀態 */
 </style>

@@ -27,5 +27,5 @@ import GitHubProjects from '../components/projects/GitHubProjects.vue'
 
 const projectStore = useProjectStore()
 
-// GitHub 專案由 GitHubProjects 組件負責載入，避免重複調用
+// GitHub 專案由 GitHubProjects 模組負責載入，避免重複調用
 </script>

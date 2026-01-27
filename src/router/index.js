@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-// 頁面組件懶載入
+// 頁面模組懶載入
 const Home = () => import('../views/Home.vue')
 const About = () => import('../views/About.vue')
 const Projects = () => import('../views/Projects.vue')

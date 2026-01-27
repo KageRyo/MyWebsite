@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useProjectStore = defineStore('projects', () => {
-  // 狀態
   const projects = ref({
     kageryo: [],
     kageryo_lab: [],
@@ -14,14 +13,12 @@ export const useProjectStore = defineStore('projects', () => {
   const lastFetchTime = ref(0)
   const CACHE_DURATION = 10 * 60 * 1000 // 10 分鐘緩存
   
-  // API URLs
   const API_URLS = {
     kageryo: 'https://api.github.com/users/KageRyo/repos',
     kageryo_lab: 'https://api.github.com/users/KageRyo-Lab/repos', 
     coderyostudio: 'https://api.github.com/users/CodeRyoStudio/repos'
   }
   
-  // 動作
   const fetchProjects = async (username) => {
     if (!API_URLS[username]) {
       return { success: false, error: `無效的用戶名: ${username}` }
@@ -54,7 +51,6 @@ export const useProjectStore = defineStore('projects', () => {
     } catch (err) {
       const errorMessage = `獲取 ${username} 專案失敗: ${err.message}`
       
-      // 設置空陣列避免 undefined
       projects.value[username] = []
       
       return { success: false, error: err.message, username }
@@ -62,7 +58,6 @@ export const useProjectStore = defineStore('projects', () => {
   }
   
   const fetchAllProjects = async () => {
-    // 檢查緩存
     const now = Date.now()
     if (now - lastFetchTime.value < CACHE_DURATION && projects.value.kageryo.length > 0) {
       return
@@ -71,17 +66,14 @@ export const useProjectStore = defineStore('projects', () => {
     loading.value = true
     error.value = null
     
-    // 初始化所有用戶的專案陣列
     Object.keys(API_URLS).forEach(username => {
       projects.value[username] = []
     })
     
     try {
-      // 並行獲取所有專案
       const fetchPromises = Object.keys(API_URLS).map(username => fetchProjects(username))
       const results = await Promise.allSettled(fetchPromises)
       
-      // 檢查結果
       let hasAnySuccess = false
       let errorCount = 0
       let rateLimited = false
@@ -97,19 +89,17 @@ export const useProjectStore = defineStore('projects', () => {
             ? result.reason?.message 
             : result.value?.error
           
-          // 檢查是否為 API 限制
+
           if (errorMsg?.includes('403') || errorMsg?.includes('rate limit')) {
             rateLimited = true
           }
         }
       })
       
-      // 如果所有請求都失敗且包含 API 限制，載入"功能修復中"
       if (!hasAnySuccess && rateLimited) {
         return
       }
       
-      // 如果有部分成功，更新快取時間
       if (hasAnySuccess) {
         lastFetchTime.value = now
       } else {
@@ -123,7 +113,6 @@ export const useProjectStore = defineStore('projects', () => {
     }
   }
   
-  // 取得特定用戶的專案統計
   const getProjectStats = (username) => {
     const userProjects = projects.value[username] || []
     return {
@@ -133,7 +122,6 @@ export const useProjectStore = defineStore('projects', () => {
     }
   }
   
-  // 取得所有專案的總計
   const getAllProjectStats = () => {
     let total = 0
     const stats = {}
