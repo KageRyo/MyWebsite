@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
+import { fileURLToPath, URL } from 'url'
 import { copyFileSync } from 'fs'
 
 export default defineConfig({
@@ -37,7 +38,7 @@ export default defineConfig({
   base: '/', // 自訂網域使用根路徑
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')
+      '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
   server: {
