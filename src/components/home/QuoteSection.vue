@@ -1,5 +1,4 @@
 <template>
-  <!-- 引言 -->
   <div class="ts-quote is-heading has-top-spaced-big">
     「人生和 Coding 一樣，都是從 print("Hello World"); 開始的。」
     <div class="cite">
@@ -9,5 +8,5 @@
 </template>
 
 <script setup>
-// 引言組件不需要特殊邏輯
+// 引言模組
 </script>

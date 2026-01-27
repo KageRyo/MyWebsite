@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-// 地圖組件
+// 地圖模組
 </script>
 
 <style scoped>

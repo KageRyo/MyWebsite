@@ -71,5 +71,5 @@
 </template>
 
 <script setup>
-// 履歷經歷組件
+// 履歷經歷模組
 </script>

@@ -2,12 +2,10 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useModalStore = defineStore('modal', () => {
-  // 狀態
   const unfinishedModalVisible = ref(false)
   const mobileMenuVisible = ref(false)
   const appDrawerVisible = ref(false)
   
-  // 動作
   const showUnfinishedModal = () => {
     unfinishedModalVisible.value = true
   }

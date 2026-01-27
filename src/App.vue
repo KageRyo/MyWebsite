@@ -11,7 +11,7 @@
     <!-- 底部 -->
     <AppFooter />
     
-    <!-- 全局組件 -->
+    <!-- 全局模組 -->
     <MobileDrawer />
     <UnfinishedModal />
   </div>
@@ -25,7 +25,6 @@ import AppFooter from './components/layout/AppFooter.vue'
 import MobileDrawer from './components/layout/MobileDrawer.vue'
 import UnfinishedModal from './components/common/UnfinishedModal.vue'
 
-// 使用主題 store
 const themeStore = useThemeStore()
 onMounted(() => {
   themeStore.initTheme()

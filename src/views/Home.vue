@@ -3,13 +3,10 @@
     <!-- 穹頂 -->
     <HeroSection />
     
-    <!-- 引言 -->
     <QuoteSection />
     
-    <!-- 精選相片 -->
     <FeaturedPhotos />
     
-    <!-- 資訊卡片 -->
     <InfoCards />
     
     <!-- 邊緣收屜內容 -->

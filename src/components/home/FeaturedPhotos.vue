@@ -1,8 +1,6 @@
 <template>
-  <!-- 精選相片 -->
   <div class="ts-container is-padd has-top-spaced-big">
     <div class="ts-grid is-evenly-divided">
-      <!-- 教育部 -->
       <div class="column">
         <a href="https://www.edu.tw/News_Content.aspx?n=9E7AC85F1954DDA8&s=BB1CB6531ABFD661/" 
            target="_blank" rel="noopener noreferrer" class="no-underline">
@@ -18,7 +16,6 @@
         </a>
       </div>
       
-      <!-- COSCUP -->
       <div class="column">
         <a href="https://coscup.org/2023/zh-TW/" target="_blank" rel="noopener noreferrer" class="no-underline">
           <div class="ts-image is-rounded">
@@ -37,5 +34,5 @@
 </template>
 
 <script setup>
-// 精選相片組件不需要特殊邏輯
+// 精選相片模組
 </script>

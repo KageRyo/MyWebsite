@@ -1,5 +1,4 @@
 <template>
-  <!-- 資訊卡片 -->
   <div class="ts-container is-padded has-top-spaced-big">
     <!-- KageRyo Developer -->
     <div class="ts-grid tablet+:is-3-columns">
@@ -35,7 +34,6 @@
         </div>
       </div>
       
-      <!-- WaterMirror -->
       <div class="column mobile:ts-content">
         <div class="ts-box">
           <div class="ts-image">
@@ -62,7 +60,6 @@
         </div>
       </div>
       
-      <!-- CodeRyo -->
       <div class="column mobile:ts-content">
         <div class="ts-box">
           <div class="ts-image">
@@ -90,5 +87,5 @@
 </template>
 
 <script setup>
-// 資訊卡片組件不需要特殊邏輯
+// 資訊卡片模組
 </script>
