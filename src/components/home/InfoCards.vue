@@ -66,10 +66,10 @@
       <div class="column mobile:ts-content">
         <div class="ts-box">
           <div class="ts-image">
-            <img src="/assets/img/coderyo.svg" alt="CodeRyo 碼凌工作室">
+            <img src="/assets/img/coderyo.svg" alt="CodeRyo Studio">
           </div>
           <div class="ts-content">
-            <div class="ts-header is-heavy has-flex-center">CodeRyo 碼凌工作室</div>
+            <div class="ts-header is-heavy has-flex-center">CodeRyo Studio</div>
             <p class="justify-text">
               我和幾位志同道合的好友共同成立了 CodeRyo 團隊，我們致力於伺服器服務以及智慧化金融交易等，
               並將「使未來不只是未來。」訂為我們的標語，期望能對資訊領域以及開源社群有所貢獻，並增強自我能力。
