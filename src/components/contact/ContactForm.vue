@@ -70,11 +70,7 @@
         </button>
       </form>
 
-      <!-- Ko-fi 贊助按鈕 -->
-      <div class="has-flex-center has-top-spaced-large">
-        <div class="ts-text is-secondary has-bottom-spaced">如果您覺得我的內容對您有幫助，歡迎贊助支持我繼續創作！</div>
-        <div id="kofi-widget-container" ref="kofiContainer"></div>
-      </div>
+      <!-- Ko-fi 贊助按鈕已移至聯絡資訊（ContactInfo） -->
     </div>
   </div>
 </template>
@@ -301,72 +297,4 @@ ${form.message}`
     isSubmitting.value = false
   }
 }
-
-// 模板引用
-const kofiContainer = ref(null)
-
-// 初始化 Ko-fi 按鈕
-const initKofiWidget = () => {
-  if (typeof window.kofiwidget2 !== 'undefined' && kofiContainer.value) {
-    try {
-      // 清空容器
-      kofiContainer.value.innerHTML = ''
-      
-      // 初始化 Ko-fi widget
-      window.kofiwidget2.init('Support Me on Ko-fi', '#606466', 'P5P0KOCNI')
-      
-      // 將 widget 渲染到指定容器
-      const widgetHTML = window.kofiwidget2.getHTML()
-      if (widgetHTML) {
-        kofiContainer.value.innerHTML = widgetHTML
-      } else {
-        // 如果 getHTML 不可用，使用傳統方法
-        window.kofiwidget2.draw()
-        // 尋找生成的 widget 並移動到我們的容器
-        const widget = document.querySelector('iframe[src*="ko-fi.com"]')
-        if (widget && widget.parentNode) {
-          kofiContainer.value.appendChild(widget.parentNode)
-        }
-      }
-    } catch (error) {
-      console.log('Ko-fi widget initialization failed:', error)
-      // 提供備用的贊助連結
-      kofiContainer.value.innerHTML = `
-        <a href="https://ko-fi.com/P5P0KOCNI" target="_blank" class="ts-button is-outlined">
-          ☕ Support Me on Ko-fi
-        </a>
-      `
-    }
-  }
-}
-
-onMounted(async () => {
-  await nextTick()
-  
-  // 嘗試初始化 Ko-fi widget
-  if (typeof window.kofiwidget2 !== 'undefined') {
-    initKofiWidget()
-  } else {
-    // 如果腳本還沒載入，等待載入完成
-    let attempts = 0
-    const maxAttempts = 10
-    const checkInterval = setInterval(() => {
-      attempts++
-      if (typeof window.kofiwidget2 !== 'undefined') {
-        clearInterval(checkInterval)
-        initKofiWidget()
-      } else if (attempts >= maxAttempts) {
-        clearInterval(checkInterval)
-        // 如果腳本載入失敗，提供備用連結
-        if (kofiContainer.value) {
-          kofiContainer.value.innerHTML = `
-            <a href="https://ko-fi.com/P5P0KOCNI" target="_blank" class="ts-button is-outlined">
-              ☕ Support Me on Ko-fi
-            </a>
-          `
-        }
-      }
-    }, 500)
-  }
-})
 </script>
