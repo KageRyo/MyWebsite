@@ -14,9 +14,6 @@
     <!-- 履歷資訊 -->
     <ResumeSection />
     
-    <!-- 榮譽獎項 -->
-    <AwardsSection />
-    
     <!-- 證照 -->
     <CertificatesSection />
   </div>
@@ -25,6 +22,5 @@
 <script setup>
 import PersonalInfo from '../components/about/PersonalInfo.vue'
 import ResumeSection from '../components/about/ResumeSection.vue'
-import AwardsSection from '../components/about/AwardsSection.vue'
 import CertificatesSection from '../components/about/CertificatesSection.vue'
 </script>
