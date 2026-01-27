@@ -8,8 +8,8 @@
             <img src="/assets/img/ministry-of-education.svg" alt="教育部合影">
             <div class="ts-mask is-bottom">
               <div class="ts-content" style="color: #FFF;">
-                <div class="ts-header">與教育部潘文忠部長合影</div>
-                參加 2023 國際發明展金牌得獎學生接見活動。
+                <div class="ts-header">{{ $t('featuredPhotos.ministryHeader') }}</div>
+                {{ $t('featuredPhotos.ministryDescription') }}
               </div>
             </div>
           </div>
@@ -22,8 +22,8 @@
             <img src="/assets/img/coscup-lightingtalk.svg" alt="COSCUP">
             <div class="ts-mask is-bottom">
               <div class="ts-content" style="color: #FFF;">
-                <div class="ts-header">COSCUP</div>
-                於 COSCUP 2023 的 Lightning Talk 擔任講者。
+                <div class="ts-header">{{ $t('featuredPhotos.coscupHeader') }}</div>
+                {{ $t('featuredPhotos.coscupDescription') }}
               </div>
             </div>
           </div>
