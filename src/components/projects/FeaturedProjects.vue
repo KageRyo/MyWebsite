@@ -1,6 +1,6 @@
 <template>
   <div class="ts-container has-top-spaced-large">
-    <div class="ts-header is-big is-heavy has-bottom-spaced-small">精選專案</div>
+    <div class="ts-header is-big is-heavy has-bottom-spaced-small">{{ $t('featuredProject') }}</div>
     <div class="ts-grid">
       <!-- WaterMirror -->
       <div class="tablet+:column tablet+:is-4-wide mobile:ts-content">

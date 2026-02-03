@@ -1,7 +1,7 @@
 <template>
   <div class="ts-container has-top-spaced-large">
     <!-- GitHub 專案 -->
-    <div class="ts-header is-big is-heavy">我在 GitHub 上的開源專案</div>
+    <div class="ts-header is-big is-heavy">{{ $t('githubProjects.header') }}</div>
     
     <!-- 標籤頁切換 -->
     <div class="ts-tab is-pilled has-vertically-spaced">
@@ -19,19 +19,18 @@
     <!-- 專案列表 -->
     <div v-if="loading" class="ts-content is-center-aligned has-top-spaced">
       <div class="ts-loader"></div>
-      <div class="ts-text is-secondary">正在載入 {{ currentTabLabel }} 的 GitHub 專案...</div>
+      <div class="ts-text is-secondary">{{ $t('githubProjects.loading', { tab: currentTabLabel }) }}</div>
     </div>
     
     <div v-else-if="error" class="ts-content is-center-aligned has-top-spaced">
       <div class="ts-text is-warning">
         <div class="ts-icon is-wrench-icon"></div>
-        <div class="ts-header is-large">GitHub API 功能修復中</div>
+        <div class="ts-header is-large">{{ $t('githubProjects.apiErrorTitle') }}</div>
         <div class="ts-text is-secondary has-top-spaced-small">
-          由於 GitHub API 速率限制問題，此功能暫時無法正常運作。<br>
-          我們正在修復這個問題，敬請見諒！
+          {{ $t('githubProjects.apiErrorDesc') }}
         </div>
         <div class="ts-text is-small has-top-spaced">
-          您仍可以直接訪問我的 GitHub 主頁查看所有專案：<br>
+          {{ $t('githubProjects.visitDirectly') }}<br>
           <a :href="currentGitHubUrl" target="_blank" class="ts-text is-link">
             🔗 {{ currentGitHubUrl.replace('https://', '') }}
           </a>
@@ -41,7 +40,7 @@
           @click="retryFetch"
           :disabled="loading"
         >
-          {{ loading ? '載入中...' : '嘗試重新載入' }}
+          {{ loading ? $t('githubProjects.loadingBtn') : $t('githubProjects.retryBtn') }}
         </button>
       </div>
     </div>
@@ -49,13 +48,12 @@
     <div v-else-if="currentProjects.length === 0" class="ts-content is-center-aligned has-top-spaced">
       <div class="ts-text is-warning">
         <div class="ts-icon is-wrench-icon"></div>
-        <div class="ts-header is-large">GitHub API 功能修復中</div>
+        <div class="ts-header is-large">{{ $t('githubProjects.apiErrorTitle') }}</div>
         <div class="ts-text is-secondary has-top-spaced-small">
-          由於 GitHub API 速率限制問題，此功能暫時無法正常運作。<br>
-          我們正在修復這個問題，敬請見諒！
+          {{ $t('githubProjects.apiErrorDesc') }}
         </div>
         <div class="ts-text is-small has-top-spaced">
-          您仍可以直接訪問我的 GitHub 主頁：
+          {{ $t('githubProjects.visitDirectlyShort') }}
           <a :href="currentGitHubUrl" target="_blank" class="ts-text is-link">
             {{ currentGitHubUrl.replace('https://', '') }}
           </a>
@@ -67,10 +65,10 @@
       <table class="ts-table">
         <thead>
           <tr>
-            <th>#</th>
-            <th>名稱</th>
-            <th>網址</th>
-            <th class="mobile:has-hidden">描述</th>
+            <th>{{ $t('githubProjects.index') }}</th>
+            <th>{{ $t('githubProjects.name') }}</th>
+            <th>{{ $t('githubProjects.url') }}</th>
+            <th class="mobile:has-hidden">{{ $t('githubProjects.desc') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -86,12 +84,12 @@
                 {{ repo.html_url }}
               </a>
             </td>
-            <td class="mobile:has-hidden">{{ repo.description || '無描述' }}</td>
+            <td class="mobile:has-hidden">{{ repo.description || $t('githubProjects.noDesc') }}</td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
-            <th :colspan="4">統計筆數：{{ currentProjects.length }}</th>
+            <th :colspan="4">{{ $t('githubProjects.count', { count: currentProjects.length }) }}</th>
           </tr>
         </tfoot>
       </table>

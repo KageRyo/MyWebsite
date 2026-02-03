@@ -1,12 +1,12 @@
 <template>
   <div class="tablet+:column tablet+:is-8-wide mobile:ts-content">
-    <div class="ts-header is-big is-heavy">聯絡資訊</div>
+    <div class="ts-header is-big is-heavy">{{ $t('contactInfo.header') }}</div>
     
     <a href="https://coderyo.com/discord" target="_blank" rel="noopener noreferrer" class="no-underline">
       <div class="ts-iconset has-top-spaced-small">
         <span class="ts-icon is-discord-icon"></span>
         <div class="content">
-          <div class="title">Discord</div>
+          <div class="title">{{ $t('contactInfo.discord') }}</div>
           <div class="text">KageRyo</div>
         </div>
       </div>
@@ -16,7 +16,7 @@
       <div class="ts-iconset has-top-spaced">
         <span class="ts-icon is-github-icon"></span>
         <div class="content">
-          <div class="title">GitHub</div>
+          <div class="title">{{ $t('contactInfo.github') }}</div>
           <div class="text">KageRyo</div>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <div class="ts-iconset has-top-spaced">
         <span class="ts-icon is-linkedin-icon"></span>
         <div class="content">
-          <div class="title">LinkedIn</div>
+          <div class="title">{{ $t('contactInfo.linkedin') }}</div>
           <div class="text">Chien-Hsun Chang 張健勳</div>
         </div>
       </div>
@@ -36,7 +36,7 @@
       <div class="ts-iconset has-top-spaced">
         <span class="ts-icon is-envelope-icon"></span>
         <div class="content">
-          <div class="title">電子郵件</div>
+          <div class="title">{{ $t('contactInfo.email') }}</div>
           <div class="text">kageryo@coderyo.com</div>
         </div>
       </div>
@@ -45,4 +45,6 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 </script>

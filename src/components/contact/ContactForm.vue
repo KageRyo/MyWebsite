@@ -1,57 +1,57 @@
 <template>
   <div class="tablet+:column tablet+:is-8-wide mobile:ts-content">
-    <div class="ts-header is-big is-heavy">聯絡表單</div>
+    <div class="ts-header is-big is-heavy">{{ $t('contactForm.header') }}</div>
     <div class="ts-container is-very-narrow has-top-spaced-large">
       <form @submit.prevent="sendEmail">
         <div class="ts-grid is-relaxed is-2-columns">
           <div class="column">
-            <div class="ts-text is-label">名稱</div>
+            <div class="ts-text is-label">{{ $t('contactForm.name') }}</div>
             <div class="ts-input is-underlined is-fluid has-top-spaced">
               <input 
                 type="text" 
                 v-model="form.name" 
-                placeholder="讓我知道該如何稱呼您吧！"
+                :placeholder="$t('contactForm.namePlaceholder')"
                 required
               >
             </div>
           </div>
           
           <div class="column">
-            <div class="ts-text is-label">性別</div>
+            <div class="ts-text is-label">{{ $t('contactForm.gender') }}</div>
             <div class="has-flex-center">
               <div class="ts-wrap has-top-spaced">
                 <label class="ts-radio">
                   <input v-model="form.gender" name="gender" type="radio" value="male">
-                  男性
+                  {{ $t('contactForm.male') }}
                 </label>
                 <label class="ts-radio">
                   <input v-model="form.gender" name="gender" type="radio" value="female">
-                  女性
+                  {{ $t('contactForm.female') }}
                 </label>
                 <label class="ts-radio">
                   <input v-model="form.gender" name="gender" type="radio" value="other">
-                  其它
+                  {{ $t('contactForm.other') }}
                 </label>
               </div>
             </div>
           </div>
         </div>
         
-        <div class="ts-text is-label has-top-spaced-large">電子郵件地址</div>
+        <div class="ts-text is-label has-top-spaced-large">{{ $t('contactForm.email') }}</div>
         <div class="ts-input is-underlined is-fluid has-top-spaced">
           <input 
             type="email" 
             v-model="form.email" 
-            placeholder="請輸入您的電子郵件地址，這樣才能回復您唷！"
+            :placeholder="$t('contactForm.emailPlaceholder')"
             required
           >
         </div>
         
-        <div class="ts-text is-label has-top-spaced-large">內文</div>
+        <div class="ts-text is-label has-top-spaced-large">{{ $t('contactForm.message') }}</div>
         <div class="ts-input is-resizable is-underlined is-fluid has-top-spaced">
           <textarea 
             v-model="form.message" 
-            placeholder="讓我知道您想說明或聯絡的內容吧！"
+            :placeholder="$t('contactForm.messagePlaceholder')"
             required
           ></textarea>
         </div>
@@ -61,7 +61,7 @@
           type="submit"
           :disabled="isSubmitting"
         >
-          {{ isSubmitting ? '送出中...' : '送出' }}
+          {{ isSubmitting ? $t('contactForm.sending') : $t('contactForm.send') }}
         </button>
       </form>
 
@@ -128,24 +128,24 @@ const showEmailModal = (subject, body) => {
     <div class="ts-content has-vertically-padded">
       <div class="ts-header is-large has-bottom-spaced">
         <span class="ts-icon is-envelope-icon"></span>
-        郵件內容
+        {{ $t('contactForm.emailModalTitle') }}
       </div>
       <div class="ts-text is-secondary has-bottom-spaced">
-        由於環境限制，無法直接開啟郵件應用程式。請複製以下內容手動發送郵件：
+        {{ $t('contactForm.emailModalDesc') }}
       </div>
       
       <div class="ts-segment is-secondary has-bottom-spaced">
-        <div class="ts-text is-label">收件人</div>
+        <div class="ts-text is-label">{{ $t('contactForm.recipient') }}</div>
         <div class="ts-text is-code">kageryo@coderyo.com</div>
       </div>
       
       <div class="ts-segment is-secondary has-bottom-spaced">
-        <div class="ts-text is-label">主旨</div>
+        <div class="ts-text is-label">{{ $t('contactForm.subject') }}</div>
         <div class="ts-text is-code">${subject}</div>
       </div>
       
       <div class="ts-segment is-secondary has-bottom-spaced">
-        <div class="ts-text is-label">內容</div>
+        <div class="ts-text is-label">{{ $t('contactForm.body') }}</div>
         <div class="ts-text is-code" style="white-space: pre-wrap; font-family: monospace;">${body}</div>
       </div>
     </div>
@@ -157,12 +157,12 @@ const showEmailModal = (subject, body) => {
         <div class="column">
           <button class="ts-button is-fluid" onclick="copyEmailContent()">
             <span class="ts-icon is-copy-icon"></span>
-            複製全部內容
+            {{ $t('contactForm.copyAll') }}
           </button>
         </div>
         <div class="column">
           <button class="ts-button is-outlined is-fluid" onclick="closeEmailModal()">
-            關閉
+            {{ $t('contactForm.close') }}
           </button>
         </div>
       </div>
@@ -186,9 +186,9 @@ ${body}`
     
     const success = await copyToClipboard(emailContent)
     if (success) {
-      alert('郵件內容已複製到剪貼簿！您可以貼到您的郵件應用程式中。')
+      alert($t('contactForm.copySuccess'))
     } else {
-      alert('複製失敗，請手動選取複製上述內容。')
+      alert($t('contactForm.copyFail'))
     }
   }
   
@@ -206,13 +206,13 @@ const sendEmail = async () => {
   isSubmitting.value = true
   
   try {
-    const subject = `來自 ${form.name} 的聯絡訊息`
-    const body = `姓名：${form.name}
-性別：${form.gender === 'male' ? '男性' : form.gender === 'female' ? '女性' : '其它'}
-電子郵件：${form.email}
-
-訊息內容：
-${form.message}`
+    const subject = $t('contactForm.subjectPrefix', { name: form.name })
+    const body = $t('contactForm.bodyTemplate', {
+      name: form.name,
+      gender: form.gender === 'male' ? $t('contactForm.male') : form.gender === 'female' ? $t('contactForm.female') : $t('contactForm.other'),
+      email: form.email,
+      message: form.message
+    })
     
     const mailtoURL = `mailto:kageryo@coderyo.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
     
@@ -248,7 +248,7 @@ ${form.message}`
       window.removeEventListener('blur', handleBlur)
       
       if (mailAppOpened) {
-        alert('郵件應用程式已開啟，請確認發送！')
+        alert($t('contactForm.mailOpened'))
         
         // 重置表單
         Object.assign(form, {
@@ -258,7 +258,7 @@ ${form.message}`
           message: ''
         })
       } else {
-        const userConfirm = confirm('郵件應用程式可能沒有正確開啟。\n\n點擊「確定」查看備用方案，或點擊「取消」保留表單內容。')
+        const userConfirm = confirm($t('contactForm.mailNotOpened'))
         
         if (userConfirm) {
           showEmailModal(subject, body)
@@ -275,7 +275,7 @@ ${form.message}`
     
   } catch (error) {
     console.error('發送郵件時發生錯誤：', error)
-    alert(`發送失敗：${error.message}\n\n請直接發送郵件到 kageryo@coderyo.com 或使用其他聯絡方式。`)
+    alert($t('contactForm.sendFail', { msg: error.message }))
   } finally {
     isSubmitting.value = false
   }
