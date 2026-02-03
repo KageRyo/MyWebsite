@@ -30,13 +30,13 @@
 
               <!-- 介紹文字 -->
               <span class="ts-text">
-                {{ $t('hero.introduction') }}
+                {{ $t('home.hero.introduction') }}
               </span>
 
               <!-- 查看更多按鈕 -->
               <button class="ts-button is-fluid is-start-icon has-top-spaced" @click="modalStore.showAppDrawer">
                 <span class="ts-icon is-heart-icon"></span>
-                {{ $t('hero.seeMore') }}
+                {{ $t('home.hero.seeMore') }}
               </button>
 
               <!-- 社群連結 -->

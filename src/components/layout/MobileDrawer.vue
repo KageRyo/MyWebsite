@@ -16,14 +16,14 @@
         <div class="ts-content is-padded">
           <div class="ts-grid is-middle-aligned">
             <div class="column">
-              <div class="ts-header is-large is-heavy is-text">導航欄</div>
+              <div class="ts-header is-large is-heavy is-text">{{ t('ui.drawer.title') }}</div>
             </div>
             <div class="column is-fluid"></div>
             <div class="column">
               <button 
                 class="ts-button is-rounded is-outline is-small"
                 @click="handleCloseClick"
-                aria-label="關閉選單"
+                :aria-label="t('ui.drawer.close')"
                 type="button"
               >
                 <span class="ts-icon is-xmark-icon"></span>
@@ -63,18 +63,22 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useModalStore } from '../../stores/modal'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 const modalStore = useModalStore()
 const route = useRoute()
 
-const navItems = [
-  { name: 'home', path: '/', label: '首頁', icon: 'is-house-icon' },
-  { name: 'about', path: '/about', label: '關於我', icon: 'is-user-icon' },
-  { name: 'projects', path: '/projects', label: '作品集', icon: 'is-folder-icon' },
-  { name: 'contact', path: '/contact', label: '聯絡我', icon: 'is-envelope-icon' }
-]
+const { t } = useI18n()
+
+const navItems = computed(() => [
+  { name: 'home', path: '/', label: t('nav.home'), icon: 'is-house-icon' },
+  { name: 'about', path: '/about', label: t('nav.about'), icon: 'is-user-icon' },
+  { name: 'projects', path: '/projects', label: t('nav.projects'), icon: 'is-folder-icon' },
+  { name: 'contact', path: '/contact', label: t('nav.contact'), icon: 'is-envelope-icon' }
+])
 
 // 處理關閉按鈕點擊
 const handleCloseClick = () => {

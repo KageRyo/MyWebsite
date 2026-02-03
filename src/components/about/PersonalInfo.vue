@@ -24,15 +24,15 @@
             <div class="ts-iconset has-top-spaced">
               <span class="ts-icon is-user-large-icon"></span>
               <div class="content">
-                <div class="title">{{ $t('info.basic.gender') }}</div>
-                <div class="text">{{ $t('info.basic.male') }}</div>
+                <div class="title">{{ $t('about.personal.basic.gender') }}</div>
+                <div class="text">{{ $t('about.personal.basic.male') }}</div>
               </div>
             </div>
 
             <div class="ts-iconset has-top-spaced-small">
               <span class="ts-icon is-calendar-days-icon"></span>
               <div class="content">
-                <div class="title">{{ $t('info.basic.age') }}</div>
+                <div class="title">{{ $t('about.personal.basic.age') }}</div>
                 <div class="text">{{ currentAge }}</div>
               </div>
             </div>
@@ -40,13 +40,13 @@
             <div class="ts-iconset has-top-spaced-small has-bottom-spaced">
               <span class="ts-icon is-graduation-cap-icon"></span>
               <div class="content">
-                <div class="title">{{ $t('info.basic.education') }}</div>
-                <div class="text">{{ $t('info.basic.educationDetail') }}</div>
+                <div class="title">{{ $t('about.personal.basic.education') }}</div>
+                <div class="text">{{ $t('about.personal.basic.educationDetail') }}</div>
               </div>
             </div>
 
             <span class="ts-text">
-              {{ $t('info.basic.motto') }}
+              {{ $t('about.personal.basic.motto') }}
             </span>
           </div>
         </div>

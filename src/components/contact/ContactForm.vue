@@ -1,57 +1,57 @@
 <template>
   <div class="tablet+:column tablet+:is-8-wide mobile:ts-content">
-    <div class="ts-header is-big is-heavy">{{ $t('contactForm.header') }}</div>
+    <div class="ts-header is-big is-heavy">{{ $t('contact.form.header') }}</div>
     <div class="ts-container is-very-narrow has-top-spaced-large">
       <form @submit.prevent="sendEmail">
         <div class="ts-grid is-relaxed is-2-columns">
           <div class="column">
-            <div class="ts-text is-label">{{ $t('contactForm.name') }}</div>
+            <div class="ts-text is-label">{{ $t('contact.form.name') }}</div>
             <div class="ts-input is-underlined is-fluid has-top-spaced">
               <input 
                 type="text" 
                 v-model="form.name" 
-                :placeholder="$t('contactForm.namePlaceholder')"
+                :placeholder="$t('contact.form.namePlaceholder')"
                 required
               >
             </div>
           </div>
           
           <div class="column">
-            <div class="ts-text is-label">{{ $t('contactForm.gender') }}</div>
+            <div class="ts-text is-label">{{ $t('contact.form.gender') }}</div>
             <div class="has-flex-center">
               <div class="ts-wrap has-top-spaced">
                 <label class="ts-radio">
                   <input v-model="form.gender" name="gender" type="radio" value="male">
-                  {{ $t('contactForm.male') }}
+                  {{ $t('contact.form.male') }}
                 </label>
                 <label class="ts-radio">
                   <input v-model="form.gender" name="gender" type="radio" value="female">
-                  {{ $t('contactForm.female') }}
+                  {{ $t('contact.form.female') }}
                 </label>
                 <label class="ts-radio">
                   <input v-model="form.gender" name="gender" type="radio" value="other">
-                  {{ $t('contactForm.other') }}
+                  {{ $t('contact.form.other') }}
                 </label>
               </div>
             </div>
           </div>
         </div>
         
-        <div class="ts-text is-label has-top-spaced-large">{{ $t('contactForm.email') }}</div>
+        <div class="ts-text is-label has-top-spaced-large">{{ $t('contact.form.email') }}</div>
         <div class="ts-input is-underlined is-fluid has-top-spaced">
           <input 
             type="email" 
             v-model="form.email" 
-            :placeholder="$t('contactForm.emailPlaceholder')"
+            :placeholder="$t('contact.form.emailPlaceholder')"
             required
           >
         </div>
         
-        <div class="ts-text is-label has-top-spaced-large">{{ $t('contactForm.message') }}</div>
+        <div class="ts-text is-label has-top-spaced-large">{{ $t('contact.form.message') }}</div>
         <div class="ts-input is-resizable is-underlined is-fluid has-top-spaced">
           <textarea 
             v-model="form.message" 
-            :placeholder="$t('contactForm.messagePlaceholder')"
+            :placeholder="$t('contact.form.messagePlaceholder')"
             required
           ></textarea>
         </div>
@@ -61,7 +61,7 @@
           type="submit"
           :disabled="isSubmitting"
         >
-          {{ isSubmitting ? $t('contactForm.sending') : $t('contactForm.send') }}
+          {{ isSubmitting ? $t('contact.form.sending') : $t('contact.form.send') }}
         </button>
       </form>
 
@@ -71,6 +71,9 @@
 
 <script setup>
 import { ref, reactive, onMounted, nextTick } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const form = reactive({
   name: '',
@@ -128,24 +131,24 @@ const showEmailModal = (subject, body) => {
     <div class="ts-content has-vertically-padded">
       <div class="ts-header is-large has-bottom-spaced">
         <span class="ts-icon is-envelope-icon"></span>
-        {{ $t('contactForm.emailModalTitle') }}
+        ${t('contact.form.emailModal.title')}
       </div>
       <div class="ts-text is-secondary has-bottom-spaced">
-        {{ $t('contactForm.emailModalDesc') }}
+        ${t('contact.form.emailModal.desc')}
       </div>
       
       <div class="ts-segment is-secondary has-bottom-spaced">
-        <div class="ts-text is-label">{{ $t('contactForm.recipient') }}</div>
+        <div class="ts-text is-label">${t('contact.form.emailModal.recipient')}</div>
         <div class="ts-text is-code">kageryo@coderyo.com</div>
       </div>
       
       <div class="ts-segment is-secondary has-bottom-spaced">
-        <div class="ts-text is-label">{{ $t('contactForm.subject') }}</div>
+        <div class="ts-text is-label">${t('contact.form.emailModal.subject')}</div>
         <div class="ts-text is-code">${subject}</div>
       </div>
       
       <div class="ts-segment is-secondary has-bottom-spaced">
-        <div class="ts-text is-label">{{ $t('contactForm.body') }}</div>
+        <div class="ts-text is-label">${t('contact.form.emailModal.body')}</div>
         <div class="ts-text is-code" style="white-space: pre-wrap; font-family: monospace;">${body}</div>
       </div>
     </div>
@@ -157,12 +160,12 @@ const showEmailModal = (subject, body) => {
         <div class="column">
           <button class="ts-button is-fluid" onclick="copyEmailContent()">
             <span class="ts-icon is-copy-icon"></span>
-            {{ $t('contactForm.copyAll') }}
+            ${t('contact.form.emailModal.copyAll')}
           </button>
         </div>
         <div class="column">
           <button class="ts-button is-outlined is-fluid" onclick="closeEmailModal()">
-            {{ $t('contactForm.close') }}
+            ${t('contact.form.emailModal.close')}
           </button>
         </div>
       </div>
@@ -178,17 +181,17 @@ const showEmailModal = (subject, body) => {
   document.body.insertAdjacentHTML('beforeend', modalContent)
   
   window.copyEmailContent = async () => {
-    const emailContent = `收件人: kageryo@coderyo.com
-主旨: ${subject}
+    const emailContent = `${t('contact.form.emailModal.recipient')}: kageryo@coderyo.com
+  ${t('contact.form.emailModal.subject')}: ${subject}
 
-內容:
-${body}`
+  ${t('contact.form.emailModal.body')}:
+  ${body}`
     
     const success = await copyToClipboard(emailContent)
     if (success) {
-      alert($t('contactForm.copySuccess'))
+      alert(t('contact.form.emailModal.copySuccess'))
     } else {
-      alert($t('contactForm.copyFail'))
+      alert(t('contact.form.emailModal.copyFail'))
     }
   }
   
@@ -206,10 +209,10 @@ const sendEmail = async () => {
   isSubmitting.value = true
   
   try {
-    const subject = $t('contactForm.subjectPrefix', { name: form.name })
-    const body = $t('contactForm.bodyTemplate', {
+    const subject = t('contact.form.subjectPrefix', { name: form.name })
+    const body = t('contact.form.bodyTemplate', {
       name: form.name,
-      gender: form.gender === 'male' ? $t('contactForm.male') : form.gender === 'female' ? $t('contactForm.female') : $t('contactForm.other'),
+      gender: form.gender === 'male' ? t('contact.form.male') : form.gender === 'female' ? t('contact.form.female') : t('contact.form.other'),
       email: form.email,
       message: form.message
     })
@@ -248,7 +251,7 @@ const sendEmail = async () => {
       window.removeEventListener('blur', handleBlur)
       
       if (mailAppOpened) {
-        alert($t('contactForm.mailOpened'))
+        alert(t('contact.form.mailOpened'))
         
         // 重置表單
         Object.assign(form, {
@@ -258,7 +261,7 @@ const sendEmail = async () => {
           message: ''
         })
       } else {
-        const userConfirm = confirm($t('contactForm.mailNotOpened'))
+        const userConfirm = confirm(t('contact.form.mailNotOpened'))
         
         if (userConfirm) {
           showEmailModal(subject, body)
@@ -275,7 +278,7 @@ const sendEmail = async () => {
     
   } catch (error) {
     console.error('發送郵件時發生錯誤：', error)
-    alert($t('contactForm.sendFail', { msg: error.message }))
+    alert(t('contact.form.sendFail', { msg: error.message }))
   } finally {
     isSubmitting.value = false
   }

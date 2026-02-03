@@ -1,16 +1,16 @@
 <template>
   <div class="ts-container has-top-spaced-large">
     <!-- 證照 -->
-    <div class="ts-header is-big is-heavy">{{ $t('certificates.header') }}</div>
+    <div class="ts-header is-big is-heavy">{{ $t('about.certificates.header') }}</div>
     <div class="ts-box has-top-spaced-small">
       <table class="ts-table">
         <thead>
           <tr>
-            <th>{{ $t('certificates.index') }}</th>
-            <th>{{ $t('certificates.year') }}</th>
-            <th>{{ $t('certificates.name') }}</th>
-            <th>{{ $t('certificates.level') }}</th>
-            <th class="mobile:has-hidden">{{ $t('certificates.number') }}</th>
+            <th>{{ $t('about.certificates.table.index') }}</th>
+            <th>{{ $t('about.certificates.table.year') }}</th>
+            <th>{{ $t('about.certificates.table.name') }}</th>
+            <th>{{ $t('about.certificates.table.level') }}</th>
+            <th class="mobile:has-hidden">{{ $t('about.certificates.table.number') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -24,7 +24,7 @@
         </tbody>
         <tfoot>
           <tr>
-            <th :colspan="5">{{ $t('certificates.count', { count: certificates.length }) }}</th>
+            <th :colspan="5">{{ $t('about.certificates.count', { count: certificates.length }) }}</th>
           </tr>
         </tfoot>
       </table>

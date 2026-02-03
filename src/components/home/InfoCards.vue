@@ -10,8 +10,8 @@
           <div class="ts-content">
             <div class="ts-header is-heavy has-flex-center">KageRyo Developer</div>
             <p class="justify-text">
-              <span v-html="$t('infoCards.intro')"></span>
-              <span v-html="$t('infoCards.learningFocus')"></span>
+              <span v-html="$t('home.infoCards.intro')"></span>
+              <span v-html="$t('home.infoCards.learningFocus')"></span>
             </p>
             <div class="has-flex-center">
               <div class="ts-wrap">
@@ -35,9 +35,9 @@
             <img src="/assets/img/watermirror.svg" alt="WaterMirror">
           </div>
           <div class="ts-content">
-            <div class="ts-header is-heavy has-flex-center">{{ $t('infoCards.waterMirror.header') }}</div>
+            <div class="ts-header is-heavy has-flex-center">{{ $t('home.infoCards.waterMirror.header') }}</div>
             <p class="justify-text">
-              <span v-html="$t('infoCards.waterMirror.description')"></span>
+              <span v-html="$t('home.infoCards.waterMirror.description')"></span>
             </p>
             <div class="has-flex-center">
               <div class="ts-wrap">
@@ -59,9 +59,9 @@
             <img src="/assets/img/coderyo.svg" alt="CodeRyo Studio">
           </div>
           <div class="ts-content">
-            <div class="ts-header is-heavy has-flex-center">{{ $t('infoCards.codeRyo.header') }}</div>
+            <div class="ts-header is-heavy has-flex-center">{{ $t('home.infoCards.codeRyo.header') }}</div>
             <p class="justify-text">
-              <span v-html="$t('infoCards.codeRyo.description')"></span>
+              <span v-html="$t('home.infoCards.codeRyo.description')"></span>
             </p>
             <div class="has-flex-center">
               <div class="ts-wrap">

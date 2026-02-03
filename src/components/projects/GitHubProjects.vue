@@ -1,7 +1,7 @@
 <template>
   <div class="ts-container has-top-spaced-large">
     <!-- GitHub 專案 -->
-    <div class="ts-header is-big is-heavy">{{ $t('githubProjects.header') }}</div>
+    <div class="ts-header is-big is-heavy">{{ $t('projects.github.header') }}</div>
     
     <!-- 標籤頁切換 -->
     <div class="ts-tab is-pilled has-vertically-spaced">
@@ -19,18 +19,18 @@
     <!-- 專案列表 -->
     <div v-if="loading" class="ts-content is-center-aligned has-top-spaced">
       <div class="ts-loader"></div>
-      <div class="ts-text is-secondary">{{ $t('githubProjects.loading', { tab: currentTabLabel }) }}</div>
+      <div class="ts-text is-secondary">{{ $t('projects.github.loading', { tab: currentTabLabel }) }}</div>
     </div>
     
     <div v-else-if="error" class="ts-content is-center-aligned has-top-spaced">
       <div class="ts-text is-warning">
         <div class="ts-icon is-wrench-icon"></div>
-        <div class="ts-header is-large">{{ $t('githubProjects.apiErrorTitle') }}</div>
+        <div class="ts-header is-large">{{ $t('projects.github.apiErrorTitle') }}</div>
         <div class="ts-text is-secondary has-top-spaced-small">
-          {{ $t('githubProjects.apiErrorDesc') }}
+          {{ $t('projects.github.apiErrorDesc') }}
         </div>
         <div class="ts-text is-small has-top-spaced">
-          {{ $t('githubProjects.visitDirectly') }}<br>
+          {{ $t('projects.github.visitDirectly') }}<br>
           <a :href="currentGitHubUrl" target="_blank" class="ts-text is-link">
             🔗 {{ currentGitHubUrl.replace('https://', '') }}
           </a>
@@ -40,7 +40,7 @@
           @click="retryFetch"
           :disabled="loading"
         >
-          {{ loading ? $t('githubProjects.loadingBtn') : $t('githubProjects.retryBtn') }}
+          {{ loading ? $t('projects.github.loadingBtn') : $t('projects.github.retryBtn') }}
         </button>
       </div>
     </div>
@@ -48,12 +48,12 @@
     <div v-else-if="currentProjects.length === 0" class="ts-content is-center-aligned has-top-spaced">
       <div class="ts-text is-warning">
         <div class="ts-icon is-wrench-icon"></div>
-        <div class="ts-header is-large">{{ $t('githubProjects.apiErrorTitle') }}</div>
+        <div class="ts-header is-large">{{ $t('projects.github.apiErrorTitle') }}</div>
         <div class="ts-text is-secondary has-top-spaced-small">
-          {{ $t('githubProjects.apiErrorDesc') }}
+          {{ $t('projects.github.apiErrorDesc') }}
         </div>
         <div class="ts-text is-small has-top-spaced">
-          {{ $t('githubProjects.visitDirectlyShort') }}
+          {{ $t('projects.github.visitDirectlyShort') }}
           <a :href="currentGitHubUrl" target="_blank" class="ts-text is-link">
             {{ currentGitHubUrl.replace('https://', '') }}
           </a>
@@ -65,10 +65,10 @@
       <table class="ts-table">
         <thead>
           <tr>
-            <th>{{ $t('githubProjects.index') }}</th>
-            <th>{{ $t('githubProjects.name') }}</th>
-            <th>{{ $t('githubProjects.url') }}</th>
-            <th class="mobile:has-hidden">{{ $t('githubProjects.desc') }}</th>
+            <th>{{ $t('projects.github.table.index') }}</th>
+            <th>{{ $t('projects.github.table.name') }}</th>
+            <th>{{ $t('projects.github.table.url') }}</th>
+            <th class="mobile:has-hidden">{{ $t('projects.github.table.desc') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -84,12 +84,12 @@
                 {{ repo.html_url }}
               </a>
             </td>
-            <td class="mobile:has-hidden">{{ repo.description || $t('githubProjects.noDesc') }}</td>
+            <td class="mobile:has-hidden">{{ repo.description || $t('projects.github.table.noDesc') }}</td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
-            <th :colspan="4">{{ $t('githubProjects.count', { count: currentProjects.length }) }}</th>
+            <th :colspan="4">{{ $t('projects.github.table.count', { count: currentProjects.length }) }}</th>
           </tr>
         </tfoot>
       </table>

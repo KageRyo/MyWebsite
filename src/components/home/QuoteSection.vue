@@ -1,8 +1,8 @@
 <template>
   <div class="ts-quote is-heading has-top-spaced-big">
-    {{ $t('quote.main') }}
+    {{ $t('home.quote.main') }}
     <div class="cite">
-      {{ $t('quote.cite') }}
+      {{ $t('home.quote.cite') }}
     </div>
   </div>
 </template>
