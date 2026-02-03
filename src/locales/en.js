@@ -21,7 +21,7 @@ export default {
   infoCards: {
     intro: `Yes, that's me, a developer from Taiwan, currently studying at 
       <a href='https://www.ccu.edu.tw/' class='ts-text is-external-link' target='_blank' rel='noopener noreferrer'>National Chung Cheng University</a> in the 
-      <a href='https://cs.ccu.edu.tw/' class='ts-text is-external-link' target='_blank' rel='noopener noreferrer'>Department of Computer Science</a>.`,
+      <a href='https://cs.ccu.edu.tw/' class='ts-text is-external-link' target='_blank' rel='noopener noreferrer'>Department of Computer Science and Technology</a>.`,
     learningFocus: `My learning focus involves software-hardware integration, full-stack development, and artificial intelligence. If you'd like to know more about me, feel free to visit 
       <router-link to='/about' class='item'>About Me</router-link> or 
       <router-link to='/projects' class='item'>Projects</router-link>.`,
