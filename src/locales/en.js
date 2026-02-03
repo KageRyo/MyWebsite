@@ -25,16 +25,17 @@ export default {
       },
     },
     infoCards: {
-      intro: `Yes, that's me, a developer from Taiwan, currently studying at 
-      <a href='https://www.ccu.edu.tw/' class='ts-text is-external-link' target='_blank' rel='noopener noreferrer'>National Chung Cheng University</a> in the 
-      <a href='https://cs.ccu.edu.tw/' class='ts-text is-external-link' target='_blank' rel='noopener noreferrer'>Department of Computer Science and Technology</a>.`,
-      learningFocus: `My learning focus involves software-hardware integration, full-stack development, and artificial intelligence. If you'd like to know more about me, feel free to visit 
-      <router-link to='/about' class='item'>About Me</router-link> or 
-      <router-link to='/projects' class='item'>Projects</router-link>.`,
+      intro: "Yes, that's me, a developer from Taiwan, currently studying at {ccu} in the {cs}.",
+      learningFocus: "My learning focus involves software-hardware integration, full-stack development, and artificial intelligence. If you'd like to know more about me, feel free to visit {about} or {projects}.",
+      links: {
+        ccu: 'National Chung Cheng University',
+        cs: 'Department of Computer Science and Technology',
+        about: 'About Me',
+        projects: 'Projects',
+      },
       waterMirror: {
         header: 'WaterMirror 水之鏡',
-        description: `This is a collaborative research project developed with my university friends. It is an intelligent water quality analysis and evaluation system based on the 
-        <a href='https://scikit-learn.org/' class='ts-text is-external-link' target='_blank' rel='noopener noreferrer'>Scikit-learn</a> framework. The system analyzes specific water quality experimental data and achieves evaluation and early warning through artificial intelligence and machine learning.`,
+        description: 'This is a collaborative research project developed with my university friends. It is an intelligent water quality analysis and evaluation system based on the {sklearn} framework. The system analyzes specific water quality experimental data and achieves evaluation and early warning through artificial intelligence and machine learning.',
       },
       codeRyo: {
         header: 'CodeRyo Studio',
@@ -122,7 +123,7 @@ export default {
   contact: {
     page: {
       heroTitle: 'Chien-Hsun Chang',
-      heroSubtitle: 'Developer, Programmer, and Student@TAIWAN.',
+      heroSubtitle: 'Developer, Programmer, and Student in TAIWAN.',
     },
     info: {
       header: 'Contact Information',
