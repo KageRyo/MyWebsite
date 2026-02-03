@@ -8,8 +8,8 @@
             <img src="/assets/img/ministry-of-education.svg" alt="教育部合影">
             <div class="ts-mask is-bottom">
               <div class="ts-content" style="color: #FFF;">
-                <div class="ts-header">{{ $t('featuredPhotos.ministryHeader') }}</div>
-                {{ $t('featuredPhotos.ministryDescription') }}
+                <div class="ts-header">{{ $t('home.featuredPhotos.ministry.header') }}</div>
+                {{ $t('home.featuredPhotos.ministry.description') }}
               </div>
             </div>
           </div>
@@ -22,8 +22,8 @@
             <img src="/assets/img/coscup-lightingtalk.svg" alt="COSCUP">
             <div class="ts-mask is-bottom">
               <div class="ts-content" style="color: #FFF;">
-                <div class="ts-header">{{ $t('featuredPhotos.coscupHeader') }}</div>
-                {{ $t('featuredPhotos.coscupDescription') }}
+                <div class="ts-header">{{ $t('home.featuredPhotos.coscup.header') }}</div>
+                {{ $t('home.featuredPhotos.coscup.description') }}
               </div>
             </div>
           </div>

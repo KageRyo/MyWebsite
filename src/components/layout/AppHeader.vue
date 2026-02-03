@@ -15,7 +15,7 @@
 
       <!-- 黑白色系切換 -->
       <button class="ts-button is-icon is-secondary" @click="themeStore.toggleTheme"
-        :title="themeStore.theme === 'is-dark' ? '切換到淺色模式' : '切換到深色模式'">
+        :title="themeStore.theme === 'is-dark' ? t('ui.theme.light') : t('ui.theme.dark')">
         <span class="ts-icon" :class="themeStore.theme === 'is-dark' ? 'is-moon-icon' : 'is-sun-icon'"></span>
       </button>
 
@@ -67,10 +67,10 @@ import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n()
 
 const navItems = computed(() => [
-  { name: 'home', path: '/', label: t('home') },
-  { name: 'about', path: '/about', label: t('about') },
-  { name: 'projects', path: '/projects', label: t('projects') },
-  { name: 'contact', path: '/contact', label: t('contact') }
+  { name: 'home', path: '/', label: t('nav.home') },
+  { name: 'about', path: '/about', label: t('nav.about') },
+  { name: 'projects', path: '/projects', label: t('nav.projects') },
+  { name: 'contact', path: '/contact', label: t('nav.contact') }
 ])
 
 const showUnfinishedModal = () => {
