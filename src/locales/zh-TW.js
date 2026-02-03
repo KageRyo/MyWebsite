@@ -1,4 +1,53 @@
 export default {
+  certificates: {
+    header: '證照',
+    index: '#',
+    year: '年份',
+    name: '名稱',
+    level: '級別',
+    number: '序號',
+    count: '統計筆數：{count}',
+  },
+  info: {
+    basic: {
+      gender: '性別',
+      male: '男',
+      age: '年齡',
+      education: '學歷',
+      educationDetail: '國立中正大學 資訊工程研究所 一年級',
+      motto: '總是會在專業領域上盡自己最大能力去協助他人，用心與堅持的毅力面對人生的每一次挑戰。',
+    },
+  },
+  resume: {
+    education: {
+      header: '學歷',
+      gradSchool: {
+        period: '2025~',
+        school: '國立中正大學 資訊工程研究所 / 碩士',
+      },
+      college: {
+        period: '2021~2024',
+        school: '國立臺中科技大學 智慧生產工程系 / 學士',
+      },
+    },
+    experience: {
+      header: '工作經歷',
+      paia: {
+        period: '2024~2025',
+        company: 'PAIA-Tech. 帕亞科技股份有限公司 / 後端軟體開發工程師',
+        platform: 'Playful AI Arena, PAIA 帕亞學習平台',
+      },
+      codingApe: {
+        period: '2023~2025',
+        company: 'Coding APE 猿創力程式設計學校 / 講師',
+        corp: '壞主意股份有限公司(CODINGAPE CO., LTD.)',
+      },
+      kaohsiung: {
+        period: '2018~2021',
+        company: '社團法人高雄市資訊培育協會 / 教學助理',
+      },
+    },
+  },
   home: '首頁',
   about: '關於我',
   projects: '作品集',

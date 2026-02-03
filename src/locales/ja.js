@@ -1,4 +1,53 @@
 export default {
+  certificates: {
+    header: '資格',
+    index: '#',
+    year: '年',
+    name: '名称',
+    level: 'レベル',
+    number: '番号',
+    count: '合計：{count}',
+  },
+  info: {
+    basic: {
+      gender: '性別',
+      male: '男',
+      age: '年齢',
+      education: '学歴',
+      educationDetail: '国立中正大学 コンピュータサイエンス研究科 1年生',
+      motto: '常に専門分野で最善を尽くして他者を助け、真心と粘り強さで人生のあらゆる挑戦に立ち向かいます。',
+    },
+  },
+  resume: {
+    education: {
+      header: '学歴',
+      gradSchool: {
+        period: '2025~',
+        school: '国立中正大学 コンピュータサイエンス研究科 / 修士',
+      },
+      college: {
+        period: '2021~2024',
+        school: '国立台中科技大学 インテリジェント生産工学科 / 学士',
+      },
+    },
+    experience: {
+      header: '職務経歴',
+      paia: {
+        period: '2024~2025',
+        company: 'PAIA-Tech株式会社 / バックエンドソフトウェアエンジニア',
+        platform: 'Playful AI Arena, PAIA学習プラットフォーム',
+      },
+      codingApe: {
+        period: '2023~2025',
+        company: 'Coding APE プログラミングスクール / 講師',
+        corp: 'Bad Idea株式会社 (CODINGAPE CO., LTD.)',
+      },
+      kaohsiung: {
+        period: '2018~2021',
+        company: '高雄市情報育成協会 / 教学アシスタント',
+      },
+    },
+  },
   home: 'ホーム',
   about: '私について',
   projects: 'プロジェクト',
