@@ -64,7 +64,7 @@ const modalStore = useModalStore()
 const currentFlag = ref('is-tw-flag')
 
 import { useI18n } from 'vue-i18n'
-const { t, locale } = useI18n()
+const { t, locale } = useI18n({ useScope: 'global' })
 
 const navItems = computed(() => [
   { name: 'home', path: '/', label: t('nav.home') },

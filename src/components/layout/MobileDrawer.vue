@@ -71,7 +71,7 @@ import { useI18n } from 'vue-i18n'
 const modalStore = useModalStore()
 const route = useRoute()
 
-const { t } = useI18n()
+const { t } = useI18n({ useScope: 'global' })
 
 const navItems = computed(() => [
   { name: 'home', path: '/', label: t('nav.home'), icon: 'is-house-icon' },

@@ -10,8 +10,24 @@
           <div class="ts-content">
             <div class="ts-header is-heavy has-flex-center">KageRyo Developer</div>
             <p class="justify-text">
-              <span v-html="$t('home.infoCards.intro')"></span>
-              <span v-html="$t('home.infoCards.learningFocus')"></span>
+              <i18n-t keypath="home.infoCards.intro" tag="span">
+                <template #ccu>
+                  <a href="https://www.ccu.edu.tw/" class="ts-text is-external-link" target="_blank"
+                    rel="noopener noreferrer">{{ $t('home.infoCards.links.ccu') }}</a>
+                </template>
+                <template #cs>
+                  <a href="https://cs.ccu.edu.tw/" class="ts-text is-external-link" target="_blank"
+                    rel="noopener noreferrer">{{ $t('home.infoCards.links.cs') }}</a>
+                </template>
+              </i18n-t>
+              <i18n-t keypath="home.infoCards.learningFocus" tag="span">
+                <template #about>
+                  <router-link to="/about" class="item">{{ $t('home.infoCards.links.about') }}</router-link>
+                </template>
+                <template #projects>
+                  <router-link to="/projects" class="item">{{ $t('home.infoCards.links.projects') }}</router-link>
+                </template>
+              </i18n-t>
             </p>
             <div class="has-flex-center">
               <div class="ts-wrap">
@@ -37,7 +53,12 @@
           <div class="ts-content">
             <div class="ts-header is-heavy has-flex-center">{{ $t('home.infoCards.waterMirror.header') }}</div>
             <p class="justify-text">
-              <span v-html="$t('home.infoCards.waterMirror.description')"></span>
+              <i18n-t keypath="home.infoCards.waterMirror.description" tag="span">
+                <template #sklearn>
+                  <a href="https://scikit-learn.org/" class="ts-text is-external-link" target="_blank"
+                    rel="noopener noreferrer">Scikit-learn</a>
+                </template>
+              </i18n-t>
             </p>
             <div class="has-flex-center">
               <div class="ts-wrap">
