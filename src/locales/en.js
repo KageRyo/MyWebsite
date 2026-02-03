@@ -1,4 +1,53 @@
 export default {
+  certificates: {
+    header: 'Certificates',
+    index: '#',
+    year: 'Year',
+    name: 'Name',
+    level: 'Level',
+    number: 'Number',
+    count: 'Total: {count}',
+  },
+  info: {
+    basic: {
+      gender: 'Gender',
+      male: 'Male',
+      age: 'Age',
+      education: 'Education',
+      educationDetail: 'National Chung Cheng University, Institute of Computer Science and Information Technology, 1st Year',
+      motto: 'Always do my best to help others in my professional field, facing every challenge in life with dedication and perseverance.',
+    },
+  },
+  resume: {
+    education: {
+      header: 'Education',
+      gradSchool: {
+        period: '2025~',
+        school: 'National Chung Cheng University, Institute of Computer Science and Information Technology / Master',
+      },
+      college: {
+        period: '2021~2024',
+        school: 'National Taichung University of Science and Technology, Department of Intelligent Production Engineering / Bachelor',
+      },
+    },
+    experience: {
+      header: 'Work Experience',
+      paia: {
+        period: '2024~2025',
+        company: 'PAIA-Tech Co., Ltd. / Backend Software Engineer',
+        platform: 'Playful AI Arena',
+      },
+      codingApe: {
+        period: '2023~2025',
+        company: 'Coding APE Programming School / Lecturer',
+        corp: 'CODINGAPE CO., LTD.',
+      },
+      kaohsiung: {
+        period: '2018~2021',
+        company: 'Kaohsiung Information Training Association / Teaching Assistant',
+      },
+    },
+  },
   home: 'Home',
   about: 'About',
   projects: 'Projects',

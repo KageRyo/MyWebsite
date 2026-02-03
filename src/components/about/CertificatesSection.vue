@@ -1,16 +1,16 @@
 <template>
   <div class="ts-container has-top-spaced-large">
     <!-- 證照 -->
-    <div class="ts-header is-big is-heavy">證照</div>
+    <div class="ts-header is-big is-heavy">{{ $t('certificates.header') }}</div>
     <div class="ts-box has-top-spaced-small">
       <table class="ts-table">
         <thead>
           <tr>
-            <th>#</th>
-            <th>年份</th>
-            <th>名稱</th>
-            <th>級別</th>
-            <th class="mobile:has-hidden">序號</th>
+            <th>{{ $t('certificates.index') }}</th>
+            <th>{{ $t('certificates.year') }}</th>
+            <th>{{ $t('certificates.name') }}</th>
+            <th>{{ $t('certificates.level') }}</th>
+            <th class="mobile:has-hidden">{{ $t('certificates.number') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -24,7 +24,7 @@
         </tbody>
         <tfoot>
           <tr>
-            <th :colspan="5">統計筆數：{{ certificates.length }}</th>
+            <th :colspan="5">{{ $t('certificates.count', { count: certificates.length }) }}</th>
           </tr>
         </tfoot>
       </table>

@@ -24,15 +24,15 @@
             <div class="ts-iconset has-top-spaced">
               <span class="ts-icon is-user-large-icon"></span>
               <div class="content">
-                <div class="title">性別</div>
-                <div class="text">男</div>
+                <div class="title">{{ $t('info.basic.gender') }}</div>
+                <div class="text">{{ $t('info.basic.male') }}</div>
               </div>
             </div>
 
             <div class="ts-iconset has-top-spaced-small">
               <span class="ts-icon is-calendar-days-icon"></span>
               <div class="content">
-                <div class="title">年齡</div>
+                <div class="title">{{ $t('info.basic.age') }}</div>
                 <div class="text">{{ currentAge }}</div>
               </div>
             </div>
@@ -40,13 +40,13 @@
             <div class="ts-iconset has-top-spaced-small has-bottom-spaced">
               <span class="ts-icon is-graduation-cap-icon"></span>
               <div class="content">
-                <div class="title">學歷</div>
-                <div class="text">國立中正大學 資訊工程研究所 一年級</div>
+                <div class="title">{{ $t('info.basic.education') }}</div>
+                <div class="text">{{ $t('info.basic.educationDetail') }}</div>
               </div>
             </div>
 
             <span class="ts-text">
-              總是會在專業領域上盡自己最大能力去協助他人，用心與堅持的毅力面對人生的每一次挑戰。
+              {{ $t('info.basic.motto') }}
             </span>
           </div>
         </div>
