@@ -29,7 +29,7 @@ export default {
       learningFocus: "My learning focus involves software-hardware integration, full-stack development, and artificial intelligence. If you'd like to know more about me, feel free to visit {about} or {projects}.",
       links: {
         ccu: 'National Chung Cheng University',
-        cs: 'Department of Computer Science and Technology',
+        cs: 'Department of Computer Science and Engineering',
         about: 'About Me',
         projects: 'Projects',
       },
