@@ -73,7 +73,7 @@ export default {
           school: '國立中正大學 資訊工程研究所 / 碩士',
         },
         college: {
-          period: '2021~2024',
+          period: '2021~2025',
           school: '國立臺中科技大學 智慧生產工程系 / 學士',
         },
       },
