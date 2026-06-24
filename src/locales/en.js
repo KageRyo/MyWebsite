@@ -51,7 +51,7 @@ export default {
         male: 'Male',
         age: 'Age',
         education: 'Education',
-        educationDetail: 'National Chung Cheng University, Institute of Computer Science and Information Technology, 1st Year',
+        educationDetail: 'National Chung Cheng University, Institute of Computer Science and Information Engineering, 1st Year',
         motto: 'Always do my best to help others in my professional field, facing every challenge in life with dedication and perseverance.',
       },
     },
@@ -71,10 +71,10 @@ export default {
         header: 'Education',
         gradSchool: {
           period: '2025~',
-          school: 'National Chung Cheng University, Institute of Computer Science and Information Technology / Master',
+          school: 'National Chung Cheng University, Institute of Computer Science and Information Engineering / Master',
         },
         college: {
-          period: '2021~2024',
+          period: '2021~2025',
           school: 'National Taichung University of Science and Technology, Department of Intelligent Production Engineering / Bachelor',
         },
       },
