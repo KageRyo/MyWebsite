@@ -110,8 +110,14 @@ const handleBackdropClick = event => {
 
 <style scoped>
 dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
   width: min(44rem, calc(100vw - 1rem));
   max-width: 44rem;
+  max-height: calc(100dvh - 1rem);
+  margin: 0;
+  transform: translate(-50%, -50%);
 }
 
 .email-body {
