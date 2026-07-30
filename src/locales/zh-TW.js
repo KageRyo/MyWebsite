@@ -1,9 +1,20 @@
 export default {
+  meta: {
+    home: { title: 'KageRyo Developer - 首頁' },
+    about: { title: 'KageRyo Developer - 關於我' },
+    projects: { title: 'KageRyo Developer - 作品集' },
+    contact: { title: 'KageRyo Developer - 聯絡我' },
+    notFound: { title: 'KageRyo Developer - 找不到頁面' },
+  },
   nav: {
     home: '首頁',
     about: '關於我',
     projects: '作品集',
     contact: '聯絡我',
+  },
+  notFound: {
+    message: '找不到你要前往的頁面。',
+    backHome: '回到首頁',
   },
   home: {
     hero: {
@@ -94,6 +105,12 @@ export default {
   },
   projects: {
     featured: {
+      items: {
+        minxiongHydroCast: { description: '民雄地區水文預報工具。' },
+        bybitPredict: { description: '使用 Python 與 Bybit API 預測加密貨幣趨勢。' },
+        concentration: { description: '以 Hololive 為主題的翻牌配對遊戲。' },
+        myWebsite: { description: '此個人網站的原始碼。' },
+      },
       header: '精選專案',
     },
     github: {

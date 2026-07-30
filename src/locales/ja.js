@@ -1,9 +1,20 @@
 export default {
+  meta: {
+    home: { title: 'KageRyo Developer - ホーム' },
+    about: { title: 'KageRyo Developer - 私について' },
+    projects: { title: 'KageRyo Developer - プロジェクト' },
+    contact: { title: 'KageRyo Developer - お問い合わせ' },
+    notFound: { title: 'KageRyo Developer - ページが見つかりません' },
+  },
   nav: {
     home: 'ホーム',
     about: '私について',
     projects: 'プロジェクト',
     contact: '連絡先',
+  },
+  notFound: {
+    message: 'お探しのページは見つかりませんでした。',
+    backHome: 'ホームに戻る',
   },
   home: {
     hero: {
@@ -95,6 +106,12 @@ export default {
   },
   projects: {
     featured: {
+      items: {
+        minxiongHydroCast: { description: '民雄地域の水文予報ツール。' },
+        bybitPredict: { description: 'Python と Bybit API を使った暗号資産トレンド予測。' },
+        concentration: { description: 'Hololive をテーマにした神経衰弱ゲーム。' },
+        myWebsite: { description: 'この個人サイトのソースコード。' },
+      },
       header: '注目プロジェクト',
     },
     github: {
