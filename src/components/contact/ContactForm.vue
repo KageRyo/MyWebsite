@@ -5,19 +5,21 @@
       <form @submit.prevent="showEmailPreview">
         <div class="ts-grid is-relaxed is-2-columns">
           <div class="column">
-            <div class="ts-text is-label">{{ $t('contact.form.name') }}</div>
+            <label for="contact-name" class="ts-text is-label">{{ $t('contact.form.name') }}</label>
             <div class="ts-input is-underlined is-fluid has-top-spaced">
               <input
+                id="contact-name"
                 v-model="form.name"
                 type="text"
+                autocomplete="name"
                 :placeholder="$t('contact.form.namePlaceholder')"
                 required
               >
             </div>
           </div>
 
-          <div class="column">
-            <div class="ts-text is-label">{{ $t('contact.form.gender') }}</div>
+          <fieldset class="column contact-fieldset">
+            <legend class="ts-text is-label">{{ $t('contact.form.gender') }}</legend>
             <div class="has-flex-center">
               <div class="ts-wrap has-top-spaced">
                 <label class="ts-radio">
@@ -34,22 +36,25 @@
                 </label>
               </div>
             </div>
-          </div>
+          </fieldset>
         </div>
 
-        <div class="ts-text is-label has-top-spaced-large">{{ $t('contact.form.email') }}</div>
+        <label for="contact-email" class="ts-text is-label has-top-spaced-large">{{ $t('contact.form.email') }}</label>
         <div class="ts-input is-underlined is-fluid has-top-spaced">
           <input
+            id="contact-email"
             v-model="form.email"
             type="email"
+            autocomplete="email"
             :placeholder="$t('contact.form.emailPlaceholder')"
             required
           >
         </div>
 
-        <div class="ts-text is-label has-top-spaced-large">{{ $t('contact.form.message') }}</div>
+        <label for="contact-message" class="ts-text is-label has-top-spaced-large">{{ $t('contact.form.message') }}</label>
         <div class="ts-input is-resizable is-underlined is-fluid has-top-spaced">
           <textarea
+            id="contact-message"
             v-model="form.message"
             :placeholder="$t('contact.form.messagePlaceholder')"
             required
@@ -90,5 +95,13 @@ const emailContent = computed(() => ({
 const showEmailPreview = () => {
   modalVisible.value = true
 }
-
 </script>
+
+<style scoped>
+.contact-fieldset {
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+</style>
