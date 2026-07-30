@@ -4,8 +4,8 @@ import { ref } from 'vue'
 export const useProjectStore = defineStore('projects', () => {
   const projects = ref({
     kageryo: [],
-    kageryo_lab: [],
-    coderyostudio: []
+    coderyostudio: [],
+    coderyomc: []
   })
   
   const loading = ref(false)
@@ -15,8 +15,8 @@ export const useProjectStore = defineStore('projects', () => {
   
   const API_URLS = {
     kageryo: 'https://api.github.com/users/KageRyo/repos',
-    kageryo_lab: 'https://api.github.com/users/KageRyo-Lab/repos', 
-    coderyostudio: 'https://api.github.com/users/CodeRyoStudio/repos'
+    coderyostudio: 'https://api.github.com/users/CodeRyoStudio/repos',
+    coderyomc: 'https://api.github.com/users/CodeRyoMC/repos'
   }
   
   const fetchProjects = async (username) => {
