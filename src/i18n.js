@@ -1,19 +1,21 @@
-import { createI18n } from 'vue-i18n';
-import zhTW from './locales/zh-TW.js';
-import en from './locales/en.js';
-import ja from './locales/ja.js';
+import { createI18n } from 'vue-i18n'
+import en from './locales/en.js'
+import ja from './locales/ja.js'
+import zhTW from './locales/zh-TW.js'
 
-const messages = {
-  'zh-TW': zhTW,
-  en: en,
-  ja: ja,
-};
+const SUPPORTED_LOCALES = ['zh-TW', 'en', 'ja']
+const savedLocale = localStorage.getItem('locale')
+const initialLocale = SUPPORTED_LOCALES.includes(savedLocale) ? savedLocale : 'zh-TW'
 
 const i18n = createI18n({
   legacy: false,
-  locale: 'zh-TW',
+  locale: initialLocale,
   fallbackLocale: 'en',
-  messages,
-});
+  messages: {
+    'zh-TW': zhTW,
+    en,
+    ja
+  }
+})
 
-export default i18n;
+export default i18n
