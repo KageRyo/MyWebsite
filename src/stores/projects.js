@@ -4,14 +4,14 @@ import { githubAccounts, githubAccountsByKey } from '../config/githubAccounts'
 import { fetchGitHubRepositories } from '../services/githubRepositoryService'
 
 const CACHE_DURATION = 10 * 60 * 1000
-const createAccountState = initialValue =>
-  Object.fromEntries(githubAccounts.map(account => [account.key, initialValue]))
+const createAccountState = valueFactory =>
+  Object.fromEntries(githubAccounts.map(account => [account.key, valueFactory()]))
 
 export const useProjectStore = defineStore('projects', () => {
-  const projects = ref(createAccountState([]))
-  const loadingByAccount = ref(createAccountState(false))
-  const errorsByAccount = ref(createAccountState(null))
-  const lastFetchedAt = ref(createAccountState(0))
+  const projects = ref(createAccountState(() => []))
+  const loadingByAccount = ref(createAccountState(() => false))
+  const errorsByAccount = ref(createAccountState(() => null))
+  const lastFetchedAt = ref(createAccountState(() => 0))
 
   const loading = computed(() => Object.values(loadingByAccount.value).some(Boolean))
   const error = computed(() => Object.values(errorsByAccount.value).find(Boolean) || null)
