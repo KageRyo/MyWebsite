@@ -97,6 +97,7 @@ export default {
       header: '精選專案',
     },
     github: {
+      noProjects: '目前沒有可顯示的公開儲存庫。',
       header: '我在 GitHub 上的開源專案',
       loading: '正在載入 {tab} 的 GitHub 專案...',
       apiErrorTitle: 'GitHub API 功能修復中',

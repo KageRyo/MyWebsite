@@ -98,6 +98,7 @@ export default {
       header: '注目プロジェクト',
     },
     github: {
+      noProjects: '表示できる公開リポジトリはありません。',
       header: 'GitHub上のオープンソースプロジェクト',
       loading: '{tab} の GitHub プロジェクトを読み込み中...',
       apiErrorTitle: 'GitHub API メンテナンス中',
