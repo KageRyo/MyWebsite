@@ -31,6 +31,7 @@ export const useThemeStore = defineStore('theme', () => {
   const systemTheme = ref(getSystemTheme())
   const theme = computed(() => `is-${themeSource.value === 'system' ? systemTheme.value : themeSource.value}`)
   let mediaQuery
+  let initialized = false
 
   const applyTheme = () => {
     const root = document.documentElement
@@ -61,7 +62,13 @@ export const useThemeStore = defineStore('theme', () => {
   const detectSystemTheme = () => `is-${getSystemTheme()}`
 
   const initTheme = () => {
-    mediaQuery ??= window.matchMedia?.('(prefers-color-scheme: dark)')
+    if (initialized) {
+      applyTheme()
+      return
+    }
+
+    initialized = true
+    mediaQuery = window.matchMedia?.('(prefers-color-scheme: dark)')
     if (mediaQuery) {
       systemTheme.value = mediaQuery.matches ? 'dark' : 'light'
       mediaQuery.addEventListener('change', event => {
