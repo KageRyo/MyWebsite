@@ -107,8 +107,8 @@ const activeTab = ref('kageryo')
 
 const tabs = [
   { key: 'kageryo', label: 'KageRyo' },
-  { key: 'kageryo_lab', label: "KageRyo's Lab" },
-  { key: 'coderyostudio', label: 'CodeRyo' }
+  { key: 'coderyostudio', label: 'CodeRyo' },
+  { key: 'coderyomc', label: 'CodeRyoMC' }
 ]
 
 const currentProjects = computed(() => {
@@ -123,8 +123,8 @@ const currentTabLabel = computed(() => {
 const currentGitHubUrl = computed(() => {
   const urlMap = {
     'kageryo': 'https://github.com/KageRyo',
-    'kageryo_lab': 'https://github.com/KageRyo-Lab', 
-    'coderyostudio': 'https://github.com/CodeRyoStudio'
+    'coderyostudio': 'https://github.com/CodeRyoStudio',
+    'coderyomc': 'https://github.com/CodeRyoMC'
   }
   return urlMap[activeTab.value] || 'https://github.com/KageRyo'
 })
