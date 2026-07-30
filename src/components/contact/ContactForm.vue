@@ -66,7 +66,6 @@
         :recipient="emailContent.recipient"
         :subject="emailContent.subject"
         :body="emailContent.body"
-        @open-mail="resetForm"
       />
     </div>
   </div>
@@ -92,7 +91,4 @@ const showEmailPreview = () => {
   modalVisible.value = true
 }
 
-const resetForm = () => {
-  Object.assign(form, { name: '', gender: 'male', email: '', message: '' })
-}
 </script>
