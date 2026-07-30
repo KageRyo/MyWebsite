@@ -30,20 +30,20 @@
       <div class="ts-divider"></div>
 
       <div class="ts-content is-tertiary">
-        <div class="ts-grid is-3-columns">
-          <div class="column">
+        <div class="email-actions">
+          <div>
             <button class="ts-button is-fluid" type="button" @click="copyEmailContent">
               <span class="ts-icon is-copy-icon"></span>
               {{ $t('contact.form.emailModal.copyAll') }}
             </button>
           </div>
-          <div class="column">
+          <div>
             <a class="ts-button is-fluid" :href="mailtoUrl" @click="openMailClient">
               <span class="ts-icon is-envelope-icon"></span>
               {{ $t('contact.form.emailModal.openMail') }}
             </a>
           </div>
-          <div class="column">
+          <div class="close-action">
             <button class="ts-button is-outlined is-fluid" type="button" @click="close">
               {{ $t('contact.form.emailModal.close') }}
             </button>
@@ -109,8 +109,33 @@ const handleBackdropClick = event => {
 </script>
 
 <style scoped>
+dialog {
+  width: min(44rem, calc(100vw - 1rem));
+  max-width: 44rem;
+}
+
 .email-body {
   white-space: pre-wrap;
   font-family: monospace;
+}
+
+.email-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.close-action {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 40rem) {
+  .email-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .close-action {
+    grid-column: auto;
+  }
 }
 </style>
