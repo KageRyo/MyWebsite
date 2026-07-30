@@ -2,18 +2,18 @@
   <div class="ts-container has-top-spaced-large">
     <div class="ts-header is-big is-heavy has-bottom-spaced-small">{{ $t('projects.featured.header') }}</div>
     <div class="ts-grid">
-      <!-- WaterMirror -->
+      <!-- MinxiongHydroCast -->
       <div class="tablet+:column tablet+:is-4-wide mobile:ts-content">
-        <a href="https://github.com/KageRyo/WaterMirror" target="_blank" rel="noopener noreferrer" class="no-underline">
+        <a href="https://github.com/KageRyo/MinxiongHydroCast" target="_blank" rel="noopener noreferrer" class="no-underline">
           <div class="ts-box">
             <div class="ts-image">
-              <img src="/assets/img/watermirror.svg" alt="WaterMirror 專案">
+              <img src="/assets/img/minxionghydrocast.svg" alt="MinxiongHydroCast">
             </div>
             <div class="ts-content is-secondary">
-              <div class="ts-text is-description">KageRyo/WaterMirror</div>
-              <div class="ts-header is-truncated is-heavy">WaterMirror</div>
+              <div class="ts-text is-description">KageRyo/MinxiongHydroCast</div>
+              <div class="ts-header is-truncated is-heavy">MinxiongHydroCast</div>
               <div class="ts-text is-description text-overflow-ellipsis">
-                💧Water Mirror: AI-powered Water Quality Analysis
+                Hydrological forecasting for Minxiong.
               </div>
             </div>
           </div>

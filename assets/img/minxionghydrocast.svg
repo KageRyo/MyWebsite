@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#071827"/>
+      <stop offset="58%" stop-color="#0B2740"/>
+      <stop offset="100%" stop-color="#0A3550"/>
+    </linearGradient>
+    <linearGradient id="main" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#67E8F9"/>
+      <stop offset="52%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5EEAD4"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Rounded square background -->
+  <rect x="32" y="32" width="960" height="960" rx="220" fill="url(#bg)"/>
+
+  <!-- Subtle hydro/radar grid -->
+  <g opacity="0.09" stroke="#B9F4FF" stroke-width="2">
+    <path d="M180 240H844M180 352H844M180 464H844M180 576H844M180 688H844M180 800H844"/>
+    <path d="M224 188V836M336 188V836M448 188V836M560 188V836M672 188V836M784 188V836"/>
+  </g>
+
+  <!-- Radar rings -->
+  <g fill="none" stroke="#64E7F5" stroke-width="18" stroke-linecap="round" opacity="0.92">
+    <path d="M647 255 A165 165 0 0 1 811 419"/>
+    <path d="M647 318 A102 102 0 0 1 748 419"/>
+  </g>
+  <circle cx="648" cy="420" r="16" fill="#67E8F9"/>
+
+  <!-- Rainfall marks -->
+  <g fill="url(#main)" opacity="0.95">
+    <path d="M245 271 C245 271 213 313 213 338 A32 32 0 0 0 277 338 C277 313 245 271 245 271Z"/>
+    <path d="M326 226 C326 226 298 263 298 285 A28 28 0 0 0 354 285 C354 263 326 226 326 226Z"/>
+    <path d="M409 286 C409 286 384 319 384 339 A25 25 0 0 0 434 339 C434 319 409 286 409 286Z"/>
+  </g>
+
+  <!-- Main watershed M -->
+  <g filter="url(#shadow)">
+    <path d="M225 674 L356 430 Q370 404 388 432 L511 616"
+          fill="none" stroke="url(#main)" stroke-width="78" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M511 616 L634 432 Q652 404 668 430 L799 674"
+          fill="none" stroke="url(#main)" stroke-width="78" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- River / forecast wave -->
+  <path d="M178 655
+           C258 594 329 716 409 655
+           C489 594 560 716 640 655
+           C720 594 791 716 846 668"
+        fill="none" stroke="#071827" stroke-width="66" stroke-linecap="round"/>
+  <path d="M178 655
+           C258 594 329 716 409 655
+           C489 594 560 716 640 655
+           C720 594 791 716 846 668"
+        fill="none" stroke="url(#wave)" stroke-width="38" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Forecast points -->
+  <g fill="#D7FAFF">
+    <circle cx="410" cy="655" r="13"/>
+    <circle cx="640" cy="655" r="13"/>
+    <circle cx="846" cy="668" r="13"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="512" y="837"
+        text-anchor="middle"
+        font-family="DejaVu Sans, Arial, sans-serif"
+        font-size="76"
+        font-weight="800"
+        letter-spacing="10"
+        fill="#E9FBFF">MHC</text>
+  <text x="512" y="887"
+        text-anchor="middle"
+        font-family="DejaVu Sans, Arial, sans-serif"
+        font-size="27"
+        font-weight="600"
+        letter-spacing="7"
+        fill="#8EDDEA">HYDROCAST</text>
+</svg>
