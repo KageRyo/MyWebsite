@@ -58,6 +58,6 @@ watch(activeTab, accountKey => {
 })
 
 onMounted(() => {
-  projectStore.fetchAllProjects()
+  projectStore.fetchProjects(activeTab.value).catch(() => {})
 })
 </script>
