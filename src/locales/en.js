@@ -1,9 +1,20 @@
 export default {
+  meta: {
+    home: { title: 'KageRyo Developer - Home' },
+    about: { title: 'KageRyo Developer - About' },
+    projects: { title: 'KageRyo Developer - Projects' },
+    contact: { title: 'KageRyo Developer - Contact' },
+    notFound: { title: 'KageRyo Developer - Page Not Found' },
+  },
   nav: {
     home: 'Home',
     about: 'About',
     projects: 'Projects',
     contact: 'Contact',
+  },
+  notFound: {
+    message: 'The page you requested could not be found.',
+    backHome: 'Back to Home',
   },
   home: {
     hero: {
@@ -95,6 +106,12 @@ export default {
   },
   projects: {
     featured: {
+      items: {
+        minxiongHydroCast: { description: 'Hydrological forecasting for Minxiong.' },
+        bybitPredict: { description: 'Predict cryptocurrency trends with Python and the Bybit API.' },
+        concentration: { description: 'A Hololive-themed concentration card game.' },
+        myWebsite: { description: 'Source code for this personal website.' },
+      },
       header: 'Featured Projects',
     },
     github: {
