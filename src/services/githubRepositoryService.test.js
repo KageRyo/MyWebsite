@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import {
+  fetchGitHubRepositories,
   filterRepositories,
   normalizeRepository,
   sortRepositories
@@ -35,5 +36,55 @@ describe('GitHub repository helpers', () => {
 
     expect(older.description).toBeNull()
     expect(sortRepositories([older, newer])).toEqual([newer, older])
+  })
+
+  it('fetches, filters, and normalizes GitHub repositories', async () => {
+    const fetchFn = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => [
+        {
+          id: 1,
+          name: 'project',
+          fork: false,
+          archived: false,
+          private: false,
+          description: 'Test',
+          html_url: 'https://github.com/example/project',
+          updated_at: '2026-01-01T00:00:00Z'
+        },
+        {
+          id: 2,
+          name: 'forked-project',
+          fork: true,
+          archived: false,
+          private: false
+        }
+      ]
+    })
+
+    const result = await fetchGitHubRepositories({ username: 'example' }, { fetchFn })
+
+    expect(result).toEqual([
+      {
+        id: 1,
+        name: 'project',
+        description: 'Test',
+        htmlUrl: 'https://github.com/example/project',
+        updatedAt: '2026-01-01T00:00:00Z'
+      }
+    ])
+    const { searchParams } = fetchFn.mock.calls[0][0]
+    expect(searchParams.get('sort')).toBe('updated')
+    expect(searchParams.get('direction')).toBe('desc')
+    expect(searchParams.get('per_page')).toBe('100')
+  })
+
+  it('marks GitHub rate-limit responses as rate-limited', async () => {
+    const fetchFn = vi.fn().mockResolvedValue({ ok: false, status: 403 })
+
+    await expect(fetchGitHubRepositories({ username: 'example' }, { fetchFn })).rejects.toMatchObject({
+      status: 403,
+      rateLimited: true
+    })
   })
 })
