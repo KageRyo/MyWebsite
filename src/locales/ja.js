@@ -33,10 +33,6 @@ export default {
         about: '私について',
         projects: 'プロジェクト',
       },
-      waterMirror: {
-        header: 'WaterMirror 水之鏡',
-        description: 'これは大学の友人と共同で開発した研究プロジェクトです。このプロジェクトは、{sklearn} フレームワークに基づいた、インテリジェントな水質分析および評価システムです。このシステムは、特定の水質実験データを分析し、人工知能と機械学習を通じて評価と早期警告を実現します。',
-      },
       codeRyo: {
         header: 'CodeRyo Studio',
         description: `志を同じくする友人たちと一緒に、CodeRyo チームを設立しました。私たちはサーバーサービスとインテリジェントな金融取引に注力しています。

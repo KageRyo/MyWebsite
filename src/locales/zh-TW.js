@@ -33,10 +33,6 @@ export default {
         about: '關於我',
         projects: '作品集',
       },
-      waterMirror: {
-        header: 'WaterMirror 水之鏡',
-        description: '我和大學友人共同開發的專題研究專案，此專案為一基於 {sklearn} 框架開發機器學習模型的智慧化水質分析與評估系統，能夠分析特定的水質實驗數值與資料，並藉由人工智慧機器學習達到分析評估與預警。',
-      },
       codeRyo: {
         header: 'CodeRyo Studio',
         description: '我和幾位志同道合的好友共同成立了 CodeRyo 團隊，我們致力於伺服器服務以及智慧化金融交易等，\n        並將「使未來不只是未來。」訂為我們的標語，期望能對資訊領域以及開源社群有所貢獻，並增強自我能力。',
