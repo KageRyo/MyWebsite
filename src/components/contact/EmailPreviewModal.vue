@@ -30,20 +30,20 @@
       <div class="ts-divider"></div>
 
       <div class="ts-content is-tertiary">
-        <div class="email-actions">
-          <div>
+        <div class="ts-grid is-3-columns">
+          <div class="column">
             <button class="ts-button is-fluid" type="button" @click="copyEmailContent">
               <span class="ts-icon is-copy-icon"></span>
               {{ $t('contact.form.emailModal.copyAll') }}
             </button>
           </div>
-          <div>
+          <div class="column">
             <a class="ts-button is-fluid" :href="mailtoUrl" @click="openMailClient">
               <span class="ts-icon is-envelope-icon"></span>
               {{ $t('contact.form.emailModal.openMail') }}
             </a>
           </div>
-          <div class="close-action">
+          <div class="column">
             <button class="ts-button is-outlined is-fluid" type="button" @click="close">
               {{ $t('contact.form.emailModal.close') }}
             </button>
@@ -56,6 +56,7 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { copyText, createMailtoUrl } from '../../composables/useMailto'
 
 const props = defineProps({
@@ -65,7 +66,8 @@ const props = defineProps({
   body: { type: String, required: true }
 })
 
-const emit = defineEmits(['update:visible', 'open-mail'])
+const emit = defineEmits(['update:visible'])
+const { t } = useI18n({ useScope: 'global' })
 const dialog = ref(null)
 const copyStatus = ref('')
 
@@ -90,14 +92,13 @@ const emailContent = computed(() => `${props.recipient}\n${props.subject}\n\n${p
 const copyEmailContent = async () => {
   const copied = await copyText(emailContent.value)
   copyStatus.value = copied
-    ? 'Copied to clipboard.'
-    : 'Unable to copy automatically. Please select the content manually.'
+    ? t('contact.form.emailModal.copySuccess')
+    : t('contact.form.emailModal.copyFail')
 }
 
 const close = () => emit('update:visible', false)
 
 const openMailClient = () => {
-  emit('open-mail')
   close()
 }
 
@@ -109,39 +110,8 @@ const handleBackdropClick = event => {
 </script>
 
 <style scoped>
-dialog {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: min(44rem, calc(100vw - 1rem));
-  max-width: 44rem;
-  max-height: calc(100dvh - 1rem);
-  margin: 0;
-  transform: translate(-50%, -50%);
-}
-
 .email-body {
   white-space: pre-wrap;
   font-family: monospace;
-}
-
-.email-actions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
-}
-
-.close-action {
-  grid-column: 1 / -1;
-}
-
-@media (min-width: 40rem) {
-  .email-actions {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .close-action {
-    grid-column: auto;
-  }
 }
 </style>
