@@ -149,6 +149,7 @@ export default {
       mailNotOpened: 'メールアプリが正しく開かなかった可能性があります。\n\nOKをクリックすると代替案を表示し、キャンセルをクリックするとフォーム内容を保持します。',
       sendFail: '送信に失敗しました：{msg}\n\n直接 kageryo@coderyo.com へメールするか、他の連絡方法をご利用ください。',
       emailModal: {
+        openMail: 'メールアプリを開く',
         title: 'メール内容',
         desc: '環境の制限により、メールアプリを直接開くことができません。以下の内容をコピーして手動で送信してください：',
         recipient: '宛先',

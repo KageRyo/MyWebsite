@@ -149,6 +149,7 @@ export default {
       mailNotOpened: 'The mail app may not have opened correctly.\n\nClick OK to view the backup solution, or Cancel to keep the form content.',
       sendFail: 'Send failed: {msg}\n\nPlease send an email directly to kageryo@coderyo.com or use another contact method.',
       emailModal: {
+        openMail: 'Open Mail App',
         title: 'Email Content',
         desc: 'Due to environment limitations, the mail app cannot be opened directly. Please copy the following content and send the email manually:',
         recipient: 'Recipient',
