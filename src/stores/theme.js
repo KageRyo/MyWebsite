@@ -1,70 +1,84 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 
-export const useThemeStore = defineStore('theme', () => {
-  // 初始主題狀態應該根據系統主題或保存的設定來決定
-  const getInitialTheme = () => {
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme) {
-      return savedTheme
-    }
-    // 如果沒有保存的主題，檢測系統主題
-    return window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'is-dark'
-      : 'is-light'
+const THEME_PREFERENCE_KEY = 'themePreference'
+const LEGACY_THEME_KEY = 'theme'
+const LEGACY_THEME_SOURCE_KEY = 'themeSource'
+
+const getSystemTheme = () =>
+  window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+
+const getStoredPreference = () => {
+  const preference = localStorage.getItem(THEME_PREFERENCE_KEY)
+  if (preference === 'light' || preference === 'dark' || preference === 'system') {
+    return preference
   }
 
-  const theme = ref(getInitialTheme())
-  const themeSource = ref('system') // 'user' | 'system'
+  if (localStorage.getItem(LEGACY_THEME_SOURCE_KEY) === 'system') {
+    return 'system'
+  }
 
-  const setTheme = (newTheme) => {
-    theme.value = newTheme
-    themeSource.value = 'user'
+  const legacyTheme = localStorage.getItem(LEGACY_THEME_KEY)
+  if (legacyTheme === 'is-dark' || legacyTheme === 'is-light') {
+    return legacyTheme === 'is-dark' ? 'dark' : 'light'
+  }
+
+  return 'system'
+}
+
+export const useThemeStore = defineStore('theme', () => {
+  const themeSource = ref(getStoredPreference())
+  const systemTheme = ref(getSystemTheme())
+  const theme = computed(() => `is-${themeSource.value === 'system' ? systemTheme.value : themeSource.value}`)
+  let mediaQuery
+
+  const applyTheme = () => {
+    const root = document.documentElement
+    root.classList.toggle('is-dark', theme.value === 'is-dark')
+    root.classList.toggle('is-light', theme.value === 'is-light')
+  }
+
+  const saveThemePreference = () => {
+    localStorage.setItem(THEME_PREFERENCE_KEY, themeSource.value)
+  }
+
+  const setTheme = newTheme => {
+    themeSource.value = newTheme === 'is-dark' || newTheme === 'dark' ? 'dark' : 'light'
+    saveThemePreference()
     applyTheme()
-    saveThemeToStorage()
+  }
+
+  const setSystemTheme = () => {
+    themeSource.value = 'system'
+    saveThemePreference()
+    applyTheme()
   }
 
   const toggleTheme = () => {
-    setTheme(theme.value === 'is-light' ? 'is-dark' : 'is-light')
+    setTheme(theme.value === 'is-light' ? 'dark' : 'light')
   }
 
-  const detectSystemTheme = () => {
-    return window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'is-dark'
-      : 'is-light'
-  }
+  const detectSystemTheme = () => `is-${getSystemTheme()}`
 
   const initTheme = () => {
-    const savedTheme = localStorage.getItem('theme')
-    const savedThemeSource = localStorage.getItem('themeSource')
-
-    if (savedTheme && savedThemeSource) {
-      // 如果有保存的設定，使用保存的設定
-      theme.value = savedTheme
-      themeSource.value = savedThemeSource
-    } else {
-      // 新用戶：主題已經在初始化時設定好了，只需要設定來源和保存
-      themeSource.value = 'system'
-      saveThemeToStorage()
+    mediaQuery ??= window.matchMedia?.('(prefers-color-scheme: dark)')
+    if (mediaQuery) {
+      systemTheme.value = mediaQuery.matches ? 'dark' : 'light'
+      mediaQuery.addEventListener('change', event => {
+        systemTheme.value = event.matches ? 'dark' : 'light'
+        if (themeSource.value === 'system') {
+          applyTheme()
+        }
+      })
     }
-    // 應用主題（包含圖標更新）
     applyTheme()
-  }
-  const applyTheme = () => {
-    document.querySelector('html').className = theme.value
-  }
-
-  const saveThemeToStorage = () => {
-    localStorage.setItem('theme', theme.value)
-    localStorage.setItem('themeSource', themeSource.value)
   }
 
   return {
     theme,
     themeSource,
     setTheme,
+    setSystemTheme,
     toggleTheme,
     detectSystemTheme,
     initTheme
