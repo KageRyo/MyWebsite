@@ -100,6 +100,7 @@ export default {
     github: {
       header: 'My Open Source Projects on GitHub',
       loading: 'Loading GitHub projects for {tab}...',
+      noProjects: 'No public repositories to display.',
       apiErrorTitle: 'GitHub API Maintenance',
       apiErrorDesc: 'Due to GitHub API rate limits, this feature is temporarily unavailable.\nWe are working to fix this issue. Sorry for the inconvenience!',
       visitDirectly: 'You can still visit my GitHub profile to see all projects:',
