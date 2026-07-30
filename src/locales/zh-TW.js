@@ -148,6 +148,7 @@ export default {
       mailNotOpened: '郵件應用程式可能沒有正確開啟。\n\n點擊「確定」查看備用方案，或點擊「取消」保留表單內容。',
       sendFail: '發送失敗：{msg}\n\n請直接發送郵件到 kageryo@coderyo.com 或使用其他聯絡方式。',
       emailModal: {
+        openMail: '開啟郵件程式',
         title: '郵件內容',
         desc: '由於環境限制，無法直接開啟郵件應用程式。請複製以下內容手動發送郵件：',
         recipient: '收件人',
