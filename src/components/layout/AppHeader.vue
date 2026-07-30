@@ -84,6 +84,7 @@ watch(
   locale,
   value => {
     document.documentElement.lang = value
+    localStorage.setItem('locale', value)
   },
   { immediate: true }
 )
