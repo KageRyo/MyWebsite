@@ -180,6 +180,12 @@ export default {
     },
   },
   ui: {
+    navigation: {
+      primary: 'Primary navigation',
+    },
+    language: {
+      label: 'Language',
+    },
     theme: {
       light: 'Switch to light mode',
       dark: 'Switch to dark mode',

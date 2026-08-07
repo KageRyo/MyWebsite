@@ -42,11 +42,11 @@
               <!-- 社群連結 -->
               <div class="has-flex-center">
                 <div class="ts-wrap has-top-spaced">
-                  <a href="https://coderyo.com/discord" target="_blank" rel="noopener noreferrer"
+                  <a href="https://coderyo.com/discord" target="_blank" rel="noopener noreferrer" aria-label="Discord (opens in a new tab)"
                     class="ts-icon is-secondary is-discord-icon is-circular is-large"></a>
-                  <a href="https://github.com/KageRyo" target="_blank" rel="noopener noreferrer"
+                  <a href="https://github.com/KageRyo" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"
                     class="ts-icon is-secondary is-github-icon is-circular is-large"></a>
-                  <a href="https://www.linkedin.com/in/kageryo/" target="_blank" rel="noopener noreferrer"
+                  <a href="https://www.linkedin.com/in/kageryo/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"
                     class="ts-icon is-secondary is-linkedin-icon is-circular is-large"></a>
                 </div>
               </div>

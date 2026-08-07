@@ -31,13 +31,13 @@
             </p>
             <div class="has-flex-center">
               <div class="ts-wrap">
-                <a href="https://coderyo.com/discord" target="_blank" rel="noopener noreferrer"
+                <a href="https://coderyo.com/discord" target="_blank" rel="noopener noreferrer" aria-label="Discord (opens in a new tab)"
                   class="ts-icon is-secondary is-discord-icon is-circular is-large"></a>
-                <a href="https://github.com/KageRyo" target="_blank" rel="noopener noreferrer"
+                <a href="https://github.com/KageRyo" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"
                   class="ts-icon is-secondary is-github-icon is-circular is-large"></a>
-                <a href="https://www.linkedin.com/in/kageryo/" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.linkedin.com/in/kageryo/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"
                   class="ts-icon is-secondary is-linkedin-icon is-circular is-large"></a>
-                <a href="mailto:kageryo@coderyo.com" target="_blank" rel="noopener noreferrer"
+                <a href="mailto:kageryo@coderyo.com" target="_blank" rel="noopener noreferrer" aria-label="Email KageRyo"
                   class="ts-icon is-secondary is-envelope-icon is-circular is-large"></a>
               </div>
             </div>
@@ -57,9 +57,9 @@
             </p>
             <div class="has-flex-center">
               <div class="ts-wrap">
-                <a href="https://coderyo.com/discord" target="_blank" rel="noopener noreferrer"
+                <a href="https://coderyo.com/discord" target="_blank" rel="noopener noreferrer" aria-label="CodeRyo Discord (opens in a new tab)"
                   class="ts-icon is-secondary is-discord-icon is-circular is-large"></a>
-                <a href="https://github.com/CodeRyoDeveloper" target="_blank" rel="noopener noreferrer"
+                <a href="https://github.com/CodeRyoDeveloper" target="_blank" rel="noopener noreferrer" aria-label="CodeRyo GitHub (opens in a new tab)"
                   class="ts-icon is-secondary is-github-icon is-circular is-large"></a>
               </div>
             </div>

@@ -179,6 +179,12 @@ export default {
     },
   },
   ui: {
+    navigation: {
+      primary: '主要導覽',
+    },
+    language: {
+      label: '語言',
+    },
     theme: {
       light: '切換到淺色模式',
       dark: '切換到深色模式',
