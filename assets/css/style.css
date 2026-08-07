@@ -43,6 +43,12 @@
     outline-offset: 3px;
 }
 
+html:not(.is-dark) .ts-text.is-secondary,
+html:not(.is-dark) .ts-text.is-description,
+html:not(.is-dark) .ts-content.is-secondary > p {
+    color: #666;
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -98,6 +104,8 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
+    padding: 0;
+    border: 0;
     z-index: 999;
     cursor: pointer;
 }

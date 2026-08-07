@@ -1,5 +1,5 @@
 <template>
-  <div class="ts-app-topbar has-dark">
+  <header class="ts-app-topbar has-dark">
     <div class="start">
       <router-link to="/" class="item is-text">KageRyo Developer</router-link>
     </div>
@@ -47,7 +47,7 @@
         <span class="ts-icon is-bars-icon"></span>
       </button>
     </div>
-  </div>
+  </header>
 </template>
 
 <script setup>

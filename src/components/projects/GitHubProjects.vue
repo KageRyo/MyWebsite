@@ -3,34 +3,42 @@
     <h2 class="ts-header is-big is-heavy">{{ $t('projects.github.header') }}</h2>
     <GitHubAccountTabs v-model="activeTab" :accounts="githubAccounts" />
 
-    <div v-if="isInitialLoading" class="ts-content is-center-aligned has-top-spaced" role="status" aria-live="polite">
-      <div class="ts-loader"></div>
-      <div class="ts-text is-secondary">{{ $t('projects.github.loading', { tab: activeAccount.label }) }}</div>
-    </div>
-
-    <div v-else-if="currentError && !currentProjects.length" class="ts-content is-center-aligned has-top-spaced" role="alert">
-      <div class="ts-text is-warning">
-        <div class="ts-icon is-wrench-icon"></div>
-        <h3 class="ts-header is-large">{{ $t('projects.github.apiErrorTitle') }}</h3>
-        <div class="ts-text is-secondary has-top-spaced-small">
-          {{ $t('projects.github.apiErrorDesc') }}
-        </div>
-        <div class="ts-text is-small has-top-spaced">
-          {{ $t('projects.github.visitDirectly') }}<br>
-          <a :href="activeAccount.profileUrl" target="_blank" rel="noopener noreferrer" class="ts-text is-link">
-            {{ activeAccount.profileUrl.replace('https://', '') }}
-          </a>
-        </div>
-        <button class="ts-button is-outlined has-top-spaced" type="button" @click="retryFetch">
-          {{ $t('projects.github.retryBtn') }}
-        </button>
+    <div
+      :id="`${activeTab}-panel`"
+      role="tabpanel"
+      :aria-labelledby="`${activeTab}-tab`"
+      :aria-busy="isInitialLoading"
+      tabindex="0"
+    >
+      <div v-if="isInitialLoading" class="ts-content is-center-aligned has-top-spaced" role="status" aria-live="polite">
+        <div class="ts-loader"></div>
+        <div class="ts-text is-secondary">{{ $t('projects.github.loading', { tab: activeAccount.label }) }}</div>
       </div>
-    </div>
 
-    <GitHubProjectTable v-else-if="currentProjects.length" :repositories="currentProjects" />
+      <div v-else-if="currentError && !currentProjects.length" class="ts-content is-center-aligned has-top-spaced" role="alert">
+        <div class="ts-text is-warning">
+          <div class="ts-icon is-wrench-icon"></div>
+          <h3 class="ts-header is-large">{{ $t('projects.github.apiErrorTitle') }}</h3>
+          <div class="ts-text is-secondary has-top-spaced-small">
+            {{ $t('projects.github.apiErrorDesc') }}
+          </div>
+          <div class="ts-text is-small has-top-spaced">
+            {{ $t('projects.github.visitDirectly') }}<br>
+            <a :href="activeAccount.profileUrl" target="_blank" rel="noopener noreferrer" class="ts-text is-link">
+              {{ activeAccount.profileUrl.replace('https://', '') }}
+            </a>
+          </div>
+          <button class="ts-button is-outlined has-top-spaced" type="button" @click="retryFetch">
+            {{ $t('projects.github.retryBtn') }}
+          </button>
+        </div>
+      </div>
 
-    <div v-else class="ts-content is-center-aligned has-top-spaced">
-      <div class="ts-text is-secondary">{{ $t('projects.github.noProjects') }}</div>
+      <GitHubProjectTable v-else-if="currentProjects.length" :repositories="currentProjects" />
+
+      <div v-else class="ts-content is-center-aligned has-top-spaced">
+        <div class="ts-text is-secondary">{{ $t('projects.github.noProjects') }}</div>
+      </div>
     </div>
   </div>
 </template>
