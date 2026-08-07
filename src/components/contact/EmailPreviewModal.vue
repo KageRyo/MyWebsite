@@ -1,11 +1,11 @@
 <template>
-  <dialog ref="dialog" class="ts-modal" @cancel.prevent="close" @click="handleBackdropClick">
+  <dialog ref="dialog" class="ts-modal" aria-labelledby="email-preview-title" @cancel.prevent="close" @click="handleBackdropClick">
     <div class="content">
       <div class="ts-content has-vertically-padded">
-        <div class="ts-header is-large has-bottom-spaced">
+        <h2 id="email-preview-title" class="ts-header is-large has-bottom-spaced">
           <span class="ts-icon is-envelope-icon"></span>
           {{ $t('contact.form.emailModal.title') }}
-        </div>
+        </h2>
         <p class="ts-text is-secondary has-bottom-spaced">
           {{ $t('contact.form.emailModal.desc') }}
         </p>

@@ -4,14 +4,17 @@
     ref="modalDialog"
     class="ts-modal" 
     :open="modalStore.unfinishedModalVisible"
+    aria-labelledby="unfinished-modal-title"
+    @cancel.prevent="modalStore.closeUnfinishedModal"
+    @close="modalStore.closeUnfinishedModal"
     @click="handleBackdropClick"
   >
     <div class="content">
       <div class="ts-content">
-        <div class="ts-header is-icon">
+        <h2 id="unfinished-modal-title" class="ts-header is-icon">
           <span class="ts-icon is-circle-exclamation-icon"></span>
           這個功能還沒有開放
-        </div>
+        </h2>
       </div>
       <div class="ts-divider"></div>
       <div class="ts-content">

@@ -3,7 +3,7 @@
     <!-- 穹頂 -->
     <div class="ts-content is-tertiary is-vertically-padded">
       <div class="ts-container">
-        <div class="ts-header is-huge is-heavy">{{ $t('contact.page.heroTitle') }}</div>
+        <h1 class="ts-header is-huge is-heavy">{{ $t('contact.page.heroTitle') }}</h1>
         <div class="ts-text is-secondary">{{ $t('contact.page.heroSubtitle') }}</div>
       </div>
     </div>

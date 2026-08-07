@@ -4,7 +4,7 @@
     <div class="ts-grid is-relaxed has-top-spaced-large">
       <!-- 學歷 -->
       <div class="column is-8-wide">
-        <div class="ts-header is-big is-heavy">{{ $t('about.resume.education.header') }}</div>
+        <h2 class="ts-header is-big is-heavy">{{ $t('about.resume.education.header') }}</h2>
         <div class="ts-timeline has-top-spaced-small">
           <div class="item">
             <div class="indicator">
@@ -29,7 +29,7 @@
       
       <!-- 工作經歷 -->
       <div class="column is-8-wide">
-        <div class="ts-header is-big is-heavy">{{ $t('about.resume.experience.header') }}</div>
+        <h2 class="ts-header is-big is-heavy">{{ $t('about.resume.experience.header') }}</h2>
         <div class="ts-timeline has-top-spaced-small">
           <div class="item">
             <div class="indicator">

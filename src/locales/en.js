@@ -186,6 +186,7 @@ export default {
     language: {
       label: 'Language',
     },
+    skipToMain: 'Skip to main content',
     theme: {
       light: 'Switch to light mode',
       dark: 'Switch to dark mode',

@@ -1,17 +1,17 @@
 <template>
   <div class="ts-container has-top-spaced-large">
-    <div class="ts-header is-big is-heavy">{{ $t('projects.github.header') }}</div>
+    <h2 class="ts-header is-big is-heavy">{{ $t('projects.github.header') }}</h2>
     <GitHubAccountTabs v-model="activeTab" :accounts="githubAccounts" />
 
-    <div v-if="isInitialLoading" class="ts-content is-center-aligned has-top-spaced">
+    <div v-if="isInitialLoading" class="ts-content is-center-aligned has-top-spaced" role="status" aria-live="polite">
       <div class="ts-loader"></div>
       <div class="ts-text is-secondary">{{ $t('projects.github.loading', { tab: activeAccount.label }) }}</div>
     </div>
 
-    <div v-else-if="currentError && !currentProjects.length" class="ts-content is-center-aligned has-top-spaced">
+    <div v-else-if="currentError && !currentProjects.length" class="ts-content is-center-aligned has-top-spaced" role="alert">
       <div class="ts-text is-warning">
         <div class="ts-icon is-wrench-icon"></div>
-        <div class="ts-header is-large">{{ $t('projects.github.apiErrorTitle') }}</div>
+        <h3 class="ts-header is-large">{{ $t('projects.github.apiErrorTitle') }}</h3>
         <div class="ts-text is-secondary has-top-spaced-small">
           {{ $t('projects.github.apiErrorDesc') }}
         </div>

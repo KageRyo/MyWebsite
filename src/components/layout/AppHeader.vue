@@ -27,7 +27,7 @@
         <span class="ts-icon" :class="themeStore.theme === 'is-dark' ? 'is-moon-icon' : 'is-sun-icon'"></span>
       </button>
 
-      <div class="ts-select">
+      <div class="ts-select is-basic">
         <label class="visually-hidden" for="language-select">{{ t('ui.language.label') }}</label>
         <select id="language-select" v-model="locale" :aria-label="t('ui.language.label')">
           <option v-for="option in localeOptions" :key="option.key" :value="option.key">

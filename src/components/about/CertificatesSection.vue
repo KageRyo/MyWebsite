@@ -1,7 +1,7 @@
 <template>
   <div class="ts-container has-top-spaced-large">
     <!-- 證照 -->
-    <div class="ts-header is-big is-heavy">{{ $t('about.certificates.header') }}</div>
+    <h2 class="ts-header is-big is-heavy">{{ $t('about.certificates.header') }}</h2>
     <div class="ts-box has-top-spaced-small">
       <table class="ts-table">
         <thead>
