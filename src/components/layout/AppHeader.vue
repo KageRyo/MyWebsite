@@ -5,7 +5,7 @@
     </div>
 
     <div class="end">
-      <div class="ts-tab mobile:has-hidden">
+      <nav class="ts-tab mobile:has-hidden" :aria-label="t('ui.navigation.primary')">
         <router-link
           v-for="item in navItems"
           :key="item.name"
@@ -15,39 +15,35 @@
         >
           {{ item.label }}
         </router-link>
-      </div>
+      </nav>
 
       <button
         class="ts-button is-icon is-secondary"
         :title="themeStore.theme === 'is-dark' ? t('ui.theme.light') : t('ui.theme.dark')"
+        :aria-label="themeStore.theme === 'is-dark' ? t('ui.theme.light') : t('ui.theme.dark')"
         type="button"
         @click="themeStore.toggleTheme"
       >
         <span class="ts-icon" :class="themeStore.theme === 'is-dark' ? 'is-moon-icon' : 'is-sun-icon'"></span>
       </button>
 
-      <div class="ts-select" data-dropdown="select">
-        <div class="content">
-          <span class="ts-flag" :class="currentLocale.flag"></span>
-          <div class="mobile:has-hidden">{{ currentLocale.label }}</div>
-        </div>
+      <div class="ts-select">
+        <label class="visually-hidden" for="language-select">{{ t('ui.language.label') }}</label>
+        <select id="language-select" v-model="locale" :aria-label="t('ui.language.label')">
+          <option v-for="option in localeOptions" :key="option.key" :value="option.key">
+            {{ option.label }}
+          </option>
+        </select>
       </div>
 
-      <div id="select" class="ts-dropdown">
-        <button
-          v-for="option in localeOptions"
-          :key="option.key"
-          class="item"
-          :class="{ 'is-selected': locale === option.key }"
-          type="button"
-          @click="handleLanguageChange(option.key)"
-        >
-          <span class="ts-flag" :class="option.flag"></span>
-          <div>{{ option.label }}</div>
-        </button>
-      </div>
-
-      <button class="ts-button is-icon desktop+:has-hidden" type="button" @click="toggleMobileMenu">
+      <button
+        class="ts-button is-icon desktop+:has-hidden"
+        type="button"
+        aria-controls="mobile-navigation"
+        :aria-expanded="modalStore.mobileMenuVisible"
+        :aria-label="t('ui.drawer.title')"
+        @click="toggleMobileMenu"
+      >
         <span class="ts-icon is-bars-icon"></span>
       </button>
     </div>
@@ -61,18 +57,15 @@ import { useModalStore } from '../../stores/modal'
 import { useThemeStore } from '../../stores/theme'
 
 const localeOptions = [
-  { key: 'zh-TW', label: '正體中文', flag: 'is-tw-flag' },
-  { key: 'en', label: 'English', flag: 'is-america-flag' },
-  { key: 'ja', label: '日本語', flag: 'is-japan-flag' }
+  { key: 'zh-TW', label: '正體中文' },
+  { key: 'en', label: 'English' },
+  { key: 'ja', label: '日本語' }
 ]
 
 const themeStore = useThemeStore()
 const modalStore = useModalStore()
 const { t, locale } = useI18n({ useScope: 'global' })
 
-const currentLocale = computed(
-  () => localeOptions.find(option => option.key === locale.value) ?? localeOptions[0]
-)
 const navItems = computed(() => [
   { name: 'home', path: '/', label: t('nav.home') },
   { name: 'about', path: '/about', label: t('nav.about') },
@@ -93,7 +86,4 @@ const toggleMobileMenu = () => {
   modalStore.toggleMobileMenu()
 }
 
-const handleLanguageChange = language => {
-  locale.value = language
-}
 </script>

@@ -180,6 +180,12 @@ export default {
     },
   },
   ui: {
+    navigation: {
+      primary: 'メインナビゲーション',
+    },
+    language: {
+      label: '言語',
+    },
     theme: {
       light: 'ライトモードに切り替え',
       dark: 'ダークモードに切り替え',
