@@ -7,6 +7,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:vue/vue3-essential",
+    "plugin:vuejs-accessibility/recommended",
     "@vue/eslint-config-prettier"
   ],
   "parserOptions": {
@@ -16,6 +17,7 @@
   "plugins": ["vue"],
   "rules": {
     "vue/multi-word-component-names": "off",
+    "vuejs-accessibility/label-has-for": "off",
     "no-unused-vars": "warn",
     "no-console": "warn"
   }
