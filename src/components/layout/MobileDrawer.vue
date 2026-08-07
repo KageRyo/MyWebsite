@@ -1,14 +1,23 @@
 <template>
   <!-- 背景遮罩 -->
-  <div 
+  <div
     v-if="modalStore.mobileMenuVisible"
     class="drawer-backdrop"
     @click="modalStore.closeMobileMenu"
+    aria-hidden="true"
   ></div>
   
-  <div 
+  <div
+    id="mobile-navigation"
+    ref="drawer"
     class="ts-app-drawer is-right"
     :class="{ 'is-visible': modalStore.mobileMenuVisible }"
+    :inert="!modalStore.mobileMenuVisible"
+    :aria-hidden="!modalStore.mobileMenuVisible"
+    aria-modal="true"
+    aria-labelledby="mobile-navigation-title"
+    role="dialog"
+    @keydown="trapFocus"
   >
     <div class="content">
       <div class="ts-app-sidebar">
@@ -16,11 +25,12 @@
         <div class="ts-content is-padded">
           <div class="ts-grid is-middle-aligned">
             <div class="column">
-              <div class="ts-header is-large is-heavy is-text">{{ t('ui.drawer.title') }}</div>
+              <h2 id="mobile-navigation-title" class="ts-header is-large is-heavy is-text">{{ t('ui.drawer.title') }}</h2>
             </div>
             <div class="column is-fluid"></div>
             <div class="column">
-              <button 
+              <button
+                ref="closeButton"
                 class="ts-button is-rounded is-outline is-small"
                 @click="handleCloseClick"
                 :aria-label="t('ui.drawer.close')"
@@ -63,15 +73,20 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { useModalStore } from '../../stores/modal'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useDrawerFocus } from '../../composables/useDrawerFocus'
 
 const modalStore = useModalStore()
 const route = useRoute()
 
 const { t } = useI18n({ useScope: 'global' })
+const { drawer, closeButton, trapFocus } = useDrawerFocus(
+  toRef(modalStore, 'mobileMenuVisible'),
+  modalStore.closeMobileMenu
+)
 
 const navItems = computed(() => [
   { name: 'home', path: '/', label: t('nav.home'), icon: 'is-house-icon' },

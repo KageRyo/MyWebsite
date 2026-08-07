@@ -1,26 +1,35 @@
 <template>
   <!-- 背景遮罩 -->
-  <div 
+  <div
     v-if="modalStore.appDrawerVisible"
     class="drawer-backdrop"
     @click="modalStore.closeAppDrawer"
+    aria-hidden="true"
   ></div>
   
   <!-- 邊緣收屜 -->
-  <div 
+  <div
+    ref="drawer"
     class="ts-app-drawer is-right" 
     id="more"
     :class="{ 'is-visible': modalStore.appDrawerVisible }"
+    :inert="!modalStore.appDrawerVisible"
+    :aria-hidden="!modalStore.appDrawerVisible"
+    aria-modal="true"
+    aria-labelledby="more-title"
+    role="dialog"
+    @keydown="trapFocus"
   >
     <div class="content">
       <div class="ts-content justify-text">
         <div class="ts-grid is-middle-aligned has-bottom-spaced">
           <div class="column">
-            <div class="ts-header is-large">查看更多</div>
+            <h2 id="more-title" class="ts-header is-large">查看更多</h2>
           </div>
           <div class="column is-fluid"></div>
           <div class="column">
-            <button 
+            <button
+              ref="closeButton"
               class="ts-button is-rounded is-outline is-small"
               @click="modalStore.closeAppDrawer"
               aria-label="關閉選單"
@@ -50,7 +59,13 @@
 </template>
 
 <script setup>
+import { toRef } from 'vue'
 import { useModalStore } from '../../stores/modal'
+import { useDrawerFocus } from '../../composables/useDrawerFocus'
 
 const modalStore = useModalStore()
+const { drawer, closeButton, trapFocus } = useDrawerFocus(
+  toRef(modalStore, 'appDrawerVisible'),
+  modalStore.closeAppDrawer
+)
 </script>
