@@ -1,7 +1,7 @@
 <template>
   <div class="ts-content is-tertiary is-vertically-padded">
     <div class="ts-container">
-      <div class="ts-header is-huge is-heavy">Chien-Hsun Chang</div>
+      <h1 class="ts-header is-huge is-heavy">Chien-Hsun Chang</h1>
       <div class="ts-text is-secondary">Developer, Programmer, and Student in TAIWAN.</div>
 
       <div class="ts-grid is-relaxed has-top-spaced">
@@ -17,15 +17,15 @@
           <div class="ts-box mobile:ts-content">
             <div class="ts-content is-secondary">
               <!-- 個人簡述 -->
-              <div class="ts-header is-big is-heavy">Hello👏</div>
-              <div class="ts-header is-big is-heavy">I'm Chien-Hsun Chang</div>
+              <h2 class="ts-header is-big is-heavy">Hello👏</h2>
+              <h2 class="ts-header is-big is-heavy">I'm Chien-Hsun Chang</h2>
               <div class="ts-text is-description has-bottom-spaced-small">
                 A Student && Developer from Taiwan.
                 <span class="ts-flag is-taiwan-flag"></span>
               </div>
 
               <!-- 個人資料 -->
-              <div class="ts-header is-big is-heavy">張健勳</div>
+              <h2 class="ts-header is-big is-heavy">張健勳</h2>
               <div class="ts-text is-description has-bottom-spaced-small">來自臺灣的學生開發者</div>
 
               <!-- 介紹文字 -->

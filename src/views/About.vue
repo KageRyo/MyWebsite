@@ -3,7 +3,7 @@
     <!-- 穹頂 -->
     <div class="ts-content is-tertiary is-vertically-padded">
       <div class="ts-container">
-        <div class="ts-header is-huge is-heavy">Chien-Hsun Chang</div>
+        <h1 class="ts-header is-huge is-heavy">Chien-Hsun Chang</h1>
         <div class="ts-text is-secondary">Developer, Programmer, and Student in TAIWAN.</div>
       </div>
     </div>

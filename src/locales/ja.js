@@ -186,6 +186,7 @@ export default {
     language: {
       label: '言語',
     },
+    skipToMain: 'メインコンテンツへ移動',
     theme: {
       light: 'ライトモードに切り替え',
       dark: 'ダークモードに切り替え',

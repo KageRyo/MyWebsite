@@ -185,6 +185,7 @@ export default {
     language: {
       label: '語言',
     },
+    skipToMain: '跳到主要內容',
     theme: {
       light: '切換到淺色模式',
       dark: '切換到深色模式',

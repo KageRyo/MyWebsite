@@ -7,7 +7,7 @@
         </div>
         <div class="ts-content is-secondary">
           <div class="ts-text is-description">{{ project.repository }}</div>
-          <div class="ts-header is-truncated is-heavy">{{ project.name }}</div>
+      <h3 class="ts-header is-truncated is-heavy">{{ project.name }}</h3>
           <div class="ts-text is-description text-overflow-ellipsis">
             {{ $t(project.descriptionKey) }}
           </div>

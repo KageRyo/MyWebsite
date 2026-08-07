@@ -1,6 +1,6 @@
 <template>
   <div class="tablet+:column tablet+:is-8-wide mobile:ts-content">
-    <div class="ts-header is-big is-heavy">{{ $t('contact.info.header') }}</div>
+    <h2 class="ts-header is-big is-heavy">{{ $t('contact.info.header') }}</h2>
     
     <a href="https://coderyo.com/discord" target="_blank" rel="noopener noreferrer" class="no-underline">
       <div class="ts-iconset has-top-spaced-small">

@@ -1,6 +1,6 @@
 <template>
   <div class="tablet+:column tablet+:is-8-wide mobile:ts-content">
-    <div class="ts-header is-big is-heavy">{{ $t('contact.form.header') }}</div>
+    <h2 class="ts-header is-big is-heavy">{{ $t('contact.form.header') }}</h2>
     <div class="ts-container is-very-narrow has-top-spaced-large">
       <form @submit.prevent="showEmailPreview">
         <div class="ts-grid is-relaxed is-2-columns">

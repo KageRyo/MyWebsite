@@ -13,7 +13,7 @@
         <div class="ts-box mobile:ts-content">
           <div class="ts-content is-secondary">
             <!-- 個人資料 -->
-            <div class="ts-header is-big is-heavy">Chien-Hsun Chang 張健勳</div>
+            <h2 class="ts-header is-big is-heavy">Chien-Hsun Chang 張健勳</h2>
             <div class="ts-text is-description">
               A Student && Developer from Taiwan.
               <span class="ts-flag is-taiwan-flag"></span>

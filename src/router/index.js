@@ -1,4 +1,4 @@
-import { watch } from 'vue'
+import { nextTick, watch } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import i18n from '../i18n'
 
@@ -30,8 +30,10 @@ const updateDocumentTitle = route => {
     : 'KageRyo Developer'
 }
 
-router.afterEach(to => {
+router.afterEach(async to => {
   updateDocumentTitle(to)
+  await nextTick()
+  document.querySelector('#main-content')?.focus({ preventScroll: true })
 })
 
 watch(i18n.global.locale, () => {

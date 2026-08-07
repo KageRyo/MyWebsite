@@ -1,8 +1,8 @@
 <template>
   <div class="ts-container has-top-spaced-large">
-    <div class="ts-header is-big is-heavy has-bottom-spaced-small">
+    <h2 class="ts-header is-big is-heavy has-bottom-spaced-small">
       {{ $t('projects.featured.header') }}
-    </div>
+    </h2>
     <div class="ts-grid">
       <ProjectCard
         v-for="project in featuredProjects"
