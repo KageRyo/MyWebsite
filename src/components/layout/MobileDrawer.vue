@@ -1,11 +1,12 @@
 <template>
   <!-- 背景遮罩 -->
-  <div
+  <button
     v-if="modalStore.mobileMenuVisible"
     class="drawer-backdrop"
     @click="modalStore.closeMobileMenu"
-    aria-hidden="true"
-  ></div>
+    :aria-label="t('ui.drawer.close')"
+    type="button"
+  ></button>
   
   <div
     id="mobile-navigation"

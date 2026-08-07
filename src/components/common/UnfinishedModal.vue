@@ -1,5 +1,6 @@
 <template>
   <!-- 未完成功能模態框 -->
+  <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events, vuejs-accessibility/no-static-element-interactions -->
   <dialog 
     ref="modalDialog"
     class="ts-modal" 

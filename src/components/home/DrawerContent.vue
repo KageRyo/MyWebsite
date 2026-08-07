@@ -1,11 +1,12 @@
 <template>
   <!-- 背景遮罩 -->
-  <div
+  <button
     v-if="modalStore.appDrawerVisible"
     class="drawer-backdrop"
     @click="modalStore.closeAppDrawer"
-    aria-hidden="true"
-  ></div>
+    :aria-label="t('ui.drawer.close')"
+    type="button"
+  ></button>
   
   <!-- 邊緣收屜 -->
   <div
@@ -61,9 +62,11 @@
 <script setup>
 import { toRef } from 'vue'
 import { useModalStore } from '../../stores/modal'
+import { useI18n } from 'vue-i18n'
 import { useDrawerFocus } from '../../composables/useDrawerFocus'
 
 const modalStore = useModalStore()
+const { t } = useI18n({ useScope: 'global' })
 const { drawer, closeButton, trapFocus } = useDrawerFocus(
   toRef(modalStore, 'appDrawerVisible'),
   modalStore.closeAppDrawer

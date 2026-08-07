@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events, vuejs-accessibility/no-static-element-interactions -->
   <dialog ref="dialog" class="ts-modal" aria-labelledby="email-preview-title" @cancel.prevent="close" @click="handleBackdropClick">
     <div class="content">
       <div class="ts-content has-vertically-padded">
