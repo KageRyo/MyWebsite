@@ -57,7 +57,7 @@ export default {
         male: '男',
         age: '年齡',
         education: '學歷',
-        educationDetail: '國立中正大學 資訊工程研究所 一年級',
+        educationDetail: '國立中正大學 資訊工程研究所 二年級',
         motto: '總是會在專業領域上盡自己最大能力去協助他人，用心與堅持的毅力面對人生的每一次挑戰。',
       },
     },

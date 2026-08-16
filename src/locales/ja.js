@@ -58,7 +58,7 @@ export default {
         male: '男',
         age: '年齢',
         education: '学歴',
-        educationDetail: '国立中正大学 コンピュータサイエンス研究科 1年生',
+        educationDetail: '国立中正大学 コンピュータサイエンス研究科 2年生',
         motto: '常に専門分野で最善を尽くして他者を助け、真心と粘り強さで人生のあらゆる挑戦に立ち向かいます。',
       },
     },

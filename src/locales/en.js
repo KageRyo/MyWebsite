@@ -58,7 +58,7 @@ export default {
         male: 'Male',
         age: 'Age',
         education: 'Education',
-        educationDetail: 'National Chung Cheng University, Institute of Computer Science and Information Engineering, 1st Year',
+        educationDetail: 'National Chung Cheng University, Institute of Computer Science and Information Engineering, 2nd Year',
         motto: 'Always do my best to help others in my professional field, facing every challenge in life with dedication and perseverance.',
       },
     },
