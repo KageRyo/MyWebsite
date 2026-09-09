@@ -5,7 +5,9 @@ import { fetchGitHubRepositories } from '../services/githubRepositoryService'
 
 const CACHE_DURATION = 10 * 60 * 1000
 const createAccountState = valueFactory =>
-  Object.fromEntries(githubAccounts.map(account => [account.key, valueFactory()]))
+  Object.fromEntries(
+    githubAccounts.map(account => [account.key, valueFactory()])
+  )
 
 export const useProjectStore = defineStore('projects', () => {
   const projects = ref(createAccountState(() => []))
@@ -13,8 +15,12 @@ export const useProjectStore = defineStore('projects', () => {
   const errorsByAccount = ref(createAccountState(() => null))
   const lastFetchedAt = ref(createAccountState(() => 0))
 
-  const loading = computed(() => Object.values(loadingByAccount.value).some(Boolean))
-  const error = computed(() => Object.values(errorsByAccount.value).find(Boolean) || null)
+  const loading = computed(() =>
+    Object.values(loadingByAccount.value).some(Boolean)
+  )
+  const error = computed(
+    () => Object.values(errorsByAccount.value).find(Boolean) || null
+  )
 
   const fetchProjects = async (accountKey, { force = false } = {}) => {
     const account = githubAccountsByKey[accountKey]
@@ -22,8 +28,9 @@ export const useProjectStore = defineStore('projects', () => {
       throw new Error(`Unknown GitHub account: ${accountKey}`)
     }
 
-    const isFresh = Date.now() - lastFetchedAt.value[accountKey] < CACHE_DURATION
-    if (!force && isFresh && projects.value[accountKey].length > 0) {
+    const fetchedAt = lastFetchedAt.value[accountKey]
+    const isFresh = fetchedAt > 0 && Date.now() - fetchedAt < CACHE_DURATION
+    if (!force && isFresh) {
       return projects.value[accountKey]
     }
 
@@ -44,7 +51,9 @@ export const useProjectStore = defineStore('projects', () => {
   }
 
   const fetchAllProjects = async options =>
-    Promise.allSettled(githubAccounts.map(account => fetchProjects(account.key, options)))
+    Promise.allSettled(
+      githubAccounts.map(account => fetchProjects(account.key, options))
+    )
 
   return {
     projects,
