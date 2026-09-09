@@ -59,7 +59,7 @@
               <div class="ts-wrap">
                 <a href="https://coderyo.com/discord" target="_blank" rel="noopener noreferrer" aria-label="CodeRyo Discord (opens in a new tab)"
                   class="ts-icon is-secondary is-discord-icon is-circular is-large"></a>
-                <a href="https://github.com/CodeRyoDeveloper" target="_blank" rel="noopener noreferrer" aria-label="CodeRyo GitHub (opens in a new tab)"
+                <a href="https://github.com/CodeRyoStudio" target="_blank" rel="noopener noreferrer" aria-label="CodeRyo GitHub (opens in a new tab)"
                   class="ts-icon is-secondary is-github-icon is-circular is-large"></a>
               </div>
             </div>
