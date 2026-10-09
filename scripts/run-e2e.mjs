@@ -253,6 +253,26 @@ const tests = {
     await context.close()
   },
 
+  async 'pages fit a 390px mobile screen in every language'(browser) {
+    const overflowing = []
+    for (const locale of ['zh-TW', 'en', 'ja']) {
+      const { context, page } = await newPage(browser, {
+        viewport: { width: 390, height: 844 },
+        storage: { locale }
+      })
+      for (const path of ['/', '/about', '/contact']) {
+        await page.goto(`${baseUrl}${path}`)
+        await page.locator('h1').first().waitFor()
+        const width = await page.evaluate(
+          () => document.documentElement.scrollWidth
+        )
+        if (width > 390) overflowing.push(`${locale} ${path}: ${width}px`)
+      }
+      await context.close()
+    }
+    assert.deepEqual(overflowing, [])
+  },
+
   async 'GitHub archive shows a retry state when the API is rate limited'(
     browser
   ) {
