@@ -43,6 +43,15 @@
     outline-offset: 3px;
 }
 
+/* TocasUI 5.7 依 color-scheme 切換配色，對應既有的 html.is-dark / is-light 主題類別 */
+html.is-dark {
+    color-scheme: dark;
+}
+
+html.is-light {
+    color-scheme: light;
+}
+
 html:not(.is-dark) .ts-text.is-secondary,
 html:not(.is-dark) .ts-text.is-description,
 html:not(.is-dark) .ts-content.is-secondary > p {
