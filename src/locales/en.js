@@ -137,12 +137,51 @@ export default {
   projects: {
     featured: {
       items: {
-        minxiongHydroCast: { description: 'Hydrological forecasting for Minxiong.' },
-        bybitPredict: { description: 'Predict cryptocurrency trends with Python and the Bybit API.' },
-        concentration: { description: 'A Hololive-themed concentration card game.' },
-        myWebsite: { description: 'Source code for this personal website.' },
+        kserve: {
+          title: 'KServe (CNCF)',
+          category: 'Open Source',
+          role: 'Open Source Contributor',
+          period: 'Sep 2025 – Present',
+          summary: 'Fixed a Python logging issue in KServe; the patch was merged upstream. Submitted runtimeClassName support for ServingRuntimePodSpec and WorkerSpec, including tests and CRD/OpenAPI updates.',
+        },
+        tagTwin: {
+          title: 'TAG-Twin Flood Disaster Digital Twin Platform',
+          category: 'Backend & Digital Twin',
+          role: 'Project Lead',
+          period: 'Aug 2025 – Present',
+          summary: 'Built the core backend and data platform integrating GIS data, flood simulation, risk data, evacuation routing, and Unreal Engine visualization, along with data and ML inference pipelines, APIs, and WebSocket interfaces connecting simulation, decision, and visualization modules.',
+        },
+        federatedAqi: {
+          title: 'Cross-Nation Federated AQI Platform',
+          category: 'Federated Learning & MLOps',
+          role: 'System Planning & Integration',
+          period: 'Aug – Sep 2026',
+          summary: 'Led system planning and cross-team integration for the CCU × UBM federated AQI platform, defining interfaces and handoff contracts across dataset preparation, Flower training, deployment, inference, and monitoring. Integrated the federated global model with the UBM AI Deployment Platform, including AQI inference, Grafana monitoring, end-to-end testing, and final deployment.',
+        },
+        environmentalEnforcement: {
+          title: 'AI Environmental Enforcement System',
+          category: 'Computer Vision',
+          period: 'Sep 2025 – Present',
+          summary: 'Built a CCTV event analysis pipeline with D-FINE, ByteTrack, pose analysis, VLM, and OCR. Separated GPU inference from post-processing to avoid repeated inference and deployed the system for field use.',
+        },
       },
+      status: {
+        merged: 'Merged',
+        open: 'Open',
+      },
+      privateSource: 'Source code not public',
       header: 'Featured Projects',
+    },
+    tools: {
+      header: 'Open-Source Data Engineering & Governance Tools',
+      description: 'Independent open-source tools extracted from recurring problems in preparing multi-source research data.',
+      items: {
+        releaseGuard: 'Validates dataset structure, uniqueness, cross-table relationships, temporal order, and file integrity from a config file, with GitHub Actions support and Linux, Windows, and macOS binaries.',
+        gridForge: 'Builds fixed-spec spatial grids that align point, polygon, and raster data, handling coordinate system conversion, grid IDs, merging, and validation. Published on PyPI.',
+        lineageGuard: 'A local CLI for validating artifact provenance, identity, and lineage.',
+        evidenceMatrix: 'Deterministic entity-by-source coverage audits for multi-source datasets.',
+        entityLinkage: 'Links external records to a canonical set of entities, keeping unmatched and ambiguous cases explicit instead of guessing.',
+      },
     },
     github: {
       header: 'My Open Source Projects on GitHub',

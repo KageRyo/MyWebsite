@@ -137,12 +137,51 @@ export default {
   projects: {
     featured: {
       items: {
-        minxiongHydroCast: { description: '民雄地域の水文予報ツール。' },
-        bybitPredict: { description: 'Python と Bybit API を使った暗号資産トレンド予測。' },
-        concentration: { description: 'Hololive をテーマにした神経衰弱ゲーム。' },
-        myWebsite: { description: 'この個人サイトのソースコード。' },
+        kserve: {
+          title: 'KServe (CNCF)',
+          category: 'オープンソース',
+          role: 'オープンソースコントリビューター',
+          period: '2025年9月 ~ 現在',
+          summary: 'KServe の Python ロギングの問題を修正し、パッチはアップストリームにマージされました。ServingRuntimePodSpec と WorkerSpec への runtimeClassName 対応も、テストと CRD/OpenAPI の更新を含めて提出しています。',
+        },
+        tagTwin: {
+          title: 'スマート防災デジタルツインシステム（TAG-Twin）',
+          category: 'バックエンド・デジタルツイン',
+          role: 'プロジェクトリード',
+          period: '2025年8月 ~ 現在',
+          summary: 'GIS データ、洪水シミュレーション、リスクデータ、避難経路、Unreal Engine による可視化を統合するコアバックエンドとデータ基盤を構築。シミュレーション・意思決定・可視化モジュールをつなぐデータ／ML 推論パイプライン、API、WebSocket インターフェースも開発しました。',
+        },
+        federatedAqi: {
+          title: '国際連携・連合学習による空気質分析・デプロイ基盤',
+          category: '連合学習・MLOps',
+          role: 'システム設計・統合',
+          period: '2026年8月 ~ 2026年9月',
+          summary: 'CCU × UBM の国際連携・連合学習による空気質分析・デプロイ基盤でシステム設計とチーム横断の統合を主導し、データセット準備、Flower による学習、デプロイ、推論、監視の間のインターフェースと引き継ぎ仕様を定義。連合グローバルモデルを UBM AI Deployment Platform に統合し、AQI 推論、Grafana 監視、E2E テスト、最終デプロイまで担当しました。',
+        },
+        environmentalEnforcement: {
+          title: 'AI 環境違反取締り映像解析システム',
+          category: 'コンピュータビジョン',
+          period: '2025年9月 ~ 現在',
+          summary: 'D-FINE、ByteTrack、姿勢推定、VLM、OCR を組み合わせた CCTV イベント解析パイプラインを構築。GPU 推論と後処理を分離して重複推論を避け、現場で運用できるようデプロイしました。',
+        },
       },
+      status: {
+        merged: 'マージ済み',
+        open: 'レビュー中',
+      },
+      privateSource: 'ソースコード非公開',
       header: '注目プロジェクト',
+    },
+    tools: {
+      header: 'オープンソースのデータエンジニアリング・ガバナンスツール群',
+      description: '複数ソースの研究データを整備する中で繰り返し直面した課題を、単独で使えるオープンソースツールとして切り出したものです。',
+      items: {
+        releaseGuard: '設定ファイルに基づき、データの列形式、一意性、テーブル間の関係、時系列の順序、ファイルの整合性を検証。GitHub Actions に対応し、Linux・Windows・macOS 向けのバイナリを提供しています。',
+        gridForge: '固定仕様の空間グリッドを作成し、点・面・ラスターデータを揃えて、座標系の変換、グリッド ID、データ統合と検証を行います。PyPI で公開しています。',
+        lineageGuard: '成果物の出所・識別情報・処理履歴を検証するローカル CLI。',
+        evidenceMatrix: '複数ソースのデータセットについて、エンティティごとのソース証拠のカバレッジを監査します。',
+        entityLinkage: '外部レコードを正規のエンティティ集合に対応付け、対応なしや複数候補のケースを推測せずにそのまま残します。',
+      },
     },
     github: {
       noProjects: '表示できる公開リポジトリはありません。',
