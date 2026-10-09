@@ -53,9 +53,8 @@ export default {
   about: {
     personal: {
       basic: {
-        gender: '性別',
         male: '男',
-        age: '年齡',
+        details: '性別：{gender}　年齡：{age}',
         education: '學歷',
         educationDetail: '國立中正大學 資訊工程研究所 碩士生',
         motto: '總是會在專業領域上盡自己最大能力去協助他人，用心與堅持的毅力面對人生的每一次挑戰。',
@@ -70,7 +69,6 @@ export default {
         year: '年份',
         name: '名稱',
         level: '級別',
-        number: '序號',
       },
       count: '統計筆數：{count}',
     },
@@ -95,7 +93,7 @@ export default {
             period: '2025/08 ~ 現在',
             company: '國立中正大學 / 研究助理／專案負責人',
             highlights: [
-              '帶領 4 人跨國團隊，以 FastAPI、PostgreSQL/PostGIS、Redis 與 Docker 建置淹水災害數位孿生平台。',
+              '帶領 4 人跨國團隊，以 FastAPI、PostgreSQL/PostGIS、Redis 與 Docker 建置智慧防災數位孿生系統（TAG-Twin）。',
               '開發 API、空間資料管線與 ML 推論流程，串接模擬、GIS、決策支援與視覺化。',
               '使用 GitHub Actions 建立 CI/CD、自動化部署與驗證流程。',
             ],
