@@ -325,6 +325,63 @@ const tests = {
     await context.close()
   },
 
+  async 'photos scale to their containers on desktop and mobile'(browser) {
+    const oversized = []
+    for (const viewport of [
+      { width: 1280, height: 800 },
+      { width: 390, height: 844 }
+    ]) {
+      const { context, page } = await newPage(browser, { viewport })
+      for (const path of ['/', '/about']) {
+        await page.goto(`${baseUrl}${path}`)
+        await page.locator('h1').first().waitFor()
+        const found = await page.$$eval('.ts-image img', images =>
+          images
+            .filter(
+              image =>
+                image.getBoundingClientRect().width >
+                image.parentElement.getBoundingClientRect().width + 1
+            )
+            .map(image => image.getAttribute('src'))
+        )
+        oversized.push(
+          ...found.map(src => `${viewport.width}px ${path} ${src}`)
+        )
+      }
+      await context.close()
+    }
+    assert.deepEqual(oversized, [])
+  },
+
+  async 'photos load when scrolled into view'(browser) {
+    const { context, page } = await newPage(browser)
+    const broken = []
+    for (const path of ['/', '/about']) {
+      await page.goto(`${baseUrl}${path}`)
+      await page.locator('h1').first().waitFor()
+      for (const image of await page.locator('.ts-image img').all()) {
+        await image.scrollIntoViewIfNeeded()
+        const loaded = await image
+          .evaluate(
+            element =>
+              new Promise(resolve => {
+                const done = () =>
+                  resolve(element.complete && element.naturalWidth > 0)
+                if (element.complete) done()
+                else {
+                  element.addEventListener('load', done, { once: true })
+                  element.addEventListener('error', done, { once: true })
+                }
+              })
+          )
+          .catch(() => false)
+        if (!loaded) broken.push(`${path} ${await image.getAttribute('src')}`)
+      }
+    }
+    assert.deepEqual(broken, [])
+    await context.close()
+  },
+
   async 'GitHub archive shows a retry state when the API is rate limited'(
     browser
   ) {

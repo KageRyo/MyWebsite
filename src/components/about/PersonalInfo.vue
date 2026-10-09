@@ -4,7 +4,7 @@
       <!-- 個人照片 -->
       <div class="tablet+:column is-5-wide mobile:ts-content">
         <div class="ts-image is-rounded">
-          <img src="/assets/img/chienhsun.svg" alt="Chien-Hsun Chang 個人照片">
+          <img src="/assets/img/chienhsun.webp" alt="Chien-Hsun Chang 個人照片" width="900" height="900" decoding="async">
         </div>
       </div>
 
