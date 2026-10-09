@@ -3,8 +3,7 @@ import { buildMailBody, buildMailSubject, createMailtoUrl } from './useMailto'
 
 const translations = {
   'contact.form.subjectPrefix': 'Contact message from {name}',
-  'contact.form.bodyTemplate': 'Name: {name}\nGender: {gender}\nEmail: {email}\n\nMessage:\n{message}',
-  'contact.form.male': 'Male'
+  'contact.form.bodyTemplate': 'Name: {name}\nEmail: {email}\n\nMessage:\n{message}'
 }
 
 const t = (key, values = {}) =>
@@ -14,11 +13,13 @@ const t = (key, values = {}) =>
   )
 
 describe('mailto helpers', () => {
-  const form = { name: 'Ada & Bob', gender: 'male', email: 'ada@example.com', message: '<Hello>' }
+  const form = { name: 'Ada & Bob', email: 'ada@example.com', message: '<Hello>' }
 
   it('builds translated subject and body text', () => {
     expect(buildMailSubject(t, form)).toBe('Contact message from Ada & Bob')
-    expect(buildMailBody(t, form)).toContain('Message:\n<Hello>')
+    expect(buildMailBody(t, form)).toBe(
+      'Name: Ada & Bob\nEmail: ada@example.com\n\nMessage:\n<Hello>'
+    )
   })
 
   it('encodes user content in a mailto URL', () => {
