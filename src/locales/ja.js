@@ -1,9 +1,21 @@
 export default {
   meta: {
-    home: { title: 'KageRyo Developer - ホーム' },
-    about: { title: 'KageRyo Developer - 私について' },
-    projects: { title: 'KageRyo Developer - プロジェクト' },
-    contact: { title: 'KageRyo Developer - お問い合わせ' },
+    home: {
+      title: "Chien-Hsun Chang {'|'} バックエンド・プラットフォーム・AI システム",
+      description: '国立中正大学の修士課程で学ぶ Chien-Hsun Chang のポートフォリオ。バックエンド、プラットフォーム、AI システム、MLOps、KServe への貢献、デジタルツイン、画像解析、連合学習を紹介します。',
+    },
+    about: {
+      title: 'KageRyo Developer - 私について',
+      description: 'Chien-Hsun Chang の学歴、職務経歴、スキル、オープンソースへの貢献を紹介します。',
+    },
+    projects: {
+      title: 'KageRyo Developer - プロジェクト',
+      description: 'KServe への貢献、防災デジタルツイン、AI 画像解析、連合学習などの注目プロジェクトと GitHub のオープンソース作品を紹介します。',
+    },
+    contact: {
+      title: 'KageRyo Developer - お問い合わせ',
+      description: 'メール、GitHub、LinkedIn から Chien-Hsun Chang に連絡できます。ソフトウェア開発、AI システム、オープンソースについて気軽にどうぞ。',
+    },
     notFound: { title: 'KageRyo Developer - ページが見つかりません' },
   },
   nav: {
