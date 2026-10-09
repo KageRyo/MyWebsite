@@ -143,7 +143,7 @@ export default {
       header: 'Featured Projects',
     },
     tools: {
-      header: 'Open-Source Data Engineering & Governance Tools',
+      header: 'Open-Source Data Tools',
       description: 'Independent open-source tools extracted from recurring problems in preparing multi-source research data.',
       items: {
         releaseGuard: 'Validates dataset structure, uniqueness, cross-table relationships, temporal order, and file integrity from a config file, with GitHub Actions support and Linux, Windows, and macOS binaries.',
