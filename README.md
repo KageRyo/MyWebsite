@@ -28,7 +28,7 @@ on Debian/Ubuntu, install them with `npx playwright install --with-deps chromium
 
 If you have any questions or suggestions, feel free to contact me through the following ways:
 
-- [Submit an Issue](https://github.com/KageRyo/MyWebsite/issues)
+- [Submit an Issue](https://github.com/KageRyo/kageryo-website/issues)
 - Email: kageryo@coderyo.com
 
 ## License
