@@ -1,9 +1,21 @@
 export default {
   meta: {
-    home: { title: 'KageRyo Developer - Home' },
-    about: { title: 'KageRyo Developer - About' },
-    projects: { title: 'KageRyo Developer - Projects' },
-    contact: { title: 'KageRyo Developer - Contact' },
+    home: {
+      title: "Chien-Hsun Chang {'|'} Backend & Platform Engineering, AI Systems / MLOps",
+      description: "Portfolio of Chien-Hsun Chang, a Computer Science master's student at National Chung Cheng University. Backend, platform engineering, AI systems and MLOps; featuring CNCF KServe contributions, disaster digital twins, computer vision and federated learning.",
+    },
+    about: {
+      title: 'KageRyo Developer - About',
+      description: 'Education, work experience, skills, and open-source contributions of Chien-Hsun Chang.',
+    },
+    projects: {
+      title: 'KageRyo Developer - Projects',
+      description: 'Explore selected KServe contributions, disaster digital twins, AI vision systems and federated learning projects.',
+    },
+    contact: {
+      title: 'KageRyo Developer - Contact',
+      description: 'Connect with Chien-Hsun Chang via email, GitHub or LinkedIn about software engineering, AI systems and open source.',
+    },
     notFound: { title: 'KageRyo Developer - Page Not Found' },
   },
   nav: {
