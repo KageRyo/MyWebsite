@@ -114,18 +114,18 @@ export default {
           summary: '修正 KServe 的 Python logging 問題，修補已合併至上游；並提交 ServingRuntimePodSpec 與 WorkerSpec 的 runtimeClassName 支援，包含測試與 CRD/OpenAPI 更新。',
         },
         tagTwin: {
-          title: 'TAG-Twin 淹水災害數位孿生平台',
+          title: '智慧防災數位孿生系統（TAG-Twin）',
           category: '後端與數位孿生',
           role: '專案負責人',
           period: '2025/08 ~ 現在',
           summary: '建置平台核心後端與資料平台，整合 GIS 資料、淹水模擬、風險資料、避難路線與 Unreal Engine 視覺化；並開發資料與 ML 推論管線、API 與 WebSocket 介面，串接模擬、決策與視覺化模組。',
         },
         federatedAqi: {
-          title: '跨國聯邦式 AQI 平台',
+          title: '跨國聯邦式空氣品質分析與部署平台',
           category: '聯邦學習與 MLOps',
           role: '系統規劃與整合',
           period: '2026/08 ~ 2026/09',
-          summary: '主導 CCU × UBM 聯邦式 AQI 平台的系統規劃與跨團隊整合，定義資料集準備、Flower 訓練、部署、推論與監控之間的介面與交接規範；並將聯邦全域模型整合至 UBM AI 部署平台，完成 AQI 推論、Grafana 監控、端到端測試與最終部署。',
+          summary: '主導 CCU × UBM 跨國聯邦式空氣品質分析與部署平台的系統規劃與跨團隊整合，定義資料集準備、Flower 訓練、部署、推論與監控之間的介面與交接規範；並將聯邦全域模型整合至 UBM AI 部署平台，完成 AQI 推論、Grafana 監控、端到端測試與最終部署。',
         },
         environmentalEnforcement: {
           title: 'AI 環保科技執法影像分析系統',
@@ -142,7 +142,7 @@ export default {
       header: '精選專案',
     },
     tools: {
-      header: '開源資料工具',
+      header: '開源資料工程與治理工具組',
       description: '整理多來源研究資料時反覆遇到的問題，拆分成可以獨立使用的開源工具。',
       items: {
         releaseGuard: '透過設定檔檢查資料欄位格式、唯一性、跨表關聯、時間順序與檔案完整性，整合 GitHub Actions，並提供 Linux、Windows 與 macOS 執行版本。',
