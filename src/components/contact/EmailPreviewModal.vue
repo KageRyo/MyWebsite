@@ -11,15 +11,15 @@
           {{ $t('contact.form.emailModal.desc') }}
         </p>
 
-        <div class="ts-segment is-secondary has-bottom-spaced">
+        <div class="ts-content is-secondary is-dense is-rounded has-bottom-spaced">
           <div class="ts-text is-label">{{ $t('contact.form.emailModal.recipient') }}</div>
           <div class="ts-text is-code">{{ recipient }}</div>
         </div>
-        <div class="ts-segment is-secondary has-bottom-spaced">
+        <div class="ts-content is-secondary is-dense is-rounded has-bottom-spaced">
           <div class="ts-text is-label">{{ $t('contact.form.emailModal.subject') }}</div>
           <div class="ts-text is-code">{{ subject }}</div>
         </div>
-        <div class="ts-segment is-secondary">
+        <div class="ts-content is-secondary is-dense is-rounded">
           <div class="ts-text is-label">{{ $t('contact.form.emailModal.body') }}</div>
           <div class="ts-text is-code email-body">{{ body }}</div>
         </div>
