@@ -1,5 +1,5 @@
 <template>
-  <div class="ts-container is-padd has-top-spaced-big">
+  <div class="ts-container is-padded has-top-spaced-big">
     <div class="ts-grid is-evenly-divided">
       <div class="column">
         <a href="https://www.edu.tw/News_Content.aspx?n=9E7AC85F1954DDA8&s=BB1CB6531ABFD661/" 

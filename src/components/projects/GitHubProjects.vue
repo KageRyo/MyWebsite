@@ -11,7 +11,7 @@
       tabindex="0"
     >
       <div v-if="isInitialLoading" class="ts-content is-center-aligned has-top-spaced" role="status" aria-live="polite">
-        <div class="ts-loader"></div>
+        <div class="ts-loading"></div>
         <div class="ts-text is-secondary">{{ $t('projects.github.loading', { tab: activeAccount.label }) }}</div>
       </div>
 

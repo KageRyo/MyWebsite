@@ -11,7 +11,7 @@
   <div
     id="mobile-navigation"
     ref="drawer"
-    class="ts-app-drawer is-right"
+    class="ts-app-drawer is-end"
     :class="{ 'is-visible': modalStore.mobileMenuVisible }"
     :inert="!modalStore.mobileMenuVisible"
     :aria-hidden="!modalStore.mobileMenuVisible"
@@ -32,7 +32,7 @@
             <div class="column">
               <button
                 ref="closeButton"
-                class="ts-button is-rounded is-outline is-small"
+                class="ts-button is-rounded is-outlined is-small"
                 @click="handleCloseClick"
                 :aria-label="t('ui.drawer.close')"
                 type="button"
