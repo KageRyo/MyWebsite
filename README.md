@@ -17,6 +17,10 @@ npm run dev
 The development server is available at http://localhost:3000. Before opening a
 pull request, run `npm test`, `npm run lint`, and `npm run build`.
 
+Pull requests to `main` run the same lint, test, accessibility, and build checks
+in the CI workflow with read-only permissions. Only pushes to `main` deploy the
+site to GitHub Pages.
+
 The accessibility check additionally requires the Chromium system libraries;
 on Debian/Ubuntu, install them with `npx playwright install --with-deps chromium`.
 
