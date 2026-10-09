@@ -9,6 +9,7 @@
 
     <div class="ts-container has-top-spaced-large">
       <FeaturedProjects />
+      <OpenSourceTools />
       <GitHubProjects />
     </div>
   </div>
@@ -16,5 +17,6 @@
 
 <script setup>
 import FeaturedProjects from '../components/projects/FeaturedProjects.vue'
+import OpenSourceTools from '../components/projects/OpenSourceTools.vue'
 import GitHubProjects from '../components/projects/GitHubProjects.vue'
 </script>

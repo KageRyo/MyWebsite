@@ -106,12 +106,51 @@ export default {
   projects: {
     featured: {
       items: {
-        minxiongHydroCast: { description: '民雄地區水文預報工具。' },
-        bybitPredict: { description: '使用 Python 與 Bybit API 預測加密貨幣趨勢。' },
-        concentration: { description: '以 Hololive 為主題的翻牌配對遊戲。' },
-        myWebsite: { description: '此個人網站的原始碼。' },
+        kserve: {
+          title: 'KServe (CNCF)',
+          category: '開源貢獻',
+          role: '開源貢獻者',
+          period: '2025/09 ~ 現在',
+          summary: '修正 KServe 的 Python logging 問題，修補已合併至上游；並提交 ServingRuntimePodSpec 與 WorkerSpec 的 runtimeClassName 支援，包含測試與 CRD/OpenAPI 更新。',
+        },
+        tagTwin: {
+          title: 'TAG-Twin 淹水災害數位孿生平台',
+          category: '後端與數位孿生',
+          role: '專案負責人',
+          period: '2025/08 ~ 現在',
+          summary: '建置平台核心後端與資料平台，整合 GIS 資料、淹水模擬、風險資料、避難路線與 Unreal Engine 視覺化；並開發資料與 ML 推論管線、API 與 WebSocket 介面，串接模擬、決策與視覺化模組。',
+        },
+        federatedAqi: {
+          title: '跨國聯邦式 AQI 平台',
+          category: '聯邦學習與 MLOps',
+          role: '系統規劃與整合',
+          period: '2026/08 ~ 2026/09',
+          summary: '主導 CCU × UBM 聯邦式 AQI 平台的系統規劃與跨團隊整合，定義資料集準備、Flower 訓練、部署、推論與監控之間的介面與交接規範；並將聯邦全域模型整合至 UBM AI 部署平台，完成 AQI 推論、Grafana 監控、端到端測試與最終部署。',
+        },
+        environmentalEnforcement: {
+          title: 'AI 環保科技執法影像分析系統',
+          category: '電腦視覺',
+          period: '2025/09 ~ 現在',
+          summary: '建置整合 D-FINE、ByteTrack、姿態分析、VLM 與 OCR 的 CCTV 事件分析流程；將 GPU 推論與後處理拆開以避免重複推論，系統已部署於實際場域使用。',
+        },
       },
+      status: {
+        merged: '已合併',
+        open: '審查中',
+      },
+      privateSource: '原始碼未公開',
       header: '精選專案',
+    },
+    tools: {
+      header: '開源資料工具',
+      description: '整理多來源研究資料時反覆遇到的問題，拆分成可以獨立使用的開源工具。',
+      items: {
+        releaseGuard: '透過設定檔檢查資料欄位格式、唯一性、跨表關聯、時間順序與檔案完整性，整合 GitHub Actions，並提供 Linux、Windows 與 macOS 執行版本。',
+        gridForge: '建立固定規格的空間網格，統一對齊點、面與柵格資料，處理座標系統轉換、網格識別、資料合併與驗證，並發布至 PyPI。',
+        lineageGuard: '在本機驗證產出檔案的來源、身分與處理歷程。',
+        evidenceMatrix: '盤點多來源資料中每個實體的來源證據覆蓋情況。',
+        entityLinkage: '將外部資料比對到標準實體清單，並保留無法對應或多重對應的情況，不在資料不足時自行推測。',
+      },
     },
     github: {
       noProjects: '目前沒有可顯示的公開儲存庫。',
