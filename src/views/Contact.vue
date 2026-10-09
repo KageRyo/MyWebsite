@@ -4,7 +4,7 @@
     <div class="ts-content is-tertiary is-vertically-padded">
       <div class="ts-container">
         <h1 class="ts-header is-huge is-heavy">{{ $t('contact.page.heroTitle') }}</h1>
-        <div class="ts-text is-secondary">{{ $t('contact.page.heroSubtitle') }}</div>
+        <div class="ts-text is-secondary">{{ headline }}</div>
       </div>
     </div>
     
@@ -25,6 +25,7 @@
 </template>
 
 <script setup>
+import { headline } from '../config/site'
 import ContactInfo from '../components/contact/ContactInfo.vue'
 import ContactForm from '../components/contact/ContactForm.vue'
 import LocationMap from '../components/contact/LocationMap.vue'

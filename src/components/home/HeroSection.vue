@@ -2,7 +2,7 @@
   <div class="ts-content is-tertiary is-vertically-padded">
     <div class="ts-container">
       <h1 class="ts-header is-huge is-heavy">Chien-Hsun Chang</h1>
-      <div class="ts-text is-secondary">Backend / Platform Engineer | AI Systems / MLOps</div>
+      <div class="ts-text is-secondary">{{ headline }}</div>
 
       <div class="ts-grid is-relaxed has-top-spaced">
         <!-- 個人照片 -->
@@ -90,6 +90,7 @@
 </template>
 
 <script setup>
+import { headline } from '../../config/site'
 import { useModalStore } from '../../stores/modal'
 
 // 與 About 頁相同的公開版履歷（已移除電話）
