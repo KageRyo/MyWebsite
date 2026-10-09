@@ -57,9 +57,11 @@ export default {
         male: '男',
         age: '年齡',
         education: '學歷',
-        educationDetail: '國立中正大學 資訊工程研究所 二年級',
+        educationDetail: '國立中正大學 資訊工程研究所 碩士生',
         motto: '總是會在專業領域上盡自己最大能力去協助他人，用心與堅持的毅力面對人生的每一次挑戰。',
       },
+      summary: '我目前就讀國立中正大學資訊工程研究所，專注於 Backend / Platform Engineering、AI Systems 與 MLOps。曾建置後端服務、ML 推論流程、Kubernetes 部署、CI/CD 與 Linux 基礎設施，參與 CNCF KServe 開源貢獻，也投入數位孿生、電腦視覺與聯邦學習相關專案。',
+      resumeDownload: '下載英文履歷（PDF）',
     },
     certificates: {
       header: '證照',
@@ -75,30 +77,61 @@ export default {
     resume: {
       education: {
         header: '學歷',
-        gradSchool: {
-          period: '2025~',
-          school: '國立中正大學 資訊工程研究所 / 碩士',
-        },
-        college: {
-          period: '2021~2025',
-          school: '國立臺中科技大學 智慧生產工程系 / 學士',
+        items: {
+          ccu: {
+            period: '2025/08 ~ 2027/08（預計畢業）',
+            school: '國立中正大學 資訊工程研究所 / 碩士',
+          },
+          nutc: {
+            period: '2021/09 ~ 2025/06',
+            school: '國立臺中科技大學 智慧生產工程系 / 學士',
+          },
         },
       },
       experience: {
         header: '工作經歷',
-        paia: {
-          period: '2024~2025',
-          company: 'PAIA-Tech. 帕亞科技股份有限公司 / 後端軟體開發工程師',
-          platform: 'Playful AI Arena, PAIA 帕亞學習平台',
+        items: {
+          ccuResearch: {
+            period: '2025/08 ~ 現在',
+            company: '國立中正大學 / 研究助理／專案負責人',
+            highlights: [
+              '帶領 4 人跨國團隊，以 FastAPI、PostgreSQL/PostGIS、Redis 與 Docker 建置淹水災害數位孿生平台。',
+              '開發 API、空間資料管線與 ML 推論流程，串接模擬、GIS、決策支援與視覺化。',
+              '使用 GitHub Actions 建立 CI/CD、自動化部署與驗證流程。',
+            ],
+          },
+          ccuSysadmin: {
+            period: '2025/08 ~ 現在',
+            company: '國立中正大學 / 系統管理員',
+            highlights: [
+              '維護 Linux 伺服器、GPU 工作站、Docker 環境、網路、儲存設備、SSH 存取與共用研究基礎設施。',
+            ],
+          },
+          paia: {
+            period: '2024/07 ~ 2025/06',
+            company: 'PAIA 帕亞科技股份有限公司 / 後端軟體開發實習工程師',
+            platform: 'Playful AI Arena, PAIA 帕亞學習平台',
+            highlights: [
+              '使用 Python、Django Ninja、Pydantic、PostgreSQL 與 MongoDB 開發後端服務。',
+              '實作 REST API、資料驗證、資料庫模型、日誌與錯誤處理。',
+              '撰寫單元測試與整合測試，並參與 Code Review 與 Agile/Scrum 開發流程。',
+            ],
+          },
+          codingApe: {
+            period: '2023/03 ~ 2025/06',
+            company: 'Coding APE 猿創力程式設計學校 / 程式設計講師',
+            corp: '壞主意股份有限公司(CODINGAPE CO., LTD.)',
+          },
         },
-        codingApe: {
-          period: '2023~2025',
-          company: 'Coding APE 猿創力程式設計學校 / 講師',
-          corp: '壞主意股份有限公司(CODINGAPE CO., LTD.)',
-        },
-        kaohsiung: {
-          period: '2018~2021',
-          company: '社團法人高雄市資訊培育協會 / 教學助理',
+      },
+      skills: {
+        header: '技能',
+        groups: {
+          languages: '程式語言',
+          backend: '後端與資料',
+          aiml: 'AI / ML',
+          platform: '平台與 MLOps',
+          digitalIc: '數位 IC（課程實作）',
         },
       },
     },

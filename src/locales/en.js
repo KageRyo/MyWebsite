@@ -58,9 +58,11 @@ export default {
         male: 'Male',
         age: 'Age',
         education: 'Education',
-        educationDetail: 'National Chung Cheng University, Institute of Computer Science and Information Engineering, 2nd Year',
+        educationDetail: "National Chung Cheng University, Institute of Computer Science and Information Engineering, Master's Student",
         motto: 'Always do my best to help others in my professional field, facing every challenge in life with dedication and perseverance.',
       },
+      summary: "I'm a master's student in Computer Science and Information Engineering at National Chung Cheng University, focusing on backend and platform engineering, AI systems, and MLOps. I have built backend services, ML inference workflows, Kubernetes deployments, CI/CD pipelines, and Linux infrastructure, contributed to CNCF KServe, and worked on digital twin, computer vision, and federated learning projects.",
+      resumeDownload: 'Download Resume (PDF)',
     },
     certificates: {
       header: 'Certificates',
@@ -76,30 +78,61 @@ export default {
     resume: {
       education: {
         header: 'Education',
-        gradSchool: {
-          period: '2025~',
-          school: 'National Chung Cheng University, Institute of Computer Science and Information Engineering / Master',
-        },
-        college: {
-          period: '2021~2025',
-          school: 'National Taichung University of Science and Technology, Department of Intelligent Production Engineering / Bachelor',
+        items: {
+          ccu: {
+            period: 'Aug 2025 – Aug 2027 (expected)',
+            school: 'National Chung Cheng University / M.S. in Computer Science and Information Engineering',
+          },
+          nutc: {
+            period: 'Sep 2021 – Jun 2025',
+            school: 'National Taichung University of Science and Technology / B.Eng. in Intelligent Production Engineering',
+          },
         },
       },
       experience: {
         header: 'Work Experience',
-        paia: {
-          period: '2024~2025',
-          company: 'PAIA-Tech Co., Ltd. / Backend Software Engineer',
-          platform: 'Playful AI Arena',
+        items: {
+          ccuResearch: {
+            period: 'Aug 2025 – Present',
+            company: 'National Chung Cheng University / Research Assistant / Project Lead',
+            highlights: [
+              'Lead a 4-member international team building a flood disaster digital twin platform with FastAPI, PostgreSQL/PostGIS, Redis, and Docker.',
+              'Build APIs, spatial data pipelines, and ML inference workflows connecting simulation, GIS, decision support, and visualization.',
+              'Set up CI/CD, automated deployment, and validation workflows with GitHub Actions.',
+            ],
+          },
+          ccuSysadmin: {
+            period: 'Aug 2025 – Present',
+            company: 'National Chung Cheng University / System Administrator',
+            highlights: [
+              'Maintain Linux servers, GPU workstations, Docker environments, networking, storage, SSH access, and shared research infrastructure.',
+            ],
+          },
+          paia: {
+            period: 'Jul 2024 – Jun 2025',
+            company: 'PAIA Technology Co., Ltd. / Backend Software Engineer Intern',
+            platform: 'Playful AI Arena',
+            highlights: [
+              'Developed backend services with Python, Django Ninja, Pydantic, PostgreSQL, and MongoDB.',
+              'Built REST APIs, validation logic, database models, logging, and error handling.',
+              'Wrote unit and integration tests and participated in code review and Agile/Scrum development.',
+            ],
+          },
+          codingApe: {
+            period: 'Mar 2023 – Jun 2025',
+            company: 'Coding APE Programming School / Programming Instructor',
+            corp: 'CODINGAPE CO., LTD.',
+          },
         },
-        codingApe: {
-          period: '2023~2025',
-          company: 'Coding APE Programming School / Lecturer',
-          corp: 'CODINGAPE CO., LTD.',
-        },
-        kaohsiung: {
-          period: '2018~2021',
-          company: 'Kaohsiung Information Training Association / Teaching Assistant',
+      },
+      skills: {
+        header: 'Skills',
+        groups: {
+          languages: 'Languages',
+          backend: 'Backend & Data',
+          aiml: 'AI / ML',
+          platform: 'Platform / MLOps',
+          digitalIc: 'Digital IC (coursework)',
         },
       },
     },

@@ -45,9 +45,19 @@
               </div>
             </div>
 
+            <p>{{ $t('about.personal.summary') }}</p>
+
             <span class="ts-text">
               {{ $t('about.personal.basic.motto') }}
             </span>
+
+            <!-- 公開版履歷 -->
+            <div class="has-top-spaced">
+              <a :href="resumePdfUrl" class="ts-button is-start-icon" download>
+                <span class="ts-icon is-download-icon"></span>
+                {{ $t('about.personal.resumeDownload') }}
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -57,6 +67,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { resumePdfUrl } from '../../config/resume'
 
 // 計算當前年齡
 const currentAge = computed(() => {
