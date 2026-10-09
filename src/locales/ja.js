@@ -54,15 +54,14 @@ export default {
   about: {
     personal: {
       basic: {
-        gender: '性別',
-        male: '男',
-        age: '年齢',
+        male: '男性',
+        details: '性別：{gender}・年齢：{age}',
         education: '学歴',
         educationDetail: '国立中正大学 コンピュータサイエンス研究科 修士課程在籍',
         motto: '常に専門分野で最善を尽くして他者を助け、真心と粘り強さで人生のあらゆる挑戦に立ち向かいます。',
       },
       summary: '国立中正大学の情報工学研究科修士課程に在籍し、バックエンド／プラットフォームエンジニアリング、AI システム、MLOps に取り組んでいます。バックエンドサービス、ML 推論ワークフロー、Kubernetes デプロイ、CI/CD パイプライン、Linux インフラの構築経験があり、CNCF KServe へのコントリビュートのほか、デジタルツイン、コンピュータビジョン、連合学習のプロジェクトにも携わっています。',
-      resumeDownload: '英語版の履歴書をダウンロード（PDF）',
+      resumeDownload: '英語版履歴書（PDF）',
     },
     certificates: {
       header: '資格',
@@ -71,7 +70,6 @@ export default {
         year: '年',
         name: '名称',
         level: 'レベル',
-        number: '番号',
       },
       count: '合計：{count}',
     },
@@ -96,7 +94,7 @@ export default {
             period: '2025年8月 ~ 現在',
             company: '国立中正大学 / リサーチアシスタント・プロジェクトリード',
             highlights: [
-              '4名の国際チームを率い、FastAPI、PostgreSQL/PostGIS、Redis、Docker で洪水災害デジタルツイン基盤を構築。',
+              '4名の国際チームを率い、FastAPI、PostgreSQL/PostGIS、Redis、Docker でスマート防災デジタルツインシステム（TAG-Twin）を構築。',
               'シミュレーション、GIS、意思決定支援、可視化をつなぐ API、空間データパイプライン、ML 推論ワークフローを開発。',
               'GitHub Actions で CI/CD、自動デプロイ、検証ワークフローを構築。',
             ],
