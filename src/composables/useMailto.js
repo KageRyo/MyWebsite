@@ -3,16 +3,12 @@ export const CONTACT_EMAIL = 'kageryo@coderyo.com'
 export const buildMailSubject = (t, form) =>
   t('contact.form.subjectPrefix', { name: form.name })
 
-export const buildMailBody = (t, form) => {
-  const genderKey = `contact.form.${form.gender}`
-
-  return t('contact.form.bodyTemplate', {
+export const buildMailBody = (t, form) =>
+  t('contact.form.bodyTemplate', {
     name: form.name,
-    gender: t(genderKey),
     email: form.email,
     message: form.message
   })
-}
 
 export const createMailtoUrl = ({ recipient = CONTACT_EMAIL, subject, body }) =>
   `mailto:${encodeURIComponent(recipient)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
