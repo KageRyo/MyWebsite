@@ -1,9 +1,21 @@
 export default {
   meta: {
-    home: { title: 'KageRyo Developer - 首頁' },
-    about: { title: 'KageRyo Developer - 關於我' },
-    projects: { title: 'KageRyo Developer - 作品集' },
-    contact: { title: 'KageRyo Developer - 聯絡我' },
+    home: {
+      title: "張健勳 Chien-Hsun Chang {'|'} Backend / Platform Engineer · AI Systems / MLOps",
+      description: '張健勳的個人網站與作品集。國立中正大學資工所碩士生，專注 Backend、Platform、AI Systems 與 MLOps；展示 KServe 開源貢獻、智慧防災數位孿生系統、AI 環保科技執法影像分析系統與跨國聯邦式空氣品質分析與部署平台。',
+    },
+    about: {
+      title: 'KageRyo Developer - 關於我',
+      description: '了解張健勳的學歷、後端與平台開發經歷、技能及開源貢獻。',
+    },
+    projects: {
+      title: 'KageRyo Developer - 作品集',
+      description: '精選 KServe 開源貢獻、智慧防災數位孿生系統（TAG-Twin）、AI 環保科技執法影像分析系統與跨國聯邦式空氣品質分析與部署平台等專案，並瀏覽 GitHub 開源作品。',
+    },
+    contact: {
+      title: 'KageRyo Developer - 聯絡我',
+      description: '透過電子郵件、GitHub 或 LinkedIn 聯絡張健勳，交流後端、AI 系統及開源相關話題。',
+    },
     notFound: { title: 'KageRyo Developer - 找不到頁面' },
   },
   nav: {
