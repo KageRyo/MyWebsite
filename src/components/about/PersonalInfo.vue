@@ -20,8 +20,24 @@
             </div>
             <div class="ts-text is-description">來自臺灣的學生開發者</div>
 
-            <!-- 學歷 -->
-            <div class="ts-iconset has-top-spaced has-bottom-spaced">
+            <!-- 基本資訊 -->
+            <div class="ts-iconset has-top-spaced">
+              <span class="ts-icon is-user-large-icon"></span>
+              <div class="content">
+                <div class="title">{{ $t('about.personal.basic.gender') }}</div>
+                <div class="text">{{ $t('about.personal.basic.male') }}</div>
+              </div>
+            </div>
+
+            <div class="ts-iconset has-top-spaced-small">
+              <span class="ts-icon is-calendar-days-icon"></span>
+              <div class="content">
+                <div class="title">{{ $t('about.personal.basic.age') }}</div>
+                <div class="text">{{ currentAge }}</div>
+              </div>
+            </div>
+
+            <div class="ts-iconset has-top-spaced-small has-bottom-spaced">
               <span class="ts-icon is-graduation-cap-icon"></span>
               <div class="content">
                 <div class="title">{{ $t('about.personal.basic.education') }}</div>
@@ -41,12 +57,6 @@
                 <span class="ts-icon is-download-icon"></span>
                 {{ $t('about.personal.resumeDownload') }}
               </a>
-            </div>
-
-            <!-- 次要的基本資料 -->
-            <div class="ts-divider has-top-spaced"></div>
-            <div class="ts-text is-description is-small has-top-spaced-small">
-              {{ $t('about.personal.basic.details', { gender: $t('about.personal.basic.male'), age: currentAge }) }}
             </div>
           </div>
         </div>

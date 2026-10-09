@@ -54,8 +54,9 @@ export default {
   about: {
     personal: {
       basic: {
+        gender: 'Gender',
         male: 'Male',
-        details: 'Gender: {gender} · Age: {age}',
+        age: 'Age',
         education: 'Education',
         educationDetail: "National Chung Cheng University, Institute of Computer Science and Information Engineering, Master's Student",
         motto: 'Always do my best to help others in my professional field, facing every challenge in life with dedication and perseverance.',
@@ -70,6 +71,7 @@ export default {
         year: 'Year',
         name: 'Name',
         level: 'Level',
+        number: 'Number',
       },
       count: 'Total: {count}',
     },
