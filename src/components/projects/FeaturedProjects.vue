@@ -3,10 +3,10 @@
     <h2 class="ts-header is-big is-heavy has-bottom-spaced-small">
       {{ $t('projects.featured.header') }}
     </h2>
-    <div class="ts-grid">
+    <div class="ts-grid is-relaxed">
       <ProjectCard
         v-for="project in featuredProjects"
-        :key="project.repository"
+        :key="project.id"
         :project="project"
       />
     </div>
