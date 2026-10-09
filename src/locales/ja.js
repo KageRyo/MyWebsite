@@ -2,7 +2,7 @@ export default {
   meta: {
     home: {
       title: "Chien-Hsun Chang {'|'} バックエンド・プラットフォーム・AI システム",
-      description: '国立中正大学の修士課程で学ぶ Chien-Hsun Chang のポートフォリオ。バックエンド、プラットフォーム、AI システム、MLOps、KServe への貢献、デジタルツイン、画像解析、連合学習を紹介します。',
+      description: '国立中正大学の修士課程で学ぶ Chien-Hsun Chang のポートフォリオ。バックエンド、プラットフォーム、AI システム、MLOps、KServe へのコントリビュート、スマート防災デジタルツイン、AI 映像解析、国際連携の連合学習を紹介します。',
     },
     about: {
       title: 'KageRyo Developer - 私について',
@@ -10,7 +10,7 @@ export default {
     },
     projects: {
       title: 'KageRyo Developer - プロジェクト',
-      description: 'KServe への貢献、防災デジタルツイン、AI 画像解析、連合学習などの注目プロジェクトと GitHub のオープンソース作品を紹介します。',
+      description: 'KServe へのコントリビュート、スマート防災デジタルツインシステム（TAG-Twin）、AI 環境違反取締り映像解析システム、国際連携・連合学習による空気質分析・デプロイ基盤などの注目プロジェクトと GitHub のオープンソース作品を紹介します。',
     },
     contact: {
       title: 'KageRyo Developer - お問い合わせ',
