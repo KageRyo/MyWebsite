@@ -91,9 +91,7 @@
 
 <script setup>
 import { useModalStore } from '../../stores/modal'
-
-// 與 About 頁相同的公開版履歷（已移除電話）
-const resumePdfUrl = '/resume/Chien-Hsun_Chang_Resume.pdf'
+import { resumePdfUrl } from '../../config/resume'
 
 const modalStore = useModalStore()
 </script>
