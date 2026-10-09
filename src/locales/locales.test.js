@@ -38,3 +38,12 @@ describe('home resume link', () => {
     expect(existsSync(file)).toBe(true)
   })
 })
+
+describe('Japanese availability line', () => {
+  it("explains Taiwan's R&D Substitute Service for Japanese readers", () => {
+    const { availability } = ja.home.hero
+
+    expect(availability).toMatch(/台湾の研究開発代替役（[^）]*兵役[^）]*）/)
+    expect(availability).toContain('研究開発')
+  })
+})
