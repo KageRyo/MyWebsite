@@ -20,6 +20,10 @@ pull request, run `npm test`, `npm run lint`, and `npm run build`.
 The accessibility check additionally requires the Chromium system libraries;
 on Debian/Ubuntu, install them with `npx playwright install --with-deps chromium`.
 
+`npm run test:e2e` runs browser interaction tests for navigation, language,
+theme, drawers, and the GitHub archive tabs against a mocked GitHub API. It needs
+the same Chromium setup as the accessibility check.
+
 ## Contact Me
 
 If you have any questions or suggestions, feel free to contact me through the following ways:
