@@ -1,34 +1,36 @@
 <template>
   <div class="ts-container has-top-spaced-large">
-    <!-- 證照 -->
-    <h2 class="ts-header is-big is-heavy">{{ $t('about.certificates.header') }}</h2>
-    <div class="ts-box has-top-spaced-small">
-      <table class="ts-table">
-        <thead>
-          <tr>
-            <th>{{ $t('about.certificates.table.index') }}</th>
-            <th>{{ $t('about.certificates.table.year') }}</th>
-            <th>{{ $t('about.certificates.table.name') }}</th>
-            <th>{{ $t('about.certificates.table.level') }}</th>
-            <th class="mobile:has-hidden">{{ $t('about.certificates.table.number') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(cert, index) in certificates" :key="index">
-            <td>{{ index + 1 }}</td>
-            <td>{{ cert.year }}</td>
-            <td>{{ cert.name }}</td>
-            <td>{{ cert.level || '' }}</td>
-            <td class="mobile:has-hidden">{{ cert.number || '' }}</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th :colspan="5">{{ $t('about.certificates.count', { count: certificates.length }) }}</th>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+    <!-- 證照（預設收合） -->
+    <details class="ts-accordion">
+      <summary>
+        <h2 class="ts-header is-big is-heavy certificates-title">{{ $t('about.certificates.header') }}</h2>
+      </summary>
+      <div class="ts-box has-top-spaced-small">
+        <table class="ts-table">
+          <thead>
+            <tr>
+              <th>{{ $t('about.certificates.table.index') }}</th>
+              <th>{{ $t('about.certificates.table.year') }}</th>
+              <th>{{ $t('about.certificates.table.name') }}</th>
+              <th>{{ $t('about.certificates.table.level') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(cert, index) in certificates" :key="index">
+              <td>{{ index + 1 }}</td>
+              <td>{{ cert.year }}</td>
+              <td>{{ cert.name }}</td>
+              <td>{{ cert.level || '' }}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th :colspan="4">{{ $t('about.certificates.count', { count: certificates.length }) }}</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </details>
   </div>
 </template>
 
@@ -40,62 +42,58 @@ const certificates = ref([
   { 
     year: '2017', 
     name: 'TQC+ 基礎物件導向程式語言 Java6', 
-    level: '專業級', 
-    number: '2321170800001350' 
+    level: '專業級' 
   },
   { 
     year: '2018', 
     name: 'Certiport IC3 Living Online', 
-    level: '', 
-    number: '' 
+    level: '' 
   },
   { 
     year: '2018', 
     name: 'Certiport IC3 Key Applications', 
-    level: '', 
-    number: '' 
+    level: '' 
   },
   { 
     year: '2018', 
     name: 'Certiport IC3 Computing Fundamentals', 
-    level: '', 
-    number: '' 
+    level: '' 
   },
   { 
     year: '2018', 
     name: 'Certiport IC3 GS5', 
-    level: '', 
-    number: 'XvUz-XMNe' 
+    level: '' 
   },
   { 
     year: '2019', 
     name: 'TQC+ 基礎行動裝置應用程式設計 Android6', 
-    level: '專業級', 
-    number: '232191200002100' 
+    level: '專業級' 
   },
   { 
     year: '2019', 
     name: '勞動部勞動力發展署技能檢定中心 電腦軟體應用', 
-    level: '丙級', 
-    number: '118-852929' 
+    level: '丙級' 
   },
   { 
     year: '2019', 
     name: '勞動部勞動力發展署技能檢定中心 電腦硬體裝修', 
-    level: '丙級', 
-    number: '120-279051' 
+    level: '丙級' 
   },
   { 
     year: '2020', 
     name: '勞動部勞動力發展署技能檢定中心 電腦硬體裝修', 
-    level: '乙級', 
-    number: '120-056354' 
+    level: '乙級' 
   },
   { 
     year: '2021', 
-    name: 'Mircosoft Certified Azure AI Fundamentals', 
-    level: '', 
-    number: 'yyC5-DwWu' 
+    name: 'Microsoft Certified Azure AI Fundamentals', 
+    level: '' 
   }
 ])
 </script>
+
+<style scoped>
+.certificates-title {
+  display: inline;
+}
+</style>
