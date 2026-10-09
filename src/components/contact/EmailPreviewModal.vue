@@ -23,8 +23,8 @@
           <div class="ts-text is-label">{{ $t('contact.form.emailModal.body') }}</div>
           <div class="ts-text is-code email-body">{{ body }}</div>
         </div>
-        <p v-if="copyStatus" class="ts-text is-secondary has-top-spaced-small" role="status">
-          {{ copyStatus }}
+        <p v-if="status" class="ts-text is-secondary has-top-spaced-small" role="status">
+          {{ status }}
         </p>
       </div>
 
@@ -70,7 +70,7 @@ const props = defineProps({
 const emit = defineEmits(['update:visible'])
 const { t } = useI18n({ useScope: 'global' })
 const dialog = ref(null)
-const copyStatus = ref('')
+const status = ref('')
 
 const mailtoUrl = computed(() =>
   createMailtoUrl({ recipient: props.recipient, subject: props.subject, body: props.body })
@@ -79,7 +79,7 @@ const mailtoUrl = computed(() =>
 watch(
   () => props.visible,
   visible => {
-    copyStatus.value = ''
+    status.value = ''
     if (visible) {
       dialog.value?.showModal()
     } else if (dialog.value?.open) {
@@ -92,15 +92,16 @@ const emailContent = computed(() => `${props.recipient}\n${props.subject}\n\n${p
 
 const copyEmailContent = async () => {
   const copied = await copyText(emailContent.value)
-  copyStatus.value = copied
+  status.value = copied
     ? t('contact.form.emailModal.copySuccess')
     : t('contact.form.emailModal.copyFail')
 }
 
 const close = () => emit('update:visible', false)
 
+// mailto 無法得知郵件程式是否真的開啟，保留內容讓使用者可以改用複製
 const openMailClient = () => {
-  close()
+  status.value = t('contact.form.mailOpened')
 }
 
 const handleBackdropClick = event => {

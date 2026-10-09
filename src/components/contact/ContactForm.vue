@@ -3,40 +3,16 @@
     <h2 class="ts-header is-big is-heavy">{{ $t('contact.form.header') }}</h2>
     <div class="ts-container is-very-narrow has-top-spaced-large">
       <form @submit.prevent="showEmailPreview">
-        <div class="ts-grid is-relaxed is-2-columns">
-          <div class="column">
-            <label for="contact-name" class="ts-text is-label">{{ $t('contact.form.name') }}</label>
-            <div class="ts-input is-underlined is-fluid has-top-spaced">
-              <input
-                id="contact-name"
-                v-model="form.name"
-                type="text"
-                autocomplete="name"
-                :placeholder="$t('contact.form.namePlaceholder')"
-                required
-              >
-            </div>
-          </div>
-
-          <fieldset class="column contact-fieldset">
-            <legend class="ts-text is-label">{{ $t('contact.form.gender') }}</legend>
-            <div class="has-flex-center">
-              <div class="ts-wrap has-top-spaced">
-                <label class="ts-radio">
-                  <input v-model="form.gender" name="gender" type="radio" value="male">
-                  {{ $t('contact.form.male') }}
-                </label>
-                <label class="ts-radio">
-                  <input v-model="form.gender" name="gender" type="radio" value="female">
-                  {{ $t('contact.form.female') }}
-                </label>
-                <label class="ts-radio">
-                  <input v-model="form.gender" name="gender" type="radio" value="other">
-                  {{ $t('contact.form.other') }}
-                </label>
-              </div>
-            </div>
-          </fieldset>
+        <label for="contact-name" class="ts-text is-label">{{ $t('contact.form.name') }}</label>
+        <div class="ts-input is-underlined is-fluid has-top-spaced">
+          <input
+            id="contact-name"
+            v-model="form.name"
+            type="text"
+            autocomplete="name"
+            :placeholder="$t('contact.form.namePlaceholder')"
+            required
+          >
         </div>
 
         <label for="contact-email" class="ts-text is-label has-top-spaced-large">{{ $t('contact.form.email') }}</label>
@@ -61,7 +37,15 @@
           ></textarea>
         </div>
 
-        <button class="ts-button is-fluid has-vertically-spaced-large" type="submit">
+        <p id="contact-form-helper" class="ts-text is-description has-top-spaced-large">
+          {{ $t('contact.form.helper') }}
+        </p>
+        <button
+          class="ts-button is-fluid is-start-icon has-top-spaced has-bottom-spaced-large"
+          type="submit"
+          aria-describedby="contact-form-helper"
+        >
+          <span class="ts-icon is-envelope-open-text-icon"></span>
           {{ $t('contact.form.send') }}
         </button>
       </form>
@@ -83,7 +67,7 @@ import EmailPreviewModal from './EmailPreviewModal.vue'
 import { buildMailBody, buildMailSubject, CONTACT_EMAIL } from '../../composables/useMailto'
 
 const { t } = useI18n({ useScope: 'global' })
-const form = reactive({ name: '', gender: 'male', email: '', message: '' })
+const form = reactive({ name: '', email: '', message: '' })
 const modalVisible = ref(false)
 
 const emailContent = computed(() => ({
@@ -97,11 +81,3 @@ const showEmailPreview = () => {
 }
 </script>
 
-<style scoped>
-.contact-fieldset {
-  min-inline-size: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-</style>
