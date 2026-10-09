@@ -18,7 +18,11 @@ export default {
   },
   home: {
     hero: {
-      introduction: "Currently a graduate student, I like to create small projects in my free time, most of which are open-source repos. Feel free to exchange ideas. ヾ(*´∀ ˋ*)ﾉ",
+      introduction: "Hi! I'm Chien-Hsun, a master's student in Computer Science and Information Engineering at National Chung Cheng University. I enjoy building small tools, contributing to open source, and working on backend platforms, AI systems, and MLOps. Explore my projects, and feel free to connect! ヾ(*´∀ ˋ*)ﾉ",
+      academic: 'M.S. student at National Chung Cheng University · Expected Aug 2027',
+      availability: 'Available for 2027 pre-employment programs and R&D Substitute Service',
+      viewProjects: 'View Projects',
+      downloadResume: 'Resume (PDF)',
       seeMore: 'See More',
     },
     quote: {
@@ -37,17 +41,12 @@ export default {
     },
     infoCards: {
       intro: "Yes, that's me, a developer from Taiwan, currently studying at {ccu} in the {cs}.",
-      learningFocus: "My learning focus involves software-hardware integration, full-stack development, and artificial intelligence. If you'd like to know more about me, feel free to visit {about} or {projects}.",
+      learningFocus: 'My focus is backend and data services, Linux/Kubernetes platforms, ML inference, and digital-twin integration. See {about} and {projects} for practical examples.',
       links: {
         ccu: 'National Chung Cheng University',
         cs: 'Department of Computer Science and Engineering',
         about: 'About Me',
         projects: 'Projects',
-      },
-      codeRyo: {
-        header: 'CodeRyo Studio',
-        description: `Together with a few like-minded friends, we established the CodeRyo team. We are dedicated to server services and intelligent financial transactions. Our slogan, 
-        "Making the future more than just the future," reflects our aspiration to contribute to the information field and the open-source community while enhancing our own capabilities.`,
       },
     },
   },

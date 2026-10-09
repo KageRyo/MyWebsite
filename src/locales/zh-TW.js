@@ -18,7 +18,11 @@ export default {
   },
   home: {
     hero: {
-      introduction: '目前是研究生一枚，有空的時候會想一些小東西來做，基本上全部都會是開源的Repo，歡迎互相交流交流。 ヾ(*´∀ ˋ*)ﾉ',
+      introduction: '嗨！我是健勳，目前就讀國立中正大學資訊工程研究所。平常喜歡開發小工具、參與開源，也投入 Backend／Platform、AI Systems 與 MLOps 相關的研究和系統整合。歡迎逛逛我的專案，一起交流！ヾ(*´∀ ˋ*)ﾉ',
+      academic: '國立中正大學資工所碩士生｜預計 2027 年 8 月畢業',
+      availability: '可配合 2027 預聘與研發替代役',
+      viewProjects: '查看作品集',
+      downloadResume: '英文履歷（PDF）',
       seeMore: '查看更多',
     },
     quote: {
@@ -37,16 +41,12 @@ export default {
     },
     infoCards: {
       intro: '是的沒錯，就是我本人，來自臺灣的開發者，目前就讀 {ccu} 的 {cs}。',
-      learningFocus: '目前學習方向涉及軟硬體整合、前後端開發與人工智慧，如果對我想要有進一步的了解歡迎到 {about} 或 {projects} 看看。',
+      learningFocus: '目前主要投入後端與資料服務、Linux／Kubernetes 平台、AI 模型推論與數位孿生系統整合，如果想了解實際成果，歡迎到 {about} 或 {projects} 看看。',
       links: {
         ccu: '國立中正大學',
         cs: '資訊工程研究所',
         about: '關於我',
         projects: '作品集',
-      },
-      codeRyo: {
-        header: 'CodeRyo Studio',
-        description: '我和幾位志同道合的好友共同成立了 CodeRyo 團隊，我們致力於伺服器服務以及智慧化金融交易等，\n        並將「使未來不只是未來。」訂為我們的標語，期望能對資訊領域以及開源社群有所貢獻，並增強自我能力。',
       },
     },
   },
