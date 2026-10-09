@@ -54,13 +54,14 @@ export default {
   about: {
     personal: {
       basic: {
-        gender: '性別',
-        male: '男',
-        age: '年齢',
+        male: '男性',
+        details: '性別：{gender}・年齢：{age}',
         education: '学歴',
-        educationDetail: '国立中正大学 コンピュータサイエンス研究科 2年生',
+        educationDetail: '国立中正大学 コンピュータサイエンス研究科 修士課程在籍',
         motto: '常に専門分野で最善を尽くして他者を助け、真心と粘り強さで人生のあらゆる挑戦に立ち向かいます。',
       },
+      summary: '国立中正大学の情報工学研究科修士課程に在籍し、バックエンド／プラットフォームエンジニアリング、AI システム、MLOps に取り組んでいます。バックエンドサービス、ML 推論ワークフロー、Kubernetes デプロイ、CI/CD パイプライン、Linux インフラの構築経験があり、CNCF KServe へのコントリビュートのほか、デジタルツイン、コンピュータビジョン、連合学習のプロジェクトにも携わっています。',
+      resumeDownload: '英語版履歴書（PDF）',
     },
     certificates: {
       header: '資格',
@@ -69,37 +70,67 @@ export default {
         year: '年',
         name: '名称',
         level: 'レベル',
-        number: '番号',
       },
       count: '合計：{count}',
     },
     resume: {
       education: {
         header: '学歴',
-        gradSchool: {
-          period: '2025~',
-          school: '国立中正大学 コンピュータサイエンス研究科 / 修士',
-        },
-        college: {
-          period: '2021~2025',
-          school: '国立台中科技大学 インテリジェント生産工学科 / 学士',
+        items: {
+          ccu: {
+            period: '2025年8月 ~ 2027年8月（修了予定）',
+            school: '国立中正大学 コンピュータサイエンス研究科 / 修士',
+          },
+          nutc: {
+            period: '2021年9月 ~ 2025年6月',
+            school: '国立台中科技大学 インテリジェント生産工学科 / 学士',
+          },
         },
       },
       experience: {
         header: '職務経歴',
-        paia: {
-          period: '2024~2025',
-          company: 'PAIA-Tech株式会社 / バックエンドソフトウェアエンジニア',
-          platform: 'Playful AI Arena, PAIA学習プラットフォーム',
+        items: {
+          ccuResearch: {
+            period: '2025年8月 ~ 現在',
+            company: '国立中正大学 / リサーチアシスタント・プロジェクトリード',
+            highlights: [
+              '4名の国際チームを率い、FastAPI、PostgreSQL/PostGIS、Redis、Docker でスマート防災デジタルツインシステム（TAG-Twin）を構築。',
+              'シミュレーション、GIS、意思決定支援、可視化をつなぐ API、空間データパイプライン、ML 推論ワークフローを開発。',
+              'GitHub Actions で CI/CD、自動デプロイ、検証ワークフローを構築。',
+            ],
+          },
+          ccuSysadmin: {
+            period: '2025年8月 ~ 現在',
+            company: '国立中正大学 / システム管理者',
+            highlights: [
+              'Linux サーバー、GPU ワークステーション、Docker 環境、ネットワーク、ストレージ、SSH アクセス、共有研究インフラを管理。',
+            ],
+          },
+          paia: {
+            period: '2024年7月 ~ 2025年6月',
+            company: 'PAIA Technology Co., Ltd. / バックエンドソフトウェアエンジニア（インターン）',
+            platform: 'Playful AI Arena, PAIA学習プラットフォーム',
+            highlights: [
+              'Python、Django Ninja、Pydantic、PostgreSQL、MongoDB でバックエンドサービスを開発。',
+              'REST API、バリデーション、データベースモデル、ログ、エラーハンドリングを実装。',
+              'ユニットテスト・統合テストを作成し、コードレビューや Agile/Scrum 開発に参加。',
+            ],
+          },
+          codingApe: {
+            period: '2023年3月 ~ 2025年6月',
+            company: 'Coding APE プログラミングスクール / プログラミング講師',
+            corp: 'Bad Idea株式会社 (CODINGAPE CO., LTD.)',
+          },
         },
-        codingApe: {
-          period: '2023~2025',
-          company: 'Coding APE プログラミングスクール / 講師',
-          corp: 'Bad Idea株式会社 (CODINGAPE CO., LTD.)',
-        },
-        kaohsiung: {
-          period: '2018~2021',
-          company: '高雄市情報育成協会 / 教学アシスタント',
+      },
+      skills: {
+        header: 'スキル',
+        groups: {
+          languages: 'プログラミング言語',
+          backend: 'バックエンド・データ',
+          aiml: 'AI / ML',
+          platform: 'プラットフォーム・MLOps',
+          digitalIc: 'デジタル IC（授業での実習）',
         },
       },
     },
