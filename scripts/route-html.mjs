@@ -10,13 +10,13 @@ export const staticRoutes = [
 
 const escapeHtml = value =>
   value
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
+    .replaceAll('&', '&amp;')
+    .replaceAll('"', '&quot;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
 
 // vue-i18n 以 {'|'} 表示字面上的特殊符號
-export const toPlainText = message => message.replace(/\{'(.)'\}/g, '$1')
+export const toPlainText = message => message.replaceAll(/\{'(.)'\}/g, '$1')
 
 const replaceTag = (html, pattern, replacement) => {
   if (!pattern.test(html)) {
