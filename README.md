@@ -14,19 +14,13 @@ npm ci
 npm run dev
 ```
 
-The development server is available at http://localhost:3000. Before opening a
-pull request, run `npm test`, `npm run lint`, and `npm run build`.
+The development server is available at http://localhost:3000. Before opening a pull request, run `npm test`, `npm run lint`, and `npm run build`.
 
-Pull requests to `main` run the same lint, test, accessibility, end-to-end, and
-build checks in the CI workflow with read-only permissions. Only pushes to `main` deploy the
-site to GitHub Pages.
+Pull requests to `main` run the same lint, test, accessibility, end-to-end, and build checks in the CI workflow with read-only permissions. Only pushes to `main` deploy the site to GitHub Pages.
 
-The accessibility check additionally requires the Chromium system libraries;
-on Debian/Ubuntu, install them with `npx playwright install --with-deps chromium`.
+The accessibility check additionally requires the Chromium system libraries; on Debian/Ubuntu, install them with `npx playwright install --with-deps chromium`.
 
-`npm run test:e2e` runs browser interaction tests for navigation, language,
-theme, drawers, and the GitHub archive tabs against a mocked GitHub API. It needs
-the same Chromium setup as the accessibility check.
+`npm run test:e2e` runs browser interaction tests for navigation, language, theme, drawers, and the GitHub archive tabs against a mocked GitHub API. It needs the same Chromium setup as the accessibility check.
 
 ## Contact Me
 
