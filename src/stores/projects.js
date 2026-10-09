@@ -14,6 +14,7 @@ export const useProjectStore = defineStore('projects', () => {
   const loadingByAccount = ref(createAccountState(() => false))
   const errorsByAccount = ref(createAccountState(() => null))
   const lastFetchedAt = ref(createAccountState(() => 0))
+  const pendingRequests = new Map()
 
   const loading = computed(() =>
     Object.values(loadingByAccount.value).some(Boolean)
@@ -21,6 +22,24 @@ export const useProjectStore = defineStore('projects', () => {
   const error = computed(
     () => Object.values(errorsByAccount.value).find(Boolean) || null
   )
+
+  const loadProjects = async account => {
+    loadingByAccount.value[account.key] = true
+    errorsByAccount.value[account.key] = null
+
+    try {
+      const repositories = await fetchGitHubRepositories(account)
+      projects.value[account.key] = repositories
+      lastFetchedAt.value[account.key] = Date.now()
+      return repositories
+    } catch (error) {
+      errorsByAccount.value[account.key] = error
+      throw error
+    } finally {
+      loadingByAccount.value[account.key] = false
+      pendingRequests.delete(account.key)
+    }
+  }
 
   const fetchProjects = async (accountKey, { force = false } = {}) => {
     const account = githubAccountsByKey[accountKey]
@@ -34,20 +53,11 @@ export const useProjectStore = defineStore('projects', () => {
       return projects.value[accountKey]
     }
 
-    loadingByAccount.value[accountKey] = true
-    errorsByAccount.value[accountKey] = null
-
-    try {
-      const repositories = await fetchGitHubRepositories(account)
-      projects.value[accountKey] = repositories
-      lastFetchedAt.value[accountKey] = Date.now()
-      return repositories
-    } catch (error) {
-      errorsByAccount.value[accountKey] = error
-      throw error
-    } finally {
-      loadingByAccount.value[accountKey] = false
+    // 同一帳號已有進行中的請求時共用結果，避免快速切換分頁或重試時重複呼叫 GitHub API
+    if (!pendingRequests.has(accountKey)) {
+      pendingRequests.set(accountKey, loadProjects(account))
     }
+    return pendingRequests.get(accountKey)
   }
 
   const fetchAllProjects = async options =>
