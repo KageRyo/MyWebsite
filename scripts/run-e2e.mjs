@@ -260,7 +260,7 @@ const tests = {
         viewport: { width: 390, height: 844 },
         storage: { locale }
       })
-      for (const path of ['/', '/about', '/contact']) {
+      for (const path of ['/', '/about', '/projects', '/contact']) {
         await page.goto(`${baseUrl}${path}`)
         await page.locator('h1').first().waitFor()
         const width = await page.evaluate(
