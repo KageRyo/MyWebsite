@@ -242,11 +242,14 @@ const tests = {
       .waitFor()
     await page.keyboard.press('Home')
     assert.equal(await selected.innerText(), 'KageRyo')
-    assert.deepEqual(requests.sort(), [
-      '/users/CodeRyoMC/repos',
-      '/users/CodeRyoStudio/repos',
-      '/users/KageRyo/repos'
-    ])
+    assert.deepEqual(
+      requests.toSorted((left, right) => left.localeCompare(right)),
+      [
+        '/users/CodeRyoMC/repos',
+        '/users/CodeRyoStudio/repos',
+        '/users/KageRyo/repos'
+      ]
+    )
     await context.close()
   },
 
