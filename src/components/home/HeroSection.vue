@@ -2,7 +2,7 @@
   <div class="ts-content is-tertiary is-vertically-padded">
     <div class="ts-container">
       <h1 class="ts-header is-huge is-heavy">Chien-Hsun Chang</h1>
-      <div class="ts-text is-secondary">Developer, Programmer, and Student in TAIWAN.</div>
+      <div class="ts-text is-secondary">Backend / Platform Engineer | AI Systems / MLOps</div>
 
       <div class="ts-grid is-relaxed has-top-spaced">
         <!-- 個人照片 -->
@@ -33,8 +33,34 @@
                 {{ $t('home.hero.introduction') }}
               </span>
 
+              <!-- 學業與求職狀態 -->
+              <div class="ts-text is-description has-top-spaced-small">
+                <span class="ts-icon is-graduation-cap-icon"></span>
+                {{ $t('home.hero.academic') }}
+              </div>
+              <div class="ts-text is-description">
+                <span class="ts-icon is-briefcase-icon"></span>
+                {{ $t('home.hero.availability') }}
+              </div>
+
+              <!-- 作品集與履歷 -->
+              <div class="ts-grid is-compact mobile:is-stacked has-top-spaced">
+                <div class="column is-fluid">
+                  <router-link to="/projects" class="ts-button is-fluid is-outlined is-start-icon">
+                    <span class="ts-icon is-folder-open-icon"></span>
+                    {{ $t('home.hero.viewProjects') }}
+                  </router-link>
+                </div>
+                <div class="column is-fluid">
+                  <a :href="resumePdfUrl" class="ts-button is-fluid is-outlined is-start-icon" download>
+                    <span class="ts-icon is-download-icon"></span>
+                    {{ $t('home.hero.downloadResume') }}
+                  </a>
+                </div>
+              </div>
+
               <!-- 查看更多按鈕 -->
-              <button class="ts-button is-fluid is-start-icon has-top-spaced" @click="modalStore.showAppDrawer">
+              <button class="ts-button is-fluid is-start-icon has-top-spaced-small" @click="modalStore.showAppDrawer">
                 <span class="ts-icon is-heart-icon"></span>
                 {{ $t('home.hero.seeMore') }}
               </button>
@@ -65,6 +91,9 @@
 
 <script setup>
 import { useModalStore } from '../../stores/modal'
+
+// 與 About 頁相同的公開版履歷（已移除電話）
+const resumePdfUrl = '/resume/Chien-Hsun_Chang_Resume.pdf'
 
 const modalStore = useModalStore()
 </script>
