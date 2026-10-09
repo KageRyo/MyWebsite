@@ -260,7 +260,13 @@ const tests = {
         viewport: { width: 390, height: 844 },
         storage: { locale }
       })
-      for (const path of ['/', '/about', '/projects', '/contact']) {
+      for (const path of [
+        '/',
+        '/about',
+        '/projects',
+        '/contact',
+        '/case-studies/kserve'
+      ]) {
         await page.goto(`${baseUrl}${path}`)
         await page.locator('h1').first().waitFor()
         const width = await page.evaluate(
@@ -271,6 +277,25 @@ const tests = {
       await context.close()
     }
     assert.deepEqual(overflowing, [])
+  },
+
+  async 'KServe card opens its case study and unknown slugs show 404'(browser) {
+    const { context, page } = await newPage(browser)
+    await page.goto(`${baseUrl}/projects`)
+    await page.getByRole('link', { name: '閱讀案例研究' }).click()
+    await page.waitForURL(`${baseUrl}/case-studies/kserve`)
+    await page
+      .getByRole('heading', { level: 1, name: 'KServe (CNCF) 開源貢獻' })
+      .waitFor()
+    assert.match(await page.title(), /KServe/)
+    await page.getByRole('link', { name: '回到作品集' }).click()
+    await page.waitForURL(`${baseUrl}/projects`)
+
+    await page.goto(`${baseUrl}/case-studies/not-a-project`)
+    await page.getByRole('link', { name: '回到首頁' }).waitFor()
+    assert.equal(page.url(), `${baseUrl}/case-studies/not-a-project`)
+    assert.match(await page.title(), /找不到頁面/)
+    await context.close()
   },
 
   async 'contact form previews the email and keeps a copy fallback'(browser) {

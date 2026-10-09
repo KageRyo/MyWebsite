@@ -35,7 +35,9 @@ export default defineConfig({
             description: zhTW.meta[key].description,
             url: `${SITE_URL}${path}`
           })
-          writeFileSync(resolve(projectRoot, `dist${path}.html`), html)
+          const file = resolve(projectRoot, `dist${path}.html`)
+          mkdirSync(dirname(file), { recursive: true })
+          writeFileSync(file, html)
         }
       }
     }

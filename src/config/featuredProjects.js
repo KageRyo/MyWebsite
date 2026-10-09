@@ -3,6 +3,7 @@
 export const featuredProjects = [
   {
     id: 'kserve',
+    caseStudy: 'kserve',
     stack: ['Python', 'Go', 'Kubernetes', 'CRD', 'Helm'],
     links: [
       {

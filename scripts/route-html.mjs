@@ -5,7 +5,8 @@ export const SITE_URL = 'https://kageryo.coderyo.com'
 export const staticRoutes = [
   { path: '/about', key: 'about' },
   { path: '/projects', key: 'projects' },
-  { path: '/contact', key: 'contact' }
+  { path: '/contact', key: 'contact' },
+  { path: '/case-studies/kserve', key: 'kserveCaseStudy' }
 ]
 
 const escapeHtml = value =>

@@ -16,6 +16,10 @@ export default {
       title: 'KageRyo Developer - Contact',
       description: 'Connect with Chien-Hsun Chang via email, GitHub or LinkedIn about software engineering, AI systems and open source.',
     },
+    kserveCaseStudy: {
+      title: 'KageRyo Developer - KServe Case Study',
+      description: 'How Chien-Hsun Chang fixed CNCF KServe overriding user logging configuration and added runtimeClassName support to ServingRuntime.',
+    },
     notFound: { title: 'KageRyo Developer - Page Not Found' },
   },
   nav: {
@@ -212,6 +216,51 @@ export default {
         desc: 'Description',
         noDesc: 'No description',
         count: 'Total: {count}',
+      },
+    },
+  },
+  caseStudies: {
+    headings: {
+      overview: 'Overview',
+      problem: 'Problem & Goal',
+      role: 'My Role & Contributions',
+      architecture: 'Architecture & Technologies',
+      tradeoffs: 'Technical Decisions & Trade-offs',
+      outcomes: 'Outcomes & Evidence',
+      links: 'Links & References',
+    },
+    readCaseStudy: 'Read the case study',
+    backToProjects: 'Back to Projects',
+    kserve: {
+      title: 'Contributing to KServe (CNCF)',
+      overview: [
+        'KServe is a CNCF open-source platform for deploying and managing machine learning inference services on Kubernetes. I submitted two changes: a fix for the Python SDK overriding user logging configuration, and support for choosing a Kubernetes RuntimeClass in a ServingRuntime.',
+      ],
+      problem: [
+        'Logging: when no log_config was passed, configure_logging() always applied KServe\'s default dictConfig, replacing handlers and formats the user had already set up. That made KServe hard to embed in applications with their own logging (kserve/kserve#3919).',
+        'RuntimeClass: a ServingRuntime could not set runtimeClassName (for example nvidia, kata, or gvisor), a common requirement for GPU passthrough and sandboxed container runtimes (kserve/kserve#5057).',
+      ],
+      role: [
+        'I implemented and submitted both pull requests, including the code changes, unit tests, regenerated artifacts, and PR descriptions.',
+      ],
+      architecture: [
+        'Python SDK (kserve/logging.py): configure_logging() now checks logger.hasHandlers() for direct or inherited handlers on the kserve logger, and returns early without reconfiguring when no log_config is given and handlers already exist.',
+        'Go controller and CRDs: a RuntimeClassName field on the v1alpha1 ServingRuntimePodSpec, merged in the InferenceService MergePodSpec; WorkerSpec gets it through inline embedding.',
+        'Generated artifacts: CRDs (Helm chart and config), deepcopy, OpenAPI/Swagger, and the Python SDK models and docs were regenerated together.',
+      ],
+      tradeoffs: [
+        'Backward compatible: the default is skipped only when no config is given and handlers already exist, so users without their own logging see no change, and an explicit log_config still wins.',
+        'hasHandlers() instead of counting handlers, so handlers inherited from parent loggers are also respected.',
+        'runtimeClassName follows the merge pattern of schedulerName (kserve/kserve#5073), keeping the code consistent and easy to review; the field is optional, so existing ServingRuntimes are unaffected.',
+        'End-to-end tests and documentation updates were left as follow-ups and are not part of the PR.',
+      ],
+      outcomes: [
+        'The logging fix (kserve/kserve#4687) was merged upstream in March 2026 with three unit tests: user handlers are preserved, defaults apply when nothing is configured, and an explicit config overrides.',
+        'The runtimeClassName support (kserve/kserve#5198) adds unit tests for merging and overriding the field, and was verified locally by creating a ServingRuntime with runtimeClassName: nvidia and checking the resulting PodSpec.',
+      ],
+      contributions: {
+        logging: 'Logging configuration fix',
+        runtimeClassName: 'runtimeClassName support',
       },
     },
   },

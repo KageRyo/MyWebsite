@@ -31,6 +31,14 @@
           <span class="ts-icon is-lock-icon"></span>
           {{ $t('projects.featured.privateSource') }}
         </div>
+        <router-link
+          v-if="project.caseStudy"
+          :to="`/case-studies/${project.caseStudy}`"
+          class="ts-button is-small is-start-icon has-top-spaced-small"
+        >
+          <span class="ts-icon is-book-open-icon"></span>
+          {{ $t('caseStudies.readCaseStudy') }}
+        </router-link>
       </div>
     </article>
   </div>

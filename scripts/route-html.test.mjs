@@ -54,6 +54,12 @@ describe('renderRouteHtml', () => {
     }
   })
 
+  it('include the KServe case study page', () => {
+    expect(staticRoutes.map(({ path }) => path)).toContain(
+      '/case-studies/kserve'
+    )
+  })
+
   it('fails loudly when a tag is missing', () => {
     expect(() =>
       renderRouteHtml('<html></html>', {

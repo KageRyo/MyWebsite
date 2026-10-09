@@ -1,11 +1,13 @@
 import { nextTick, watch } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import i18n from '../i18n'
+import { caseStudiesBySlug } from '../config/caseStudies'
 
 const Home = () => import('../views/Home.vue')
 const About = () => import('../views/About.vue')
 const Projects = () => import('../views/Projects.vue')
 const Contact = () => import('../views/Contact.vue')
+const CaseStudy = () => import('../views/CaseStudy.vue')
 const NotFound = () => import('../views/NotFound.vue')
 
 const routes = [
@@ -13,6 +15,25 @@ const routes = [
   { path: '/about', name: 'About', component: About, meta: { titleKey: 'meta.about.title', descriptionKey: 'meta.about.description' } },
   { path: '/projects', name: 'Projects', component: Projects, meta: { titleKey: 'meta.projects.title', descriptionKey: 'meta.projects.description' } },
   { path: '/contact', name: 'Contact', component: Contact, meta: { titleKey: 'meta.contact.title', descriptionKey: 'meta.contact.description' } },
+  {
+    path: '/case-studies/:slug',
+    name: 'CaseStudy',
+    component: CaseStudy,
+    props: true,
+    beforeEnter: to => {
+      const caseStudy = caseStudiesBySlug[to.params.slug]
+      if (!caseStudy) {
+        return {
+          name: 'NotFound',
+          params: { pathMatch: to.path.slice(1).split('/') },
+          query: to.query,
+          hash: to.hash
+        }
+      }
+      to.meta.titleKey = `meta.${caseStudy.metaKey}.title`
+      to.meta.descriptionKey = `meta.${caseStudy.metaKey}.description`
+    }
+  },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound, meta: { titleKey: 'meta.notFound.title' } }
 ]
 
