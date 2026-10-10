@@ -38,9 +38,15 @@
     transform: translateY(0);
 }
 
-:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+/* 用 :is() 讓焦點框的優先權高於 TocasUI 的 .ts-button:focus { outline: 0 }，鍵盤操作按鈕時才看得到焦點 */
+:is(a, button, input, select, textarea, [tabindex]):focus-visible {
     outline: 3px solid #005fcc;
     outline-offset: 3px;
+}
+
+/* 換頁後程式會把焦點移到主要內容區，讓螢幕閱讀器從頁首開始朗讀；它不是可操作的元件，不畫焦點框 */
+#main-content:focus {
+    outline: none;
 }
 
 /* TocasUI 5.7 依 color-scheme 切換配色，對應既有的 html.is-dark / is-light 主題類別 */
@@ -50,6 +56,17 @@ html.is-dark {
 
 html.is-light {
     color-scheme: light;
+}
+
+/* 品牌強調色取自 KageRyo 插圖的螢光綠；淺色背景上改用較深的綠以維持文字對比（約 5.9:1） */
+:root {
+    --kageryo-green: #b0ff30;
+    --kageryo-accent: light-dark(#457000, var(--kageryo-green));
+}
+
+/* 頂部導覽列在兩種主題都是深色底，目前頁籤直接用插圖的綠 */
+.ts-app-topbar .ts-tab .item.is-active {
+    border-bottom-color: var(--kageryo-green);
 }
 
 html:not(.is-dark) .ts-text.is-secondary,
@@ -145,4 +162,10 @@ html:not(.is-dark) .ts-content.is-secondary > p {
     border: 0;
     z-index: 999;
     cursor: pointer;
+}
+
+/* 頁首橫幅只負責上下留白，左右留白交給內層的 ts-container，標題才會與下方內容對齊 */
+.ts-content.is-tertiary.is-vertically-padded {
+    padding-left: 0;
+    padding-right: 0;
 }

@@ -95,6 +95,22 @@ const tests = {
     await context.close()
   },
 
+  async 'the active navigation tab is underlined in the KageRyo green'(
+    browser
+  ) {
+    for (const colorScheme of ['light', 'dark']) {
+      const { context, page } = await newPage(browser, { colorScheme })
+      await page.goto(`${baseUrl}/about`)
+      const active = page.locator('header nav .item.is-active')
+      await active.waitFor()
+      assert.equal(
+        await active.evaluate(item => getComputedStyle(item).borderBottomColor),
+        'rgb(176, 255, 48)'
+      )
+      await context.close()
+    }
+  },
+
   async 'unknown routes render the not-found page'(browser) {
     const { context, page } = await newPage(browser)
     await page.goto(`${baseUrl}/does-not-exist`)
@@ -141,6 +157,38 @@ const tests = {
     assert.equal(
       await page.evaluate(() => localStorage.getItem('themePreference')),
       'light'
+    )
+    await context.close()
+  },
+
+  async 'focus rings show on keyboard-focused buttons but not around the main region'(
+    browser
+  ) {
+    const { context, page } = await newPage(browser)
+    const mainOutline = () =>
+      page.evaluate(() => {
+        const main = document.querySelector('#main-content')
+        return document.activeElement === main
+          ? getComputedStyle(main).outlineStyle
+          : 'main is not focused'
+      })
+    await page.goto(baseUrl)
+    await page.locator('h1').first().waitFor()
+    assert.equal(await mainOutline(), 'none')
+    await page
+      .locator('header nav')
+      .getByRole('link', { name: '關於我' })
+      .click()
+    await page.waitForURL(`${baseUrl}/about`)
+    assert.equal(await mainOutline(), 'none')
+
+    // 鍵盤操作的 TocasUI 按鈕要看得到焦點框（第一個是下載履歷按鈕）
+    await page.keyboard.press('Tab')
+    assert.equal(
+      await page.evaluate(
+        () => getComputedStyle(document.activeElement).outlineStyle
+      ),
+      'solid'
     )
     await context.close()
   },
@@ -557,6 +605,41 @@ const tests = {
     assert.deepEqual(oversized, [])
   },
 
+  async 'featured photo captions leave their photos visible'(browser) {
+    const covering = []
+    for (const locale of ['zh-TW', 'en', 'ja']) {
+      for (const width of [1280, 390]) {
+        const { context, page } = await newPage(browser, {
+          viewport: { width, height: 844 },
+          storage: { locale }
+        })
+        await page.goto(baseUrl)
+        await page.locator('h1').first().waitFor()
+        // 說明文字不能超出照片上緣，也不能蓋住大半張照片
+        const found = await page.$$eval('.ts-image:has(.ts-mask)', images =>
+          images
+            .filter(image => {
+              const photo = image.querySelector('img').getBoundingClientRect()
+              const caption = image
+                .querySelector('.ts-mask .ts-content')
+                .getBoundingClientRect()
+              const overlap =
+                Math.min(caption.bottom, photo.bottom) -
+                Math.max(caption.top, photo.top)
+              return (
+                (caption.top < photo.top && caption.bottom > photo.top) ||
+                overlap > photo.height * 0.6
+              )
+            })
+            .map(image => image.querySelector('img').getAttribute('src'))
+        )
+        covering.push(...found.map(src => `${locale} ${width}px ${src}`))
+        await context.close()
+      }
+    }
+    assert.deepEqual(covering, [])
+  },
+
   async 'photos load when scrolled into view'(browser) {
     const { context, page } = await newPage(browser)
     const broken = []
@@ -584,6 +667,29 @@ const tests = {
     }
     assert.deepEqual(broken, [])
     await context.close()
+  },
+
+  async 'page banners line up with the content below'(browser) {
+    const misaligned = []
+    for (const width of [1280, 1024, 390]) {
+      const { context, page } = await newPage(browser, {
+        viewport: { width, height: 844 }
+      })
+      for (const path of ['/projects', '/contact']) {
+        await page.goto(`${baseUrl}${path}`)
+        await page.locator('main h2').first().waitFor()
+        const [title, heading] = await page.evaluate(() =>
+          [
+            document.querySelector('main h1'),
+            document.querySelector('main h2')
+          ].map(element => Math.round(element.getBoundingClientRect().left))
+        )
+        if (title !== heading)
+          misaligned.push(`${width}px ${path}: ${title} vs ${heading}`)
+      }
+      await context.close()
+    }
+    assert.deepEqual(misaligned, [])
   },
 
   async 'GitHub archive shows a retry state when the API is rate limited'(
