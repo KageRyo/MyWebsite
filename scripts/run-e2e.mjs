@@ -475,6 +475,29 @@ const tests = {
     await context.close()
   },
 
+  async 'page banners line up with the content below'(browser) {
+    const misaligned = []
+    for (const width of [1280, 1024, 390]) {
+      const { context, page } = await newPage(browser, {
+        viewport: { width, height: 844 }
+      })
+      for (const path of ['/projects', '/contact']) {
+        await page.goto(`${baseUrl}${path}`)
+        await page.locator('main h2').first().waitFor()
+        const [title, heading] = await page.evaluate(() =>
+          [
+            document.querySelector('main h1'),
+            document.querySelector('main h2')
+          ].map(element => Math.round(element.getBoundingClientRect().left))
+        )
+        if (title !== heading)
+          misaligned.push(`${width}px ${path}: ${title} vs ${heading}`)
+      }
+      await context.close()
+    }
+    assert.deepEqual(misaligned, [])
+  },
+
   async 'GitHub archive shows a retry state when the API is rate limited'(
     browser
   ) {

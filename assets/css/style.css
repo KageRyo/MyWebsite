@@ -124,3 +124,9 @@ html:not(.is-dark) .ts-content.is-secondary > p {
     z-index: 999;
     cursor: pointer;
 }
+
+/* 頁首橫幅只負責上下留白，左右留白交給內層的 ts-container，標題才會與下方內容對齊 */
+.ts-content.is-tertiary.is-vertically-padded {
+    padding-left: 0;
+    padding-right: 0;
+}
