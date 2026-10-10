@@ -75,7 +75,7 @@ export default {
         educationDetail: '國立中正大學 資訊工程研究所 碩士生',
         motto: '總是會在專業領域上盡自己最大能力去協助他人，用心與堅持的毅力面對人生的每一次挑戰。',
       },
-      summary: '我目前就讀國立中正大學資訊工程研究所，專注於 Backend / Platform Engineering、AI Systems 與 MLOps。曾建置後端服務、ML 推論流程、Kubernetes 部署、CI/CD 與 Linux 基礎設施，參與 CNCF KServe 開源貢獻，也投入數位孿生、電腦視覺與聯邦學習相關專案。',
+      summary: '我目前就讀國立中正大學資訊工程研究所，主要發展方向為 Software Engineering、Backend／Platform 與 AI Systems，具後端系統、AI／ML 系統整合、MLOps 與 Linux 基礎設施的實務經驗。參與過 CNCF KServe 開源貢獻、智慧防災數位孿生平台、電腦視覺 AI 系統與跨國聯邦式學習專案，實作過 API、資料庫、資料管線、模型訓練與推論整合、CI/CD、容器化、模型部署與監控系統，並具從需求分析、系統設計、開發與測試，到部署上線及後續維護的完整軟體開發經驗；也曾帶領跨國研究團隊，負責任務分配、技術整合與開發進度協調。另曾修習數位積體電路設計課程，在課程中完成數位 IC 設計流程實作。',
       resumeDownload: '下載英文履歷（PDF）',
     },
     certificates: {
