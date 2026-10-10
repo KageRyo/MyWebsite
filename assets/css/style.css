@@ -52,6 +52,17 @@ html.is-light {
     color-scheme: light;
 }
 
+/* 品牌強調色取自 KageRyo 插圖的螢光綠；淺色背景上改用較深的綠以維持文字對比（約 5.9:1） */
+:root {
+    --kageryo-green: #b0ff30;
+    --kageryo-accent: light-dark(#457000, var(--kageryo-green));
+}
+
+/* 頂部導覽列在兩種主題都是深色底，目前頁籤直接用插圖的綠 */
+.ts-app-topbar .ts-tab .item.is-active {
+    border-bottom-color: var(--kageryo-green);
+}
+
 html:not(.is-dark) .ts-text.is-secondary,
 html:not(.is-dark) .ts-text.is-description,
 html:not(.is-dark) .ts-content.is-secondary > p {

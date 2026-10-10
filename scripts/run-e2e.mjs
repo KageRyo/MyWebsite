@@ -95,6 +95,22 @@ const tests = {
     await context.close()
   },
 
+  async 'the active navigation tab is underlined in the KageRyo green'(
+    browser
+  ) {
+    for (const colorScheme of ['light', 'dark']) {
+      const { context, page } = await newPage(browser, { colorScheme })
+      await page.goto(`${baseUrl}/about`)
+      const active = page.locator('header nav .item.is-active')
+      await active.waitFor()
+      assert.equal(
+        await active.evaluate(item => getComputedStyle(item).borderBottomColor),
+        'rgb(176, 255, 48)'
+      )
+      await context.close()
+    }
+  },
+
   async 'unknown routes render the not-found page'(browser) {
     const { context, page } = await newPage(browser)
     await page.goto(`${baseUrl}/does-not-exist`)
