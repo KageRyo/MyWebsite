@@ -1,5 +1,5 @@
 <template>
-  <article v-if="study">
+  <article v-if="detail">
     <!-- 穹頂 -->
     <div class="ts-content is-tertiary is-vertically-padded">
       <div class="ts-container">
@@ -16,12 +16,12 @@
     <div class="ts-container has-top-spaced-large">
       <section v-for="key in sections" :key="key" class="has-top-spaced-large">
         <h2 class="ts-header is-big is-heavy">
-          {{ $t(`caseStudies.headings.${key}`) }}
+          {{ $t(`projectDetail.headings.${key}`) }}
         </h2>
         <template v-if="key === 'overview'">
           <p v-for="(line, index) in lines(key)" :key="index">{{ line }}</p>
         </template>
-        <ul v-else class="case-study-list">
+        <ul v-else class="case-detail-list">
           <li v-for="(line, index) in lines(key)" :key="index">{{ line }}</li>
         </ul>
         <div
@@ -40,11 +40,11 @@
       <!-- 相關連結：每項貢獻的 PR 與對應 issue -->
       <section class="has-top-spaced-large">
         <h2 class="ts-header is-big is-heavy">
-          {{ $t('caseStudies.headings.links') }}
+          {{ $t('projectDetail.headings.links') }}
         </h2>
-        <ul class="case-study-links">
+        <ul class="case-detail-links">
           <li
-            v-for="contribution in study.contributions"
+            v-for="contribution in detail.contributions"
             :key="contribution.id"
           >
             <div class="ts-text is-bold">
@@ -87,7 +87,7 @@
         class="ts-button is-outlined is-start-icon has-top-spaced-large"
       >
         <span class="ts-icon is-arrow-left-icon"></span>
-        {{ $t('caseStudies.backToProjects') }}
+        {{ $t('projectDetail.backToProjects') }}
       </router-link>
     </div>
   </article>
@@ -96,7 +96,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { caseStudiesBySlug } from '../config/caseStudies'
+import { projectDetailsBySlug } from '../config/projectDetails'
 import { featuredProjects } from '../config/featuredProjects'
 
 const props = defineProps({
@@ -113,36 +113,36 @@ const sections = [
 ]
 const { tm, rt } = useI18n({ useScope: 'global' })
 
-const study = computed(() => caseStudiesBySlug[props.slug])
+const detail = computed(() => projectDetailsBySlug[props.slug])
 const project = computed(() =>
-  featuredProjects.find(({ id }) => id === study.value.projectId)
+  featuredProjects.find(({ id }) => id === detail.value.projectId)
 )
 const projectKey = computed(
-  () => `projects.featured.items.${study.value.projectId}`
+  () => `projects.featured.items.${detail.value.projectId}`
 )
-const copyKey = computed(() => `caseStudies.${props.slug}`)
+const copyKey = computed(() => `projectDetail.${props.slug}`)
 
 // 各段落為字串陣列，需逐行轉譯
 const lines = key => tm(`${copyKey.value}.${key}`).map(line => rt(line))
 </script>
 
 <style scoped>
-.case-study-list {
+.case-detail-list {
   margin: 0.5rem 0 0;
   padding-left: 1.25rem;
 }
 
-.case-study-list li + li {
+.case-detail-list li + li {
   margin-top: 0.5rem;
 }
 
-.case-study-links {
+.case-detail-links {
   margin: 0.5rem 0 0;
   padding: 0;
   list-style: none;
 }
 
-.case-study-links li + li {
+.case-detail-links li + li {
   margin-top: 1rem;
 }
 </style>

@@ -16,8 +16,8 @@ export default {
       title: 'KageRyo Developer - Contact',
       description: 'Connect with Chien-Hsun Chang via email, GitHub or LinkedIn about software engineering, AI systems and open source.',
     },
-    kserveCaseStudy: {
-      title: 'KageRyo Developer - KServe Case Study',
+    kserveProject: {
+      title: 'KageRyo Developer - KServe (CNCF) Open Source Contributions',
       description: 'How Chien-Hsun Chang fixed CNCF KServe overriding user logging configuration and added runtimeClassName support to ServingRuntime.',
     },
     notFound: { title: 'KageRyo Developer - Page Not Found' },
@@ -219,7 +219,7 @@ export default {
       },
     },
   },
-  caseStudies: {
+  projectDetail: {
     headings: {
       overview: 'Overview',
       problem: 'Problem & Goal',
@@ -229,7 +229,7 @@ export default {
       outcomes: 'Outcomes & Evidence',
       links: 'Links & References',
     },
-    readCaseStudy: 'Read the case study',
+    viewDetails: 'View project details',
     backToProjects: 'Back to Projects',
     kserve: {
       title: 'Contributing to KServe (CNCF)',

@@ -2,12 +2,18 @@
 // 讓 GitHub Pages 直接以 200 回應 /about 等路徑，爬蟲也能讀到對應的 meta
 export const SITE_URL = 'https://kageryo.coderyo.com'
 
+// 作品集以資料夾 index 提供，讓專案介紹頁可以放在 /projects/ 底下；
+// 同時存在 projects.html 與 projects/ 時 GitHub Pages 的行為未明確定義
 export const staticRoutes = [
   { path: '/about', key: 'about' },
-  { path: '/projects', key: 'projects' },
+  { path: '/projects/', key: 'projects' },
   { path: '/contact', key: 'contact' },
-  { path: '/case-studies/kserve', key: 'kserveCaseStudy' }
+  { path: '/projects/kserve', key: 'kserveProject' }
 ]
+
+// 路徑對應到 dist 裡的檔案：結尾斜線為資料夾 index，其餘為同名 .html
+export const routeFile = path =>
+  path.endsWith('/') ? `${path.slice(1)}index.html` : `${path.slice(1)}.html`
 
 const escapeHtml = value =>
   value

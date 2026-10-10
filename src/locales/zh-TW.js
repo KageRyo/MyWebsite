@@ -16,8 +16,8 @@ export default {
       title: 'KageRyo Developer - 聯絡我',
       description: '透過電子郵件、GitHub 或 LinkedIn 聯絡張健勳，交流後端、AI 系統及開源相關話題。',
     },
-    kserveCaseStudy: {
-      title: 'KageRyo Developer - KServe 開源貢獻案例研究',
+    kserveProject: {
+      title: 'KageRyo Developer - KServe (CNCF) 開源貢獻',
       description: '張健勳在 CNCF KServe 的開源貢獻：修正 Python SDK 覆蓋使用者日誌設定的問題，並為 ServingRuntime 加入 runtimeClassName 支援。',
     },
     notFound: { title: 'KageRyo Developer - 找不到頁面' },
@@ -219,7 +219,7 @@ export default {
       },
     },
   },
-  caseStudies: {
+  projectDetail: {
     headings: {
       overview: '專案概述',
       problem: '問題與目標',
@@ -229,7 +229,7 @@ export default {
       outcomes: '成果與驗證',
       links: '相關連結',
     },
-    readCaseStudy: '閱讀案例研究',
+    viewDetails: '查看專案介紹',
     backToProjects: '回到作品集',
     kserve: {
       title: 'KServe (CNCF) 開源貢獻',

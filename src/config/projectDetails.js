@@ -4,13 +4,13 @@ const kserve = featuredProjects.find(({ id }) => id === 'kserve')
 const kservePullRequest = number =>
   kserve.links.find(({ url }) => url.endsWith(`/pull/${number}`))
 
-// 案例研究的結構與連結；文字放在 locales 的 caseStudies.*，
+// 專案介紹頁的結構與連結；文字放在 locales 的 projectDetail.*，
 // PR 連結沿用作品集卡片的資料，讓合併狀態只需維護一處
-export const caseStudies = [
+export const projectDetails = [
   {
     slug: 'kserve',
     projectId: 'kserve',
-    metaKey: 'kserveCaseStudy',
+    metaKey: 'kserveProject',
     contributions: [
       {
         id: 'logging',
@@ -32,6 +32,6 @@ export const caseStudies = [
   }
 ]
 
-export const caseStudiesBySlug = Object.fromEntries(
-  caseStudies.map(caseStudy => [caseStudy.slug, caseStudy])
+export const projectDetailsBySlug = Object.fromEntries(
+  projectDetails.map(detail => [detail.slug, detail])
 )

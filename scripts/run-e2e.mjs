@@ -265,7 +265,7 @@ const tests = {
         '/about',
         '/projects',
         '/contact',
-        '/case-studies/kserve'
+        '/projects/kserve'
       ]) {
         await page.goto(`${baseUrl}${path}`)
         await page.locator('h1').first().waitFor()
@@ -279,11 +279,13 @@ const tests = {
     assert.deepEqual(overflowing, [])
   },
 
-  async 'KServe card opens its case study and unknown slugs show 404'(browser) {
+  async 'KServe card opens its project detail page and unknown slugs show 404'(
+    browser
+  ) {
     const { context, page } = await newPage(browser)
     await page.goto(`${baseUrl}/projects`)
-    await page.getByRole('link', { name: '閱讀案例研究' }).click()
-    await page.waitForURL(`${baseUrl}/case-studies/kserve`)
+    await page.getByRole('link', { name: '查看專案介紹' }).click()
+    await page.waitForURL(`${baseUrl}/projects/kserve`)
     await page
       .getByRole('heading', { level: 1, name: 'KServe (CNCF) 開源貢獻' })
       .waitFor()
@@ -291,10 +293,22 @@ const tests = {
     await page.getByRole('link', { name: '回到作品集' }).click()
     await page.waitForURL(`${baseUrl}/projects`)
 
-    await page.goto(`${baseUrl}/case-studies/not-a-project`)
+    await page.goto(`${baseUrl}/projects/not-a-project`)
     await page.getByRole('link', { name: '回到首頁' }).waitFor()
-    assert.equal(page.url(), `${baseUrl}/case-studies/not-a-project`)
+    assert.equal(page.url(), `${baseUrl}/projects/not-a-project`)
     assert.match(await page.title(), /找不到頁面/)
+    await context.close()
+  },
+
+  async 'trailing-slash URLs settle on the canonical route'(browser) {
+    const { context, page } = await newPage(browser)
+    // GitHub Pages 會把 /projects 導向 /projects/
+    await page.goto(`${baseUrl}/projects/`)
+    await page.waitForURL(`${baseUrl}/projects`)
+    assert.equal(
+      await page.locator('header nav .item.is-active').innerText(),
+      '作品集'
+    )
     await context.close()
   },
 

@@ -4,7 +4,7 @@ import { mkdirSync, copyFileSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath, URL } from 'node:url'
 import zhTW from './src/locales/zh-TW.js'
-import { renderRouteHtml, SITE_URL, staticRoutes } from './scripts/route-html.mjs'
+import { renderRouteHtml, routeFile, SITE_URL, staticRoutes } from './scripts/route-html.mjs'
 
 const projectRoot = fileURLToPath(new URL('.', import.meta.url))
 
@@ -35,7 +35,7 @@ export default defineConfig({
             description: zhTW.meta[key].description,
             url: `${SITE_URL}${path}`
           })
-          const file = resolve(projectRoot, `dist${path}.html`)
+          const file = resolve(projectRoot, 'dist', routeFile(path))
           mkdirSync(dirname(file), { recursive: true })
           writeFileSync(file, html)
         }

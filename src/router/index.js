@@ -1,13 +1,13 @@
 import { nextTick, watch } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import i18n from '../i18n'
-import { caseStudiesBySlug } from '../config/caseStudies'
+import { projectDetailsBySlug } from '../config/projectDetails'
 
 const Home = () => import('../views/Home.vue')
 const About = () => import('../views/About.vue')
 const Projects = () => import('../views/Projects.vue')
 const Contact = () => import('../views/Contact.vue')
-const CaseStudy = () => import('../views/CaseStudy.vue')
+const ProjectDetail = () => import('../views/ProjectDetail.vue')
 const NotFound = () => import('../views/NotFound.vue')
 
 const routes = [
@@ -16,13 +16,13 @@ const routes = [
   { path: '/projects', name: 'Projects', component: Projects, meta: { titleKey: 'meta.projects.title', descriptionKey: 'meta.projects.description' } },
   { path: '/contact', name: 'Contact', component: Contact, meta: { titleKey: 'meta.contact.title', descriptionKey: 'meta.contact.description' } },
   {
-    path: '/case-studies/:slug',
-    name: 'CaseStudy',
-    component: CaseStudy,
+    path: '/projects/:slug',
+    name: 'ProjectDetail',
+    component: ProjectDetail,
     props: true,
     beforeEnter: to => {
-      const caseStudy = caseStudiesBySlug[to.params.slug]
-      if (!caseStudy) {
+      const detail = projectDetailsBySlug[to.params.slug]
+      if (!detail) {
         return {
           name: 'NotFound',
           params: { pathMatch: to.path.slice(1).split('/') },
@@ -30,8 +30,8 @@ const routes = [
           hash: to.hash
         }
       }
-      to.meta.titleKey = `meta.${caseStudy.metaKey}.title`
-      to.meta.descriptionKey = `meta.${caseStudy.metaKey}.description`
+      to.meta.titleKey = `meta.${detail.metaKey}.title`
+      to.meta.descriptionKey = `meta.${detail.metaKey}.description`
     }
   },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound, meta: { titleKey: 'meta.notFound.title' } }
@@ -42,6 +42,18 @@ const router = createRouter({
   routes,
   scrollBehavior(_to, _from, savedPosition) {
     return savedPosition || { top: 0 }
+  }
+})
+
+// GitHub Pages 會把資料夾形式的網址導向結尾斜線（例如 /projects/），站內統一去掉
+router.beforeEach(to => {
+  if (to.path.length > 1 && to.path.endsWith('/')) {
+    return {
+      path: to.path.replace(/\/+$/, ''),
+      query: to.query,
+      hash: to.hash,
+      replace: true
+    }
   }
 })
 

@@ -16,8 +16,8 @@ export default {
       title: 'KageRyo Developer - お問い合わせ',
       description: 'メール、GitHub、LinkedIn から Chien-Hsun Chang に連絡できます。ソフトウェア開発、AI システム、オープンソースについて気軽にどうぞ。',
     },
-    kserveCaseStudy: {
-      title: 'KageRyo Developer - KServe ケーススタディ',
+    kserveProject: {
+      title: 'KageRyo Developer - KServe (CNCF) へのコントリビュート',
       description: 'Chien-Hsun Chang による CNCF KServe へのコントリビュート：ユーザーのロギング設定を上書きする問題の修正と、ServingRuntime への runtimeClassName 対応。',
     },
     notFound: { title: 'KageRyo Developer - ページが見つかりません' },
@@ -219,7 +219,7 @@ export default {
       },
     },
   },
-  caseStudies: {
+  projectDetail: {
     headings: {
       overview: '概要',
       problem: '課題と目標',
@@ -229,7 +229,7 @@ export default {
       outcomes: '成果・検証',
       links: '関連リンク',
     },
-    readCaseStudy: 'ケーススタディを読む',
+    viewDetails: 'プロジェクトの詳細を見る',
     backToProjects: 'プロジェクト一覧に戻る',
     kserve: {
       title: 'KServe (CNCF) へのコントリビュート',

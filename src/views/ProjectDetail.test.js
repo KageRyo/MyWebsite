@@ -4,7 +4,7 @@ import en from '../locales/en'
 import ja from '../locales/ja'
 import zhTW from '../locales/zh-TW'
 import { renderComponent, textContent } from '../test-utils/renderComponent'
-import CaseStudy from './CaseStudy.vue'
+import ProjectDetail from './ProjectDetail.vue'
 
 const HEADING_KEYS = [
   'overview',
@@ -17,7 +17,7 @@ const HEADING_KEYS = [
 ]
 const render = locale =>
   renderComponent(
-    { render: () => h(CaseStudy, { slug: 'kserve' }) },
+    { render: () => h(ProjectDetail, { slug: 'kserve' }) },
     { locale }
   )
 
@@ -25,17 +25,17 @@ describe.each([
   ['zh-TW', zhTW],
   ['en', en],
   ['ja', ja]
-])('KServe case study in %s', (locale, messages) => {
-  const copy = messages.caseStudies
+])('KServe project detail page in %s', (locale, messages) => {
+  const copy = messages.projectDetail
 
-  it('titles the page with the case study name', async () => {
+  it('titles the page with the project name', async () => {
     const html = await render(locale)
     expect(textContent(html.match(/<h1[^>]*>(.*?)<\/h1>/s)[1])).toBe(
       copy.kserve.title
     )
   })
 
-  it('follows the case study template headings in order', async () => {
+  it('follows the project detail template headings in order', async () => {
     const html = await render(locale)
     const headings = [...html.matchAll(/<h2[^>]*>(.*?)<\/h2>/gs)].map(
       ([, text]) => textContent(text)
@@ -70,7 +70,31 @@ describe.each([
 
   it('renders no raw translation keys', async () => {
     expect(textContent(await render(locale))).not.toMatch(
-      /caseStudies\.|meta\./
+      /projectDetail\.|caseStud|meta\./
     )
   })
+})
+
+describe('project detail wording', () => {
+  it.each([
+    ['zh-TW', zhTW, /案例研究/],
+    ['en', en, /case stud/i],
+    ['ja', ja, /ケーススタディ/]
+  ])(
+    'never calls the page a case study in %s',
+    (_locale, messages, pattern) => {
+      expect(JSON.stringify(messages)).not.toMatch(pattern)
+    }
+  )
+
+  it.each([
+    ['zh-TW', zhTW, '查看專案介紹'],
+    ['en', en, 'View project details'],
+    ['ja', ja, 'プロジェクトの詳細を見る']
+  ])(
+    'labels the card link as project details in %s',
+    (_locale, messages, label) => {
+      expect(messages.projectDetail.viewDetails).toBe(label)
+    }
+  )
 })

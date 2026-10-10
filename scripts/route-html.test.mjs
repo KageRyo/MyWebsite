@@ -4,7 +4,13 @@ import { createI18n } from 'vue-i18n'
 import en from '../src/locales/en'
 import ja from '../src/locales/ja'
 import zhTW from '../src/locales/zh-TW'
-import { renderRouteHtml, staticRoutes, toPlainText } from './route-html.mjs'
+import {
+  renderRouteHtml,
+  routeFile,
+  SITE_URL,
+  staticRoutes,
+  toPlainText
+} from './route-html.mjs'
 
 const indexHtml = readFileSync(
   new URL('../index.html', import.meta.url),
@@ -54,10 +60,33 @@ describe('renderRouteHtml', () => {
     }
   })
 
-  it('include the KServe case study page', () => {
-    expect(staticRoutes.map(({ path }) => path)).toContain(
-      '/case-studies/kserve'
+  it('serve Projects as a folder index with the KServe detail page inside it', () => {
+    expect(staticRoutes.map(({ path }) => path)).toEqual(
+      expect.arrayContaining(['/projects/', '/projects/kserve'])
     )
+    expect(staticRoutes.map(({ path }) => path)).not.toContain('/projects')
+  })
+
+  it.each([
+    ['/about', 'about.html'],
+    ['/projects/', 'projects/index.html'],
+    ['/projects/kserve', 'projects/kserve.html']
+  ])('write %s to %s', (path, file) => {
+    expect(routeFile(path)).toBe(file)
+  })
+
+  it('list every pre-rendered page in the sitemap', () => {
+    const sitemap = readFileSync(
+      new URL('../public/sitemap.xml', import.meta.url),
+      'utf8'
+    )
+    const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
+      ([, url]) => url
+    )
+    expect(locations).toEqual([
+      `${SITE_URL}/`,
+      ...staticRoutes.map(({ path }) => `${SITE_URL}${path}`)
+    ])
   })
 
   it('fails loudly when a tag is missing', () => {

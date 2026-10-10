@@ -32,12 +32,12 @@
           {{ $t('projects.featured.privateSource') }}
         </div>
         <router-link
-          v-if="project.caseStudy"
-          :to="`/case-studies/${project.caseStudy}`"
+          v-if="project.detail"
+          :to="`/projects/${project.detail}`"
           class="ts-button is-small is-start-icon has-top-spaced-small"
         >
           <span class="ts-icon is-book-open-icon"></span>
-          {{ $t('caseStudies.readCaseStudy') }}
+          {{ $t('projectDetail.viewDetails') }}
         </router-link>
       </div>
     </article>

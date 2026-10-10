@@ -13,14 +13,14 @@ const renderCard = id =>
   })
 
 describe('ProjectCard', () => {
-  it('links the KServe card to its case study', async () => {
+  it('links the KServe card to its project detail page', async () => {
     const html = await renderCard('kserve')
     expect(html).toMatch(
-      /<a[^>]*href="\/case-studies\/kserve"[^>]*>[\s\S]*?閱讀案例研究/
+      /<a[^>]*href="\/projects\/kserve"[^>]*>[\s\S]*?查看專案介紹/
     )
   })
 
-  it('shows no case study link for projects without one', async () => {
-    expect(await renderCard('tagTwin')).not.toContain('/case-studies/')
+  it('shows no detail link for projects without one', async () => {
+    expect(await renderCard('tagTwin')).not.toContain('查看專案介紹')
   })
 })
