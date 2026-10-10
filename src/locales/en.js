@@ -236,7 +236,7 @@ export default {
           platform: 'Cloud Native & MLOps',
           linux: 'Linux Systems & GPU Server Operations',
           projectManagement: 'Project Management & International Collaboration',
-          digitalIc: 'Digital IC Design (coursework)',
+          digitalIc: 'Digital IC Design',
         },
         descriptions: {
           languages: 'Python is my main language, and I also write Go; ReleaseGuard and LineageGuard in my open-source data tools are written in Rust.',
