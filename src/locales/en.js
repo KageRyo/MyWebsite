@@ -94,11 +94,13 @@ export default {
         items: {
           ccu: {
             period: 'Aug 2025 – Aug 2027 (expected)',
-            school: 'National Chung Cheng University / M.S. in Computer Science and Information Engineering',
+            school: 'National Chung Cheng University',
+            degree: 'M.S. in Computer Science and Information Engineering',
           },
           nutc: {
             period: 'Sep 2021 – Jun 2025',
-            school: 'National Taichung University of Science and Technology / B.Eng. in Intelligent Production Engineering',
+            school: 'National Taichung University of Science and Technology',
+            degree: 'B.Eng. in Intelligent Production Engineering',
           },
         },
       },
@@ -107,7 +109,8 @@ export default {
         items: {
           ccuResearch: {
             period: 'Aug 2025 – Present',
-            company: 'National Chung Cheng University / Research Assistant / Project Lead',
+            organization: 'National Chung Cheng University',
+            role: 'Research Assistant / Project Lead',
             highlights: [
               'Lead a 4-member international team building a flood disaster digital twin platform with FastAPI, PostgreSQL/PostGIS, Redis, and Docker.',
               'Build APIs, spatial data pipelines, and ML inference workflows connecting simulation, GIS, decision support, and visualization.',
@@ -116,14 +119,16 @@ export default {
           },
           ccuSysadmin: {
             period: 'Aug 2025 – Present',
-            company: 'National Chung Cheng University / System Administrator',
+            organization: 'National Chung Cheng University',
+            role: 'System Administrator',
             highlights: [
               'Maintain Linux servers, GPU workstations, Docker environments, networking, storage, SSH access, and shared research infrastructure.',
             ],
           },
           paia: {
             period: 'Jul 2024 – Jun 2025',
-            company: 'PAIA Technology Co., Ltd. / Backend Software Engineer Intern',
+            organization: 'PAIA Technology Co., Ltd.',
+            role: 'Backend Software Engineer Intern',
             platform: 'Playful AI Arena',
             highlights: [
               'Developed backend services with Python, Django Ninja, Pydantic, PostgreSQL, and MongoDB.',
@@ -133,7 +138,8 @@ export default {
           },
           codingApe: {
             period: 'Mar 2023 – Jun 2025',
-            company: 'Coding APE Programming School / Programming Instructor',
+            organization: 'Coding APE Programming School',
+            role: 'Programming Instructor',
             corp: 'CODINGAPE CO., LTD.',
           },
         },

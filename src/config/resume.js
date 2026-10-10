@@ -1,23 +1,19 @@
-// 履歷資料：時間與職稱等文字放在 locales 的 about.resume.*，這裡只記錄順序、圖示與連結
+// 履歷資料：時間、學校與職稱等文字放在 locales 的 about.resume.*，這裡只記錄順序與連結
 export const resumePdfUrl = '/resume/Chien-Hsun_Chang_Resume.pdf'
 
-export const education = [
-  { id: 'ccu', icon: 'is-graduation-cap-icon' },
-  { id: 'nutc', icon: 'is-graduation-cap-icon' }
-]
+export const education = [{ id: 'ccu' }, { id: 'nutc' }]
 
 export const experience = [
-  { id: 'ccuResearch', icon: 'is-diagram-project-icon' },
-  { id: 'ccuSysadmin', icon: 'is-server-icon' },
+  { id: 'ccuResearch' },
+  { id: 'ccuSysadmin' },
   {
     id: 'paia',
-    icon: 'is-code-icon',
     link: {
       url: 'https://app.paia-arena.com/',
       labelKey: 'about.resume.experience.items.paia.platform'
     }
   },
-  { id: 'codingApe', icon: 'is-person-chalkboard-icon' }
+  { id: 'codingApe' }
 ]
 
 export const skillGroups = [

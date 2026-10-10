@@ -17,7 +17,8 @@ describe.each(Object.entries(locales))(
       for (const { id } of education) {
         expect(resume.education.items[id]).toMatchObject({
           period: expect.any(String),
-          school: expect.any(String)
+          school: expect.any(String),
+          degree: expect.any(String)
         })
       }
     })
@@ -27,7 +28,8 @@ describe.each(Object.entries(locales))(
         const item = resume.experience.items[id]
         expect(item).toMatchObject({
           period: expect.any(String),
-          company: expect.any(String)
+          organization: expect.any(String),
+          role: expect.any(String)
         })
         expect(item.highlights?.length ?? 0).toBe(
           en.about.resume.experience.items[id].highlights?.length ?? 0

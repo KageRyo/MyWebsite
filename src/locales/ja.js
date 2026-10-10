@@ -94,11 +94,13 @@ export default {
         items: {
           ccu: {
             period: '2025年8月 ~ 2027年8月（修了予定）',
-            school: '国立中正大学 コンピュータサイエンス研究科 / 修士',
+            school: '国立中正大学',
+            degree: 'コンピュータサイエンス研究科 修士',
           },
           nutc: {
             period: '2021年9月 ~ 2025年6月',
-            school: '国立台中科技大学 インテリジェント生産工学科 / 学士',
+            school: '国立台中科技大学',
+            degree: 'インテリジェント生産工学科 学士',
           },
         },
       },
@@ -107,7 +109,8 @@ export default {
         items: {
           ccuResearch: {
             period: '2025年8月 ~ 現在',
-            company: '国立中正大学 / リサーチアシスタント・プロジェクトリード',
+            organization: '国立中正大学',
+            role: 'リサーチアシスタント・プロジェクトリード',
             highlights: [
               '4名の国際チームを率い、FastAPI、PostgreSQL/PostGIS、Redis、Docker でスマート防災デジタルツインシステム（TAG-Twin）を構築。',
               'シミュレーション、GIS、意思決定支援、可視化をつなぐ API、空間データパイプライン、ML 推論ワークフローを開発。',
@@ -116,14 +119,16 @@ export default {
           },
           ccuSysadmin: {
             period: '2025年8月 ~ 現在',
-            company: '国立中正大学 / システム管理者',
+            organization: '国立中正大学',
+            role: 'システム管理者',
             highlights: [
               'Linux サーバー、GPU ワークステーション、Docker 環境、ネットワーク、ストレージ、SSH アクセス、共有研究インフラを管理。',
             ],
           },
           paia: {
             period: '2024年7月 ~ 2025年6月',
-            company: 'PAIA Technology Co., Ltd. / バックエンドソフトウェアエンジニア（インターン）',
+            organization: 'PAIA Technology Co., Ltd.',
+            role: 'バックエンドソフトウェアエンジニア（インターン）',
             platform: 'Playful AI Arena, PAIA学習プラットフォーム',
             highlights: [
               'Python、Django Ninja、Pydantic、PostgreSQL、MongoDB でバックエンドサービスを開発。',
@@ -133,7 +138,8 @@ export default {
           },
           codingApe: {
             period: '2023年3月 ~ 2025年6月',
-            company: 'Coding APE プログラミングスクール / プログラミング講師',
+            organization: 'Coding APE プログラミングスクール',
+            role: 'プログラミング講師',
             corp: 'Bad Idea株式会社 (CODINGAPE CO., LTD.)',
           },
         },

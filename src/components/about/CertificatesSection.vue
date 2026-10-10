@@ -1,41 +1,44 @@
 <template>
-  <div class="ts-container has-top-spaced-large">
-    <!-- 證照（預設收合） -->
+  <section
+    class="ts-container editorial-section"
+    aria-labelledby="about-certificates"
+  >
+    <SectionKicker index="05" label="Certificates" />
+    <!-- 證照（次要資訊，預設收合） -->
     <details class="ts-accordion">
       <summary>
-        <h2 class="ts-header is-big is-heavy certificates-title">{{ $t('about.certificates.header') }}</h2>
+        <h2 id="about-certificates" class="ts-header is-big is-heavy certificates-title">{{ $t('about.certificates.header') }}</h2>
       </summary>
-      <div class="ts-box has-top-spaced-small">
-        <table class="ts-table">
-          <thead>
-            <tr>
-              <th>{{ $t('about.certificates.table.index') }}</th>
-              <th>{{ $t('about.certificates.table.year') }}</th>
-              <th>{{ $t('about.certificates.table.name') }}</th>
-              <th>{{ $t('about.certificates.table.level') }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(cert, index) in certificates" :key="index">
-              <td>{{ index + 1 }}</td>
-              <td>{{ cert.year }}</td>
-              <td>{{ cert.name }}</td>
-              <td>{{ cert.level || '' }}</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th :colspan="4">{{ $t('about.certificates.count', { count: certificates.length }) }}</th>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+      <table class="ts-table has-top-spaced">
+        <thead>
+          <tr>
+            <th>{{ $t('about.certificates.table.index') }}</th>
+            <th>{{ $t('about.certificates.table.year') }}</th>
+            <th>{{ $t('about.certificates.table.name') }}</th>
+            <th>{{ $t('about.certificates.table.level') }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(cert, index) in certificates" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ cert.year }}</td>
+            <td>{{ cert.name }}</td>
+            <td>{{ cert.level || '' }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th :colspan="4">{{ $t('about.certificates.count', { count: certificates.length }) }}</th>
+          </tr>
+        </tfoot>
+      </table>
     </details>
-  </div>
+  </section>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import SectionKicker from '../common/SectionKicker.vue'
 
 // 證照數據
 const certificates = ref([

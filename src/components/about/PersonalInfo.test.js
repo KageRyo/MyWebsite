@@ -21,6 +21,17 @@ describe('PersonalInfo', () => {
     )
   })
 
+  it('offers the resume PDF and the GitHub profile next to the introduction', async () => {
+    const html = await renderComponent(PersonalInfo)
+
+    expect(html).toMatch(
+      /<a[^>]*href="\/resume\/Chien-Hsun_Chang_Resume\.pdf"[^>]*download/
+    )
+    expect(html).toMatch(
+      /<a[^>]*href="https:\/\/github\.com\/KageRyo"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/
+    )
+  })
+
   it.each([
     ['en', /Gender: Male · Age: \d+/],
     ['ja', /性別：男性・年齢：\d+/]

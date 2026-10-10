@@ -94,11 +94,13 @@ export default {
         items: {
           ccu: {
             period: '2025/08 ~ 2027/08（預計畢業）',
-            school: '國立中正大學 資訊工程研究所 / 碩士',
+            school: '國立中正大學',
+            degree: '資訊工程研究所 碩士',
           },
           nutc: {
             period: '2021/09 ~ 2025/06',
-            school: '國立臺中科技大學 智慧生產工程系 / 學士',
+            school: '國立臺中科技大學',
+            degree: '智慧生產工程系 學士',
           },
         },
       },
@@ -107,7 +109,8 @@ export default {
         items: {
           ccuResearch: {
             period: '2025/08 ~ 現在',
-            company: '國立中正大學 / 研究助理／專案負責人',
+            organization: '國立中正大學',
+            role: '研究助理／專案負責人',
             highlights: [
               '帶領 4 人跨國團隊，以 FastAPI、PostgreSQL/PostGIS、Redis 與 Docker 建置智慧防災數位孿生系統（TAG-Twin）。',
               '開發 API、空間資料管線與 ML 推論流程，串接模擬、GIS、決策支援與視覺化。',
@@ -116,14 +119,16 @@ export default {
           },
           ccuSysadmin: {
             period: '2025/08 ~ 現在',
-            company: '國立中正大學 / 系統管理員',
+            organization: '國立中正大學',
+            role: '系統管理員',
             highlights: [
               '維護 Linux 伺服器、GPU 工作站、Docker 環境、網路、儲存設備、SSH 存取與共用研究基礎設施。',
             ],
           },
           paia: {
             period: '2024/07 ~ 2025/06',
-            company: 'PAIA 帕亞科技股份有限公司 / 後端軟體開發實習工程師',
+            organization: 'PAIA 帕亞科技股份有限公司',
+            role: '後端軟體開發實習工程師',
             platform: 'Playful AI Arena, PAIA 帕亞學習平台',
             highlights: [
               '使用 Python、Django Ninja、Pydantic、PostgreSQL 與 MongoDB 開發後端服務。',
@@ -133,7 +138,8 @@ export default {
           },
           codingApe: {
             period: '2023/03 ~ 2025/06',
-            company: 'Coding APE 猿創力程式設計學校 / 程式設計講師',
+            organization: 'Coding APE 猿創力程式設計學校',
+            role: '程式設計講師',
             corp: '壞主意股份有限公司(CODINGAPE CO., LTD.)',
           },
         },

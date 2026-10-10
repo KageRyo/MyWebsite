@@ -75,6 +75,42 @@ html:not(.is-dark) .ts-content.is-secondary > p {
     height: auto;
 }
 
+/* 編輯式版面（docs/ui-guidelines.md）：以留白、字級與分隔線建立層次，不替每個區塊加框 */
+.editorial-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+/* 相鄰區塊之間畫一條與內容同寬的分隔線，不延伸到容器左右留白 */
+.editorial-section + .editorial-section {
+    background: linear-gradient(var(--ts-gray-300), var(--ts-gray-300)) center top / calc(100% - 2 * var(--gap, 0px)) 1px no-repeat;
+}
+
+@media (max-width: 767.98px) {
+    .editorial-section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+}
+
+.reading-width {
+    max-width: 44rem;
+}
+
+.section-kicker {
+    margin: 0 0 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ts-gray-600);
+    font-variant-numeric: tabular-nums;
+}
+
+.section-kicker-index {
+    color: var(--ts-link-700);
+}
+
 /* 使文字可以左右對齊 */
 .justify-text {
     text-align: justify;
