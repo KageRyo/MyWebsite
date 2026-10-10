@@ -218,7 +218,6 @@ export default {
   contact: {
     page: {
       heroTitle: 'Chien-Hsun Chang',
-      heroSubtitle: 'Developer, Programmer, and Student in TAIWAN.',
     },
     info: {
       header: 'Contact Information',
