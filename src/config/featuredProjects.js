@@ -1,3 +1,10 @@
+// 圖片以模組匯入，正式建置時才會被打包並換成實際的檔案網址
+import kserveMergeImage from '../../assets/img/kserve-merge.webp'
+import tagTwinImage from '../../assets/img/tag-twin.webp'
+import federatedAqiImage from '../../assets/img/federated-aqi.webp'
+import environmentalEnforcementImage from '../../assets/img/environmental-enforcement.webp'
+import waterMirrorImage from '../../assets/img/watermirror.webp'
+
 // 精選專案依最新履歷排序；標題、角色、期間與摘要放在 locales 的 projects.featured.items.*
 // 未公開原始碼的專案不提供連結，避免指向私人儲存庫。
 // image 是已確認可公開的截圖或照片（替代文字在 projects.featured.items.<id>.imageAlt）；
@@ -5,7 +12,7 @@
 export const featuredProjects = [
   {
     id: 'kserve',
-    image: { src: '/assets/img/kserve-merge.webp', width: 800, height: 450 },
+    image: { src: kserveMergeImage, width: 800, height: 450 },
     detail: 'kserve',
     stack: ['Python', 'Go', 'Kubernetes', 'CRD', 'Helm'],
     links: [
@@ -40,7 +47,7 @@ export const featuredProjects = [
   },
   {
     id: 'tagTwin',
-    image: { src: '/assets/img/tag-twin.webp', width: 800, height: 450 },
+    image: { src: tagTwinImage, width: 800, height: 450 },
     stack: [
       'FastAPI',
       'PostgreSQL/PostGIS',
@@ -76,7 +83,7 @@ export const featuredProjects = [
   },
   {
     id: 'federatedAqi',
-    image: { src: '/assets/img/federated-aqi.webp', width: 800, height: 450 },
+    image: { src: federatedAqiImage, width: 800, height: 450 },
     stack: ['PyTorch', 'Flower', 'Kubernetes', 'Kubeflow', 'KServe', 'Grafana'],
     links: [],
     related: [
@@ -100,7 +107,7 @@ export const featuredProjects = [
   {
     id: 'environmentalEnforcement',
     image: {
-      src: '/assets/img/environmental-enforcement.webp',
+      src: environmentalEnforcementImage,
       width: 800,
       height: 450
     },
@@ -118,7 +125,7 @@ export const featuredProjects = [
   },
   {
     id: 'waterMirror',
-    image: { src: '/assets/img/watermirror.webp', width: 800, height: 450 },
+    image: { src: waterMirrorImage, width: 800, height: 450 },
     stack: [
       'Python',
       'FastAPI',
