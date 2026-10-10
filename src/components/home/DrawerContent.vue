@@ -11,7 +11,7 @@
   <!-- 邊緣收屜 -->
   <div
     ref="drawer"
-    class="ts-app-drawer is-right" 
+    class="ts-app-drawer is-end" 
     id="more"
     :class="{ 'is-visible': modalStore.appDrawerVisible }"
     :inert="!modalStore.appDrawerVisible"
@@ -31,7 +31,7 @@
           <div class="column">
             <button
               ref="closeButton"
-              class="ts-button is-rounded is-outline is-small"
+              class="ts-button is-rounded is-outlined is-small"
               @click="modalStore.closeAppDrawer"
               aria-label="關閉選單"
               type="button"
