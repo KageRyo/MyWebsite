@@ -15,17 +15,17 @@ These rules guide the v3 UI/UX refresh tracked in #91. They are a small, practic
 
 Cards are for **choosing between things**. Everything else is laid out with typography, whitespace and hairline dividers.
 
-| Content           | Pattern                                   | Why                                                                      |
-| ----------------- | ----------------------------------------- | ------------------------------------------------------------------------ |
-| Home hero         | Illustration + greeting box, two columns  | Keeps the personal identity first                                        |
-| Home projects     | Image cards (image on top, text below)    | Visitors pick a project; the cards follow the original home card layout  |
-| Education         | Horizontal entries, no border             | Only two short entries                                                   |
-| Experience        | Full-width rows: period, role, highlights | Longer text reads better at full width, without empty space on the right |
-| Skills            | One tinted panel with labelled chip rows  | The only boxed block on About; chips scan quickly                        |
-| Certificates      | Collapsed accordion                       | Secondary information                                                    |
-| Projects overview | Cards                                     | Visitors compare and choose projects                                     |
-| Project detail    | Article with side headings                | Continuous reading; diagrams and evidence are the visual anchors         |
-| Media / coverage  | Thumbnail + source + headline rows        | Like a news list, only when real coverage exists                         |
+| Content           | Pattern                                   | Why                                                                          |
+| ----------------- | ----------------------------------------- | ---------------------------------------------------------------------------- |
+| Home hero         | Illustration + greeting box, two columns  | Keeps the personal identity first                                            |
+| Home card row     | Swipeable row of cards at the bottom      | The original home cards (KageRyo Developer + projects); visitors browse them |
+| Education         | Horizontal entries, no border             | Only two short entries                                                       |
+| Experience        | Full-width rows: period, role, highlights | Longer text reads better at full width, without empty space on the right     |
+| Skills            | One tinted panel with labelled chip rows  | The only boxed block on About; chips scan quickly                            |
+| Certificates      | Collapsed accordion                       | Secondary information                                                        |
+| Projects overview | Cards                                     | Visitors compare and choose projects                                         |
+| Project detail    | Article with side headings                | Continuous reading; diagrams and evidence are the visual anchors             |
+| Media / coverage  | Thumbnail + source + headline rows        | Like a news list, only when real coverage exists                             |
 
 A bordered `ts-box` is appropriate when the block is one choosable item among peers, or a self-contained widget (modal, form, table). It is **not** appropriate to wrap a paragraph, a timeline entry, or a whole page section.
 
@@ -53,7 +53,7 @@ A bordered `ts-box` is appropriate when the block is one choosable item among pe
 
 The section kicker is a small label above a section heading, such as `02 / Problem`: 0.8rem, uppercase, `0.12em` tracking, `--ts-gray-600`, with the number in the KageRyo accent. It is always English, like the shared headline, and `aria-hidden` because the `h2` carries the meaning.
 
-Headings stay sequential (`h1` → `h2` → `h3`). Numbered kickers are only used where the sections really are a sequence: the project detail story (contributions → problem → … → outcomes). About and Home use plain `h2` headings; numbering sections that are not a sequence reads as template chrome. A heading may be visually hidden (`.visually-hidden`) when the content explains itself, as for the Home project cards, but it stays in the document for screen readers.
+Headings stay sequential (`h1` → `h2` → `h3`). Numbered kickers are only used where the sections really are a sequence: the project detail story (contributions → problem → … → outcomes). About and Home use plain `h2` headings; numbering sections that are not a sequence reads as template chrome. A heading may be visually hidden (`.visually-hidden`) when the content explains itself, as for the Home card row, but it stays in the document for screen readers.
 
 ## Images, diagrams and media
 
@@ -62,7 +62,9 @@ Headings stay sequential (`h1` → `h2` → `h3`). Numbered kickers are only use
 - Recommended ratios: hero 16:9, screenshots at native ratio (16:10 or 16:9), event photos 3:2.
 - Diagrams are built in HTML/CSS when they are simple flows, so they translate, adapt to dark mode and stay readable by screen readers. Cite the source (for example the pull request) in the caption.
 - Missing media renders nothing on project detail pages — no placeholders, no empty sections.
-- Home project cards always show a 16:9 media area (21:9 on mobile). Until a public image is provided through the project data, it shows the KageRyo cover: the illustration's black background, a striped circle and a neon-green ring with a project icon. The cover is decorative (`aria-hidden`).
+- **Home card row:** the cards keep the original home card style: a 16:9 picture on top, a centered title, a short paragraph and round icon links. The first card is KageRyo Developer, followed by the projects listed in `homeCards` (`src/config/featuredProjects.js`). Project pictures are owner-provided public images, cropped to 16:9 and served as 800×450 WebP without metadata; a project without one shows the KageRyo cover (the illustration's black background, a striped circle and a neon-green ring with a project icon, `aria-hidden`).
+- The row scrolls sideways (touch, trackpad, or the previous / next buttons, which disable at either end), snaps to cards and shows part of the next card as a hint: about 3¼ cards on desktop, 2¼ on tablets and 1¼ on mobile. It never auto-rotates.
+- Card text in narrow columns is left-aligned, not justified, so long identifiers don't stretch the lines.
 
 ## Links, buttons and states
 
@@ -70,13 +72,12 @@ Headings stay sequential (`h1` → `h2` → `h3`). Numbered kickers are only use
 - Inline links keep the underline; external links use `is-external-link` and open in a new tab with `rel="noopener noreferrer"`.
 - Evidence links (PRs, issues, publications) show their status as text, never by color alone.
 - The global focus ring (3px `#005fcc`, 3px offset) applies to every interactive element, including TocasUI buttons; don't remove it. Non-interactive regions focused by script (the main region after navigation) don't draw it.
-- A card that is one choice uses a single link stretched over the card (one tab stop); the focus ring is drawn around the card.
 - Avoid template tells: no `→` appended to link text.
 
 ## Color and theming
 
 - Use TocasUI tokens (`--ts-gray-*`, `--ts-link-700`, `ts-content is-tertiary`), which already switch through `light-dark()`, plus the KageRyo accent. No raw hex values in components, except the fixed colors of the KageRyo cover, which copy the illustration.
-- **KageRyo accent:** `--kageryo-green` (`#b0ff30`, the illustration's neon green) for dark surfaces such as the top bar and the project covers, and `--kageryo-accent`, which is `#457000` on light backgrounds (about 5.9:1 on white) and the illustration green in dark mode. Spend it in a few places only: the active navigation tab, the project covers and card links, and the kicker numbers.
+- **KageRyo accent:** `--kageryo-green` (`#b0ff30`, the illustration's neon green) for dark surfaces such as the top bar and the project covers, and `--kageryo-accent`, which is `#457000` on light backgrounds (about 5.9:1 on white) and the illustration green in dark mode. Spend it in a few places only: the active navigation tab, the project covers and the kicker numbers.
 - Text contrast is at least 4.5:1 in both themes: `--ts-gray-600` on the page background is about 7:1 in light mode, and `--ts-gray-500` / `--ts-gray-600` are 8:1 or more in dark mode.
 - Dividers use `--ts-gray-300`, which is visible in both themes.
 
@@ -100,19 +101,19 @@ No new animations. Hover and focus changes may transition color only. The global
 │                                         │ [Resume] [See More] │ │
 │                                         └─────────────────────┘ │
 └─────────────────────────────────────────────────────────────────┘
- (visually hidden h2: Selected Work)
- ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
- │ image / cover │ │ image / cover │ │ image / cover │
- │ Open Source   │ │ Backend & DT  │ │ FL & MLOps    │
- │ KServe (CNCF) │ │ TAG-Twin …    │ │ Federated AQI │
- │ summary …     │ │ summary …     │ │ summary …     │
- │ 1 PR merged   │ │ source private│ │ source private│
- └───────────────┘ └───────────────┘ └───────────────┘
- [All projects]
- Quote · Featured Photos · KageRyo Developer card
+ Quote
+ [Ministry of Education photo]  [COSCUP photo]
+ (visually hidden h2)
+ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──
+ │ [photo]  │ │ [image]  │ │ [image]  │ │ [ima
+ │ KageRyo  │ │  KServe  │ │ TAG-Twin │ │ Feder
+ │Developer │ │ text …   │ │ text …   │ │ text
+ │ text …   │ │ (○)(○)(○)│ │   (○)    │ │   (○
+ │(○)(○)(○)(○)└──────────┘ └──────────┘ └──
+ └──────────┘                      [‹] [›]
 ```
 
-Below 1200px the illustration and contact row sit on top and the greeting box spans the width with the greeting and the details side by side; below 768px everything stacks and the cards stack too.
+Below 1200px the illustration and contact row sit on top and the greeting box spans the width with the greeting and the details side by side; below 768px everything stacks, and the card row shows one card and part of the next.
 
 ### About — desktop (≥ 1024px)
 
