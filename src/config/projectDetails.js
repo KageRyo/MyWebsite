@@ -32,6 +32,9 @@ export const projectDetails = [
   }
 ]
 
-export const projectDetailsBySlug = Object.fromEntries(
+// 用 Map 查詢，避免 constructor、__proto__ 等繼承屬性被當成專案
+const projectDetailsBySlug = new Map(
   projectDetails.map(detail => [detail.slug, detail])
 )
+
+export const getProjectDetail = slug => projectDetailsBySlug.get(slug)

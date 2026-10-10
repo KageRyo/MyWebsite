@@ -52,7 +52,7 @@
             :key="item.name"
             :to="item.path" 
             class="item is-indented"
-            :class="{ 'is-active': $route.path === item.path }"
+            :class="{ 'is-active': isActiveNavPath($route.path, item.path) }"
             @click="handleNavClick"
           >
             <span class="ts-icon" :class="item.icon"></span>
@@ -74,6 +74,7 @@
 </template>
 
 <script setup>
+import { isActiveNavPath } from '../../router/guards'
 import { computed, toRef } from 'vue'
 import { useModalStore } from '../../stores/modal'
 import { useRoute } from 'vue-router'

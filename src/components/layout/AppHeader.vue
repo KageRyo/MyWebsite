@@ -11,7 +11,7 @@
           :key="item.name"
           :to="item.path"
           class="item"
-          :class="{ 'is-active': $route.path === item.path }"
+          :class="{ 'is-active': isActiveNavPath($route.path, item.path) }"
         >
           {{ item.label }}
         </router-link>
@@ -51,6 +51,7 @@
 </template>
 
 <script setup>
+import { isActiveNavPath } from '../../router/guards'
 import { computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useModalStore } from '../../stores/modal'

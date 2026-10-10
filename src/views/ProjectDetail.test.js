@@ -74,3 +74,15 @@ describe.each([
     )
   })
 })
+
+describe('ProjectDetail with an unknown slug', () => {
+  it.each(['not-a-project', 'constructor', '__proto__'])(
+    'renders nothing for %s instead of throwing',
+    async slug => {
+      const html = await renderComponent({
+        render: () => h(ProjectDetail, { slug })
+      })
+      expect(html).not.toContain('<h1')
+    }
+  )
+})

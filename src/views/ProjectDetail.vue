@@ -96,7 +96,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { projectDetailsBySlug } from '../config/projectDetails'
+import { getProjectDetail } from '../config/projectDetails'
 import { featuredProjects } from '../config/featuredProjects'
 
 const props = defineProps({
@@ -113,7 +113,7 @@ const sections = [
 ]
 const { tm, rt } = useI18n({ useScope: 'global' })
 
-const detail = computed(() => projectDetailsBySlug[props.slug])
+const detail = computed(() => getProjectDetail(props.slug))
 const project = computed(() =>
   featuredProjects.find(({ id }) => id === detail.value.projectId)
 )

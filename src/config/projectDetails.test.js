@@ -2,18 +2,18 @@ import { describe, expect, it } from 'vitest'
 import en from '../locales/en'
 import ja from '../locales/ja'
 import zhTW from '../locales/zh-TW'
-import { projectDetails, projectDetailsBySlug } from './projectDetails'
+import { getProjectDetail, projectDetails } from './projectDetails'
 import { featuredProjects } from './featuredProjects'
 
 describe('project detail pages', () => {
   it('include the KServe contributions', () => {
-    expect(projectDetailsBySlug.kserve).toBeDefined()
+    expect(getProjectDetail('kserve')).toBeDefined()
   })
 
   it('reuse the featured project pull request links so statuses stay in sync', () => {
     const kserve = featuredProjects.find(({ id }) => id === 'kserve')
     expect(
-      projectDetailsBySlug.kserve.contributions.map(({ pr }) => pr)
+      getProjectDetail('kserve').contributions.map(({ pr }) => pr)
     ).toEqual(kserve.links)
   })
 
@@ -34,7 +34,14 @@ describe('project detail pages', () => {
       expect(featuredProjects.some(({ detail }) => detail === slug)).toBe(true)
     }
     for (const { detail } of featuredProjects.filter(({ detail }) => detail)) {
-      expect(projectDetailsBySlug[detail]).toBeDefined()
+      expect(getProjectDetail(detail)).toBeDefined()
     }
   })
+
+  it.each(['constructor', 'toString', '__proto__', 'hasOwnProperty'])(
+    'do not treat the inherited %s property as a project',
+    slug => {
+      expect(getProjectDetail(slug)).toBeUndefined()
+    }
+  )
 })

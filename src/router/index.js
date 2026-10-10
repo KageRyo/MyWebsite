@@ -1,7 +1,7 @@
 import { nextTick, watch } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import i18n from '../i18n'
-import { projectDetailsBySlug } from '../config/projectDetails'
+import { resolveProjectDetailRoute } from './guards'
 
 const Home = () => import('../views/Home.vue')
 const About = () => import('../views/About.vue')
@@ -19,20 +19,7 @@ const routes = [
     path: '/projects/:slug',
     name: 'ProjectDetail',
     component: ProjectDetail,
-    props: true,
-    beforeEnter: to => {
-      const detail = projectDetailsBySlug[to.params.slug]
-      if (!detail) {
-        return {
-          name: 'NotFound',
-          params: { pathMatch: to.path.slice(1).split('/') },
-          query: to.query,
-          hash: to.hash
-        }
-      }
-      to.meta.titleKey = `meta.${detail.metaKey}.title`
-      to.meta.descriptionKey = `meta.${detail.metaKey}.description`
-    }
+    props: true
   },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound, meta: { titleKey: 'meta.notFound.title' } }
 ]
@@ -56,6 +43,8 @@ router.beforeEach(to => {
     }
   }
 })
+
+router.beforeEach(resolveProjectDetailRoute)
 
 const updateDocumentMeta = route => {
   document.title = route.meta.titleKey

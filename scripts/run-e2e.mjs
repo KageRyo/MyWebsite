@@ -300,6 +300,60 @@ const tests = {
     await context.close()
   },
 
+  async 'project detail URLs validate every slug and keep 作品集 active'(
+    browser
+  ) {
+    const desktop = await newPage(browser)
+    const { page } = desktop
+    const errors = []
+    page.on('pageerror', error => errors.push(error.message))
+    const navigate = path =>
+      page.evaluate(
+        target =>
+          document
+            .querySelector('#app')
+            .__vue_app__.config.globalProperties.$router.push(target),
+        path
+      )
+
+    for (const slug of ['constructor', 'toString', '__proto__']) {
+      await page.goto(`${baseUrl}/projects/${slug}`)
+      await page.getByRole('link', { name: '回到首頁' }).waitFor()
+    }
+
+    // 站內只換參數時同樣要檢查專案是否存在
+    await page.goto(`${baseUrl}/projects/kserve`)
+    assert.equal(
+      await page.locator('header nav .item.is-active').innerText(),
+      '作品集'
+    )
+    await navigate('/projects/not-a-project')
+    await page.getByRole('link', { name: '回到首頁' }).waitFor()
+    assert.match(await page.title(), /找不到頁面/)
+    await navigate('/projects/kserve')
+    await page
+      .getByRole('heading', { level: 1, name: 'KServe (CNCF) 開源貢獻' })
+      .waitFor()
+    assert.match(await page.title(), /KServe/)
+    assert.deepEqual(errors, [])
+    await desktop.context.close()
+
+    const mobile = await newPage(browser, {
+      viewport: { width: 390, height: 844 }
+    })
+    await mobile.page.goto(`${baseUrl}/projects/kserve`)
+    await mobile.page.getByRole('button', { name: '導航欄' }).click()
+    assert.equal(
+      (
+        await mobile.page
+          .locator('#mobile-navigation .item.is-active')
+          .innerText()
+      ).trim(),
+      '作品集'
+    )
+    await mobile.context.close()
+  },
+
   async 'trailing-slash URLs settle on the canonical route'(browser) {
     const { context, page } = await newPage(browser)
     // GitHub Pages 會把 /projects 導向 /projects/
