@@ -236,7 +236,7 @@ export default {
           platform: 'クラウドネイティブ・MLOps',
           linux: 'Linux システム・GPU サーバー運用',
           projectManagement: 'プロジェクト管理・国際協業',
-          digitalIc: 'デジタル IC 設計（授業での実習）',
+          digitalIc: 'デジタル IC 設計',
         },
         descriptions: {
           languages: 'Python を主に使い、Go の開発経験もあります。オープンソースのデータツールのうち ReleaseGuard と LineageGuard は Rust で開発しました。',

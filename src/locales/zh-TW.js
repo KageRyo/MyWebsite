@@ -236,7 +236,7 @@ export default {
           platform: '雲端原生與 MLOps',
           linux: 'Linux 系統與 GPU 伺服器維運',
           projectManagement: '專案管理與跨國協作',
-          digitalIc: '數位積體電路設計（課程實作）',
+          digitalIc: '數位積體電路設計',
         },
         descriptions: {
           languages: '以 Python 為主要開發語言，亦具 Go 開發經驗；開源資料工具中的 ReleaseGuard 與 LineageGuard 以 Rust 開發。',
