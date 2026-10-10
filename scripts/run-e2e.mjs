@@ -520,11 +520,12 @@ const tests = {
     await row.getByRole('link', { name: '在作品集查看' }).first().click()
     await page.waitForURL(`${baseUrl}/projects#project-tagTwin`)
     await page.locator('#project-tagTwin').waitFor()
+    // 卡片可能比視窗高，確認頁面捲到卡片開頭即可
     await page.waitForFunction(() => {
-      const { top, bottom } = document
+      const { top } = document
         .querySelector('#project-tagTwin')
         .getBoundingClientRect()
-      return top >= 0 && bottom <= window.innerHeight + 1
+      return top >= 0 && top < window.innerHeight / 2
     })
     await context.close()
   },
