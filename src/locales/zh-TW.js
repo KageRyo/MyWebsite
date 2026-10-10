@@ -47,7 +47,7 @@ export default {
       viewOnProjects: '在作品集查看',
       pullRequests: '{count} 個 Pull Request，{merged} 個已合併',
       items: {
-        kserve: '修正 KServe Python SDK 覆蓋使用者日誌設定的問題並合併至上游，也為 ServingRuntime 加入 runtimeClassName 支援。',
+        kserve: '修正 KServe Python SDK 覆蓋使用者日誌設定的問題，已合併至上游；另提交讓 ServingRuntime 支援 runtimeClassName 的 PR，目前仍在審查中。',
         tagTwin: '帶領 4 人跨國團隊，建置串接 GIS 資料、淹水模擬、避難路線與 Unreal Engine 視覺化的後端與資料平台。',
         federatedAqi: '負責 CCU × UBM 聯邦式空氣品質平台的系統規劃與整合，從 Flower 訓練一路串到部署、推論與 Grafana 監控。',
       },

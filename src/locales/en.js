@@ -47,7 +47,7 @@ export default {
       viewOnProjects: 'View on the Projects page',
       pullRequests: '{count} pull request, {merged} merged | {count} pull requests, {merged} merged',
       items: {
-        kserve: "Fixed KServe's Python SDK overriding user logging configuration (merged upstream) and added runtimeClassName support to ServingRuntimes.",
+        kserve: "Fixed KServe's Python SDK overriding user logging configuration, merged upstream; also submitted runtimeClassName support for ServingRuntimes, which is still under review.",
         tagTwin: 'Leading a 4-member international team building the backend and data platform that connects GIS data, flood simulation, evacuation routing, and Unreal Engine visualization.',
         federatedAqi: 'System planning and integration for the CCU × UBM federated AQI platform, from Flower training through deployment, inference, and Grafana monitoring.',
       },

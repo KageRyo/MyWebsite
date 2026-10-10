@@ -47,7 +47,7 @@ export default {
       viewOnProjects: 'プロジェクト一覧で見る',
       pullRequests: 'プルリクエスト {count} 件（{merged} 件マージ済み）',
       items: {
-        kserve: 'KServe の Python SDK がユーザーのロギング設定を上書きする問題を修正（アップストリームにマージ済み）し、ServingRuntime に runtimeClassName 対応を追加。',
+        kserve: 'KServe の Python SDK がユーザーのロギング設定を上書きする問題を修正し、アップストリームにマージ済み。ServingRuntime の runtimeClassName 対応も PR を提出し、現在レビュー中。',
         tagTwin: '4名の国際チームを率い、GIS データ、洪水シミュレーション、避難経路、Unreal Engine による可視化をつなぐバックエンドとデータ基盤を構築。',
         federatedAqi: 'CCU × UBM の連合学習による空気質基盤でシステム設計と統合を担当し、Flower による学習からデプロイ、推論、Grafana 監視までをつなぐ。',
       },

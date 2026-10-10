@@ -2,7 +2,11 @@ import { describe, expect, it } from 'vitest'
 import en from '../locales/en'
 import ja from '../locales/ja'
 import zhTW from '../locales/zh-TW'
-import { featuredProjects, openSourceTools } from './featuredProjects'
+import {
+  featuredProjects,
+  openSourceTools,
+  selectedWorkIds
+} from './featuredProjects'
 
 const locales = { 'zh-TW': zhTW, en, ja }
 
@@ -108,5 +112,14 @@ describe('official project names', () => {
     expect(en.projects.tools.header).toBe(
       'Open-Source Data Engineering & Governance Tools'
     )
+  })
+})
+
+describe('home selected work', () => {
+  it('only lists featured projects, so the home page can find each one', () => {
+    const ids = featuredProjects.map(({ id }) => id)
+    for (const id of selectedWorkIds) {
+      expect(ids).toContain(id)
+    }
   })
 })
