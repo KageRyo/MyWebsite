@@ -29,17 +29,33 @@ describe.each(Object.entries(locales))(
         expect(item).toMatchObject({
           period: expect.any(String),
           organization: expect.any(String),
-          role: expect.any(String)
+          role: expect.any(String),
+          summary: expect.any(String)
         })
+        expect(item.tools).toHaveLength(
+          en.about.resume.experience.items[id].tools.length
+        )
         expect(item.highlights?.length ?? 0).toBe(
           en.about.resume.experience.items[id].highlights?.length ?? 0
         )
       }
     })
 
-    it('labels every skill group', () => {
+    it('labels and describes every skill group', () => {
       for (const { id } of skillGroups) {
         expect(resume.skills.groups[id]).toEqual(expect.any(String))
+        expect(resume.skills.descriptions[id]).toEqual(expect.any(String))
+      }
+    })
+
+    it('labels every organization link', () => {
+      for (const { links } of experience) {
+        for (const { labelKey } of links) {
+          const label = labelKey
+            .split('.')
+            .reduce((value, key) => value?.[key], messages)
+          expect(label).toEqual(expect.any(String))
+        }
       }
     })
 
@@ -65,11 +81,11 @@ describe('official project names', () => {
     ['zh-TW', zhTW, '智慧防災數位孿生系統（TAG-Twin）'],
     ['ja', ja, 'スマート防災デジタルツインシステム（TAG-Twin）']
   ])(
-    'name TAG-Twin officially in the %s research highlight',
+    'name TAG-Twin officially in the %s research summary',
     (_name, messages, officialName) => {
-      const [firstHighlight] =
-        messages.about.resume.experience.items.ccuResearch.highlights
-      expect(firstHighlight).toContain(officialName)
+      expect(
+        messages.about.resume.experience.items.ccuResearch.summary
+      ).toContain(officialName)
     }
   )
 })

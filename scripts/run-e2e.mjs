@@ -393,7 +393,9 @@ const tests = {
     }
   },
 
-  async 'About experience puts highlights beside the role on desktop'(browser) {
+  async 'About experience puts the role details beside the role on desktop'(
+    browser
+  ) {
     for (const [width, beside] of [
       [1280, true],
       [390, false]
@@ -403,8 +405,8 @@ const tests = {
       })
       await page.goto(`${baseUrl}/about`)
       await page.locator('h1').first().waitFor()
-      const [role, highlights] = await Promise.all(
-        ['.experience-entry h3', '.experience-entry .highlights'].map(
+      const [role, detail] = await Promise.all(
+        ['.experience-entry h3', '.experience-entry .entry-detail'].map(
           selector =>
             page
               .locator(selector)
@@ -413,16 +415,10 @@ const tests = {
         )
       )
       if (beside) {
-        assert.ok(
-          highlights.left >= role.right,
-          'highlights sit under the role'
-        )
-        assert.ok(
-          highlights.top < role.bottom,
-          'highlights start below the role'
-        )
+        assert.ok(detail.left >= role.right, 'details sit under the role')
+        assert.ok(detail.top < role.bottom, 'details start below the role')
       } else {
-        assert.ok(highlights.top >= role.bottom, 'highlights overlap the role')
+        assert.ok(detail.top >= role.bottom, 'details overlap the role')
       }
       await context.close()
     }
