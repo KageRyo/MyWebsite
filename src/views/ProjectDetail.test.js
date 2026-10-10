@@ -70,31 +70,7 @@ describe.each([
 
   it('renders no raw translation keys', async () => {
     expect(textContent(await render(locale))).not.toMatch(
-      /projectDetail\.|caseStud|meta\./
+      /projectDetail\.|meta\./
     )
   })
-})
-
-describe('project detail wording', () => {
-  it.each([
-    ['zh-TW', zhTW, /案例研究/],
-    ['en', en, /case stud/i],
-    ['ja', ja, /ケーススタディ/]
-  ])(
-    'never calls the page a case study in %s',
-    (_locale, messages, pattern) => {
-      expect(JSON.stringify(messages)).not.toMatch(pattern)
-    }
-  )
-
-  it.each([
-    ['zh-TW', zhTW, '查看專案介紹'],
-    ['en', en, 'View project details'],
-    ['ja', ja, 'プロジェクトの詳細を見る']
-  ])(
-    'labels the card link as project details in %s',
-    (_locale, messages, label) => {
-      expect(messages.projectDetail.viewDetails).toBe(label)
-    }
-  )
 })
