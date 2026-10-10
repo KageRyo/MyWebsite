@@ -1,6 +1,6 @@
 <template>
   <div class="tablet+:column tablet+:is-8-wide mobile:ts-content">
-    <article class="ts-box project-card">
+    <article :id="`project-${project.id}`" class="ts-box project-card">
       <div class="ts-content is-secondary">
         <div class="ts-text is-description">{{ $t(`${itemKey}.category`) }}</div>
         <h3 class="ts-header is-heavy">{{ $t(`${itemKey}.title`) }}</h3>

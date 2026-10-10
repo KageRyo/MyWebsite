@@ -41,6 +41,17 @@ export default {
       downloadResume: '英文履歷（PDF）',
       seeMore: '查看更多',
     },
+    selectedWork: {
+      header: '精選作品',
+      allProjects: '查看所有作品',
+      viewOnProjects: '在作品集查看',
+      pullRequests: '{count} 個 Pull Request，{merged} 個已合併',
+      items: {
+        kserve: '修正 KServe Python SDK 覆蓋使用者日誌設定的問題並合併至上游，也為 ServingRuntime 加入 runtimeClassName 支援。',
+        tagTwin: '帶領 4 人跨國團隊，建置串接 GIS 資料、淹水模擬、避難路線與 Unreal Engine 視覺化的後端與資料平台。',
+        federatedAqi: '負責 CCU × UBM 聯邦式空氣品質平台的系統規劃與整合，從 Flower 訓練一路串到部署、推論與 Grafana 監控。',
+      },
+    },
     quote: {
       main: '人生和 Coding 一樣，都是從 print("Hello World"); 開始的。',
       cite: "人的出生是向世界問好，而 'Hello World' 賦予了我們新的篇章。",

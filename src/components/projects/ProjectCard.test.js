@@ -20,6 +20,12 @@ describe('ProjectCard', () => {
     )
   })
 
+  it('can be linked to directly by its project id', async () => {
+    expect(await renderCard('tagTwin')).toMatch(
+      /<article[^>]*id="project-tagTwin"/
+    )
+  })
+
   it('shows no detail link for projects without one', async () => {
     expect(await renderCard('tagTwin')).not.toContain('查看專案介紹')
   })

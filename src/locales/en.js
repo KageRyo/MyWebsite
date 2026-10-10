@@ -41,6 +41,17 @@ export default {
       downloadResume: 'Resume (PDF)',
       seeMore: 'See More',
     },
+    selectedWork: {
+      header: 'Selected Work',
+      allProjects: 'All projects',
+      viewOnProjects: 'View on the Projects page',
+      pullRequests: '{count} pull request, {merged} merged | {count} pull requests, {merged} merged',
+      items: {
+        kserve: "Fixed KServe's Python SDK overriding user logging configuration (merged upstream) and added runtimeClassName support to ServingRuntimes.",
+        tagTwin: 'Leading a 4-member international team building the backend and data platform that connects GIS data, flood simulation, evacuation routing, and Unreal Engine visualization.',
+        federatedAqi: 'System planning and integration for the CCU × UBM federated AQI platform, from Flower training through deployment, inference, and Grafana monitoring.',
+      },
+    },
     quote: {
       main: "Life and coding both start with print(\"Hello World\");",
       cite: "A person's birth greets the world, and 'Hello World' gives us a new chapter.",

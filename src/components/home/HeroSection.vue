@@ -43,10 +43,10 @@
                 {{ $t('home.hero.availability') }}
               </div>
 
-              <!-- 作品集與履歷 -->
+              <!-- 作品集與履歷：作品集是首頁唯一的主要按鈕 -->
               <div class="ts-grid is-compact mobile:is-stacked has-top-spaced">
                 <div class="column is-fluid">
-                  <router-link to="/projects" class="ts-button is-fluid is-outlined is-start-icon">
+                  <router-link to="/projects" class="ts-button is-fluid is-start-icon">
                     <span class="ts-icon is-folder-open-icon"></span>
                     {{ $t('home.hero.viewProjects') }}
                   </router-link>
@@ -60,7 +60,7 @@
               </div>
 
               <!-- 查看更多按鈕 -->
-              <button class="ts-button is-fluid is-start-icon has-top-spaced-small" @click="modalStore.showAppDrawer">
+              <button class="ts-button is-fluid is-outlined is-start-icon has-top-spaced-small" @click="modalStore.showAppDrawer">
                 <span class="ts-icon is-heart-icon"></span>
                 {{ $t('home.hero.seeMore') }}
               </button>

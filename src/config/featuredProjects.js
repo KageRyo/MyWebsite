@@ -44,6 +44,9 @@ export const featuredProjects = [
   }
 ]
 
+// 首頁「精選作品」依序挑出的專案，其餘仍在作品集頁面
+export const selectedWorkIds = ['kserve', 'tagTwin', 'federatedAqi']
+
 // 從研究資料整理過程拆出的開源工具，GitHub 封存清單中也找得到
 export const openSourceTools = [
   {

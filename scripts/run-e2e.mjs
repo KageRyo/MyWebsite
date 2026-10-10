@@ -409,6 +409,28 @@ const tests = {
     await context.close()
   },
 
+  async 'home selected work leads to project pages and cards'(browser) {
+    const { context, page } = await newPage(browser)
+    await page.goto(baseUrl)
+    const work = page.locator('section[aria-labelledby="home-selected-work"]')
+    await work.getByRole('link', { name: '查看專案介紹' }).click()
+    await page.waitForURL(`${baseUrl}/projects/kserve`)
+    await page.getByRole('heading', { level: 1 }).waitFor()
+
+    await page.goto(baseUrl)
+    await work.getByRole('link', { name: '在作品集查看' }).first().click()
+    await page.waitForURL(`${baseUrl}/projects#project-tagTwin`)
+    const card = page.locator('#project-tagTwin')
+    await card.waitFor()
+    await page.waitForFunction(() => {
+      const { top, bottom } = document
+        .querySelector('#project-tagTwin')
+        .getBoundingClientRect()
+      return top >= 0 && bottom <= window.innerHeight + 1
+    })
+    await context.close()
+  },
+
   async 'contact form previews the email and keeps a copy fallback'(browser) {
     const { context, page } = await newPage(browser)
     await context.grantPermissions(['clipboard-read', 'clipboard-write'], {
