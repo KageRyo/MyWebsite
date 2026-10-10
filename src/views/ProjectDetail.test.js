@@ -85,8 +85,10 @@ describe.each([
 
     for (const path of [
       'pull/4687',
+      'pull/4919',
       'pull/5198',
       'issues/3919',
+      'issues/4807',
       'issues/5057'
     ]) {
       expect(glance).toContain(
@@ -143,6 +145,25 @@ describe.each([
     expect(whenHandlersExist).toMatch(codeTag('return'))
     expect(textContent(whenNoHandlers).startsWith(copy.branch.no)).toBe(true)
     expect(whenNoHandlers).toMatch(codeTag('dictConfig()'))
+  })
+
+  it('validates the domain only when the controller creates the ingress', async () => {
+    const architecture = section(await render(locale), 'architecture')
+    const flows = [...architecture.matchAll(/<ol[^>]*>(.*?)<\/ol>/gs)].map(
+      ([, list]) => list
+    )
+    const { contributions } = getProjectDetail('kserve')
+    const domain =
+      flows[contributions.findIndex(({ id }) => id === 'domainValidation')]
+    const [whenDisabled, whenEnabled] = flowSteps(domain)
+      .at(-1)
+      .split(/<div class="flow-branch"[^>]*>/)
+      .slice(1)
+
+    expect(textContent(whenDisabled).startsWith(copy.branch.yes)).toBe(true)
+    expect(whenDisabled).toMatch(codeTag('return domainName'))
+    expect(textContent(whenEnabled).startsWith(copy.branch.no)).toBe(true)
+    expect(whenEnabled).toMatch(codeTag('IsFullyQualifiedDomainName()'))
   })
 
   it('shows no media section when the project has no media or coverage', async () => {

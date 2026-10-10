@@ -18,7 +18,7 @@ export default {
     },
     kserveProject: {
       title: 'KageRyo Developer - KServe (CNCF) 開源貢獻',
-      description: '張健勳在 CNCF KServe 的開源貢獻：修正 Python SDK 覆蓋使用者日誌設定的問題，並為 ServingRuntime 加入 runtimeClassName 支援。',
+      description: '張健勳在 CNCF KServe 的開源貢獻：修正 Python SDK 覆蓋使用者日誌設定的問題、修正停用 Ingress 建立時過長網域造成的調和失敗，並為 ServingRuntime 加入 runtimeClassName 支援。',
     },
     notFound: { title: 'KageRyo Developer - 找不到頁面' },
   },
@@ -164,7 +164,7 @@ export default {
           category: '開源貢獻',
           role: '開源貢獻者',
           period: '2025/09 ~ 現在',
-          summary: '修正 KServe 的 Python logging 問題，修補已合併至上游；並提交 ServingRuntimePodSpec 與 WorkerSpec 的 runtimeClassName 支援，包含測試與 CRD/OpenAPI 更新。',
+          summary: '修正 KServe 的 Python logging 問題，修補已合併至上游；並提交停用 Ingress 建立時過長網域的驗證修正，以及 ServingRuntimePodSpec 與 WorkerSpec 的 runtimeClassName 支援，包含測試與 CRD/OpenAPI 更新。',
         },
         tagTwin: {
           title: '智慧防災數位孿生系統（TAG-Twin）',
@@ -246,41 +246,51 @@ export default {
     kserve: {
       title: 'KServe (CNCF) 開源貢獻',
       overview: [
-        'KServe 是 CNCF 旗下、在 Kubernetes 上部署與管理機器學習模型推論服務的開源平台。我提交了兩項改動：修正 Python SDK 會覆蓋使用者日誌設定的問題，以及讓 ServingRuntime 可以指定 Kubernetes RuntimeClass。',
+        'KServe 是 CNCF 旗下、在 Kubernetes 上部署與管理機器學習模型推論服務的開源平台。我提交了三項改動：修正 Python SDK 會覆蓋使用者日誌設定的問題、修正停用 Ingress 建立時過長網域名稱讓 InferenceService 無法調和（reconcile）的問題，以及讓 ServingRuntime 可以指定 Kubernetes RuntimeClass。',
       ],
       problem: [
         '日誌設定：未傳入 log_config 時，configure_logging() 一律套用 KServe 預設的 dictConfig，覆蓋使用者已設定好的 handler 與格式，讓 KServe 難以整合進有自己日誌流程的應用程式（kserve/kserve#3919）。',
+        '網域驗證：在 RawDeployment 模式設定 disableIngressCreation: true 時，Ingress 與 HTTPRoute 由使用者自行管理，產生的網域只用於狀態顯示；但 namespace 與名稱組合過長、超過 DNS 標籤 63 字元上限時，嚴格的網域驗證仍會讓 InferenceService 調和失敗（kserve/kserve#4807）。',
         'RuntimeClass：ServingRuntime 無法指定 runtimeClassName（例如 nvidia、kata、gvisor），而這是使用 GPU passthrough 或沙箱容器執行環境時常見的需求（kserve/kserve#5057）。',
       ],
       role: [
-        '兩項改動皆由我實作並提交 Pull Request，內容包含程式修改、單元測試、自動產生檔案的更新與 PR 說明。',
+        '三項改動皆由我實作並提交 Pull Request，內容包含程式修改、單元測試、自動產生檔案的更新與 PR 說明。',
       ],
       architecture: [
         'Python SDK（kserve/logging.py）：在 configure_logging() 加入判斷，以 logger.hasHandlers() 偵測 kserve logger 上直接或繼承而來的 handler；未指定 log_config 且已有 handler 時直接返回，不再覆寫。',
+        'Go 控制器（ingress/domain.go）：GenerateDomainName() 與 GenerateInternalDomainName() 只在未停用 Ingress 建立時，才以 IsFullyQualifiedDomainName() 驗證產生的網域；停用時直接回傳網域。',
         'Go 控制器與 CRD：在 v1alpha1 的 ServingRuntimePodSpec 新增 RuntimeClassName 欄位，並在 InferenceService 的 MergePodSpec 中合併；WorkerSpec 透過內嵌結構一併支援。',
         '自動產生檔案：同步更新 CRD（Helm chart 與 config）、deepcopy、OpenAPI／Swagger，以及 Python SDK 的模型與文件。',
       ],
       tradeoffs: [
         '維持相容：只有在「未指定設定且已有 handler」時才略過預設設定；沒有自行設定日誌的使用者行為不變，明確傳入的 log_config 仍然優先。',
         '使用 hasHandlers() 而不是檢查 handler 數量，才能涵蓋從上層 logger 繼承的 handler。',
+        '只在 disableIngressCreation 為 true 時放寬網域驗證；由控制器建立 Ingress 時驗證行為不變，無效的路由設定仍會被擋下。',
         'runtimeClassName 沿用專案中 schedulerName（kserve/kserve#5073）的合併模式，與既有程式一致、也較容易審查；欄位為選填，不影響既有的 ServingRuntime。',
         'E2E 測試與官方文件更新列為後續項目，沒有包含在 PR 中。',
       ],
       outcomes: [
         '日誌修正（kserve/kserve#4687）已於 2026 年 3 月合併至上游，並新增三個單元測試：保留使用者的 handler、未設定時套用預設、明確設定時覆寫。',
+        '網域驗證修正（kserve/kserve#4919）新增兩個單元測試：停用 Ingress 建立時，過長的 DNS 標籤不再報錯；啟用時仍會驗證並回傳錯誤。PR 目前仍在審查中。',
         'runtimeClassName 支援（kserve/kserve#5198）新增合併與覆寫兩個單元測試，並在本機建立 runtimeClassName: nvidia 的 ServingRuntime，確認產生的 PodSpec 帶有該欄位。',
       ],
       contributions: {
         logging: '日誌設定修正',
+        domainValidation: '過長網域驗證修正',
         runtimeClassName: 'runtimeClassName 支援',
       },
       diagram: {
-        caption: '各項改動生效的位置，依 kserve/kserve#4687 與 kserve/kserve#5198 的程式變更繪製。',
+        caption: '各項改動生效的位置，依 kserve/kserve#4687、#4919 與 #5198 的程式變更繪製。',
         steps: {
           logging: [
             '未傳入 log_config 時呼叫',
             '新增的檢查：kserve logger 上是否已有使用者設定（含繼承）的 handler？',
             ['直接返回，保留使用者的日誌設定', '套用 KServe 預設的日誌設定'],
+          ],
+          domainValidation: [
+            '依網域範本產生網域名稱',
+            '新增的檢查：Ingress 設定是否停用 Ingress 建立？',
+            ['直接回傳網域，只用於狀態顯示，路由由使用者自行管理', '照原本的方式驗證，無效的網域仍回傳錯誤'],
           ],
           runtimeClassName: [
             'ServingRuntimePodSpec 新增的選填欄位，例如 nvidia',

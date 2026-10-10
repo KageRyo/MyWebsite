@@ -375,7 +375,7 @@ const tests = {
             )
           )
         )
-      assert.equal(flows.length, 2)
+      assert.equal(flows.length, 3)
       for (const steps of flows) {
         for (let index = 1; index < steps.length; index += 1) {
           const [previous, current] = [steps[index - 1], steps[index]]

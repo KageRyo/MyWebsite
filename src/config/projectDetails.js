@@ -33,6 +33,23 @@ export const projectDetails = [
         }
       },
       {
+        id: 'domainValidation',
+        // 停用 Ingress 建立時只回傳網域，不再驗證
+        flow: [
+          'GenerateDomainName()',
+          'DisableIngressCreation',
+          [
+            { when: 'yes', code: 'return domainName' },
+            { when: 'no', code: 'IsFullyQualifiedDomainName()' }
+          ]
+        ],
+        pr: kservePullRequest(4919),
+        issue: {
+          label: 'kserve/kserve#4807',
+          url: 'https://github.com/kserve/kserve/issues/4807'
+        }
+      },
+      {
         id: 'runtimeClassName',
         flow: ['spec.runtimeClassName', 'MergePodSpec()', 'PodSpec'],
         pr: kservePullRequest(5198),
