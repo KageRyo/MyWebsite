@@ -4,6 +4,9 @@ import { featuredProjects } from '../../config/featuredProjects'
 import { renderComponent, textContent } from '../../test-utils/renderComponent'
 import ProjectCard from './ProjectCard.vue'
 
+// 把字串當成字面文字放進正規表示式，所有特殊字元（含反斜線）都要跳脫
+const escapeRegExp = text => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
 const renderCard = id =>
   renderComponent({
     render: () =>
@@ -52,7 +55,7 @@ describe('ProjectCard', () => {
       expect(textContent(html)).toContain(source)
       expect(html).toMatch(
         new RegExp(
-          `<a[^>]*href="${url.replace(/[.?]/g, '\\$&')}"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*lang="${lang}"[^>]*>${title}</a>`
+          `<a[^>]*href="${escapeRegExp(url)}"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*lang="${lang}"[^>]*>${escapeRegExp(title)}</a>`
         )
       )
     }
