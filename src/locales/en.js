@@ -39,7 +39,6 @@ export default {
       availability: 'Available for 2027 pre-employment programs and R&D Substitute Service',
       viewProjects: 'View Projects',
       downloadResume: 'Resume (PDF)',
-      seeMore: 'See More',
     },
     quote: {
       main: "Life and coding both start with print(\"Hello World\");",
@@ -70,9 +69,12 @@ export default {
       projects: {
         kserve: 'Ongoing contributions to CNCF KServe across Python, Go, Kubernetes controllers and CRDs, and Helm. Fixed the Python SDK overriding user logging handlers, merged upstream; also submitted a fix for overlong domains when ingress creation is disabled and runtimeClassName support for ServingRuntimePodSpec and WorkerSpec, both still under review.',
         tagTwin: 'As lead of the digital twin system design group, I lead a 4-member international team building TAG-Twin, validated in Minxiong Township, Chiayi County. The core platform uses FastAPI, PostgreSQL/PostGIS, and Redis to integrate terrain, road, rainfall, flood, and risk data, and connects flood simulation and Unreal Engine 5 visualization through APIs and WebSocket.',
-        federatedAqi: 'Led system planning and technical integration for the CCU × UBM (Indonesia) image-based AQI federated learning project: connected training results from 7 Flower clients (Jakarta plus 6 stations in Taiwan), deployed inference with Docker, KServe, and the UBM AI Deployment Platform, and built Grafana monitoring.',
+        federatedAqi: 'Led system planning and technical integration for the CCU × UBM (Indonesia) image-based AQI federated learning project: connected training results from 7 Flower clients (Jakarta plus 6 stations in Taiwan), integrated inference and deployment with Kubernetes, Kubeflow, and KServe, and built Grafana monitoring.',
         environmentalEnforcement: 'An industry–academia environmental enforcement system that analyzes CCTV footage to flag suspected littering and public urination, keeping an evidence trail for human review. It combines D-FINE, ByteTrack, pose analysis, VLM, and OCR, separates GPU inference from post-processing to avoid repeated work, and is deployed in the field.',
-        waterMirror: 'This is a collaborative research project developed with my university friends. It is an intelligent water quality analysis and evaluation system based on the scikit-learn framework. The system analyzes specific water quality experimental data and achieves evaluation and early warning through artificial intelligence and machine learning.',
+        waterMirror: 'Designed and built a cross-platform AI water quality assessment system: a mobile front end and the WQSurrogateModels backend take manual or CSV water quality data and return a WQI5 score, class, and alerts. It compares linear regression, support vector machines, random forests, XGBoost, and LightGBM; the follow-up research was published in ICT Express.',
+      },
+      titles: {
+        waterMirror: 'WaterMirror Cross-Platform AI Water Quality Assessment',
       },
       images: {
         kserve: 'The merged KServe pull request #4687 on GitHub',

@@ -121,7 +121,7 @@ describe('home cards', () => {
     const ids = featuredProjects.map(({ id }) => id)
     for (const card of homeCards) {
       if (ids.includes(card.id)) continue
-      expect(card.title).toEqual(expect.any(String))
+      expect(card.titleKey).toEqual(expect.any(String))
       expect(card.links.length).toBeGreaterThan(0)
     }
   })
@@ -137,4 +137,20 @@ describe('home cards', () => {
       }
     }
   )
+})
+
+describe('related coverage and pages', () => {
+  it('give every related link a source, a title and an https address', () => {
+    const related = featuredProjects.flatMap(({ related = [] }) => related)
+
+    expect(related.length).toBeGreaterThan(0)
+    for (const link of related) {
+      expect(link).toMatchObject({
+        kind: expect.stringMatching(/^(news|page|paper)$/),
+        source: expect.any(String),
+        title: expect.any(String),
+        url: expect.stringMatching(/^https:\/\//)
+      })
+    }
+  })
 })

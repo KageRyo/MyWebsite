@@ -189,23 +189,6 @@ const tests = {
     await context.close()
   },
 
-  async 'see more drawer opens from the home page and returns focus'(browser) {
-    const { context, page } = await newPage(browser)
-    await page.goto(baseUrl)
-    const trigger = page.getByRole('button', { name: '查看更多' })
-    await trigger.click()
-    await page.waitForFunction(() => document.activeElement?.closest('#more'))
-    await page.keyboard.press('Escape')
-    await page.waitForFunction(() =>
-      document.querySelector('#more')?.hasAttribute('inert')
-    )
-    assert.equal(
-      await trigger.evaluate(element => element === document.activeElement),
-      true
-    )
-    await context.close()
-  },
-
   async 'GitHub archive tabs support keyboard selection and load each account'(
     browser
   ) {

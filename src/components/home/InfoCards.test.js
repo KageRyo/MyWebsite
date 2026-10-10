@@ -55,7 +55,13 @@ describe.each([
 
     expect(titles).toEqual([
       'KageRyo Developer',
-      ...homeCards.map(card => card.title ?? projects[card.id].title)
+      ...homeCards.map(card =>
+        card.titleKey
+          ? card.titleKey
+              .split('.')
+              .reduce((value, key) => value[key], messages)
+          : projects[card.id].title
+      )
     ])
   })
 
@@ -112,14 +118,16 @@ describe.each([
 
     homeCards.forEach((card, index) => {
       const project = featuredProjects.find(({ id }) => id === card.id)
+      const related = (project?.related ?? []).map(({ url }) => url)
       const expected = !project
         ? card.links.map(({ url }) => url)
         : project.detail
           ? [
               ...project.links.map(({ url }) => url),
-              `/projects/${project.detail}`
+              `/projects/${project.detail}`,
+              ...related
             ]
-          : [`/projects#project-${card.id}`]
+          : [`/projects#project-${card.id}`, ...related]
       expect(iconLinks(projectSlides[index]).map(({ href }) => href)).toEqual(
         expected
       )

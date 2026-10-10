@@ -39,7 +39,6 @@ export default {
       availability: '2027年の早期採用、および台湾の研究開発代替役（兵役の代わりに企業で研究開発業務に従事する制度）に対応可能',
       viewProjects: 'プロジェクト一覧',
       downloadResume: '履歴書（PDF）',
-      seeMore: 'もっと見る',
     },
     quote: {
       main: '人生とコーディングはどちらも print("Hello World"); から始まります。',
@@ -70,9 +69,12 @@ export default {
       projects: {
         kserve: 'CNCF KServe に継続的にコントリビュートし、Python、Go、Kubernetes のコントローラー／CRD、Helm を扱っています。Python SDK がユーザーのロギングハンドラーを上書きする問題を修正してアップストリームにマージされ、Ingress の作成を無効にしたときの長すぎるドメインの検証の修正と、ServingRuntimePodSpec／WorkerSpec の runtimeClassName 対応も PR を提出し、現在レビュー中です。',
         tagTwin: 'デジタルツインシステム設計グループのリーダーとして 4 名の国際チームを率い、嘉義県民雄郷を検証フィールドとする TAG-Twin を構築。FastAPI、PostgreSQL/PostGIS、Redis でコア基盤を作り、地形・道路・降雨・浸水・リスク情報を統合し、API／WebSocket で洪水シミュレーションと Unreal Engine 5 の可視化をつないでいます。',
-        federatedAqi: 'CCU × インドネシア UBM の画像による AQI 連合学習プロジェクトでシステム設計と技術統合を主導。ジャカルタと台湾 6 測定局の計 7 つの Flower クライアントの学習結果をつなぎ、Docker、KServe、UBM AI Deployment Platform で推論をデプロイし、Grafana による監視を構築しました。',
+        federatedAqi: 'CCU × インドネシア UBM の画像による AQI 連合学習プロジェクトでシステム設計と技術統合を主導。ジャカルタと台湾 6 測定局の計 7 つの Flower クライアントの学習結果をつなぎ、Kubernetes、Kubeflow、KServe で推論とデプロイを統合し、Grafana による監視を構築しました。',
         environmentalEnforcement: '産学連携の環境取締りシステムで、CCTV 映像からポイ捨てや不適切な排泄の疑いがある事象を検出し、人による確認のための証拠を記録します。D-FINE、ByteTrack、姿勢推定、VLM、OCR を組み合わせ、GPU 推論と後処理を分離して重複処理を避け、現場で運用されています。',
-        waterMirror: 'これは大学の友人と共同で開発した研究プロジェクトです。このプロジェクトは、scikit-learn フレームワークに基づいた、インテリジェントな水質分析および評価システムです。このシステムは、特定の水質実験データを分析し、人工知能と機械学習を通じて評価と早期警告を実現します。',
+        waterMirror: 'モバイルのフロントエンドと WQSurrogateModels バックエンドからなるクロスプラットフォームの AI 水質評価システムを設計・開発。手入力や CSV の水質データから WQI5 スコア、分類、警告を返します。線形回帰、SVM、ランダムフォレスト、XGBoost、LightGBM を比較し、発展研究は ICT Express 誌に掲載されました。',
+      },
+      titles: {
+        waterMirror: 'WaterMirror クロスプラットフォーム AI 水質評価システム',
       },
       images: {
         kserve: 'GitHub 上でマージされた KServe のプルリクエスト #4687',

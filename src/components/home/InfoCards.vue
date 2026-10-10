@@ -183,11 +183,17 @@ import { featuredProjects, homeCards } from '../../config/featuredProjects'
 
 const { t } = useI18n({ useScope: 'global' })
 
+const RELATED_ICONS = {
+  news: 'is-newspaper-icon',
+  page: 'is-globe-icon',
+  paper: 'is-file-lines-icon'
+}
+
 // 作品集裡的專案沿用作品集的標題與 PR 連結；有專案介紹頁就加上入口，沒有就連到作品集上的卡片
 const cards = computed(() =>
   homeCards.map(card => {
     const project = featuredProjects.find(({ id }) => id === card.id)
-    if (!project) return card
+    if (!project) return { ...card, title: t(card.titleKey) }
 
     const pullRequests = project.links.map(link => ({
       url: link.url,
@@ -210,10 +216,18 @@ const cards = computed(() =>
           label: t('home.infoCards.links.projectsPage'),
           internal: true
         }
+    // 公開報導、計畫頁與論文，標籤用原文的來源與標題
+    const related = (project.related ?? []).map(link => ({
+      url: link.url,
+      icon: RELATED_ICONS[link.kind],
+      label: `${link.source}｜${link.title}`
+    }))
     return {
       ...card,
       title: t(`projects.featured.items.${card.id}.title`),
-      links: project.detail ? [...pullRequests, page] : [page]
+      links: project.detail
+        ? [...pullRequests, page, ...related]
+        : [page, ...related]
     }
   })
 )

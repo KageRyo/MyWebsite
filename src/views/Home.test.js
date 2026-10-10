@@ -52,3 +52,14 @@ describe('Home introduction', () => {
     }
   })
 })
+
+describe('Home without the See More drawer', () => {
+  it('has no See More button or side drawer', async () => {
+    const html = await renderComponent(Home)
+
+    expect(html).not.toContain('id="more"')
+    expect(html).not.toMatch(
+      /<button[^>]*>\s*<span class="ts-icon is-heart-icon"/
+    )
+  })
+})

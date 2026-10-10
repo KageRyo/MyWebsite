@@ -72,11 +72,6 @@
                 </div>
               </div>
 
-              <!-- 查看更多按鈕 -->
-              <button class="ts-button is-fluid is-outlined is-start-icon has-top-spaced-small" @click="modalStore.showAppDrawer">
-                <span class="ts-icon is-heart-icon"></span>
-                {{ $t('home.hero.seeMore') }}
-              </button>
             </div>
           </div>
         </div>
@@ -87,10 +82,7 @@
 
 <script setup>
 import { headline } from '../../config/site'
-import { useModalStore } from '../../stores/modal'
 import { resumePdfUrl } from '../../config/resume'
-
-const modalStore = useModalStore()
 </script>
 
 <style scoped>
