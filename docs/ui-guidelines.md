@@ -15,17 +15,17 @@ These rules guide the v3 UI/UX refresh tracked in #91. They are a small, practic
 
 Cards are for **choosing between things**. Everything else is laid out with typography, whitespace and hairline dividers.
 
-| Content           | Pattern                                   | Why                                                                          |
-| ----------------- | ----------------------------------------- | ---------------------------------------------------------------------------- |
-| Home hero         | Illustration + greeting box, two columns  | Keeps the personal identity first                                            |
-| Home card row     | Swipeable row of cards at the bottom      | The original home cards (KageRyo Developer + projects); visitors browse them |
-| Education         | Horizontal entries, no border             | Only two short entries                                                       |
-| Experience        | Full-width rows: period, role, highlights | Longer text reads better at full width, without empty space on the right     |
-| Skills            | One tinted panel with labelled chip rows  | The only boxed block on About; chips scan quickly                            |
-| Certificates      | Collapsed accordion                       | Secondary information                                                        |
-| Projects overview | Cards                                     | Visitors compare and choose projects                                         |
-| Project detail    | Article with side headings                | Continuous reading; diagrams and evidence are the visual anchors             |
-| Media / coverage  | Thumbnail + source + headline rows        | Like a news list, only when real coverage exists                             |
+| Content           | Pattern                                    | Why                                                                          |
+| ----------------- | ------------------------------------------ | ---------------------------------------------------------------------------- |
+| Home hero         | Illustration + greeting box, two columns   | Keeps the personal identity first                                            |
+| Home card row     | Swipeable row of cards at the bottom       | The original home cards (KageRyo Developer + projects); visitors browse them |
+| Education         | Horizontal entries, no border              | Only two short entries                                                       |
+| Experience        | Full-width rows: period, role, highlights  | Longer text reads better at full width, without empty space on the right     |
+| Expertise         | One tinted panel: area, description, chips | The only boxed block on About; follows the CV's areas of expertise           |
+| Certificates      | Plain table, always shown                  | The owner wants the full list visible                                        |
+| Projects overview | Cards with a picture and coverage links    | Visitors compare and choose projects; evidence sits on the card              |
+| Project detail    | Article with side headings                 | Continuous reading; diagrams and evidence are the visual anchors             |
+| Media / coverage  | Thumbnail + source + headline rows         | Like a news list, only when real coverage exists                             |
 
 A bordered `ts-box` is appropriate when the block is one choosable item among peers, or a self-contained widget (modal, form, table). It is **not** appropriate to wrap a paragraph, a timeline entry, or a whole page section.
 
@@ -54,6 +54,12 @@ A bordered `ts-box` is appropriate when the block is one choosable item among pe
 The section kicker is a small label above a section heading, such as `02 / Problem`: 0.8rem, uppercase, `0.12em` tracking, `--ts-gray-600`, with the number in the KageRyo accent. It is always English, like the shared headline, and `aria-hidden` because the `h2` carries the meaning.
 
 Headings stay sequential (`h1` → `h2` → `h3`). Numbered kickers are only used where the sections really are a sequence: the project detail story (contributions → problem → … → outcomes). About and Home use plain `h2` headings; numbering sections that are not a sequence reads as template chrome. A heading may be visually hidden (`.visually-hidden`) when the content explains itself, as for the Home card row, but it stays in the document for screen readers.
+
+## Content sources
+
+- About, Home and Projects copy follows the owner's Chinese CV, with the 104 resume as a secondary source. The English autobiography on About is the CV's own English text.
+- Never publish contact details, addresses, referees or transcripts from those documents.
+- Related links (news coverage, program pages, papers, repositories) come from the CV and keep their original source name and headline, marked with `lang`.
 
 ## Images, diagrams and media
 
@@ -145,7 +151,7 @@ Below 1200px the illustration and contact row sit on top and the greeting box sp
  ░ Languages       [Python] [Go] [Rust] …                        ░
  ░ Backend & Data  [FastAPI] …                                   ░
  ─────────────────────────────────────────────────────────────────
- Certificates ▸ (collapsed)
+ Certificates (table, always shown)
 ```
 
 ### About — mobile (390px)
