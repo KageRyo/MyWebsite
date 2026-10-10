@@ -13,7 +13,9 @@ describe('production build', () => {
       .map(({ code }) => code)
       .join('\n')
     const referenced = [
-      ...new Set(code.match(/\/assets\/[\w./-]+\.(?:webp|png|jpe?g|svg)/g) ?? [])
+      ...new Set(
+        code.match(/\/assets\/[\w./-]+\.(?:webp|png|jpe?g|svg)/g) ?? []
+      )
     ]
 
     expect(referenced.length).toBeGreaterThan(0)
