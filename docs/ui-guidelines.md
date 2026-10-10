@@ -9,32 +9,34 @@ These rules guide the v3 UI/UX refresh tracked in #91. They are a small, practic
 - Vue 3 + TocasUI 5.7, the four main routes (`/`, `/about`, `/projects`, `/contact`) and optional `/projects/:slug` detail pages.
 - zh-TW / en / ja, light / dark themes, the deliberate mixed-language copy (for example "A Student && Developer from Taiwan." next to Chinese text).
 - Personal elements: the KageRyo illustration and greeting, the Quote, Featured Photos, the "See More" drawer, profile photos, the shared career headline under every page title.
-- Noto Sans TC, the TocasUI palette and the existing focus ring. No new fonts, colors or animation libraries.
+- Noto Sans TC, the TocasUI palette and the existing focus ring. No new fonts or animation libraries; the only added color is the KageRyo accent (see below).
 
 ## Choose the container by content type
 
 Cards are for **choosing between things**. Everything else is laid out with typography, whitespace and hairline dividers.
 
-| Content            | Pattern                                  | Why                                                                           |
-| ------------------ | ---------------------------------------- | ----------------------------------------------------------------------------- |
-| Home hero          | Image + text, two columns                | Keeps the personal identity first                                             |
-| Home selected work | Columns with a top rule, no box          | Visitors pick a project, but three boxes in a row would look like a dashboard |
-| Education          | Horizontal entries, no border            | Only two short entries                                                        |
-| Experience         | Full-width rows with a date column       | Longer text reads better at full width                                        |
-| Skills             | One tinted panel with labelled chip rows | The only boxed block on About; chips scan quickly                             |
-| Certificates       | Collapsed accordion                      | Secondary information                                                         |
-| Projects overview  | Cards                                    | Visitors compare and choose projects                                          |
-| Project detail     | Article with side headings               | Continuous reading; diagrams and evidence are the visual anchors              |
-| Media / coverage   | Thumbnail + source + headline rows       | Like a news list, only when real coverage exists                              |
+| Content           | Pattern                                   | Why                                                                      |
+| ----------------- | ----------------------------------------- | ------------------------------------------------------------------------ |
+| Home hero         | Illustration + greeting box, two columns  | Keeps the personal identity first                                        |
+| Home projects     | Image cards (image on top, text below)    | Visitors pick a project; the cards follow the original home card layout  |
+| Education         | Horizontal entries, no border             | Only two short entries                                                   |
+| Experience        | Full-width rows: period, role, highlights | Longer text reads better at full width, without empty space on the right |
+| Skills            | One tinted panel with labelled chip rows  | The only boxed block on About; chips scan quickly                        |
+| Certificates      | Collapsed accordion                       | Secondary information                                                    |
+| Projects overview | Cards                                     | Visitors compare and choose projects                                     |
+| Project detail    | Article with side headings                | Continuous reading; diagrams and evidence are the visual anchors         |
+| Media / coverage  | Thumbnail + source + headline rows        | Like a news list, only when real coverage exists                         |
 
 A bordered `ts-box` is appropriate when the block is one choosable item among peers, or a self-contained widget (modal, form, table). It is **not** appropriate to wrap a paragraph, a timeline entry, or a whole page section.
 
 ## Layout
 
-- **Container:** TocasUI `ts-container` (unchanged).
+- **Container:** TocasUI `ts-container` (unchanged). Page banners and the content below share one left edge: banners only add vertical padding, and containers are never nested.
 - **Sections:** `.editorial-section` (in `assets/css/style.css`) gives each page section `3rem` vertical padding (`2rem` below 768px) and separates consecutive sections with a 1px `--ts-gray-300` rule.
 - **Reading width:** prose and long lists use `.reading-width` (max `44rem`, about 45 CJK or 75 Latin characters per line).
 - **Side headings:** on project detail pages, a section's kicker and `h2` sit in a narrow left column (about 30%) with the content on the right at 768px and up; they stack below 768px.
+- **Experience rows (About):** period, role and organization, then highlights in three columns at 1024px and up; two columns on tablets; one on mobile.
+- **Home introduction:** at 1200px and up the illustration (with the social links and email under it) sits beside the greeting box and is vertically centered against it; below 1200px the illustration is on top and the box lays the greeting and the details side by side.
 - **Spacing:** multiples of `0.25rem`; in practice `0.5 / 1 / 1.5 / 2 / 3rem`. Inside a section, related items are `1–1.5rem` apart; sections are `3rem` apart.
 - **Breakpoints:** TocasUI's (`mobile` < 768px, `tablet` 768–1023px, `desktop` ≥ 1024px). Every page must fit a 390px viewport without horizontal scrolling.
 
@@ -43,15 +45,15 @@ A bordered `ts-box` is appropriate when the block is one choosable item among pe
 | Role                               | Implementation                                      |
 | ---------------------------------- | --------------------------------------------------- |
 | Page title (banner)                | `h1.ts-header.is-huge.is-heavy` (30px), unchanged   |
-| Section kicker                     | `SectionKicker` component, see below                |
+| Section kicker (project details)   | `SectionKicker` component, see below                |
 | Section heading                    | `h2.ts-header.is-big.is-heavy` (24px)               |
 | Entry title                        | `h3.ts-header.is-heavy` (17px)                      |
 | Meta (dates, organisation, status) | `ts-text is-description`, tabular figures for dates |
 | Body                               | 15px TocasUI base, line-height 1.75                 |
 
-The section kicker is a small label above a section heading, such as `02 / Education`: 0.8rem, uppercase, `0.12em` tracking, `--ts-gray-600`, with the number in `--ts-link-700`. It is always English, like the shared headline, and `aria-hidden` because the `h2` carries the meaning.
+The section kicker is a small label above a section heading, such as `02 / Problem`: 0.8rem, uppercase, `0.12em` tracking, `--ts-gray-600`, with the number in the KageRyo accent. It is always English, like the shared headline, and `aria-hidden` because the `h2` carries the meaning.
 
-Headings stay sequential (`h1` → `h2` → `h3`). Kickers number the sections of one page in reading order (`01`, `02`, …) and are used on pages read top to bottom (About, project details). The home page keeps its own rhythm and uses plain `h2` headings.
+Headings stay sequential (`h1` → `h2` → `h3`). Numbered kickers are only used where the sections really are a sequence: the project detail story (contributions → problem → … → outcomes). About and Home use plain `h2` headings; numbering sections that are not a sequence reads as template chrome. A heading may be visually hidden (`.visually-hidden`) when the content explains itself, as for the Home project cards, but it stays in the document for screen readers.
 
 ## Images, diagrams and media
 
@@ -59,18 +61,22 @@ Headings stay sequential (`h1` → `h2` → `h3`). Kickers number the sections o
 - Always declare `width` / `height`; serve right-sized WebP; `loading="lazy"` below the fold; meaningful `alt`, and a visible caption with source or credit when the image is evidence.
 - Recommended ratios: hero 16:9, screenshots at native ratio (16:10 or 16:9), event photos 3:2.
 - Diagrams are built in HTML/CSS when they are simple flows, so they translate, adapt to dark mode and stay readable by screen readers. Cite the source (for example the pull request) in the caption.
-- Missing media renders nothing — no placeholders, no empty sections.
+- Missing media renders nothing on project detail pages — no placeholders, no empty sections.
+- Home project cards always show a 16:9 media area (21:9 on mobile). Until a public image is provided through the project data, it shows the KageRyo cover: the illustration's black background, a striped circle and a neon-green ring with a project icon. The cover is decorative (`aria-hidden`).
 
 ## Links, buttons and states
 
 - One filled (primary) button per block; the rest are outlined. On Home the primary action is **View Projects**.
 - Inline links keep the underline; external links use `is-external-link` and open in a new tab with `rel="noopener noreferrer"`.
 - Evidence links (PRs, issues, publications) show their status as text, never by color alone.
-- The global focus ring (3px `#005fcc`, 3px offset) applies to every interactive element; don't remove it.
+- The global focus ring (3px `#005fcc`, 3px offset) applies to every interactive element, including TocasUI buttons; don't remove it. Non-interactive regions focused by script (the main region after navigation) don't draw it.
+- A card that is one choice uses a single link stretched over the card (one tab stop); the focus ring is drawn around the card.
+- Avoid template tells: no `→` appended to link text.
 
 ## Color and theming
 
-- Use TocasUI tokens only (`--ts-gray-*`, `--ts-link-700`, `ts-content is-tertiary`), which already switch through `light-dark()`. No raw hex values in components.
+- Use TocasUI tokens (`--ts-gray-*`, `--ts-link-700`, `ts-content is-tertiary`), which already switch through `light-dark()`, plus the KageRyo accent. No raw hex values in components, except the fixed colors of the KageRyo cover, which copy the illustration.
+- **KageRyo accent:** `--kageryo-green` (`#b0ff30`, the illustration's neon green) for dark surfaces such as the top bar and the project covers, and `--kageryo-accent`, which is `#457000` on light backgrounds (about 5.9:1 on white) and the illustration green in dark mode. Spend it in a few places only: the active navigation tab, the project covers and card links, and the kicker numbers.
 - Text contrast is at least 4.5:1 in both themes: `--ts-gray-600` on the page background is about 7:1 in light mode, and `--ts-gray-500` / `--ts-gray-600` are 8:1 or more in dark mode.
 - Dividers use `--ts-gray-300`, which is visible in both themes.
 
@@ -80,14 +86,41 @@ No new animations. Hover and focus changes may transition color only. The global
 
 ## Wireframes
 
-### About — desktop (≥ 768px)
+### Home — desktop (≥ 1200px)
+
+```text
+┌ banner ─────────────────────────────────────────────────────────┐
+│ Chien-Hsun Chang                                                │
+│ Backend / Platform Engineer | AI Systems / MLOps                │
+│                                         ┌ greeting box ───────┐ │
+│ ┌ KageRyo illustration ─────────────┐   │ Hello / I'm …       │ │
+│ │                                   │   │ 張健勳              │ │
+│ └───────────────────────────────────┘   │ intro · status      │ │
+│ (Discord) (GitHub) (LinkedIn)  email    │ [View Projects]     │ │
+│                                         │ [Resume] [See More] │ │
+│                                         └─────────────────────┘ │
+└─────────────────────────────────────────────────────────────────┘
+ (visually hidden h2: Selected Work)
+ ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
+ │ image / cover │ │ image / cover │ │ image / cover │
+ │ Open Source   │ │ Backend & DT  │ │ FL & MLOps    │
+ │ KServe (CNCF) │ │ TAG-Twin …    │ │ Federated AQI │
+ │ summary …     │ │ summary …     │ │ summary …     │
+ │ 1 PR merged   │ │ source private│ │ source private│
+ └───────────────┘ └───────────────┘ └───────────────┘
+ [All projects]
+ Quote · Featured Photos · KageRyo Developer card
+```
+
+Below 1200px the illustration and contact row sit on top and the greeting box spans the width with the greeting and the details side by side; below 768px everything stacks and the cards stack too.
+
+### About — desktop (≥ 1024px)
 
 ```text
 ┌ banner ─────────────────────────────────────────────────────────┐
 │ Chien-Hsun Chang                                                │
 │ Backend / Platform Engineer | AI Systems / MLOps                │
 └─────────────────────────────────────────────────────────────────┘
- 01 / INTRODUCTION
  ┌─────────────┐  Chien-Hsun Chang 張健勳
  │   photo     │  A Student && Developer from Taiwan.
  │             │  (cap icon) Education — CCU M.S. student
@@ -95,26 +128,22 @@ No new animations. Hover and focus changes may transition color only. The global
                   [Download Resume (PDF)] [GitHub]
                   Gender · Age (secondary line)
  ─────────────────────────────────────────────────────────────────
- 02 / EDUCATION
  Education
  2025/08 ~ 2027/08              2021/09 ~ 2025/06
  National Chung Cheng Univ.     National Taichung Univ. of S&T
  M.S. in CSIE                   B.Eng. in Intelligent Production
  ─────────────────────────────────────────────────────────────────
- 03 / EXPERIENCE
  Work Experience
- 2025/08 ~ Present   Research Assistant / Project Lead
-                     National Chung Cheng University
-                     • highlight  • highlight  • highlight
+ 2025/08 ~ Present  Research Assistant /   • highlight
+                    Project Lead           • highlight
+                    National Chung Cheng   • highlight
  ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
- 2025/08 ~ Present   System Administrator …
+ 2025/08 ~ Present  System Administrator   • highlight
  ─────────────────────────────────────────────────────────────────
- 04 / SKILLS
  Skills
  ░ Languages       [Python] [Go] [Rust] …                        ░
  ░ Backend & Data  [FastAPI] …                                   ░
  ─────────────────────────────────────────────────────────────────
- 05 / CERTIFICATES
  Certificates ▸ (collapsed)
 ```
 
@@ -123,14 +152,12 @@ No new animations. Hover and focus changes may transition color only. The global
 ```text
  Chien-Hsun Chang
  Backend / Platform Engineer | …
- 01 / INTRODUCTION
  [ photo, full width ]
  Chien-Hsun Chang 張健勳
  … summary …
  [Download Resume (PDF)]
  [GitHub]
  ───────────────
- 02 / EDUCATION
  Education
  2025/08 ~ 2027/08
  National Chung Cheng University
@@ -138,7 +165,7 @@ No new animations. Hover and focus changes may transition color only. The global
  2021/09 ~ 2025/06
  …
  ───────────────
- 03 / EXPERIENCE
+ Work Experience
  2025/08 ~ Present
  Research Assistant / Project Lead
  National Chung Cheng University
