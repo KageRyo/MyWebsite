@@ -97,20 +97,6 @@ html:not(.is-dark) .ts-content.is-secondary > p {
     max-width: 44rem;
 }
 
-.section-kicker {
-    margin: 0 0 0.25rem;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ts-gray-600);
-    font-variant-numeric: tabular-nums;
-}
-
-.section-kicker-index {
-    color: var(--ts-link-700);
-}
-
 /* 使文字可以左右對齊 */
 .justify-text {
     text-align: justify;

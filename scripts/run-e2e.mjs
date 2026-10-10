@@ -430,6 +430,41 @@ const tests = {
     }
   },
 
+  async 'About experience puts highlights beside the role on desktop'(browser) {
+    for (const [width, beside] of [
+      [1280, true],
+      [390, false]
+    ]) {
+      const { context, page } = await newPage(browser, {
+        viewport: { width, height: 844 }
+      })
+      await page.goto(`${baseUrl}/about`)
+      await page.locator('h1').first().waitFor()
+      const [role, highlights] = await Promise.all(
+        ['.experience-entry h3', '.experience-entry .highlights'].map(
+          selector =>
+            page
+              .locator(selector)
+              .first()
+              .evaluate(element => element.getBoundingClientRect().toJSON())
+        )
+      )
+      if (beside) {
+        assert.ok(
+          highlights.left >= role.right,
+          'highlights sit under the role'
+        )
+        assert.ok(
+          highlights.top < role.bottom,
+          'highlights start below the role'
+        )
+      } else {
+        assert.ok(highlights.top >= role.bottom, 'highlights overlap the role')
+      }
+      await context.close()
+    }
+  },
+
   async 'About experience rows use the full content width'(browser) {
     const { context, page } = await newPage(browser)
     await page.goto(`${baseUrl}/about`)

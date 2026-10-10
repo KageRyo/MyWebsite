@@ -3,13 +3,10 @@ import { renderComponent } from '../test-utils/renderComponent'
 import About from './About.vue'
 
 describe.each(['zh-TW', 'en', 'ja'])('About page in %s', locale => {
-  it('numbers its sections in reading order', async () => {
+  it('leaves numbered section labels to project pages', async () => {
     const html = await renderComponent(About, { locale })
-    const numbers = [
-      ...html.matchAll(/class="section-kicker-index">(\d+)</g)
-    ].map(([, number]) => number)
 
-    expect(numbers).toEqual(['01', '02', '03', '04', '05'])
+    expect(html).not.toContain('section-kicker')
   })
 
   it('names every section after its own h2', async () => {

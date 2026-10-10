@@ -4,7 +4,6 @@
     class="ts-container editorial-section"
     aria-labelledby="about-education"
   >
-    <SectionKicker index="02" label="Education" />
     <h2 id="about-education" class="ts-header is-big is-heavy">
       {{ $t('about.resume.education.header') }}
     </h2>
@@ -23,12 +22,11 @@
     </ul>
   </section>
 
-  <!-- 工作經歷：全寬列表，左側時間、右側職稱與重點 -->
+  <!-- 工作經歷：全寬列表；桌機分成時間、職稱與單位、工作重點三欄 -->
   <section
     class="ts-container editorial-section"
     aria-labelledby="about-experience"
   >
-    <SectionKicker index="03" label="Experience" />
     <h2 id="about-experience" class="ts-header is-big is-heavy">
       {{ $t('about.resume.experience.header') }}
     </h2>
@@ -59,15 +57,12 @@
           >
             {{ $t(item.link.labelKey) }}
           </a>
-          <ul
-            v-if="highlights(item.id).length"
-            class="highlights reading-width"
-          >
-            <li v-for="(line, index) in highlights(item.id)" :key="index">
-              {{ line }}
-            </li>
-          </ul>
         </div>
+        <ul v-if="highlights(item.id).length" class="highlights">
+          <li v-for="(line, index) in highlights(item.id)" :key="index">
+            {{ line }}
+          </li>
+        </ul>
       </li>
     </ol>
   </section>
@@ -77,7 +72,6 @@
     class="ts-container editorial-section"
     aria-labelledby="about-skills"
   >
-    <SectionKicker index="04" label="Skills" />
     <h2 id="about-skills" class="ts-header is-big is-heavy">
       {{ $t('about.resume.skills.header') }}
     </h2>
@@ -102,7 +96,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { education, experience, skillGroups } from '../../config/resume'
-import SectionKicker from '../common/SectionKicker.vue'
 
 const { tm, rt } = useI18n({ useScope: 'global' })
 
@@ -129,7 +122,7 @@ const highlights = id => {
 
 .experience-entry {
   display: grid;
-  grid-template-columns: 11rem minmax(0, 1fr);
+  grid-template-columns: 9rem minmax(0, 1fr) minmax(0, 1.8fr);
   gap: 0.25rem 2rem;
   padding: 1.5rem 0;
 }
@@ -159,7 +152,7 @@ const highlights = id => {
 }
 
 .highlights {
-  margin: 0.5rem 0 0;
+  margin: 0;
   padding-left: 1.25rem;
   list-style: disc;
 }
@@ -184,11 +177,27 @@ const highlights = id => {
   margin-top: 0.75rem;
 }
 
+/* 平板：工作重點移到職稱下方 */
+@media (max-width: 1023.98px) {
+  .experience-entry {
+    grid-template-columns: 9rem minmax(0, 1fr);
+  }
+
+  .highlights {
+    grid-column: 2;
+    margin-top: 0.5rem;
+  }
+}
+
 @media (max-width: 767.98px) {
   .education-list,
   .experience-entry,
   .skill-group {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .highlights {
+    grid-column: auto;
   }
 
   .skills-panel {
