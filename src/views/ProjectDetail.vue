@@ -1,33 +1,23 @@
 <template>
   <article v-if="detail">
-    <!-- 穹頂 -->
+    <!-- 穹頂：專案名稱、一段話的摘要、角色與技術，三十秒內就能讀完 -->
     <div class="ts-content is-tertiary is-vertically-padded">
       <div class="ts-container">
         <div class="ts-text is-description">
           {{ $t(`${projectKey}.category`) }}
         </div>
         <h1 class="ts-header is-huge is-heavy">{{ $t(`${copyKey}.title`) }}</h1>
+        <p
+          v-for="(line, index) in lines('overview')"
+          :key="index"
+          class="project-lede reading-width"
+        >
+          {{ line }}
+        </p>
         <div class="ts-text is-secondary">
           {{ $t(`${projectKey}.role`) }} · {{ $t(`${projectKey}.period`) }}
         </div>
-      </div>
-    </div>
-
-    <div class="ts-container has-top-spaced-large">
-      <section v-for="key in sections" :key="key" class="has-top-spaced-large">
-        <h2 class="ts-header is-big is-heavy">
-          {{ $t(`projectDetail.headings.${key}`) }}
-        </h2>
-        <template v-if="key === 'overview'">
-          <p v-for="(line, index) in lines(key)" :key="index">{{ line }}</p>
-        </template>
-        <ul v-else class="case-detail-list">
-          <li v-for="(line, index) in lines(key)" :key="index">{{ line }}</li>
-        </ul>
-        <div
-          v-if="key === 'architecture'"
-          class="ts-wrap is-compact has-top-spaced-small"
-        >
+        <div class="ts-wrap is-compact has-top-spaced-small">
           <span
             v-for="tech in project.stack"
             :key="tech"
@@ -35,57 +25,124 @@
             >{{ tech }}</span
           >
         </div>
-      </section>
+      </div>
+    </div>
 
-      <!-- 相關連結：每項貢獻的 PR 與對應 issue -->
-      <section class="has-top-spaced-large">
-        <h2 class="ts-header is-big is-heavy">
-          {{ $t('projectDetail.headings.links') }}
-        </h2>
-        <ul class="case-detail-links">
+    <!-- 各段落：左側編號與標題，右側內文；手機版上下堆疊 -->
+    <section
+      v-for="(key, index) in sections"
+      :key="key"
+      class="ts-container editorial-section"
+      :aria-labelledby="`project-${key}`"
+    >
+      <div class="side-heading-layout">
+        <div>
+          <SectionKicker
+            :index="String(index + 1).padStart(2, '0')"
+            :label="KICKERS[key]"
+          />
+          <h2 :id="`project-${key}`" class="ts-header is-big is-heavy">
+            {{ $t(`projectDetail.headings.${key}`) }}
+          </h2>
+        </div>
+
+        <!-- 貢獻一覽：每項改動的狀態、PR 與對應 issue -->
+        <ul v-if="key === 'contributions'" class="contribution-list">
           <li
             v-for="contribution in detail.contributions"
             :key="contribution.id"
+            class="contribution-entry"
           >
-            <div class="ts-text is-bold">
-              {{ $t(`${copyKey}.contributions.${contribution.id}`) }}
+            <div class="ts-text is-bold contribution-status">
+              <span
+                class="ts-icon"
+                :class="statusIcon(contribution.pr.status)"
+                aria-hidden="true"
+              ></span>
+              {{ $t(`projects.featured.status.${contribution.pr.status}`) }}
             </div>
-            <div class="ts-wrap is-compact has-top-spaced-small">
-              <a
-                :href="contribution.pr.url"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="ts-button is-small is-outlined is-start-icon"
-              >
-                <span
-                  class="ts-icon"
-                  :class="
-                    contribution.pr.status === 'merged'
-                      ? 'is-code-merge-icon'
-                      : 'is-code-pull-request-icon'
-                  "
-                ></span>
-                {{ contribution.pr.label }} ·
-                {{ $t(`projects.featured.status.${contribution.pr.status}`) }}
-              </a>
-              <a
-                :href="contribution.issue.url"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="ts-button is-small is-outlined is-start-icon"
-              >
-                <span class="ts-icon is-circle-dot-icon"></span>
-                {{ contribution.issue.label }}
-              </a>
+            <div>
+              <h3 class="ts-header is-heavy">
+                {{ $t(`${copyKey}.contributions.${contribution.id}`) }}
+              </h3>
+              <div class="contribution-links">
+                <a
+                  :href="contribution.pr.url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span
+                    class="ts-icon is-code-pull-request-icon"
+                    aria-hidden="true"
+                  ></span>
+                  {{ contribution.pr.label }}
+                </a>
+                <a
+                  :href="contribution.issue.url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span
+                    class="ts-icon is-circle-dot-icon"
+                    aria-hidden="true"
+                  ></span>
+                  {{ contribution.issue.label }}
+                </a>
+              </div>
             </div>
           </li>
         </ul>
-      </section>
 
-      <router-link
-        to="/projects"
-        class="ts-button is-outlined is-start-icon has-top-spaced-large"
-      >
+        <ProjectMedia
+          v-else-if="key === 'media'"
+          :media="detail.media"
+          :coverage="detail.coverage"
+        />
+
+        <div v-else>
+          <!-- 架構圖：每項改動在程式中生效的位置 -->
+          <figure
+            v-if="key === 'architecture' && hasFlows"
+            class="contribution-flows"
+          >
+            <div
+              v-for="contribution in detail.contributions"
+              :key="contribution.id"
+              class="flow"
+            >
+              <div class="ts-text is-bold">
+                {{ $t(`${copyKey}.contributions.${contribution.id}`) }}
+              </div>
+              <ol class="flow-steps">
+                <li
+                  v-for="(code, step) in contribution.flow"
+                  :key="code"
+                  class="flow-step"
+                >
+                  <code>{{ code }}</code>
+                  <span>{{ diagramSteps(contribution.id)[step] }}</span>
+                </li>
+              </ol>
+            </div>
+            <figcaption class="ts-text is-description">
+              {{ $t(`${copyKey}.diagram.caption`) }}
+            </figcaption>
+          </figure>
+
+          <p v-if="lines(key).length === 1" class="reading-width">
+            {{ lines(key)[0] }}
+          </p>
+          <ul v-else class="case-detail-list reading-width">
+            <li v-for="(line, lineIndex) in lines(key)" :key="lineIndex">
+              {{ line }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="ts-container project-back">
+      <router-link to="/projects" class="ts-button is-outlined is-start-icon">
         <span class="ts-icon is-arrow-left-icon"></span>
         {{ $t('projectDetail.backToProjects') }}
       </router-link>
@@ -98,19 +155,32 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { getProjectDetail } from '../config/projectDetails'
 import { featuredProjects } from '../config/featuredProjects'
+import SectionKicker from '../components/common/SectionKicker.vue'
+import ProjectMedia from '../components/projects/ProjectMedia.vue'
 
 const props = defineProps({
   slug: { type: String, required: true }
 })
 
-const sections = [
-  'overview',
+// 編號小標固定用英文，與各頁共用的職涯定位一致
+const KICKERS = {
+  contributions: 'Contributions',
+  problem: 'Problem',
+  role: 'Role',
+  architecture: 'Architecture',
+  tradeoffs: 'Trade-offs',
+  outcomes: 'Outcomes',
+  media: 'Media'
+}
+const STORY = [
+  'contributions',
   'problem',
   'role',
   'architecture',
   'tradeoffs',
   'outcomes'
 ]
+
 const { tm, rt } = useI18n({ useScope: 'global' })
 
 const detail = computed(() => getProjectDetail(props.slug))
@@ -122,27 +192,159 @@ const projectKey = computed(
 )
 const copyKey = computed(() => `projectDetail.${props.slug}`)
 
+// 沒有圖片或報導時不顯示「成果與媒體」段落，也不留空白
+const sections = computed(() =>
+  detail.value.media?.length || detail.value.coverage?.length
+    ? [...STORY, 'media']
+    : STORY
+)
+const hasFlows = computed(() =>
+  detail.value.contributions.some(({ flow }) => flow?.length)
+)
+
+const statusIcon = status =>
+  status === 'merged' ? 'is-code-merge-icon' : 'is-code-pull-request-icon'
+
 // 各段落為字串陣列，需逐行轉譯
-const lines = key => tm(`${copyKey.value}.${key}`).map(line => rt(line))
+const translateLines = key => tm(key).map(line => rt(line))
+const lines = key => translateLines(`${copyKey.value}.${key}`)
+const diagramSteps = id =>
+  translateLines(`${copyKey.value}.diagram.steps.${id}`)
 </script>
 
 <style scoped>
+.project-lede {
+  margin: 0.5rem 0 0.75rem;
+  font-size: 1.1rem;
+}
+
+.side-heading-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.5fr);
+  gap: 1rem 3rem;
+}
+
+.side-heading-layout h2 {
+  margin: 0;
+}
+
+.contribution-list,
+.flow-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contribution-entry {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  gap: 0.25rem 1.5rem;
+  padding: 1rem 0;
+}
+
+.contribution-entry:first-child {
+  padding-top: 0;
+}
+
+.contribution-entry + .contribution-entry {
+  border-top: 1px solid var(--ts-gray-200);
+}
+
+.contribution-entry h3 {
+  margin: 0;
+}
+
+.contribution-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+}
+
+.contribution-links .ts-icon {
+  margin-right: 0.25rem;
+}
+
+.contribution-flows {
+  margin: 0 0 1.5rem;
+  padding: 1.25rem;
+  border-radius: var(--ts-border-radius-container);
+  background: var(--ts-gray-100);
+}
+
+.flow + .flow {
+  margin-top: 1.25rem;
+}
+
+.flow-steps {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+
+.flow-step {
+  position: relative;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--ts-gray-300);
+  border-radius: var(--ts-border-radius-element);
+  background: var(--ts-gray-50);
+  font-size: 0.9rem;
+}
+
+/* 步驟之間的箭頭只是裝飾，順序已由 <ol> 表達 */
+.flow-step + .flow-step::before {
+  content: '→';
+  content: '→' / '';
+  position: absolute;
+  top: 50%;
+  left: -1.4rem;
+  transform: translateY(-50%);
+  color: var(--ts-gray-600);
+}
+
+.flow-step code {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.contribution-flows figcaption {
+  margin-top: 1rem;
+}
+
 .case-detail-list {
-  margin: 0.5rem 0 0;
+  margin: 0;
   padding-left: 1.25rem;
+  list-style: disc;
 }
 
 .case-detail-list li + li {
   margin-top: 0.5rem;
 }
 
-.case-detail-links {
-  margin: 0.5rem 0 0;
-  padding: 0;
-  list-style: none;
+.project-back {
+  padding-bottom: 3rem;
 }
 
-.case-detail-links li + li {
-  margin-top: 1rem;
+@media (max-width: 767.98px) {
+  .side-heading-layout,
+  .contribution-entry {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .flow-steps {
+    grid-auto-flow: row;
+    gap: 1.75rem;
+  }
+
+  .flow-step + .flow-step::before {
+    content: '↓';
+    content: '↓' / '';
+    top: -1.45rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 </style>

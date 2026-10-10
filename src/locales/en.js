@@ -227,14 +227,16 @@ export default {
   },
   projectDetail: {
     headings: {
-      overview: 'Overview',
+      contributions: 'Contributions at a Glance',
       problem: 'Problem & Goal',
       role: 'My Role & Contributions',
       architecture: 'Architecture & Technologies',
       tradeoffs: 'Technical Decisions & Trade-offs',
       outcomes: 'Outcomes & Evidence',
-      links: 'Links & References',
+      media: 'Results & Media',
     },
+    coverage: 'Media Coverage',
+    credit: 'Source: {source}',
     viewDetails: 'View project details',
     backToProjects: 'Back to Projects',
     kserve: {
@@ -267,6 +269,21 @@ export default {
       contributions: {
         logging: 'Logging configuration fix',
         runtimeClassName: 'runtimeClassName support',
+      },
+      diagram: {
+        caption: 'Where each change takes effect, drawn from the code changes in kserve/kserve#4687 and kserve/kserve#5198.',
+        steps: {
+          logging: [
+            'Called without a log_config',
+            'New check for handlers the user already attached to the kserve logger, including inherited ones',
+            "Applied only when no handlers exist; otherwise the function returns early and keeps the user's logging",
+          ],
+          runtimeClassName: [
+            'New optional field on ServingRuntimePodSpec, for example nvidia',
+            "The InferenceService controller merges the runtime's pod spec with the predictor's and now carries the field over",
+            'The merged pod spec uses that RuntimeClass unless the predictor sets its own; WorkerSpec gets the field through inline embedding',
+          ],
+        },
       },
     },
   },

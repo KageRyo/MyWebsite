@@ -29,6 +29,19 @@ describe('project detail pages', () => {
     }
   )
 
+  it.each(Object.entries({ 'zh-TW': zhTW, en, ja }))(
+    'describe every diagram step in %s',
+    (_locale, messages) => {
+      for (const { slug, contributions } of projectDetails) {
+        for (const { id, flow = [] } of contributions) {
+          expect(messages.projectDetail[slug].diagram.steps[id]).toHaveLength(
+            flow.length
+          )
+        }
+      }
+    }
+  )
+
   it('are linked from an existing featured project', () => {
     for (const { slug } of projectDetails) {
       expect(featuredProjects.some(({ detail }) => detail === slug)).toBe(true)

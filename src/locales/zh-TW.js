@@ -227,14 +227,16 @@ export default {
   },
   projectDetail: {
     headings: {
-      overview: '專案概述',
+      contributions: '貢獻一覽',
       problem: '問題與目標',
       role: '我的角色與貢獻',
       architecture: '系統架構與技術',
       tradeoffs: '技術選擇與取捨',
       outcomes: '成果與驗證',
-      links: '相關連結',
+      media: '成果與媒體',
     },
+    coverage: '媒體報導',
+    credit: '來源：{source}',
     viewDetails: '查看專案介紹',
     backToProjects: '回到作品集',
     kserve: {
@@ -267,6 +269,21 @@ export default {
       contributions: {
         logging: '日誌設定修正',
         runtimeClassName: 'runtimeClassName 支援',
+      },
+      diagram: {
+        caption: '各項改動生效的位置，依 kserve/kserve#4687 與 kserve/kserve#5198 的程式變更繪製。',
+        steps: {
+          logging: [
+            '未傳入 log_config 時呼叫',
+            '新增的檢查：kserve logger 上是否已有使用者設定（含繼承）的 handler',
+            '沒有 handler 時才套用 KServe 預設設定；已有 handler 則直接返回，保留使用者的日誌設定',
+          ],
+          runtimeClassName: [
+            'ServingRuntimePodSpec 新增的選填欄位，例如 nvidia',
+            'InferenceService 控制器合併 ServingRuntime 與 predictor 的 PodSpec 時一併帶入此欄位',
+            '合併後的 PodSpec 使用該 RuntimeClass，predictor 另有設定時以 predictor 為準；WorkerSpec 透過內嵌結構一併支援',
+          ],
+        },
       },
     },
   },

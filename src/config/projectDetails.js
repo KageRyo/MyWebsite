@@ -5,7 +5,9 @@ const kservePullRequest = number =>
   kserve.links.find(({ url }) => url.endsWith(`/pull/${number}`))
 
 // 專案介紹頁的結構與連結；文字放在 locales 的 projectDetail.*，
-// PR 連結沿用作品集卡片的資料，讓合併狀態只需維護一處
+// PR 連結沿用作品集卡片的資料，讓合併狀態只需維護一處。
+// flow 是架構圖每一步的程式名稱，說明文字在 projectDetail.<slug>.diagram.steps。
+// 選填的 media（圖片）與 coverage（報導）只放已確認來源與授權的公開素材，沒有就省略
 export const projectDetails = [
   {
     slug: 'kserve',
@@ -14,6 +16,7 @@ export const projectDetails = [
     contributions: [
       {
         id: 'logging',
+        flow: ['configure_logging()', 'logger.hasHandlers()', 'dictConfig()'],
         pr: kservePullRequest(4687),
         issue: {
           label: 'kserve/kserve#3919',
@@ -22,6 +25,7 @@ export const projectDetails = [
       },
       {
         id: 'runtimeClassName',
+        flow: ['spec.runtimeClassName', 'MergePodSpec()', 'PodSpec'],
         pr: kservePullRequest(5198),
         issue: {
           label: 'kserve/kserve#5057',

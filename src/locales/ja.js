@@ -227,14 +227,16 @@ export default {
   },
   projectDetail: {
     headings: {
-      overview: '概要',
+      contributions: 'コントリビュートの概要',
       problem: '課題と目標',
       role: '自分の役割・貢献',
       architecture: 'アーキテクチャ・技術',
       tradeoffs: '技術的な選択・トレードオフ',
       outcomes: '成果・検証',
-      links: '関連リンク',
+      media: '成果・メディア',
     },
+    coverage: 'メディア掲載',
+    credit: '出典：{source}',
     viewDetails: 'プロジェクトの詳細を見る',
     backToProjects: 'プロジェクト一覧に戻る',
     kserve: {
@@ -267,6 +269,21 @@ export default {
       contributions: {
         logging: 'ロギング設定の修正',
         runtimeClassName: 'runtimeClassName 対応',
+      },
+      diagram: {
+        caption: '各変更が効く場所。kserve/kserve#4687 と kserve/kserve#5198 のコード変更をもとに作成。',
+        steps: {
+          logging: [
+            'log_config なしで呼び出される',
+            '新しいチェック：kserve ロガーに、ユーザーが設定したハンドラー（継承分を含む）があるか',
+            'ハンドラーがない場合のみ KServe の既定設定を適用し、ある場合はそのまま戻ってユーザーのロギングを維持する',
+          ],
+          runtimeClassName: [
+            'ServingRuntimePodSpec に追加した任意フィールド（例：nvidia）',
+            'InferenceService コントローラーが ServingRuntime と predictor の PodSpec をマージする際にこのフィールドも引き継ぐ',
+            'マージ後の PodSpec はその RuntimeClass を使い、predictor 側に指定があればそちらが優先される。WorkerSpec はインライン埋め込みで同じフィールドを持つ',
+          ],
+        },
       },
     },
   },
