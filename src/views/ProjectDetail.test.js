@@ -74,7 +74,7 @@ describe.each([
   it('numbers its sections in reading order', async () => {
     const html = await render(locale)
     const numbers = [
-      ...html.matchAll(/class="section-kicker-index">(\d+)</g)
+      ...html.matchAll(/class="section-kicker-index"[^>]*>(\d+)</g)
     ].map(([, number]) => number)
 
     expect(numbers).toEqual(['01', '02', '03', '04', '05', '06'])
