@@ -35,8 +35,10 @@ const hero = html => html.slice(0, html.indexOf('<section'))
 const flowSteps = flow =>
   flow.split(/<li class="[^"]*\bflow-step\b[^"]*"[^>]*>/).slice(1)
 
-const codeTag = code =>
-  new RegExp(`<code[^>]*>${code.replace(/[.()]/g, '\\$&')}</code>`)
+// 把字串當成字面文字放進正規表示式，所有特殊字元（含反斜線）都要跳脫
+const escapeRegExp = text => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+const codeTag = code => new RegExp(`<code[^>]*>${escapeRegExp(code)}</code>`)
 
 describe.each([
   ['zh-TW', zhTW],

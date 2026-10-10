@@ -12,6 +12,17 @@ const slides = html =>
     .split(/<li class="card-slide"[^>]*>/)
     .slice(1)
 
+// 反覆移除註解與標籤直到不再變化，避免移除後又拼出新的標籤
+const stripTags = html => {
+  let text = html
+  let previous
+  do {
+    previous = text
+    text = text.replace(/<!--.*?-->|<[^>]+>/gs, '')
+  } while (text !== previous)
+  return text
+}
+
 const title = slide =>
   textContent(
     slide.match(
@@ -33,9 +44,9 @@ describe('KageRyo Developer card in English', () => {
   it('separates its sentences with a space', async () => {
     const [kageryo] = slides(await renderComponent(InfoCards, { locale: 'en' }))
     // 移除標籤時不補空白，才看得到瀏覽器實際顯示的文字
-    const paragraph = kageryo
-      .match(/<p class="card-text"[^>]*>(.*?)<\/p>/s)[1]
-      .replace(/<!--.*?-->|<[^>]+>/gs, '')
+    const paragraph = stripTags(
+      kageryo.match(/<p class="card-text"[^>]*>(.*?)<\/p>/s)[1]
+    )
 
     expect(paragraph).not.toMatch(/[.!?][A-Z]/)
   })

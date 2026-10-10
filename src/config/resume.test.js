@@ -89,3 +89,13 @@ describe('official project names', () => {
     }
   )
 })
+
+describe('organization links', () => {
+  it('use https', () => {
+    for (const { links } of experience) {
+      for (const { url } of links) {
+        expect(url).toMatch(/^https:\/\//)
+      }
+    }
+  })
+})
