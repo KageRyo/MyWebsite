@@ -34,7 +34,7 @@ export default {
   },
   home: {
     hero: {
-      introduction: '嗨！我是健勳，目前就讀國立中正大學資訊工程研究所。平常喜歡開發小工具、參與開源，也投入 Backend／Platform、AI Systems 與 MLOps 相關的研究和系統整合。歡迎逛逛我的專案，一起交流！ヾ(*´∀ ˋ*)ﾉ',
+      introduction: '嗨！我是健勳，目前就讀國立中正大學資訊工程研究所，主要發展方向是 Software Engineering、Backend／Platform 與 AI Systems，從需求分析、系統設計、開發測試到部署上線與後續維護都有實際經驗。平常喜歡開發小工具、參與開源，歡迎逛逛我的專案，一起交流！ヾ(*´∀ ˋ*)ﾉ',
       academic: '國立中正大學資工所碩士生｜預計 2027 年 8 月畢業',
       availability: '可配合 2027 預聘與研發替代役',
       viewProjects: '查看作品集',
@@ -68,7 +68,7 @@ export default {
         projectsPage: '在作品集查看',
       },
       projects: {
-        kserve: '持續參與 CNCF KServe 開源專案，涵蓋 Python、Go、Kubernetes Controller／CRD 與 Helm。修正 Python SDK 覆寫使用者 logging handlers 的問題，已合併至上游；另提交 ServingRuntimePodSpec／WorkerSpec 的 runtimeClassName 支援，目前仍在審查中。',
+        kserve: '持續參與 CNCF KServe 開源專案，涵蓋 Python、Go、Kubernetes Controller／CRD 與 Helm。修正 Python SDK 覆寫使用者 logging handlers 的問題，已合併至上游；另提交停用 Ingress 建立時過長網域的驗證修正，以及 ServingRuntimePodSpec／WorkerSpec 的 runtimeClassName 支援，目前仍在審查中。',
         tagTwin: '擔任數位孿生系統設計組組長，帶領 4 人跨國研究團隊，以嘉義縣民雄鄉為驗證場域建置 TAG-Twin。使用 FastAPI、PostgreSQL／PostGIS 與 Redis 建置核心平台，整合地形、道路、降雨、淹水與風險資訊，並以 API／WebSocket 串接洪水模擬與 Unreal Engine 5 視覺化。',
         federatedAqi: '主導 CCU × 印尼 UBM 跨國影像 AQI 聯邦學習專案的系統規劃與技術整合，銜接 Jakarta 與臺灣 6 測站共 7 個 Flower 聯邦客戶端的訓練成果，透過 Docker、KServe 與 UBM AI Deployment Platform 完成推論部署，並建置 Grafana 監控平台。',
         environmentalEnforcement: '參與產學合作的環保科技執法系統，以 CCTV 影像辨識疑似亂丟垃圾與不當便溺事件，並建立供人工覆核的證據鏈。整合 D-FINE、ByteTrack、姿態分析、VLM 與 OCR，拆分 GPU 推論與後處理以避免重複運算，系統已部署於實際場域。',
