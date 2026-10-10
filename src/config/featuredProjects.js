@@ -15,6 +15,12 @@ export const featuredProjects = [
       {
         kind: 'pr',
         status: 'open',
+        label: 'kserve/kserve#4919',
+        url: 'https://github.com/kserve/kserve/pull/4919'
+      },
+      {
+        kind: 'pr',
+        status: 'open',
         label: 'kserve/kserve#5198',
         url: 'https://github.com/kserve/kserve/pull/5198'
       }

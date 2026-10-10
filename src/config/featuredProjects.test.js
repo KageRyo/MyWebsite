@@ -58,6 +58,7 @@ describe('featured project links', () => {
       kserve.links.map(({ url, status }) => [url.split('/').pop(), status])
     ).toEqual([
       ['4687', 'merged'],
+      ['4919', 'open'],
       ['5198', 'open']
     ])
   })

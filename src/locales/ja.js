@@ -18,7 +18,7 @@ export default {
     },
     kserveProject: {
       title: 'KageRyo Developer - KServe (CNCF) へのコントリビュート',
-      description: 'Chien-Hsun Chang による CNCF KServe へのコントリビュート：ユーザーのロギング設定を上書きする問題の修正と、ServingRuntime への runtimeClassName 対応。',
+      description: 'Chien-Hsun Chang による CNCF KServe へのコントリビュート：ユーザーのロギング設定を上書きする問題の修正、Ingress の作成を無効にしたときに長すぎるドメインで調整が失敗する問題の修正、ServingRuntime への runtimeClassName 対応。',
     },
     notFound: { title: 'KageRyo Developer - ページが見つかりません' },
   },
@@ -249,7 +249,7 @@ export default {
           category: 'オープンソース',
           role: 'オープンソースコントリビューター',
           period: '2025年9月 ~ 現在',
-          summary: 'KServe の Python ロギングの問題を修正し、パッチはアップストリームにマージされました。ServingRuntimePodSpec と WorkerSpec への runtimeClassName 対応も、テストと CRD/OpenAPI の更新を含めて提出しています。',
+          summary: 'KServe の Python ロギングの問題を修正し、パッチはアップストリームにマージされました。Ingress の作成を無効にしたときの長すぎるドメインの検証の修正と、ServingRuntimePodSpec と WorkerSpec への runtimeClassName 対応も、テストと CRD/OpenAPI の更新を含めて提出しています。',
         },
         tagTwin: {
           title: 'スマート防災デジタルツインシステム（TAG-Twin）',
@@ -312,46 +312,77 @@ export default {
   },
   projectDetail: {
     headings: {
-      overview: '概要',
+      contributions: 'コントリビュートの概要',
       problem: '課題と目標',
       role: '自分の役割・貢献',
       architecture: 'アーキテクチャ・技術',
       tradeoffs: '技術的な選択・トレードオフ',
       outcomes: '成果・検証',
-      links: '関連リンク',
+      media: '成果・メディア',
     },
+    branch: {
+      yes: 'はい',
+      no: 'いいえ',
+    },
+    coverage: 'メディア掲載',
+    credit: '出典：{source}',
     viewDetails: 'プロジェクトの詳細を見る',
     backToProjects: 'プロジェクト一覧に戻る',
     kserve: {
       title: 'KServe (CNCF) へのコントリビュート',
       overview: [
-        'KServe は、Kubernetes 上で機械学習の推論サービスをデプロイ・管理するための CNCF のオープンソースプラットフォームです。Python SDK がユーザーのロギング設定を上書きしてしまう問題の修正と、ServingRuntime で Kubernetes の RuntimeClass を指定できるようにする変更の 2 件を提出しました。',
+        'KServe は、Kubernetes 上で機械学習の推論サービスをデプロイ・管理するための CNCF のオープンソースプラットフォームです。Python SDK がユーザーのロギング設定を上書きしてしまう問題の修正、Ingress の作成を無効にしたときに長すぎるドメイン名で InferenceService の調整（reconcile）が失敗する問題の修正、ServingRuntime で Kubernetes の RuntimeClass を指定できるようにする変更の 3 件を提出しました。',
       ],
       problem: [
         'ロギング設定：log_config を渡さない場合、configure_logging() は常に KServe の既定の dictConfig を適用し、ユーザーが設定済みのハンドラーやフォーマットを上書きしていました。独自のロギングを持つアプリケーションに KServe を組み込みにくい原因になっていました（kserve/kserve#3919）。',
+        'ドメイン検証：RawDeployment モードで disableIngressCreation: true の場合、Ingress や HTTPRoute はユーザーが自分で管理し、生成されるドメインは表示用にすぎません。それでも namespace と名前の組み合わせが DNS ラベルの上限 63 文字を超えると、厳密なドメイン検証によって InferenceService の調整が失敗していました（kserve/kserve#4807）。',
         'RuntimeClass：ServingRuntime で runtimeClassName（nvidia、kata、gvisor など）を指定できず、GPU パススルーやサンドボックス型コンテナランタイムを使う際の一般的な要件を満たせませんでした（kserve/kserve#5057）。',
       ],
       role: [
-        '2 件とも自分で実装して Pull Request を提出しました。コード変更、ユニットテスト、自動生成ファイルの更新、PR の説明を含みます。',
+        '3 件とも自分で実装して Pull Request を提出しました。コード変更、ユニットテスト、自動生成ファイルの更新、PR の説明を含みます。',
       ],
       architecture: [
         'Python SDK（kserve/logging.py）：configure_logging() で logger.hasHandlers() により kserve ロガーに直接または継承されたハンドラーがあるかを確認し、log_config が未指定でハンドラーが既にある場合は再設定せずに終了します。',
+        'Go コントローラー（ingress/domain.go）：GenerateDomainName() と GenerateInternalDomainName() は、Ingress の作成が有効なときだけ IsFullyQualifiedDomainName() で生成したドメインを検証し、無効なときはそのまま返します。',
         'Go コントローラーと CRD：v1alpha1 の ServingRuntimePodSpec に RuntimeClassName フィールドを追加し、InferenceService の MergePodSpec でマージします。WorkerSpec もインライン埋め込みにより対応します。',
         '自動生成ファイル：CRD（Helm チャートと config）、deepcopy、OpenAPI／Swagger、Python SDK のモデルとドキュメントをまとめて再生成しました。',
       ],
       tradeoffs: [
         '後方互換性：既定の設定を省略するのは「設定が未指定かつハンドラーが既にある」場合だけなので、独自のロギングを持たないユーザーの動作は変わらず、明示的な log_config も引き続き優先されます。',
         'ハンドラーの数ではなく hasHandlers() を使い、親ロガーから継承されたハンドラーも尊重します。',
+        'ドメイン検証を緩めるのは disableIngressCreation が true のときだけです。コントローラーが Ingress を作成する場合の検証は変わらず、無効なルーティング設定は引き続き検出されます。',
         'runtimeClassName は schedulerName（kserve/kserve#5073）と同じマージ方式を採用し、既存コードとの一貫性とレビューのしやすさを優先しました。任意フィールドのため、既存の ServingRuntime には影響しません。',
         'E2E テストとドキュメントの更新は今後の課題とし、PR には含めていません。',
       ],
       outcomes: [
         'ロギングの修正（kserve/kserve#4687）は 2026 年 3 月にアップストリームへマージされました。ユーザーのハンドラーの保持、未設定時の既定適用、明示的な設定による上書きの 3 つのユニットテストを追加しています。',
+        'ドメイン検証の修正（kserve/kserve#4919）では、Ingress の作成を無効にしたときは長すぎる DNS ラベルでもエラーにならず、有効なときは引き続き検証されることを確かめる 2 つのユニットテストを追加しました。PR は現在レビュー中です。',
         'runtimeClassName 対応（kserve/kserve#5198）では、フィールドのマージと上書きのユニットテストを追加し、runtimeClassName: nvidia の ServingRuntime をローカルで作成して、生成された PodSpec に反映されることを確認しました。',
       ],
       contributions: {
         logging: 'ロギング設定の修正',
+        domainValidation: '長すぎるドメインの検証の修正',
         runtimeClassName: 'runtimeClassName 対応',
+      },
+      diagram: {
+        caption: '各変更が効く場所。kserve/kserve#4687、#4919、#5198 のコード変更をもとに作成。',
+        steps: {
+          logging: [
+            'log_config なしで呼び出される',
+            '新しいチェック：kserve ロガーに、ユーザーが設定したハンドラー（継承分を含む）があるか？',
+            ['そのまま戻り、ユーザーのロギングを維持する', 'KServe の既定のロギング設定を適用する'],
+          ],
+          domainValidation: [
+            'ドメインテンプレートからドメイン名を生成する',
+            '新しいチェック：Ingress 設定で Ingress の作成が無効になっているか？',
+            ['ドメインをそのまま返す（表示用で、ルーティングはユーザーが管理）', '従来どおり検証し、無効なドメインはエラーを返す'],
+          ],
+          runtimeClassName: [
+            'ServingRuntimePodSpec に追加した任意フィールド（例：nvidia）',
+            'InferenceService コントローラーが ServingRuntime と predictor の PodSpec をマージする際にこのフィールドも引き継ぐ',
+            'マージ後の PodSpec はその RuntimeClass を使い、predictor 側に指定があればそちらが優先される。WorkerSpec はインライン埋め込みで同じフィールドを持つ',
+          ],
+        },
       },
     },
   },

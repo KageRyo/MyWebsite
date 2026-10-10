@@ -3,23 +3,42 @@ import { h } from 'vue'
 import en from '../locales/en'
 import ja from '../locales/ja'
 import zhTW from '../locales/zh-TW'
+import { getProjectDetail } from '../config/projectDetails'
 import { renderComponent, textContent } from '../test-utils/renderComponent'
 import ProjectDetail from './ProjectDetail.vue'
 
 const HEADING_KEYS = [
-  'overview',
+  'contributions',
   'problem',
   'role',
   'architecture',
   'tradeoffs',
-  'outcomes',
-  'links'
+  'outcomes'
 ]
 const render = locale =>
   renderComponent(
     { render: () => h(ProjectDetail, { slug: 'kserve' }) },
     { locale }
   )
+
+const section = (html, key) =>
+  html.match(
+    new RegExp(
+      `<section[^>]*aria-labelledby="project-${key}"[^>]*>(.*?)</section>`,
+      's'
+    )
+  )?.[1]
+
+const hero = html => html.slice(0, html.indexOf('<section'))
+
+// 架構圖每一步（分支步驟裡有多個 flow-branch）
+const flowSteps = flow =>
+  flow.split(/<li class="[^"]*\bflow-step\b[^"]*"[^>]*>/).slice(1)
+
+// 把字串當成字面文字放進正規表示式，所有特殊字元（含反斜線）都要跳脫
+const escapeRegExp = text => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+const codeTag = code => new RegExp(`<code[^>]*>${escapeRegExp(code)}</code>`)
 
 describe.each([
   ['zh-TW', zhTW],
@@ -35,6 +54,17 @@ describe.each([
     )
   })
 
+  it('opens with a one-paragraph summary, the role and the stack before any section', async () => {
+    const top = textContent(hero(await render(locale)))
+    const card = messages.projects.featured.items.kserve
+
+    expect(top).toContain(copy.kserve.overview[0])
+    expect(top).toContain(card.role)
+    for (const tech of ['Python', 'Go', 'Kubernetes', 'CRD', 'Helm']) {
+      expect(top).toContain(tech)
+    }
+  })
+
   it('follows the project detail template headings in order', async () => {
     const html = await render(locale)
     const headings = [...html.matchAll(/<h2[^>]*>(.*?)<\/h2>/gs)].map(
@@ -43,20 +73,106 @@ describe.each([
     expect(headings).toEqual(HEADING_KEYS.map(key => copy.headings[key]))
   })
 
-  it('links every pull request and issue it describes', async () => {
+  it('numbers its sections in reading order', async () => {
     const html = await render(locale)
+    const numbers = [
+      ...html.matchAll(/class="section-kicker-index"[^>]*>(\d+)</g)
+    ].map(([, number]) => number)
+
+    expect(numbers).toEqual(['01', '02', '03', '04', '05', '06'])
+  })
+
+  it('leads with every contribution, its status, pull request and issue', async () => {
+    const glance = section(await render(locale), 'contributions')
+
     for (const path of [
       'pull/4687',
+      'pull/4919',
       'pull/5198',
       'issues/3919',
+      'issues/4807',
       'issues/5057'
     ]) {
-      expect(html).toContain(`href="https://github.com/kserve/kserve/${path}"`)
+      expect(glance).toContain(
+        `href="https://github.com/kserve/kserve/${path}"`
+      )
     }
-    expect(textContent(html)).toContain(
+    expect(textContent(glance)).toContain(
       messages.projects.featured.status.merged
     )
-    expect(textContent(html)).toContain(messages.projects.featured.status.open)
+    expect(textContent(glance)).toContain(
+      messages.projects.featured.status.open
+    )
+  })
+
+  it('draws where each change takes effect as an ordered flow per contribution', async () => {
+    const architecture = section(await render(locale), 'architecture')
+    const figure = architecture.match(/<figure[^>]*>(.*?)<\/figure>/s)[1]
+    const flows = [...figure.matchAll(/<ol[^>]*>(.*?)<\/ol>/gs)].map(
+      ([, list]) => list
+    )
+    const { contributions } = getProjectDetail('kserve')
+
+    expect(flows).toHaveLength(contributions.length)
+    flows.forEach((flow, index) => {
+      const { id, flow: steps } = contributions[index]
+      const texts = copy.kserve.diagram.steps[id]
+      const items = flowSteps(flow)
+      expect(items).toHaveLength(steps.length)
+      steps.forEach((step, position) => {
+        const branches = Array.isArray(step) ? step : [{ code: step }]
+        const stepTexts = [texts[position]].flat()
+        branches.forEach(({ code }, branch) => {
+          expect(items[position]).toMatch(codeTag(code))
+          expect(textContent(items[position])).toContain(stepTexts[branch])
+        })
+      })
+    })
+    expect(textContent(figure)).toContain(copy.kserve.diagram.caption)
+  })
+
+  it('applies the default logging config only when no handlers exist', async () => {
+    const architecture = section(await render(locale), 'architecture')
+    const [logging] = [...architecture.matchAll(/<ol[^>]*>(.*?)<\/ol>/gs)].map(
+      ([, list]) => list
+    )
+    const [whenHandlersExist, whenNoHandlers] = flowSteps(logging)
+      .at(-1)
+      .split(/<div class="flow-branch"[^>]*>/)
+      .slice(1)
+
+    expect(textContent(whenHandlersExist).startsWith(copy.branch.yes)).toBe(
+      true
+    )
+    expect(whenHandlersExist).toMatch(codeTag('return'))
+    expect(textContent(whenNoHandlers).startsWith(copy.branch.no)).toBe(true)
+    expect(whenNoHandlers).toMatch(codeTag('dictConfig()'))
+  })
+
+  it('validates the domain only when the controller creates the ingress', async () => {
+    const architecture = section(await render(locale), 'architecture')
+    const flows = [...architecture.matchAll(/<ol[^>]*>(.*?)<\/ol>/gs)].map(
+      ([, list]) => list
+    )
+    const { contributions } = getProjectDetail('kserve')
+    const domain =
+      flows[contributions.findIndex(({ id }) => id === 'domainValidation')]
+    const [whenDisabled, whenEnabled] = flowSteps(domain)
+      .at(-1)
+      .split(/<div class="flow-branch"[^>]*>/)
+      .slice(1)
+
+    expect(textContent(whenDisabled).startsWith(copy.branch.yes)).toBe(true)
+    expect(whenDisabled).toMatch(codeTag('return domainName'))
+    expect(textContent(whenEnabled).startsWith(copy.branch.no)).toBe(true)
+    expect(whenEnabled).toMatch(codeTag('IsFullyQualifiedDomainName()'))
+  })
+
+  it('shows no media section when the project has no media or coverage', async () => {
+    const html = await render(locale)
+
+    expect(section(html, 'media')).toBeUndefined()
+    expect(html).not.toContain('<img')
   })
 
   it('links back to the Projects page', async () => {
