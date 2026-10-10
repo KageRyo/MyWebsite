@@ -414,6 +414,80 @@ const tests = {
     await context.close()
   },
 
+  async 'About lays education side by side on desktop and stacks it on mobile'(
+    browser
+  ) {
+    for (const [width, sideBySide] of [
+      [1280, true],
+      [390, false]
+    ]) {
+      const { context, page } = await newPage(browser, {
+        viewport: { width, height: 844 }
+      })
+      await page.goto(`${baseUrl}/about`)
+      await page.locator('h1').first().waitFor()
+      const [first, second] = await page
+        .locator('.education-list > li')
+        .evaluateAll(items =>
+          items.map(item => item.getBoundingClientRect().toJSON())
+        )
+      if (sideBySide) {
+        assert.equal(Math.round(first.top), Math.round(second.top))
+        assert.ok(second.left >= first.right, 'education entries overlap')
+      } else {
+        assert.ok(second.top >= first.bottom, 'education entries overlap')
+      }
+      await context.close()
+    }
+  },
+
+  async 'About experience puts the role details beside the role on desktop'(
+    browser
+  ) {
+    for (const [width, beside] of [
+      [1280, true],
+      [390, false]
+    ]) {
+      const { context, page } = await newPage(browser, {
+        viewport: { width, height: 844 }
+      })
+      await page.goto(`${baseUrl}/about`)
+      await page.locator('h1').first().waitFor()
+      const [role, detail] = await Promise.all(
+        ['.experience-entry h3', '.experience-entry .entry-detail'].map(
+          selector =>
+            page
+              .locator(selector)
+              .first()
+              .evaluate(element => element.getBoundingClientRect().toJSON())
+        )
+      )
+      if (beside) {
+        assert.ok(detail.left >= role.right, 'details sit under the role')
+        assert.ok(detail.top < role.bottom, 'details start below the role')
+      } else {
+        assert.ok(detail.top >= role.bottom, 'details overlap the role')
+      }
+      await context.close()
+    }
+  },
+
+  async 'About experience rows use the full content width'(browser) {
+    const { context, page } = await newPage(browser)
+    await page.goto(`${baseUrl}/about`)
+    await page.locator('h1').first().waitFor()
+    const [education, experience] = await Promise.all(
+      ['.education-list', '.experience-list'].map(selector =>
+        page
+          .locator(selector)
+          .evaluate(element => element.getBoundingClientRect().toJSON())
+      )
+    )
+    assert.equal(Math.round(experience.left), Math.round(education.left))
+    assert.equal(Math.round(experience.width), Math.round(education.width))
+    await context.close()
+  },
+
   async 'contact form previews the email and keeps a copy fallback'(browser) {
     const { context, page } = await newPage(browser)
     await context.grantPermissions(['clipboard-read', 'clipboard-write'], {
