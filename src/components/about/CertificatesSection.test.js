@@ -3,11 +3,12 @@ import { renderComponent, textContent } from '../../test-utils/renderComponent'
 import CertificatesSection from './CertificatesSection.vue'
 
 describe('CertificatesSection', () => {
-  it('starts collapsed in an accordion headed by the section title', async () => {
+  it('lists the certificates under the section title without hiding them', async () => {
     const html = await renderComponent(CertificatesSection)
 
-    expect(html).toMatch(/<details class="ts-accordion"(?![^>]*\bopen\b)[^>]*>/)
-    expect(html).toMatch(/<summary[^>]*>\s*<h2[^>]*>證照<\/h2>\s*<\/summary>/)
+    expect(html).not.toContain('<details')
+    expect(html).toMatch(/<h2[^>]*>證照<\/h2>/)
+    expect(html).toMatch(/<table class="ts-table/)
   })
 
   it('does not publish certificate serial numbers', async () => {
