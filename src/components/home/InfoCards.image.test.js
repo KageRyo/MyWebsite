@@ -7,8 +7,8 @@ vi.mock('../../config/featuredProjects', async importOriginal => {
   const actual = await importOriginal()
   return {
     ...actual,
-    homeCards: actual.homeCards.map(({ image: _image, ...card }) =>
-      card.id === 'tagTwin' ? card : { ...card, image: _image }
+    featuredProjects: actual.featuredProjects.map(({ image, ...project }) =>
+      project.id === 'tagTwin' ? project : { ...project, image }
     )
   }
 })
