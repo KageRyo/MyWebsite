@@ -7,7 +7,8 @@
       </div>
     </div>
 
-    <div class="ts-container has-top-spaced-large">
+    <!-- 各區塊自己就是 ts-container，外層不再包一層，避免左右留白加倍 -->
+    <div class="has-top-spaced-large">
       <FeaturedProjects />
       <OpenSourceTools />
       <GitHubProjects />
