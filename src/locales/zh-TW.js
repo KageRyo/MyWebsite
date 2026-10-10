@@ -16,6 +16,10 @@ export default {
       title: 'KageRyo Developer - 聯絡我',
       description: '透過電子郵件、GitHub 或 LinkedIn 聯絡張健勳，交流後端、AI 系統及開源相關話題。',
     },
+    kserveProject: {
+      title: 'KageRyo Developer - KServe (CNCF) 開源貢獻',
+      description: '張健勳在 CNCF KServe 的開源貢獻：修正 Python SDK 覆蓋使用者日誌設定的問題，並為 ServingRuntime 加入 runtimeClassName 支援。',
+    },
     notFound: { title: 'KageRyo Developer - 找不到頁面' },
   },
   nav: {
@@ -212,6 +216,51 @@ export default {
         desc: '描述',
         noDesc: '無描述',
         count: '統計筆數：{count}',
+      },
+    },
+  },
+  projectDetail: {
+    headings: {
+      overview: '專案概述',
+      problem: '問題與目標',
+      role: '我的角色與貢獻',
+      architecture: '系統架構與技術',
+      tradeoffs: '技術選擇與取捨',
+      outcomes: '成果與驗證',
+      links: '相關連結',
+    },
+    viewDetails: '查看專案介紹',
+    backToProjects: '回到作品集',
+    kserve: {
+      title: 'KServe (CNCF) 開源貢獻',
+      overview: [
+        'KServe 是 CNCF 旗下、在 Kubernetes 上部署與管理機器學習模型推論服務的開源平台。我提交了兩項改動：修正 Python SDK 會覆蓋使用者日誌設定的問題，以及讓 ServingRuntime 可以指定 Kubernetes RuntimeClass。',
+      ],
+      problem: [
+        '日誌設定：未傳入 log_config 時，configure_logging() 一律套用 KServe 預設的 dictConfig，覆蓋使用者已設定好的 handler 與格式，讓 KServe 難以整合進有自己日誌流程的應用程式（kserve/kserve#3919）。',
+        'RuntimeClass：ServingRuntime 無法指定 runtimeClassName（例如 nvidia、kata、gvisor），而這是使用 GPU passthrough 或沙箱容器執行環境時常見的需求（kserve/kserve#5057）。',
+      ],
+      role: [
+        '兩項改動皆由我實作並提交 Pull Request，內容包含程式修改、單元測試、自動產生檔案的更新與 PR 說明。',
+      ],
+      architecture: [
+        'Python SDK（kserve/logging.py）：在 configure_logging() 加入判斷，以 logger.hasHandlers() 偵測 kserve logger 上直接或繼承而來的 handler；未指定 log_config 且已有 handler 時直接返回，不再覆寫。',
+        'Go 控制器與 CRD：在 v1alpha1 的 ServingRuntimePodSpec 新增 RuntimeClassName 欄位，並在 InferenceService 的 MergePodSpec 中合併；WorkerSpec 透過內嵌結構一併支援。',
+        '自動產生檔案：同步更新 CRD（Helm chart 與 config）、deepcopy、OpenAPI／Swagger，以及 Python SDK 的模型與文件。',
+      ],
+      tradeoffs: [
+        '維持相容：只有在「未指定設定且已有 handler」時才略過預設設定；沒有自行設定日誌的使用者行為不變，明確傳入的 log_config 仍然優先。',
+        '使用 hasHandlers() 而不是檢查 handler 數量，才能涵蓋從上層 logger 繼承的 handler。',
+        'runtimeClassName 沿用專案中 schedulerName（kserve/kserve#5073）的合併模式，與既有程式一致、也較容易審查；欄位為選填，不影響既有的 ServingRuntime。',
+        'E2E 測試與官方文件更新列為後續項目，沒有包含在 PR 中。',
+      ],
+      outcomes: [
+        '日誌修正（kserve/kserve#4687）已於 2026 年 3 月合併至上游，並新增三個單元測試：保留使用者的 handler、未設定時套用預設、明確設定時覆寫。',
+        'runtimeClassName 支援（kserve/kserve#5198）新增合併與覆寫兩個單元測試，並在本機建立 runtimeClassName: nvidia 的 ServingRuntime，確認產生的 PodSpec 帶有該欄位。',
+      ],
+      contributions: {
+        logging: '日誌設定修正',
+        runtimeClassName: 'runtimeClassName 支援',
       },
     },
   },

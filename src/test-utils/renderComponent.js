@@ -36,8 +36,11 @@ export const renderComponent = async (
   return renderToString(app)
 }
 
+const ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'" }
+
 export const textContent = html =>
   html
     .replace(/<[^>]+>/g, ' ')
+    .replace(/&(amp|lt|gt|quot|#39);/g, (_match, name) => ENTITIES[name])
     .replace(/\s+/g, ' ')
     .trim()

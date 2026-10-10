@@ -16,6 +16,10 @@ export default {
       title: 'KageRyo Developer - お問い合わせ',
       description: 'メール、GitHub、LinkedIn から Chien-Hsun Chang に連絡できます。ソフトウェア開発、AI システム、オープンソースについて気軽にどうぞ。',
     },
+    kserveProject: {
+      title: 'KageRyo Developer - KServe (CNCF) へのコントリビュート',
+      description: 'Chien-Hsun Chang による CNCF KServe へのコントリビュート：ユーザーのロギング設定を上書きする問題の修正と、ServingRuntime への runtimeClassName 対応。',
+    },
     notFound: { title: 'KageRyo Developer - ページが見つかりません' },
   },
   nav: {
@@ -212,6 +216,51 @@ export default {
         desc: '説明',
         noDesc: '説明なし',
         count: '合計：{count}',
+      },
+    },
+  },
+  projectDetail: {
+    headings: {
+      overview: '概要',
+      problem: '課題と目標',
+      role: '自分の役割・貢献',
+      architecture: 'アーキテクチャ・技術',
+      tradeoffs: '技術的な選択・トレードオフ',
+      outcomes: '成果・検証',
+      links: '関連リンク',
+    },
+    viewDetails: 'プロジェクトの詳細を見る',
+    backToProjects: 'プロジェクト一覧に戻る',
+    kserve: {
+      title: 'KServe (CNCF) へのコントリビュート',
+      overview: [
+        'KServe は、Kubernetes 上で機械学習の推論サービスをデプロイ・管理するための CNCF のオープンソースプラットフォームです。Python SDK がユーザーのロギング設定を上書きしてしまう問題の修正と、ServingRuntime で Kubernetes の RuntimeClass を指定できるようにする変更の 2 件を提出しました。',
+      ],
+      problem: [
+        'ロギング設定：log_config を渡さない場合、configure_logging() は常に KServe の既定の dictConfig を適用し、ユーザーが設定済みのハンドラーやフォーマットを上書きしていました。独自のロギングを持つアプリケーションに KServe を組み込みにくい原因になっていました（kserve/kserve#3919）。',
+        'RuntimeClass：ServingRuntime で runtimeClassName（nvidia、kata、gvisor など）を指定できず、GPU パススルーやサンドボックス型コンテナランタイムを使う際の一般的な要件を満たせませんでした（kserve/kserve#5057）。',
+      ],
+      role: [
+        '2 件とも自分で実装して Pull Request を提出しました。コード変更、ユニットテスト、自動生成ファイルの更新、PR の説明を含みます。',
+      ],
+      architecture: [
+        'Python SDK（kserve/logging.py）：configure_logging() で logger.hasHandlers() により kserve ロガーに直接または継承されたハンドラーがあるかを確認し、log_config が未指定でハンドラーが既にある場合は再設定せずに終了します。',
+        'Go コントローラーと CRD：v1alpha1 の ServingRuntimePodSpec に RuntimeClassName フィールドを追加し、InferenceService の MergePodSpec でマージします。WorkerSpec もインライン埋め込みにより対応します。',
+        '自動生成ファイル：CRD（Helm チャートと config）、deepcopy、OpenAPI／Swagger、Python SDK のモデルとドキュメントをまとめて再生成しました。',
+      ],
+      tradeoffs: [
+        '後方互換性：既定の設定を省略するのは「設定が未指定かつハンドラーが既にある」場合だけなので、独自のロギングを持たないユーザーの動作は変わらず、明示的な log_config も引き続き優先されます。',
+        'ハンドラーの数ではなく hasHandlers() を使い、親ロガーから継承されたハンドラーも尊重します。',
+        'runtimeClassName は schedulerName（kserve/kserve#5073）と同じマージ方式を採用し、既存コードとの一貫性とレビューのしやすさを優先しました。任意フィールドのため、既存の ServingRuntime には影響しません。',
+        'E2E テストとドキュメントの更新は今後の課題とし、PR には含めていません。',
+      ],
+      outcomes: [
+        'ロギングの修正（kserve/kserve#4687）は 2026 年 3 月にアップストリームへマージされました。ユーザーのハンドラーの保持、未設定時の既定適用、明示的な設定による上書きの 3 つのユニットテストを追加しています。',
+        'runtimeClassName 対応（kserve/kserve#5198）では、フィールドのマージと上書きのユニットテストを追加し、runtimeClassName: nvidia の ServingRuntime をローカルで作成して、生成された PodSpec に反映されることを確認しました。',
+      ],
+      contributions: {
+        logging: 'ロギング設定の修正',
+        runtimeClassName: 'runtimeClassName 対応',
       },
     },
   },
