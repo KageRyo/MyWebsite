@@ -5,7 +5,7 @@ export const resumePdfUrl = '/resume/Chien-Hsun_Chang_Resume.pdf'
 export const education = [{ id: 'ccu' }, { id: 'nutc' }]
 
 const embeddedLab = {
-  url: 'http://embedded.cs.ccu.edu.tw/',
+  url: 'https://embedded.cs.ccu.edu.tw/',
   labelKey: 'about.resume.links.embeddedLab'
 }
 
