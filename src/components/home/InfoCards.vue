@@ -1,5 +1,5 @@
 <template>
-  <div class="ts-container is-padded has-top-spaced-big">
+  <div class="ts-container has-top-spaced-big">
     <!-- KageRyo Developer -->
     <div class="ts-box mobile:ts-content">
       <div class="ts-grid is-middle-aligned">

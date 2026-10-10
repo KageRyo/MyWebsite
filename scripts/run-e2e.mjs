@@ -471,6 +471,35 @@ const tests = {
     await context.close()
   },
 
+  async 'home sections share one left edge'(browser) {
+    const misaligned = []
+    for (const width of [1280, 1024, 390]) {
+      const { context, page } = await newPage(browser, {
+        viewport: { width, height: 844 }
+      })
+      await page.goto(baseUrl)
+      await page.locator('h1').first().waitFor()
+      const edges = await page.evaluate(() =>
+        Object.fromEntries(
+          [
+            ['cards', '.project-cards'],
+            ['photos', '.ts-image:has(.ts-mask)'],
+            ['intro card', '.ts-box:has(img[src*="chienhsun"])']
+          ].map(([name, selector]) => [
+            name,
+            Math.round(
+              document.querySelector(selector).getBoundingClientRect().left
+            )
+          ])
+        )
+      )
+      if (new Set(Object.values(edges)).size > 1)
+        misaligned.push(`${width}px ${JSON.stringify(edges)}`)
+      await context.close()
+    }
+    assert.deepEqual(misaligned, [])
+  },
+
   async 'home introduction balances the illustration and the greeting'(
     browser
   ) {

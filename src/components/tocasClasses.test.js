@@ -21,14 +21,6 @@ describe('TocasUI class names', () => {
     expect(classLists(html)).toContainEqual(['ts-loading'])
   })
 
-  it('pad the featured photos container like the other home sections', async () => {
-    const html = await renderComponent(FeaturedPhotos)
-
-    expect(classLists(html)[0]).toEqual(
-      expect.arrayContaining(['ts-container', 'is-padded'])
-    )
-  })
-
   it.each([
     ['See More drawer', DrawerContent],
     ['mobile navigation drawer', MobileDrawer]
