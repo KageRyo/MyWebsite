@@ -102,7 +102,7 @@
               :src="card.image.src"
               :width="card.image.width"
               :height="card.image.height"
-              :alt="$t(`home.infoCards.images.${card.id}`)"
+              :alt="$t(`projects.featured.items.${card.id}.imageAlt`)"
               loading="lazy"
               decoding="async"
             />
@@ -190,11 +190,10 @@ const RELATED_ICONS = {
 }
 
 // 作品集裡的專案沿用作品集的標題與 PR 連結；有專案介紹頁就加上入口，沒有就連到作品集上的卡片
+// 卡片沿用作品集的標題、圖片與連結：PR、專案介紹頁或作品集卡片、程式碼庫，以及相關報導
 const cards = computed(() =>
   homeCards.map(card => {
     const project = featuredProjects.find(({ id }) => id === card.id)
-    if (!project) return { ...card, title: t(card.titleKey) }
-
     const pullRequests = project.links.map(link => ({
       url: link.url,
       icon:
@@ -216,6 +215,11 @@ const cards = computed(() =>
           label: t('home.infoCards.links.projectsPage'),
           internal: true
         }
+    const repositories = (project.repositories ?? []).map(repository => ({
+      url: repository.url,
+      icon: 'is-github-icon',
+      label: `GitHub ${repository.label}`
+    }))
     // 公開報導、計畫頁與論文，標籤用原文的來源與標題
     const related = (project.related ?? []).map(link => ({
       url: link.url,
@@ -224,10 +228,9 @@ const cards = computed(() =>
     }))
     return {
       ...card,
+      image: project.image,
       title: t(`projects.featured.items.${card.id}.title`),
-      links: project.detail
-        ? [...pullRequests, page, ...related]
-        : [page, ...related]
+      links: [...pullRequests, page, ...repositories, ...related]
     }
   })
 )

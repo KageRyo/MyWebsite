@@ -101,33 +101,32 @@ describe.each([
 
     expect(kageryo).toContain('chienhsun.webp')
     projectSlides.forEach((slide, index) => {
-      const { id, image } = homeCards[index]
+      const { id } = homeCards[index]
+      const { image } = featuredProjects.find(project => project.id === id)
       const tag = slide.match(/<img\b[^>]*>/)[0]
       expect(tag).toContain(`src="${image.src}"`)
       expect(tag).toContain(`width="${image.width}"`)
       expect(tag).toContain(`height="${image.height}"`)
-      expect(tag).toContain(`alt="${messages.home.infoCards.images[id]}"`)
+      expect(tag).toContain(`alt="${projects[id].imageAlt}"`)
       expect(tag).toContain('loading="lazy"')
     })
   })
 
-  it('link KServe to its pull requests and project page, other featured projects to their Projects card, and the rest to their own links', async () => {
+  it('link each project to its pull requests, project page or Projects card, repositories and coverage', async () => {
     const [, ...projectSlides] = slides(
       await renderComponent(InfoCards, { locale })
     )
 
     homeCards.forEach((card, index) => {
       const project = featuredProjects.find(({ id }) => id === card.id)
-      const related = (project?.related ?? []).map(({ url }) => url)
-      const expected = !project
-        ? card.links.map(({ url }) => url)
-        : project.detail
-          ? [
-              ...project.links.map(({ url }) => url),
-              `/projects/${project.detail}`,
-              ...related
-            ]
-          : [`/projects#project-${card.id}`, ...related]
+      const expected = [
+        ...project.links.map(({ url }) => url),
+        project.detail
+          ? `/projects/${project.detail}`
+          : `/projects#project-${card.id}`,
+        ...(project.repositories ?? []).map(({ url }) => url),
+        ...(project.related ?? []).map(({ url }) => url)
+      ]
       expect(iconLinks(projectSlides[index]).map(({ href }) => href)).toEqual(
         expected
       )

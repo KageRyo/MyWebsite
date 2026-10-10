@@ -117,23 +117,18 @@ describe('official project names', () => {
 })
 
 describe('home cards', () => {
-  it('name a featured project, or bring their own title and links', () => {
+  it('only show featured projects, which hold their titles, images and links', () => {
     const ids = featuredProjects.map(({ id }) => id)
-    for (const card of homeCards) {
-      if (ids.includes(card.id)) continue
-      expect(card.titleKey).toEqual(expect.any(String))
-      expect(card.links.length).toBeGreaterThan(0)
+    for (const { id } of homeCards) {
+      expect(ids).toContain(id)
     }
   })
 
   it.each(Object.entries(locales))(
-    'have a summary and image description in %s',
+    'have a home summary in %s',
     (_name, messages) => {
-      for (const { id, image } of homeCards) {
+      for (const { id } of homeCards) {
         expect(messages.home.infoCards.projects[id]).toEqual(expect.any(String))
-        if (image) {
-          expect(messages.home.infoCards.images[id]).toEqual(expect.any(String))
-        }
       }
     }
   )
@@ -153,4 +148,27 @@ describe('related coverage and pages', () => {
       })
     }
   })
+})
+
+describe('featured project pictures', () => {
+  it('give every featured project a sized image', () => {
+    for (const { image } of featuredProjects) {
+      expect(image).toMatchObject({
+        src: expect.stringMatching(/\.webp$/),
+        width: expect.any(Number),
+        height: expect.any(Number)
+      })
+    }
+  })
+
+  it.each(Object.entries(locales))(
+    'describe every featured image in %s',
+    (_name, messages) => {
+      for (const { id } of featuredProjects) {
+        expect(messages.projects.featured.items[id].imageAlt).toEqual(
+          expect.any(String)
+        )
+      }
+    }
+  )
 })
