@@ -1,4 +1,7 @@
 import { describe, expect, it } from 'vitest'
+import en from '../../locales/en'
+import ja from '../../locales/ja'
+import zhTW from '../../locales/zh-TW'
 import { renderComponent, textContent } from '../../test-utils/renderComponent'
 import PersonalInfo from './PersonalInfo.vue'
 
@@ -31,6 +34,22 @@ describe('PersonalInfo', () => {
       /<a[^>]*href="https:\/\/github\.com\/KageRyo"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/
     )
   })
+
+  it.each([
+    ['zh-TW', zhTW],
+    ['en', en],
+    ['ja', ja]
+  ])(
+    'introduces every paragraph of the autobiography in %s',
+    async (locale, messages) => {
+      const text = textContent(await renderComponent(PersonalInfo, { locale }))
+
+      expect(messages.about.personal.summary.length).toBeGreaterThan(1)
+      for (const paragraph of messages.about.personal.summary) {
+        expect(text).toContain(paragraph)
+      }
+    }
+  )
 
   it.each([
     ['en', /Gender: Male · Age: \d+/],

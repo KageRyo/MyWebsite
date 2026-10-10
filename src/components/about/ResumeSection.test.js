@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import en from '../../locales/en'
 import ja from '../../locales/ja'
 import zhTW from '../../locales/zh-TW'
-import { education, experience } from '../../config/resume'
+import { education, experience, skillGroups } from '../../config/resume'
 import { renderComponent, textContent } from '../../test-utils/renderComponent'
 import ResumeSection from './ResumeSection.vue'
 
@@ -62,6 +62,41 @@ describe.each([
         expect(textContent(item)).toContain(line)
       }
     })
+  })
+
+  it('shows what each role covered, the tools used and links to the organizations', async () => {
+    const html = section(
+      await renderComponent(ResumeSection, { locale }),
+      'about-experience'
+    )
+    const items = entries(html, 'experience-list')
+
+    items.forEach((item, index) => {
+      const { id, links } = experience[index]
+      const entry = copy.experience.items[id]
+      expect(textContent(item)).toContain(entry.summary)
+      for (const tool of entry.tools) {
+        expect(item).toMatch(
+          new RegExp(
+            `<span class="ts-chip[^"]*"[^>]*>${tool.replace(/[.*+?^$()|[\]\\/]/g, '\\$&')}</span>`
+          )
+        )
+      }
+      for (const { url } of links) {
+        expect(item).toContain(`href="${url}"`)
+      }
+    })
+  })
+
+  it('describes every area of expertise next to its skills', async () => {
+    const html = section(
+      await renderComponent(ResumeSection, { locale }),
+      'about-skills'
+    )
+
+    for (const { id } of skillGroups) {
+      expect(textContent(html)).toContain(copy.skills.descriptions[id])
+    }
   })
 
   it('stacks education and experience as full-width sections instead of two columns', async () => {

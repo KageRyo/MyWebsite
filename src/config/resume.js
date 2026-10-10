@@ -1,19 +1,42 @@
-// 履歷資料：時間、學校與職稱等文字放在 locales 的 about.resume.*，這裡只記錄順序與連結
+// 履歷資料以中文 CV 為準：時間、學校、職稱與工作內容等文字放在 locales 的 about.resume.*，
+// 這裡只記錄順序、組織連結與技能清單
 export const resumePdfUrl = '/resume/Chien-Hsun_Chang_Resume.pdf'
 
 export const education = [{ id: 'ccu' }, { id: 'nutc' }]
 
+const embeddedLab = {
+  url: 'http://embedded.cs.ccu.edu.tw/',
+  labelKey: 'about.resume.links.embeddedLab'
+}
+
 export const experience = [
-  { id: 'ccuResearch' },
-  { id: 'ccuSysadmin' },
+  {
+    id: 'ccuResearch',
+    links: [
+      embeddedLab,
+      {
+        url: 'https://ai4sdc.ccu.edu.tw/',
+        labelKey: 'about.resume.links.ai4sdc'
+      }
+    ]
+  },
+  { id: 'ccuSysadmin', links: [embeddedLab] },
   {
     id: 'paia',
-    link: {
-      url: 'https://app.paia-arena.com/',
-      labelKey: 'about.resume.experience.items.paia.platform'
-    }
+    links: [
+      { url: 'https://www.paia-tech.com/', labelKey: 'about.resume.links.paia' },
+      { url: 'https://app.paia-arena.com/', labelKey: 'about.resume.links.arena' }
+    ]
   },
-  { id: 'codingApe' }
+  {
+    id: 'codingApe',
+    links: [
+      {
+        url: 'https://codingapeschool.com/',
+        labelKey: 'about.resume.links.codingApe'
+      }
+    ]
+  }
 ]
 
 export const skillGroups = [
@@ -24,11 +47,11 @@ export const skillGroups = [
       'FastAPI',
       'Django Ninja',
       'Pydantic',
+      'REST API',
+      'WebSocket',
       'PostgreSQL/PostGIS',
       'MongoDB',
-      'Redis',
-      'REST API',
-      'WebSocket'
+      'Redis'
     ]
   },
   {
@@ -36,25 +59,46 @@ export const skillGroups = [
     items: [
       'PyTorch',
       'scikit-learn',
+      'XGBoost',
+      'LightGBM',
       'Computer Vision',
-      'Federated Learning',
-      'ML Inference'
+      'Object Detection',
+      'Tracking',
+      'Pose Estimation',
+      'OCR',
+      'VLM',
+      'Federated Learning'
     ]
   },
   {
     id: 'platform',
     items: [
-      'Linux',
       'Docker',
       'Kubernetes',
+      'Helm',
       'KServe',
       'Kubeflow',
-      'Helm',
       'GitHub Actions',
-      'Git/GitLab',
+      'CI/CD',
       'Grafana',
       'Prometheus'
     ]
+  },
+  {
+    id: 'linux',
+    items: [
+      'Linux',
+      'Docker Compose',
+      'SSH',
+      'Networking',
+      'GPU Workstation',
+      'Storage',
+      'WSL2'
+    ]
+  },
+  {
+    id: 'projectManagement',
+    items: ['Git / GitHub', 'GitLab', 'Code Review', 'Agile / Scrum']
   },
   {
     id: 'digitalIc',

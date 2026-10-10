@@ -48,21 +48,39 @@
           >
             {{ $t(`about.resume.experience.items.${item.id}.corp`) }}
           </div>
-          <a
-            v-if="item.link"
-            :href="item.link.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="ts-text is-external-link"
-          >
-            {{ $t(item.link.labelKey) }}
-          </a>
+          <ul class="entry-links">
+            <li v-for="link in item.links" :key="link.url">
+              <a
+                :href="link.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ts-text is-external-link"
+                >{{ $t(link.labelKey) }}</a
+              >
+            </li>
+          </ul>
         </div>
-        <ul v-if="highlights(item.id).length" class="highlights">
-          <li v-for="(line, index) in highlights(item.id)" :key="index">
-            {{ line }}
-          </li>
-        </ul>
+        <div class="entry-detail">
+          <p class="entry-summary">
+            {{ $t(`about.resume.experience.items.${item.id}.summary`) }}
+          </p>
+          <ul class="highlights">
+            <li
+              v-for="(line, index) in lines(item.id, 'highlights')"
+              :key="index"
+            >
+              {{ line }}
+            </li>
+          </ul>
+          <div class="ts-wrap is-compact entry-tools">
+            <span
+              v-for="tool in lines(item.id, 'tools')"
+              :key="tool"
+              class="ts-chip is-small"
+              >{{ tool }}</span
+            >
+          </div>
+        </div>
       </li>
     </ol>
   </section>
@@ -80,13 +98,18 @@
         <div class="ts-text is-bold">
           {{ $t(`about.resume.skills.groups.${group.id}`) }}
         </div>
-        <div class="ts-wrap is-compact">
-          <span
-            v-for="skill in group.items"
-            :key="skill"
-            class="ts-chip is-small"
-            >{{ skill }}</span
-          >
+        <div>
+          <p class="skill-description">
+            {{ $t(`about.resume.skills.descriptions.${group.id}`) }}
+          </p>
+          <div class="ts-wrap is-compact">
+            <span
+              v-for="skill in group.items"
+              :key="skill"
+              class="ts-chip is-small"
+              >{{ skill }}</span
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -99,11 +122,9 @@ import { education, experience, skillGroups } from '../../config/resume'
 
 const { tm, rt } = useI18n({ useScope: 'global' })
 
-// 經歷重點為字串陣列，需逐行轉譯
-const highlights = id => {
-  const lines = tm(`about.resume.experience.items.${id}.highlights`)
-  return Array.isArray(lines) ? lines.map(line => rt(line)) : []
-}
+// 經歷重點與使用技術為字串陣列，需逐行轉譯
+const lines = (id, field) =>
+  tm(`about.resume.experience.items.${id}.${field}`).map(line => rt(line))
 </script>
 
 <style scoped>
@@ -151,10 +172,28 @@ const highlights = id => {
   margin: 0;
 }
 
+.entry-links {
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry-summary {
+  margin: 0 0 0.5rem;
+}
+
 .highlights {
   margin: 0;
   padding-left: 1.25rem;
   list-style: disc;
+}
+
+.entry-tools {
+  margin-top: 0.75rem;
+}
+
+.skill-description {
+  margin: 0 0 0.5rem;
 }
 
 .highlights li + li {
@@ -174,7 +213,9 @@ const highlights = id => {
 }
 
 .skill-group + .skill-group {
-  margin-top: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ts-gray-300);
 }
 
 /* 平板：工作重點移到職稱下方 */
@@ -183,7 +224,7 @@ const highlights = id => {
     grid-template-columns: 9rem minmax(0, 1fr);
   }
 
-  .highlights {
+  .entry-detail {
     grid-column: 2;
     margin-top: 0.5rem;
   }
@@ -196,7 +237,7 @@ const highlights = id => {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .highlights {
+  .entry-detail {
     grid-column: auto;
   }
 
