@@ -5,7 +5,7 @@ import zhTW from '../locales/zh-TW'
 import {
   featuredProjects,
   openSourceTools,
-  selectedWork
+  homeCards
 } from './featuredProjects'
 
 const locales = { 'zh-TW': zhTW, en, ja }
@@ -115,11 +115,25 @@ describe('official project names', () => {
   })
 })
 
-describe('home selected work', () => {
-  it('only lists featured projects, so the home page can find each one', () => {
+describe('home cards', () => {
+  it('name a featured project, or bring their own title and links', () => {
     const ids = featuredProjects.map(({ id }) => id)
-    for (const { id } of selectedWork) {
-      expect(ids).toContain(id)
+    for (const card of homeCards) {
+      if (ids.includes(card.id)) continue
+      expect(card.title).toEqual(expect.any(String))
+      expect(card.links.length).toBeGreaterThan(0)
     }
   })
+
+  it.each(Object.entries(locales))(
+    'have a summary and image description in %s',
+    (_name, messages) => {
+      for (const { id, image } of homeCards) {
+        expect(messages.home.infoCards.projects[id]).toEqual(expect.any(String))
+        if (image) {
+          expect(messages.home.infoCards.images[id]).toEqual(expect.any(String))
+        }
+      }
+    }
+  )
 })

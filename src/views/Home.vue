@@ -3,9 +3,6 @@
     <!-- 穹頂 -->
     <HeroSection />
 
-    <!-- 精選作品 -->
-    <SelectedWork />
-
     <QuoteSection />
     
     <FeaturedPhotos />
@@ -19,7 +16,6 @@
 
 <script setup>
 import HeroSection from '../components/home/HeroSection.vue'
-import SelectedWork from '../components/home/SelectedWork.vue'
 import QuoteSection from '../components/home/QuoteSection.vue'
 import FeaturedPhotos from '../components/home/FeaturedPhotos.vue'
 import InfoCards from '../components/home/InfoCards.vue'

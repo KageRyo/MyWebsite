@@ -3,26 +3,23 @@ import { renderComponent } from '../test-utils/renderComponent'
 import Home from './Home.vue'
 
 describe('Home page', () => {
-  it('shows selected work right after the introduction, before the quote and photos', async () => {
+  it('keeps the quote and photos before the card row, with nothing between them and the introduction', async () => {
     const html = await renderComponent(Home)
     const order = [
       '</h1>',
-      'aria-labelledby="home-selected-work"',
       'ts-quote',
       'ministry-of-education.webp',
-      'KageRyo Developer</div>'
+      'aria-labelledby="home-cards-title"'
     ].map(marker => html.indexOf(marker))
 
     expect(order.every(position => position >= 0)).toBe(true)
     expect(order).toEqual([...order].sort((left, right) => left - right))
+    expect(html).not.toContain('home-selected-work')
   })
 
   it('makes View Projects the only filled button in the introduction', async () => {
     const html = await renderComponent(Home)
-    const hero = html.slice(
-      0,
-      html.indexOf('aria-labelledby="home-selected-work"')
-    )
+    const hero = html.slice(0, html.indexOf('ts-quote'))
     const buttons = [
       ...hero.matchAll(/<(a|button)[^>]*class="(ts-button[^"]*)"[^>]*>/g)
     ].map(([tag, , classes]) => ({

@@ -444,22 +444,16 @@ const tests = {
     await context.close()
   },
 
-  async 'home project cards lead to project pages and cards'(browser) {
+  async 'home card row leads to project pages and cards'(browser) {
     const { context, page } = await newPage(browser)
     await page.goto(baseUrl)
-    const work = page.locator('section[aria-labelledby="home-selected-work"]')
-    // 整張卡片都可以點（標題連結延伸到整張卡片）
-    await work
-      .locator('.project-card')
-      .first()
-      .click({ position: { x: 40, y: 40 } })
+    const row = page.locator('section[aria-labelledby="home-cards-title"]')
+    await row.getByRole('link', { name: '查看專案介紹' }).click()
     await page.waitForURL(`${baseUrl}/projects/kserve`)
     await page.getByRole('heading', { level: 1 }).waitFor()
 
     await page.goto(baseUrl)
-    await work
-      .getByRole('link', { name: '智慧防災數位孿生系統（TAG-Twin）' })
-      .click()
+    await row.getByRole('link', { name: '在作品集查看' }).first().click()
     await page.waitForURL(`${baseUrl}/projects#project-tagTwin`)
     await page.locator('#project-tagTwin').waitFor()
     await page.waitForFunction(() => {
@@ -469,6 +463,49 @@ const tests = {
       return top >= 0 && bottom <= window.innerHeight + 1
     })
     await context.close()
+  },
+
+  async 'home card row scrolls sideways with its previous and next buttons'(
+    browser
+  ) {
+    for (const width of [1280, 390]) {
+      const { context, page } = await newPage(browser, {
+        viewport: { width, height: 844 }
+      })
+      await page.goto(baseUrl)
+      const row = page.locator('section[aria-labelledby="home-cards-title"]')
+      const previous = row.getByRole('button', { name: '上一張' })
+      const next = row.getByRole('button', { name: '下一張' })
+      const track = page.locator('#home-card-track')
+      await track.scrollIntoViewIfNeeded()
+      assert.equal(await previous.isDisabled(), true, `${width}px: previous`)
+      assert.equal(await next.isDisabled(), false, `${width}px: next`)
+
+      // 一路按「下一張」到底，最後一張卡片要完整出現
+      for (let step = 0; step < 10 && !(await next.isDisabled()); step += 1) {
+        await next.click()
+        await page.waitForTimeout(400)
+      }
+      assert.equal(
+        await next.isDisabled(),
+        true,
+        `${width}px: never reached the end`
+      )
+      assert.equal(await previous.isDisabled(), false, `${width}px: previous`)
+      const [trackBox, lastBox] = await Promise.all([
+        track.evaluate(element => element.getBoundingClientRect().toJSON()),
+        track
+          .locator('.card-slide')
+          .last()
+          .evaluate(element => element.getBoundingClientRect().toJSON())
+      ])
+      assert.ok(
+        lastBox.right <= trackBox.right + 1 &&
+          lastBox.left >= trackBox.left - 1,
+        `${width}px: last card is cut off`
+      )
+      await context.close()
+    }
   },
 
   async 'home sections share one left edge'(browser) {
@@ -482,9 +519,8 @@ const tests = {
       const edges = await page.evaluate(() =>
         Object.fromEntries(
           [
-            ['cards', '.project-cards'],
             ['photos', '.ts-image:has(.ts-mask)'],
-            ['intro card', '.ts-box:has(img[src*="chienhsun"])']
+            ['cards', '#home-card-track']
           ].map(([name, selector]) => [
             name,
             Math.round(
