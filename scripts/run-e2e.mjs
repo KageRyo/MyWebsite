@@ -444,19 +444,24 @@ const tests = {
     await context.close()
   },
 
-  async 'home selected work leads to project pages and cards'(browser) {
+  async 'home project cards lead to project pages and cards'(browser) {
     const { context, page } = await newPage(browser)
     await page.goto(baseUrl)
     const work = page.locator('section[aria-labelledby="home-selected-work"]')
-    await work.getByRole('link', { name: '查看專案介紹' }).click()
+    // 整張卡片都可以點（標題連結延伸到整張卡片）
+    await work
+      .locator('.project-card')
+      .first()
+      .click({ position: { x: 40, y: 40 } })
     await page.waitForURL(`${baseUrl}/projects/kserve`)
     await page.getByRole('heading', { level: 1 }).waitFor()
 
     await page.goto(baseUrl)
-    await work.getByRole('link', { name: '在作品集查看' }).first().click()
+    await work
+      .getByRole('link', { name: '智慧防災數位孿生系統（TAG-Twin）' })
+      .click()
     await page.waitForURL(`${baseUrl}/projects#project-tagTwin`)
-    const card = page.locator('#project-tagTwin')
-    await card.waitFor()
+    await page.locator('#project-tagTwin').waitFor()
     await page.waitForFunction(() => {
       const { top, bottom } = document
         .querySelector('#project-tagTwin')
@@ -464,6 +469,43 @@ const tests = {
       return top >= 0 && bottom <= window.innerHeight + 1
     })
     await context.close()
+  },
+
+  async 'home introduction balances the illustration and the greeting'(
+    browser
+  ) {
+    for (const locale of ['zh-TW', 'en', 'ja']) {
+      for (const width of [1280, 1024, 390]) {
+        const { context, page } = await newPage(browser, {
+          viewport: { width, height: 900 },
+          storage: { locale }
+        })
+        await page.goto(baseUrl)
+        await page.locator('h1').first().waitFor()
+        const [visual, intro] = await Promise.all(
+          ['.hero-visual', '.hero-intro'].map(selector =>
+            page
+              .locator(selector)
+              .evaluate(element => element.getBoundingClientRect().toJSON())
+          )
+        )
+        const where = `${locale} ${width}px`
+        if (width >= 1200) {
+          // 寬螢幕並排：插圖與聯絡方式垂直置中，上下留白各不超過 120px（原本下方一整塊 232px）
+          assert.ok(visual.right < intro.left, `${where}: not side by side`)
+          const above = visual.top - intro.top
+          const below = intro.bottom - visual.bottom
+          assert.ok(Math.abs(above - below) <= 3, `${where}: not centered`)
+          assert.ok(
+            below <= 120,
+            `${where}: ${Math.round(below)}px empty under the illustration`
+          )
+        } else {
+          assert.ok(intro.top >= visual.bottom, `${where}: not stacked`)
+        }
+        await context.close()
+      }
+    }
   },
 
   async 'contact form previews the email and keeps a copy fallback'(browser) {

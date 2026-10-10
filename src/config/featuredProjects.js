@@ -44,8 +44,14 @@ export const featuredProjects = [
   }
 ]
 
-// 首頁「精選作品」依序挑出的專案，其餘仍在作品集頁面
-export const selectedWorkIds = ['kserve', 'tagTwin', 'federatedAqi']
+// 首頁專案圖卡依序顯示，其餘專案仍在作品集頁面。
+// icon 用在尚未提供截圖時的 KageRyo 封面；確認可公開的截圖後加上
+// image: { src, width, height, altKey } 就會改顯示截圖
+export const selectedWork = [
+  { id: 'kserve', icon: 'is-cubes-icon' },
+  { id: 'tagTwin', icon: 'is-house-flood-water-icon' },
+  { id: 'federatedAqi', icon: 'is-wind-icon' }
+]
 
 // 從研究資料整理過程拆出的開源工具，GitHub 封存清單中也找得到
 export const openSourceTools = [

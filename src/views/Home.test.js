@@ -36,3 +36,22 @@ describe('Home page', () => {
     expect(filled[0].tag).toMatch(/href="\/projects"/)
   })
 })
+
+describe('Home introduction', () => {
+  it('keeps the illustration together with the social links and email, apart from the greeting box', async () => {
+    const html = await renderComponent(Home)
+    const visual = html.match(
+      /<div class="hero-visual"[^>]*>(.*?)<\/div>\s*<div class="hero-intro/s
+    )[1]
+
+    expect(visual).toContain('card.webp')
+    for (const link of [
+      'https://coderyo.com/discord',
+      'https://github.com/KageRyo',
+      'https://www.linkedin.com/in/kageryo/',
+      'mailto:kageryo@coderyo.com'
+    ]) {
+      expect(visual).toContain(`href="${link}"`)
+    }
+  })
+})

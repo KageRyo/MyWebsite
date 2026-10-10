@@ -5,7 +5,7 @@ import zhTW from '../locales/zh-TW'
 import {
   featuredProjects,
   openSourceTools,
-  selectedWorkIds
+  selectedWork
 } from './featuredProjects'
 
 const locales = { 'zh-TW': zhTW, en, ja }
@@ -118,7 +118,7 @@ describe('official project names', () => {
 describe('home selected work', () => {
   it('only lists featured projects, so the home page can find each one', () => {
     const ids = featuredProjects.map(({ id }) => id)
-    for (const id of selectedWorkIds) {
+    for (const { id } of selectedWork) {
       expect(ids).toContain(id)
     }
   })
