@@ -588,6 +588,41 @@ const tests = {
     assert.deepEqual(oversized, [])
   },
 
+  async 'featured photo captions leave their photos visible'(browser) {
+    const covering = []
+    for (const locale of ['zh-TW', 'en', 'ja']) {
+      for (const width of [1280, 390]) {
+        const { context, page } = await newPage(browser, {
+          viewport: { width, height: 844 },
+          storage: { locale }
+        })
+        await page.goto(baseUrl)
+        await page.locator('h1').first().waitFor()
+        // 說明文字不能超出照片上緣，也不能蓋住大半張照片
+        const found = await page.$$eval('.ts-image:has(.ts-mask)', images =>
+          images
+            .filter(image => {
+              const photo = image.querySelector('img').getBoundingClientRect()
+              const caption = image
+                .querySelector('.ts-mask .ts-content')
+                .getBoundingClientRect()
+              const overlap =
+                Math.min(caption.bottom, photo.bottom) -
+                Math.max(caption.top, photo.top)
+              return (
+                (caption.top < photo.top && caption.bottom > photo.top) ||
+                overlap > photo.height * 0.6
+              )
+            })
+            .map(image => image.querySelector('img').getAttribute('src'))
+        )
+        covering.push(...found.map(src => `${locale} ${width}px ${src}`))
+        await context.close()
+      }
+    }
+    assert.deepEqual(covering, [])
+  },
+
   async 'photos load when scrolled into view'(browser) {
     const { context, page } = await newPage(browser)
     const broken = []
