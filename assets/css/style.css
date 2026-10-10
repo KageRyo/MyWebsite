@@ -69,6 +69,12 @@ html:not(.is-dark) .ts-content.is-secondary > p {
     }
 }
 
+/* 圖片宣告了原始尺寸以避免版面跳動，仍需隨容器縮放（TocasUI 只縮放沒有 width 屬性的圖片） */
+.ts-image img[width] {
+    width: 100%;
+    height: auto;
+}
+
 /* 使文字可以左右對齊 */
 .justify-text {
     text-align: justify;

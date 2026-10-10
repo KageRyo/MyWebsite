@@ -44,11 +44,32 @@ const servedJpegs = () =>
     return raster?.[0] === 0xff && raster[1] === 0xd8 ? [[name, raster]] : []
   })
 
+// WebP 的中繼資料存在 RIFF 容器的 EXIF 或 XMP 區塊
+const webpChunks = webp => {
+  const chunks = []
+  for (let offset = 12; offset + 8 <= webp.length; ) {
+    const size = webp.readUInt32LE(offset + 4)
+    chunks.push(webp.toString('latin1', offset, offset + 4))
+    offset += 8 + size + (size % 2)
+  }
+  return chunks
+}
+
+const servedWebps = () =>
+  readdirSync(imageDir)
+    .filter(name => name.endsWith('.webp'))
+    .map(name => [name, readFileSync(new URL(name, imageDir))])
+
 describe('published photos', () => {
-  it('include the embedded JPEG photos', () => {
-    expect(servedJpegs().map(([name]) => name)).toEqual(
-      expect.arrayContaining(['chienhsun.svg', 'og.jpg'])
-    )
+  it('include the JPEG and WebP photos', () => {
+    expect(servedJpegs().map(([name]) => name)).toContain('og.jpg')
+    expect(servedWebps().map(([name]) => name)).toContain('chienhsun.webp')
+  })
+
+  it.each(servedWebps())('%s has no EXIF or XMP metadata', (_name, webp) => {
+    expect(webp.toString('latin1', 0, 4)).toBe('RIFF')
+    expect(webpChunks(webp)).not.toContain('EXIF')
+    expect(webpChunks(webp)).not.toContain('XMP ')
   })
 
   it.each(servedJpegs())('%s has no GPS or camera EXIF tags', (_name, jpeg) => {

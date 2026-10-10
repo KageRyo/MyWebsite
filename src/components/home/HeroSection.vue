@@ -8,7 +8,7 @@
         <!-- 個人照片 -->
         <div class="tablet+:column column is-11-wide mobile:ts-content">
           <div class="ts-image is-rounded">
-            <img src="/assets/img/card.svg" alt="個人照片">
+            <img src="/assets/img/card.webp" alt="個人照片" width="1600" height="900" decoding="async" fetchpriority="high">
           </div>
         </div>
 

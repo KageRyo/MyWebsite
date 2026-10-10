@@ -5,7 +5,7 @@
       <div class="ts-grid is-middle-aligned">
         <div class="tablet+:column tablet+:is-6-wide">
           <div class="ts-image">
-            <img src="/assets/img/chienhsun.svg" alt="KageRyo Developer">
+            <img src="/assets/img/chienhsun.webp" alt="KageRyo Developer" width="900" height="900" loading="lazy" decoding="async">
           </div>
         </div>
         <div class="tablet+:column tablet+:is-10-wide">
