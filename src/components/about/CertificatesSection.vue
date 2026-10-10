@@ -3,7 +3,6 @@
     class="ts-container editorial-section"
     aria-labelledby="about-certificates"
   >
-    <SectionKicker index="05" label="Certificates" />
     <!-- 證照（次要資訊，預設收合） -->
     <details class="ts-accordion">
       <summary>
@@ -38,7 +37,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import SectionKicker from '../common/SectionKicker.vue'
 
 // 證照數據
 const certificates = ref([

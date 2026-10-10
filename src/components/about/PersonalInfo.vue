@@ -3,7 +3,6 @@
     class="ts-container editorial-section"
     aria-labelledby="about-introduction"
   >
-    <SectionKicker index="01" label="Introduction" />
     <div class="ts-grid is-relaxed has-top-spaced">
       <!-- 個人照片 -->
       <div class="tablet+:column is-5-wide">
@@ -63,7 +62,6 @@
 <script setup>
 import { computed } from 'vue'
 import { resumePdfUrl } from '../../config/resume'
-import SectionKicker from '../common/SectionKicker.vue'
 
 // 計算當前年齡
 const currentAge = computed(() => {
