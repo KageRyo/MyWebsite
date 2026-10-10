@@ -161,6 +161,38 @@ const tests = {
     await context.close()
   },
 
+  async 'focus rings show on keyboard-focused buttons but not around the main region'(
+    browser
+  ) {
+    const { context, page } = await newPage(browser)
+    const mainOutline = () =>
+      page.evaluate(() => {
+        const main = document.querySelector('#main-content')
+        return document.activeElement === main
+          ? getComputedStyle(main).outlineStyle
+          : 'main is not focused'
+      })
+    await page.goto(baseUrl)
+    await page.locator('h1').first().waitFor()
+    assert.equal(await mainOutline(), 'none')
+    await page
+      .locator('header nav')
+      .getByRole('link', { name: '關於我' })
+      .click()
+    await page.waitForURL(`${baseUrl}/about`)
+    assert.equal(await mainOutline(), 'none')
+
+    // 鍵盤操作的 TocasUI 按鈕要看得到焦點框（第一個是下載履歷按鈕）
+    await page.keyboard.press('Tab')
+    assert.equal(
+      await page.evaluate(
+        () => getComputedStyle(document.activeElement).outlineStyle
+      ),
+      'solid'
+    )
+    await context.close()
+  },
+
   async 'mobile drawer traps focus, closes with Escape, and navigates'(
     browser
   ) {

@@ -38,9 +38,15 @@
     transform: translateY(0);
 }
 
-:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+/* 用 :is() 讓焦點框的優先權高於 TocasUI 的 .ts-button:focus { outline: 0 }，鍵盤操作按鈕時才看得到焦點 */
+:is(a, button, input, select, textarea, [tabindex]):focus-visible {
     outline: 3px solid #005fcc;
     outline-offset: 3px;
+}
+
+/* 換頁後程式會把焦點移到主要內容區，讓螢幕閱讀器從頁首開始朗讀；它不是可操作的元件，不畫焦點框 */
+#main-content:focus {
+    outline: none;
 }
 
 /* TocasUI 5.7 依 color-scheme 切換配色，對應既有的 html.is-dark / is-light 主題類別 */
