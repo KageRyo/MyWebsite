@@ -34,12 +34,11 @@ export default {
   },
   home: {
     hero: {
-      introduction: "Hi! I'm Chien-Hsun, a master's student in Computer Science and Information Engineering at National Chung Cheng University. I enjoy building small tools, contributing to open source, and working on backend platforms, AI systems, and MLOps. Explore my projects, and feel free to connect! ヾ(*´∀ ˋ*)ﾉ",
+      introduction: "Hi! I'm Chien-Hsun, a master's student in Computer Science and Information Engineering at National Chung Cheng University, working on backend/platform and AI systems from design through deployment and maintenance. I enjoy building small tools and contributing to open source. Explore my projects, and feel free to connect! ヾ(*´∀ ˋ*)ﾉ",
       academic: 'M.S. student at National Chung Cheng University · Expected Aug 2027',
       availability: 'Available for 2027 pre-employment programs and R&D Substitute Service',
       viewProjects: 'View Projects',
       downloadResume: 'Resume (PDF)',
-      seeMore: 'See More',
     },
     quote: {
       main: "Life and coding both start with print(\"Hello World\");",
@@ -56,13 +55,33 @@ export default {
       },
     },
     infoCards: {
-      intro: "Yes, that's me, a developer from Taiwan, currently studying at {ccu} in the {cs}.",
-      learningFocus: 'My focus is backend and data services, Linux/Kubernetes platforms, ML inference, and digital-twin integration. See {about} and {projects} for practical examples.',
+      header: 'About me and my projects',
+      previous: 'Previous',
+      next: 'Next',
+      intro: "Yes, that's me, a developer from Taiwan, currently studying at {ccu} in the {cs}, focusing on software engineering, backend/platform, and AI systems. I have hands-on experience with backend systems, AI/ML integration, MLOps, and Linux infrastructure, and have worked on CNCF KServe, a flood disaster digital twin platform, computer vision systems, and a cross-nation federated learning project. See {about} and {projects} for practical examples.",
       links: {
         ccu: 'National Chung Cheng University',
         cs: 'Department of Computer Science and Engineering',
         about: 'About Me',
         projects: 'Projects',
+        projectsPage: 'View on the Projects page',
+      },
+      projects: {
+        kserve: 'Ongoing contributions to CNCF KServe across Python, Go, Kubernetes controllers and CRDs, and Helm. Fixed the Python SDK overriding user logging handlers, merged upstream; also submitted a fix for overlong domains when ingress creation is disabled and runtimeClassName support for ServingRuntimePodSpec and WorkerSpec, both still under review.',
+        tagTwin: 'As lead of the digital twin system design group, I lead a 4-member international team building TAG-Twin, validated in Minxiong Township, Chiayi County. The core platform uses FastAPI, PostgreSQL/PostGIS, and Redis to integrate terrain, road, rainfall, flood, and risk data, and connects flood simulation and Unreal Engine 5 visualization through APIs and WebSocket.',
+        federatedAqi: 'Led system planning and technical integration for the CCU × UBM (Indonesia) image-based AQI federated learning project: connected training results from 7 Flower clients (Jakarta plus 6 stations in Taiwan), integrated inference and deployment with Kubernetes, Kubeflow, and KServe, and built Grafana monitoring.',
+        environmentalEnforcement: 'An industry–academia environmental enforcement system that analyzes CCTV footage to flag suspected littering and public urination, keeping an evidence trail for human review. It combines D-FINE, ByteTrack, pose analysis, VLM, and OCR, separates GPU inference from post-processing to avoid repeated work, and is deployed in the field.',
+        waterMirror: 'Designed and built a cross-platform AI water quality assessment system: a mobile front end and the WQSurrogateModels backend take manual or CSV water quality data and return a WQI5 score, class, and alerts. It compares linear regression, support vector machines, random forests, XGBoost, and LightGBM.',
+      },
+      titles: {
+        waterMirror: 'WaterMirror Cross-Platform AI Water Quality Assessment',
+      },
+      images: {
+        kserve: 'The merged KServe pull request #4687 on GitHub',
+        tagTwin: 'Chien-Hsun at the National Chung Cheng University AI and Sustainability Research Center booth, next to a drone',
+        federatedAqi: 'Chien-Hsun with UBM team members in front of the federated AQI platform dashboard',
+        environmentalEnforcement: 'CCTV frame with person pose and vehicle detections; people are pixelated',
+        waterMirror: 'WaterMirror home, water quality input, and report screens',
       },
     },
   },

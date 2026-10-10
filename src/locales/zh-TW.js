@@ -34,12 +34,11 @@ export default {
   },
   home: {
     hero: {
-      introduction: '嗨！我是健勳，目前就讀國立中正大學資訊工程研究所。平常喜歡開發小工具、參與開源，也投入 Backend／Platform、AI Systems 與 MLOps 相關的研究和系統整合。歡迎逛逛我的專案，一起交流！ヾ(*´∀ ˋ*)ﾉ',
+      introduction: '嗨！我是健勳，目前就讀國立中正大學資訊工程研究所，主要發展方向是 Software Engineering、Backend／Platform 與 AI Systems，從需求分析、系統設計、開發測試到部署上線與後續維護都有實際經驗。平常喜歡開發小工具、參與開源，歡迎逛逛我的專案，一起交流！ヾ(*´∀ ˋ*)ﾉ',
       academic: '國立中正大學資工所碩士生｜預計 2027 年 8 月畢業',
       availability: '可配合 2027 預聘與研發替代役',
       viewProjects: '查看作品集',
       downloadResume: '英文履歷（PDF）',
-      seeMore: '查看更多',
     },
     quote: {
       main: '人生和 Coding 一樣，都是從 print("Hello World"); 開始的。',
@@ -56,13 +55,33 @@ export default {
       },
     },
     infoCards: {
-      intro: '是的沒錯，就是我本人，來自臺灣的開發者，目前就讀 {ccu} 的 {cs}。',
-      learningFocus: '目前主要投入後端與資料服務、Linux／Kubernetes 平台、AI 模型推論與數位孿生系統整合，如果想了解實際成果，歡迎到 {about} 或 {projects} 看看。',
+      header: '認識我與我的專案',
+      previous: '上一張',
+      next: '下一張',
+      intro: '是的沒錯，就是我本人，來自臺灣的開發者，目前就讀 {ccu} 的 {cs}，主要發展方向為 Software Engineering、Backend／Platform 與 AI Systems。具後端系統、AI／ML 系統整合、MLOps 與 Linux 基礎設施的實務經驗，參與過 CNCF KServe 開源貢獻、智慧防災數位孿生平台、電腦視覺 AI 系統與跨國聯邦式學習專案，想看實際成果，歡迎到 {about} 或 {projects} 看看。',
       links: {
         ccu: '國立中正大學',
         cs: '資訊工程研究所',
         about: '關於我',
         projects: '作品集',
+        projectsPage: '在作品集查看',
+      },
+      projects: {
+        kserve: '持續參與 CNCF KServe 開源專案，涵蓋 Python、Go、Kubernetes Controller／CRD 與 Helm。修正 Python SDK 覆寫使用者 logging handlers 的問題，已合併至上游；另提交停用 Ingress 建立時過長網域的驗證修正，以及 ServingRuntimePodSpec／WorkerSpec 的 runtimeClassName 支援，目前仍在審查中。',
+        tagTwin: '擔任數位孿生系統設計組組長，帶領 4 人跨國研究團隊，以嘉義縣民雄鄉為驗證場域建置 TAG-Twin。使用 FastAPI、PostgreSQL／PostGIS 與 Redis 建置核心平台，整合地形、道路、降雨、淹水與風險資訊，並以 API／WebSocket 串接洪水模擬與 Unreal Engine 5 視覺化。',
+        federatedAqi: '主導 CCU × 印尼 UBM 跨國影像 AQI 聯邦學習專案的系統規劃與技術整合，銜接 Jakarta 與臺灣 6 測站共 7 個 Flower 聯邦客戶端的訓練成果，結合 Kubernetes、Kubeflow 與 KServe 完成推論與部署整合，並建置 Grafana 監控平台。',
+        environmentalEnforcement: '參與產學合作的環保科技執法系統，以 CCTV 影像辨識疑似亂丟垃圾與不當便溺事件，並建立供人工覆核的證據鏈。整合 D-FINE、ByteTrack、姿態分析、VLM 與 OCR，拆分 GPU 推論與後處理以避免重複運算，系統已部署於實際場域。',
+        waterMirror: '設計與開發跨平台 AI 水質評估系統，由行動裝置前端與 WQSurrogateModels 後端服務組成，支援手動輸入及 CSV 上傳水質資料，回傳 WQI5 水質分數、分類與警示；比較線性迴歸、支援向量機、隨機森林、XGBoost 與 LightGBM 等模型。',
+      },
+      titles: {
+        waterMirror: 'WaterMirror 跨平台 AI 水質評估系統',
+      },
+      images: {
+        kserve: 'GitHub 上已合併的 KServe Pull Request #4687 頁面',
+        tagTwin: '張健勳在國立中正大學人工智慧與永續發展研究中心的展示攤位，旁邊是無人機',
+        federatedAqi: '張健勳與 UBM 團隊成員在跨國聯邦式空氣品質平台的監控儀表板前合影',
+        environmentalEnforcement: 'CCTV 畫面上的人員姿態與車輛偵測結果，人物已馬賽克',
+        waterMirror: 'WaterMirror 的首頁、水質資料輸入與報表畫面',
       },
     },
   },

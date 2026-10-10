@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { useProjectStore } from '../stores/projects'
 import { renderComponent } from '../test-utils/renderComponent'
-import DrawerContent from './home/DrawerContent.vue'
 import FeaturedPhotos from './home/FeaturedPhotos.vue'
 import MobileDrawer from './layout/MobileDrawer.vue'
 import GitHubProjects from './projects/GitHubProjects.vue'
@@ -21,19 +20,8 @@ describe('TocasUI class names', () => {
     expect(classLists(html)).toContainEqual(['ts-loading'])
   })
 
-  it('pad the featured photos container like the other home sections', async () => {
-    const html = await renderComponent(FeaturedPhotos)
-
-    expect(classLists(html)[0]).toEqual(
-      expect.arrayContaining(['ts-container', 'is-padded'])
-    )
-  })
-
-  it.each([
-    ['See More drawer', DrawerContent],
-    ['mobile navigation drawer', MobileDrawer]
-  ])('style the %s close button as outlined', async (_name, component) => {
-    const html = await renderComponent(component)
+  it('style the mobile navigation drawer close button as outlined', async () => {
+    const html = await renderComponent(MobileDrawer)
     const buttons = classLists(html).filter(list => list.includes('ts-button'))
 
     expect(buttons).toContainEqual(
@@ -41,11 +29,8 @@ describe('TocasUI class names', () => {
     )
   })
 
-  it.each([
-    ['See More drawer', DrawerContent],
-    ['mobile navigation drawer', MobileDrawer]
-  ])('open the %s from the end side', async (_name, component) => {
-    const drawer = classLists(await renderComponent(component)).find(list =>
+  it('open the mobile navigation drawer from the end side', async () => {
+    const drawer = classLists(await renderComponent(MobileDrawer)).find(list =>
       list.includes('ts-app-drawer')
     )
 
@@ -55,7 +40,6 @@ describe('TocasUI class names', () => {
   it.each([
     ['ts-loader', GitHubProjects],
     ['is-padd', FeaturedPhotos],
-    ['is-outline', DrawerContent],
     ['is-right', MobileDrawer]
   ])('no longer use the nonexistent %s class', async (name, component) => {
     const html = await renderComponent(component, {

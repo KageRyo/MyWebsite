@@ -2,7 +2,11 @@ import { describe, expect, it } from 'vitest'
 import en from '../locales/en'
 import ja from '../locales/ja'
 import zhTW from '../locales/zh-TW'
-import { featuredProjects, openSourceTools } from './featuredProjects'
+import {
+  featuredProjects,
+  openSourceTools,
+  homeCards
+} from './featuredProjects'
 
 const locales = { 'zh-TW': zhTW, en, ja }
 
@@ -109,5 +113,44 @@ describe('official project names', () => {
     expect(en.projects.tools.header).toBe(
       'Open-Source Data Engineering & Governance Tools'
     )
+  })
+})
+
+describe('home cards', () => {
+  it('name a featured project, or bring their own title and links', () => {
+    const ids = featuredProjects.map(({ id }) => id)
+    for (const card of homeCards) {
+      if (ids.includes(card.id)) continue
+      expect(card.titleKey).toEqual(expect.any(String))
+      expect(card.links.length).toBeGreaterThan(0)
+    }
+  })
+
+  it.each(Object.entries(locales))(
+    'have a summary and image description in %s',
+    (_name, messages) => {
+      for (const { id, image } of homeCards) {
+        expect(messages.home.infoCards.projects[id]).toEqual(expect.any(String))
+        if (image) {
+          expect(messages.home.infoCards.images[id]).toEqual(expect.any(String))
+        }
+      }
+    }
+  )
+})
+
+describe('related coverage and pages', () => {
+  it('give every related link a source, a title and an https address', () => {
+    const related = featuredProjects.flatMap(({ related = [] }) => related)
+
+    expect(related.length).toBeGreaterThan(0)
+    for (const link of related) {
+      expect(link).toMatchObject({
+        kind: expect.stringMatching(/^(news|page|paper)$/),
+        source: expect.any(String),
+        title: expect.any(String),
+        url: expect.stringMatching(/^https:\/\//)
+      })
+    }
   })
 })

@@ -27,8 +27,11 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(_to, _from, savedPosition) {
-    return savedPosition || { top: 0 }
+  scrollBehavior(to, _from, savedPosition) {
+    if (savedPosition) return savedPosition
+    // 首頁「精選作品」會連到作品集頁面上的專案卡片（例如 /projects#project-tagTwin）
+    if (to.hash) return { el: to.hash }
+    return { top: 0 }
   }
 })
 
