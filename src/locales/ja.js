@@ -235,6 +235,10 @@ export default {
       outcomes: '成果・検証',
       media: '成果・メディア',
     },
+    branch: {
+      yes: 'はい',
+      no: 'いいえ',
+    },
     coverage: 'メディア掲載',
     credit: '出典：{source}',
     viewDetails: 'プロジェクトの詳細を見る',
@@ -275,8 +279,8 @@ export default {
         steps: {
           logging: [
             'log_config なしで呼び出される',
-            '新しいチェック：kserve ロガーに、ユーザーが設定したハンドラー（継承分を含む）があるか',
-            'ハンドラーがない場合のみ KServe の既定設定を適用し、ある場合はそのまま戻ってユーザーのロギングを維持する',
+            '新しいチェック：kserve ロガーに、ユーザーが設定したハンドラー（継承分を含む）があるか？',
+            ['そのまま戻り、ユーザーのロギングを維持する', 'KServe の既定のロギング設定を適用する'],
           ],
           runtimeClassName: [
             'ServingRuntimePodSpec に追加した任意フィールド（例：nvidia）',

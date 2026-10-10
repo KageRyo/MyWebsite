@@ -235,6 +235,10 @@ export default {
       outcomes: '成果與驗證',
       media: '成果與媒體',
     },
+    branch: {
+      yes: '是',
+      no: '否',
+    },
     coverage: '媒體報導',
     credit: '來源：{source}',
     viewDetails: '查看專案介紹',
@@ -275,8 +279,8 @@ export default {
         steps: {
           logging: [
             '未傳入 log_config 時呼叫',
-            '新增的檢查：kserve logger 上是否已有使用者設定（含繼承）的 handler',
-            '沒有 handler 時才套用 KServe 預設設定；已有 handler 則直接返回，保留使用者的日誌設定',
+            '新增的檢查：kserve logger 上是否已有使用者設定（含繼承）的 handler？',
+            ['直接返回，保留使用者的日誌設定', '套用 KServe 預設的日誌設定'],
           ],
           runtimeClassName: [
             'ServingRuntimePodSpec 新增的選填欄位，例如 nvidia',

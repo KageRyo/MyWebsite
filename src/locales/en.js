@@ -235,6 +235,10 @@ export default {
       outcomes: 'Outcomes & Evidence',
       media: 'Results & Media',
     },
+    branch: {
+      yes: 'Yes',
+      no: 'No',
+    },
     coverage: 'Media Coverage',
     credit: 'Source: {source}',
     viewDetails: 'View project details',
@@ -275,8 +279,8 @@ export default {
         steps: {
           logging: [
             'Called without a log_config',
-            'New check for handlers the user already attached to the kserve logger, including inherited ones',
-            "Applied only when no handlers exist; otherwise the function returns early and keeps the user's logging",
+            'New check: are handlers already attached to the kserve logger, directly or inherited?',
+            ["Return early and keep the user's logging", "Apply KServe's default logging config"],
           ],
           runtimeClassName: [
             'New optional field on ServingRuntimePodSpec, for example nvidia',

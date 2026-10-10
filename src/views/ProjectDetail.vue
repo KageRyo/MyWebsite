@@ -115,12 +115,31 @@
               </div>
               <ol class="flow-steps">
                 <li
-                  v-for="(code, step) in contribution.flow"
-                  :key="code"
+                  v-for="(step, position) in contribution.flow"
+                  :key="position"
                   class="flow-step"
+                  :class="{ 'is-branch': Array.isArray(step) }"
                 >
-                  <code>{{ code }}</code>
-                  <span>{{ diagramSteps(contribution.id)[step] }}</span>
+                  <!-- 分支：判斷結果為「是」或「否」時各自執行的程式 -->
+                  <template v-if="Array.isArray(step)">
+                    <div
+                      v-for="(branch, index) in step"
+                      :key="branch.when"
+                      class="flow-branch"
+                    >
+                      <span class="ts-text is-bold flow-branch-label">{{
+                        $t(`projectDetail.branch.${branch.when}`)
+                      }}</span>
+                      <code>{{ branch.code }}</code>
+                      <span>{{
+                        diagramSteps(contribution.id)[position][index]
+                      }}</span>
+                    </div>
+                  </template>
+                  <template v-else>
+                    <code>{{ step }}</code>
+                    <span>{{ diagramSteps(contribution.id)[position] }}</span>
+                  </template>
                 </li>
               </ol>
             </div>
@@ -205,8 +224,10 @@ const hasFlows = computed(() =>
 const statusIcon = status =>
   status === 'merged' ? 'is-code-merge-icon' : 'is-code-pull-request-icon'
 
-// 各段落為字串陣列，需逐行轉譯
-const translateLines = key => tm(key).map(line => rt(line))
+// 各段落為字串陣列，需逐行轉譯；架構圖的分支步驟是巢狀陣列
+const translate = message =>
+  Array.isArray(message) ? message.map(translate) : rt(message)
+const translateLines = key => tm(key).map(translate)
 const lines = key => translateLines(`${copyKey.value}.${key}`)
 const diagramSteps = id =>
   translateLines(`${copyKey.value}.diagram.steps.${id}`)
@@ -308,6 +329,23 @@ const diagramSteps = id =>
   margin-bottom: 0.25rem;
   font-weight: 600;
   overflow-wrap: anywhere;
+}
+
+.flow-step.is-branch {
+  padding: 0;
+}
+
+.flow-branch {
+  padding: 0.6rem 1rem;
+}
+
+.flow-branch + .flow-branch {
+  border-top: 1px dashed var(--ts-gray-300);
+}
+
+.flow-branch-label {
+  float: left;
+  margin-right: 0.5rem;
 }
 
 .contribution-flows figcaption {

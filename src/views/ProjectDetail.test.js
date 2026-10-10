@@ -31,6 +31,13 @@ const section = (html, key) =>
 
 const hero = html => html.slice(0, html.indexOf('<section'))
 
+// 架構圖每一步（分支步驟裡有多個 flow-branch）
+const flowSteps = flow =>
+  flow.split(/<li class="[^"]*\bflow-step\b[^"]*"[^>]*>/).slice(1)
+
+const codeTag = code =>
+  new RegExp(`<code[^>]*>${code.replace(/[.()]/g, '\\$&')}</code>`)
+
 describe.each([
   ['zh-TW', zhTW],
   ['en', en],
@@ -104,17 +111,38 @@ describe.each([
 
     expect(flows).toHaveLength(contributions.length)
     flows.forEach((flow, index) => {
-      const { id, flow: codes } = contributions[index]
-      const steps = copy.kserve.diagram.steps[id]
-      expect(flow.match(/<li[\s>]/g)).toHaveLength(codes.length)
-      codes.forEach((code, step) => {
-        expect(flow).toMatch(
-          new RegExp(`<code[^>]*>${code.replace(/[.()]/g, '\\$&')}</code>`)
-        )
-        expect(textContent(flow)).toContain(steps[step])
+      const { id, flow: steps } = contributions[index]
+      const texts = copy.kserve.diagram.steps[id]
+      const items = flowSteps(flow)
+      expect(items).toHaveLength(steps.length)
+      steps.forEach((step, position) => {
+        const branches = Array.isArray(step) ? step : [{ code: step }]
+        const stepTexts = [texts[position]].flat()
+        branches.forEach(({ code }, branch) => {
+          expect(items[position]).toMatch(codeTag(code))
+          expect(textContent(items[position])).toContain(stepTexts[branch])
+        })
       })
     })
     expect(textContent(figure)).toContain(copy.kserve.diagram.caption)
+  })
+
+  it('applies the default logging config only when no handlers exist', async () => {
+    const architecture = section(await render(locale), 'architecture')
+    const [logging] = [...architecture.matchAll(/<ol[^>]*>(.*?)<\/ol>/gs)].map(
+      ([, list]) => list
+    )
+    const [whenHandlersExist, whenNoHandlers] = flowSteps(logging)
+      .at(-1)
+      .split(/<div class="flow-branch"[^>]*>/)
+      .slice(1)
+
+    expect(textContent(whenHandlersExist).startsWith(copy.branch.yes)).toBe(
+      true
+    )
+    expect(whenHandlersExist).toMatch(codeTag('return'))
+    expect(textContent(whenNoHandlers).startsWith(copy.branch.no)).toBe(true)
+    expect(whenNoHandlers).toMatch(codeTag('dictConfig()'))
   })
 
   it('shows no media section when the project has no media or coverage', async () => {
