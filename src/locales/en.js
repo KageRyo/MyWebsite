@@ -18,7 +18,7 @@ export default {
     },
     kserveProject: {
       title: 'KageRyo Developer - KServe (CNCF) Open Source Contributions',
-      description: 'How Chien-Hsun Chang fixed CNCF KServe overriding user logging configuration and added runtimeClassName support to ServingRuntime.',
+      description: 'How Chien-Hsun Chang fixed CNCF KServe overriding user logging configuration, fixed InferenceServices failing to reconcile on overlong domains when ingress creation is disabled, and added runtimeClassName support to ServingRuntime.',
     },
     notFound: { title: 'KageRyo Developer - Page Not Found' },
   },
@@ -92,7 +92,7 @@ export default {
         educationDetail: "National Chung Cheng University, Institute of Computer Science and Information Engineering, Master's Student",
         motto: 'Always do my best to help others in my professional field, facing every challenge in life with dedication and perseverance.',
       },
-      summary: "I'm a master's student in Computer Science and Information Engineering at National Chung Cheng University, focusing on backend and platform engineering, AI systems, and MLOps. I have built backend services, ML inference workflows, Kubernetes deployments, CI/CD pipelines, and Linux infrastructure, contributed to CNCF KServe, and worked on digital twin, computer vision, and federated learning projects.",
+      summary: "I'm a master's student in Computer Science and Information Engineering at National Chung Cheng University, focusing on software engineering, backend/platform, and AI systems, with hands-on experience in backend systems, AI/ML integration, MLOps, and Linux infrastructure. I have contributed to CNCF KServe and worked on a flood disaster digital twin platform, computer vision AI systems, and a cross-nation federated learning project, building APIs, databases, data pipelines, model training and inference integration, CI/CD, containers, model deployment, and monitoring, and taking software from requirements and system design through development, testing, deployment, and maintenance. I have also led an international research team, handling task planning, technical integration, and schedule coordination, and have worked through the digital IC design flow in a digital IC design course.",
       resumeDownload: 'Download Resume (PDF)',
     },
     certificates: {
@@ -181,7 +181,7 @@ export default {
           category: 'Open Source',
           role: 'Open Source Contributor',
           period: 'Sep 2025 – Present',
-          summary: 'Fixed a Python logging issue in KServe; the patch was merged upstream. Submitted runtimeClassName support for ServingRuntimePodSpec and WorkerSpec, including tests and CRD/OpenAPI updates.',
+          summary: 'Fixed a Python logging issue in KServe; the patch was merged upstream. Also submitted a fix for overlong domains when ingress creation is disabled, and runtimeClassName support for ServingRuntimePodSpec and WorkerSpec, including tests and CRD/OpenAPI updates.',
         },
         tagTwin: {
           title: 'TAG-Twin Flood Disaster Digital Twin Platform',
@@ -244,46 +244,77 @@ export default {
   },
   projectDetail: {
     headings: {
-      overview: 'Overview',
+      contributions: 'Contributions at a Glance',
       problem: 'Problem & Goal',
       role: 'My Role & Contributions',
       architecture: 'Architecture & Technologies',
       tradeoffs: 'Technical Decisions & Trade-offs',
       outcomes: 'Outcomes & Evidence',
-      links: 'Links & References',
+      media: 'Results & Media',
     },
+    branch: {
+      yes: 'Yes',
+      no: 'No',
+    },
+    coverage: 'Media Coverage',
+    credit: 'Source: {source}',
     viewDetails: 'View project details',
     backToProjects: 'Back to Projects',
     kserve: {
       title: 'Contributing to KServe (CNCF)',
       overview: [
-        'KServe is a CNCF open-source platform for deploying and managing machine learning inference services on Kubernetes. I submitted two changes: a fix for the Python SDK overriding user logging configuration, and support for choosing a Kubernetes RuntimeClass in a ServingRuntime.',
+        'KServe is a CNCF open-source platform for deploying and managing machine learning inference services on Kubernetes. I submitted three changes: a fix for the Python SDK overriding user logging configuration, a fix for InferenceServices failing to reconcile when ingress creation is disabled and the generated domain is too long, and support for choosing a Kubernetes RuntimeClass in a ServingRuntime.',
       ],
       problem: [
         'Logging: when no log_config was passed, configure_logging() always applied KServe\'s default dictConfig, replacing handlers and formats the user had already set up. That made KServe hard to embed in applications with their own logging (kserve/kserve#3919).',
+        'Domain validation: in RawDeployment mode with disableIngressCreation: true, users manage their own Ingress or HTTPRoute and the generated domain is only informational, yet a namespace and name combination longer than the 63-character DNS label limit still failed strict domain validation and stopped the InferenceService from reconciling (kserve/kserve#4807).',
         'RuntimeClass: a ServingRuntime could not set runtimeClassName (for example nvidia, kata, or gvisor), a common requirement for GPU passthrough and sandboxed container runtimes (kserve/kserve#5057).',
       ],
       role: [
-        'I implemented and submitted both pull requests, including the code changes, unit tests, regenerated artifacts, and PR descriptions.',
+        'I implemented and submitted all three pull requests, including the code changes, unit tests, regenerated artifacts, and PR descriptions.',
       ],
       architecture: [
         'Python SDK (kserve/logging.py): configure_logging() now checks logger.hasHandlers() for direct or inherited handlers on the kserve logger, and returns early without reconfiguring when no log_config is given and handlers already exist.',
+        'Go controller (ingress/domain.go): GenerateDomainName() and GenerateInternalDomainName() validate the rendered domain with IsFullyQualifiedDomainName() only when ingress creation is enabled, and otherwise return the domain as is.',
         'Go controller and CRDs: a RuntimeClassName field on the v1alpha1 ServingRuntimePodSpec, merged in the InferenceService MergePodSpec; WorkerSpec gets it through inline embedding.',
         'Generated artifacts: CRDs (Helm chart and config), deepcopy, OpenAPI/Swagger, and the Python SDK models and docs were regenerated together.',
       ],
       tradeoffs: [
         'Backward compatible: the default is skipped only when no config is given and handlers already exist, so users without their own logging see no change, and an explicit log_config still wins.',
         'hasHandlers() instead of counting handlers, so handlers inherited from parent loggers are also respected.',
+        'Domain validation is relaxed only when disableIngressCreation is true; when the controller creates the ingress, validation is unchanged, so invalid routes are still caught.',
         'runtimeClassName follows the merge pattern of schedulerName (kserve/kserve#5073), keeping the code consistent and easy to review; the field is optional, so existing ServingRuntimes are unaffected.',
         'End-to-end tests and documentation updates were left as follow-ups and are not part of the PR.',
       ],
       outcomes: [
         'The logging fix (kserve/kserve#4687) was merged upstream in March 2026 with three unit tests: user handlers are preserved, defaults apply when nothing is configured, and an explicit config overrides.',
+        'The domain validation fix (kserve/kserve#4919) adds two unit tests: an overlong DNS label no longer errors when ingress creation is disabled, and is still rejected when it is enabled. The pull request is still under review.',
         'The runtimeClassName support (kserve/kserve#5198) adds unit tests for merging and overriding the field, and was verified locally by creating a ServingRuntime with runtimeClassName: nvidia and checking the resulting PodSpec.',
       ],
       contributions: {
         logging: 'Logging configuration fix',
+        domainValidation: 'Long domain validation fix',
         runtimeClassName: 'runtimeClassName support',
+      },
+      diagram: {
+        caption: 'Where each change takes effect, drawn from the code changes in kserve/kserve#4687, #4919, and #5198.',
+        steps: {
+          logging: [
+            'Called without a log_config',
+            'New check: are handlers already attached to the kserve logger, directly or inherited?',
+            ["Return early and keep the user's logging", "Apply KServe's default logging config"],
+          ],
+          domainValidation: [
+            'Renders the domain from the domain template',
+            'New check: does the ingress config disable ingress creation?',
+            ['Return the domain as information only; users manage their own routes', 'Validate as before; an invalid domain still returns an error'],
+          ],
+          runtimeClassName: [
+            'New optional field on ServingRuntimePodSpec, for example nvidia',
+            "The InferenceService controller merges the runtime's pod spec with the predictor's and now carries the field over",
+            'The merged pod spec uses that RuntimeClass unless the predictor sets its own; WorkerSpec gets the field through inline embedding',
+          ],
+        },
       },
     },
   },

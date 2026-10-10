@@ -354,6 +354,43 @@ const tests = {
     await mobile.context.close()
   },
 
+  async 'KServe architecture flow reads across on desktop and down on mobile'(
+    browser
+  ) {
+    for (const [width, across] of [
+      [1280, true],
+      [390, false]
+    ]) {
+      const { context, page } = await newPage(browser, {
+        viewport: { width, height: 844 }
+      })
+      await page.goto(`${baseUrl}/projects/kserve`)
+      await page.locator('h1').first().waitFor()
+      const flows = await page
+        .locator('.flow-steps')
+        .evaluateAll(lists =>
+          lists.map(list =>
+            [...list.children].map(step =>
+              step.getBoundingClientRect().toJSON()
+            )
+          )
+        )
+      assert.equal(flows.length, 3)
+      for (const steps of flows) {
+        for (let index = 1; index < steps.length; index += 1) {
+          const [previous, current] = [steps[index - 1], steps[index]]
+          if (across) {
+            assert.equal(Math.round(current.top), Math.round(previous.top))
+            assert.ok(current.left > previous.right, 'steps overlap')
+          } else {
+            assert.ok(current.top > previous.bottom, 'steps overlap')
+          }
+        }
+      }
+      await context.close()
+    }
+  },
+
   async 'trailing-slash URLs settle on the canonical route'(browser) {
     const { context, page } = await newPage(browser)
     // GitHub Pages 會把 /projects 導向 /projects/
