@@ -34,12 +34,11 @@ export default {
   },
   home: {
     hero: {
-      introduction: 'こんにちは、健勳です。国立中正大学の情報工学研究科で学ぶ修士課程の学生です。小さなツールの開発やオープンソースへの貢献が好きで、バックエンド／プラットフォーム、AI システム、MLOps の研究・開発にも取り組んでいます。ぜひプロジェクトをご覧ください！ヾ(*´∀ ˋ*)ﾉ',
+      introduction: 'こんにちは、健勳です。国立中正大学の情報工学研究科修士課程に在籍し、ソフトウェアエンジニアリング、バックエンド／プラットフォーム、AI システムを主な方向として、要件整理・設計から開発・テスト、デプロイ、運用まで一通り経験してきました。小さなツールの開発やオープンソースへの貢献も好きです。ぜひプロジェクトをご覧ください！ヾ(*´∀ ˋ*)ﾉ',
       academic: '国立中正大学 修士課程｜2027年8月修了予定',
       availability: '2027年の早期採用、および台湾の研究開発代替役（兵役の代わりに企業で研究開発業務に従事する制度）に対応可能',
       viewProjects: 'プロジェクト一覧',
       downloadResume: '履歴書（PDF）',
-      seeMore: 'もっと見る',
     },
     quote: {
       main: '人生とコーディングはどちらも print("Hello World"); から始まります。',
@@ -56,13 +55,33 @@ export default {
       },
     },
     infoCards: {
-      intro: 'はい、それは私です。台湾出身の開発者で、現在 {ccu} の {cs} に在籍しています。',
-      learningFocus: '現在はバックエンド／データサービス、Linux・Kubernetes プラットフォーム、AI モデル推論、デジタルツインのシステム統合に取り組んでいます。詳しくは {about} と {projects} をご覧ください。',
+      header: '自己紹介とプロジェクト',
+      previous: '前へ',
+      next: '次へ',
+      intro: 'はい、それは私です。台湾出身の開発者で、現在 {ccu} の {cs} に在籍し、ソフトウェアエンジニアリング、バックエンド／プラットフォーム、AI システムを主な方向としています。バックエンドシステム、AI／ML システム統合、MLOps、Linux インフラの実務経験があり、CNCF KServe へのコントリビュート、防災デジタルツイン基盤、コンピュータビジョン AI システム、国際連携の連合学習プロジェクトに携わってきました。詳しくは {about} と {projects} をご覧ください。',
       links: {
         ccu: '国立中正大学',
         cs: 'コンピュータサイエンス学科',
         about: '私について',
         projects: 'プロジェクト',
+        projectsPage: 'プロジェクト一覧で見る',
+      },
+      projects: {
+        kserve: 'CNCF KServe に継続的にコントリビュートし、Python、Go、Kubernetes のコントローラー／CRD、Helm を扱っています。Python SDK がユーザーのロギングハンドラーを上書きする問題を修正してアップストリームにマージされ、Ingress の作成を無効にしたときの長すぎるドメインの検証の修正と、ServingRuntimePodSpec／WorkerSpec の runtimeClassName 対応も PR を提出し、現在レビュー中です。',
+        tagTwin: 'デジタルツインシステム設計グループのリーダーとして 4 名の国際チームを率い、嘉義県民雄郷を検証フィールドとする TAG-Twin を構築。FastAPI、PostgreSQL/PostGIS、Redis でコア基盤を作り、地形・道路・降雨・浸水・リスク情報を統合し、API／WebSocket で洪水シミュレーションと Unreal Engine 5 の可視化をつないでいます。',
+        federatedAqi: 'CCU × インドネシア UBM の画像による AQI 連合学習プロジェクトでシステム設計と技術統合を主導。ジャカルタと台湾 6 測定局の計 7 つの Flower クライアントの学習結果をつなぎ、Kubernetes、Kubeflow、KServe で推論とデプロイを統合し、Grafana による監視を構築しました。',
+        environmentalEnforcement: '産学連携の環境取締りシステムで、CCTV 映像からポイ捨てや不適切な排泄の疑いがある事象を検出し、人による確認のための証拠を記録します。D-FINE、ByteTrack、姿勢推定、VLM、OCR を組み合わせ、GPU 推論と後処理を分離して重複処理を避け、現場で運用されています。',
+        waterMirror: 'モバイルのフロントエンドと WQSurrogateModels バックエンドからなるクロスプラットフォームの AI 水質評価システムを設計・開発。手入力や CSV の水質データから WQI5 スコア、分類、警告を返します。線形回帰、SVM、ランダムフォレスト、XGBoost、LightGBM を比較し、発展研究は ICT Express 誌に掲載されました。',
+      },
+      titles: {
+        waterMirror: 'WaterMirror クロスプラットフォーム AI 水質評価システム',
+      },
+      images: {
+        kserve: 'GitHub 上でマージされた KServe のプルリクエスト #4687',
+        tagTwin: '国立中正大学 人工知能・持続可能な発展研究センターの展示ブースにいる張健勳とドローン',
+        federatedAqi: '連合学習による空気質基盤のダッシュボードの前で、張健勳と UBM チームのメンバー',
+        environmentalEnforcement: 'CCTV 映像での人物の姿勢と車両の検出結果（人物はモザイク処理済み）',
+        waterMirror: 'WaterMirror のホーム、水質データ入力、レポート画面',
       },
     },
   },
